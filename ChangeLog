@@ -1,3 +1,23 @@
+2005-01-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtksourceview/gtksourceview.override
+	(_wrap_gtk_source_tag_style__set_bold): Use PyObject_IsTrue to
+	obtain boolean value from object.
+	(_wrap_gtk_source_tag_style__set_italic): idem.
+	(_wrap_gtk_source_tag_style__set_strikethrough): idem.
+	(_wrap_gtk_source_tag_style__set_underline): idem.
+	(_wrap_gtk_source_tag_style__set_mask): Remove, not really needed.
+	(_wrap_gtk_source_tag_style__set_foreground): Add
+	GTK_SOURCE_TAG_STYLE_USE_FOREGROUND to the mask.
+	(_wrap_gtk_source_tag_style__set_background): Add
+	GTK_SOURCE_TAG_STYLE_USE_BACKGROUND to the mask.
+	(_wrap_gtk_source_languages_manager_get_available_languages): Add
+	a missing const to shut up gcc.
+	(_gslist_to_pylist_objs): Add const to parameter.
+	(_wrap_gtk_source_languages_manager_get_lang_files_dirs): Add
+	const to avoid compiler warning.  Don't free the return value.
+	(_gslist_to_pylist_strs): Make parameter const.
+
 2005-01-15  Stéphan Kochen  <stephan@kochen.nl>
 
 	* gtksourceview/gtksourceview.override: Implement setters for
