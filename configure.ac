@@ -34,6 +34,11 @@ AM_CONFIG_HEADER(config.h)
 
 AM_INIT_AUTOMAKE
 
+AC_DEFINE(GNOME_PYTHON_MAJOR_VERSION, gnome_python_major_version, [Gnome-Python major version])
+AC_DEFINE(GNOME_PYTHON_MINOR_VERSION, gnome_python_minor_version, [Gnome-Python minor version])
+AC_DEFINE(GNOME_PYTHON_MICRO_VERSION, gnome_python_micro_version, [Gnome-Python macro version])
+
+
 dnl put the ACLOCAL flags in the makefile
 ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
