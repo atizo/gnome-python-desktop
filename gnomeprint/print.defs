@@ -389,6 +389,11 @@
   (return-type "GnomePrintReturnCode")
 )
 
+(define-method grestore
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_grestore")
+  (return-type "GnomePrintReturnCode")
+)
 
 (define-method fill
   (of-object "GnomePrintContext")
