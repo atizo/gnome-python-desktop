@@ -81,14 +81,35 @@ _wrap_wnck_screen_get_windows_stacked(PyGObject *self, PyObject args)
     return ret;
 }
 %%
-override wnck_class_group_get_windows_stacked noargs
+override wnck_class_group_get_windows noargs
 static PyObject*
-_wrap_wnck_class_group_get_windows_stacked(PyGObject *self, PyObject args)
+_wrap_wnck_class_group_get_windows(PyGObject *self, PyObject args)
 {
     GList *list, *tmp;
     PyObject *ret;
 
-    list = wnck_class_group_get_windows_stacked(WNCK_CLASS_GROUP(self->obj));
+    list = wnck_class_group_get_windows(WNCK_CLASS_GROUP(self->obj));
+
+    ret = PyList_New(0);
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+        GtkWidget *widget = tmp->data;
+        PyObject *item = pygobject_new((GObject *)widget);
+
+        PyList_Append(ret, item);
+        Py_DECREF(item);
+    }
+    g_list_free(list);
+    return ret;
+}
+%%
+override wnck_create_window_menu noargs
+static PyObject*
+_wrap_wnck_create_window_menu(PyGObject *self, PyObject args)
+{
+    GList *list, *tmp;
+    PyObject *ret;
+
+    list = wnck_create_window_menu(WNCK_CLASS_GROUP(self->obj));
 
     ret = PyList_New(0);
     for (tmp = list; tmp != NULL; tmp = tmp->next) {

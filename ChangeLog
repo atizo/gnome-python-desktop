@@ -8,6 +8,9 @@
 	* wnck/Makefile.am:
 	* wnck/wnck.defs:
 	* wnck/wnck.override:
+	(_wrap_wnck_create_window_menu): Wrap this..
+	(_wrap_wnck_create_window_menu): ...and this.
+
 	* wnck/wnckmodule.c:
 
 	Add wnck bindings and change automake requirement from 1.9.2 to
