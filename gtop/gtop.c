@@ -1161,6 +1161,10 @@ open_files_entry_to_Struct(const glibtop_open_files_entry *e)
 		my_dict_add_and_decref(d, "sock_dest_port", PyI_L(e->info.sock.dest_port));
 		break;
 
+	case GLIBTOP_FILE_TYPE_LOCALSOCKET:
+		my_dict_add_and_decref(d, "localsock_name", PyS_S(e->info.localsock.name));
+		break;
+
 	case GLIBTOP_FILE_TYPE_FILE:
 		my_dict_add_and_decref(d, "file_name", PyS_S(e->info.file.name));
 		break;
