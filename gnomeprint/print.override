@@ -15,8 +15,7 @@ gboolean pygnomeprint_check_error (GnomePrintReturnCode error);
 modulename gnomeprint
 %%
 import gobject.GObject as PyGObject_Type
-import pango.PangoFont as PyPangoFont_Type
-import pango.PangoFontDescription as PyPangoFontDescription_Type
+import pango.Font as PyPangoFont_Type
 %%
 ignore-glob 
   *_get_type
