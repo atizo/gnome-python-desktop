@@ -17,6 +17,10 @@ if BUILD_GTKSOURCEVIEW
   SUBDIRS += gtksourceview
 endif
 
+if BUILD_WNCK
+  SUBDIRS += wnck
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 

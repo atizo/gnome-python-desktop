@@ -20,6 +20,7 @@ m4_define(gtkhtml2_required_version,          2.3.1)
 m4_define(libgnomeprint_required_version,     2.2.0)
 m4_define(libgnomeprintui_required_version,   2.2.0)
 m4_define(gtksourceview_required_version,     1.1.0)
+m4_define(wnck_required_version,              2.8.0)
 
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
@@ -156,11 +157,20 @@ build_eggtray=false
 PKG_CHECK_MODULES(EGGTRAY, gtk+-2.0 >= 2.2.0 libgnomeui-2.0 >=  2.2.0,
   build_eggtray=true,
   build_eggtray=false)
-AM_CONDITIONAL(BUILD_EGGTRAY, $build_gtksourceview)
+AM_CONDITIONAL(BUILD_EGGTRAY, $build_eggtray)
 if test -n "$export_dynamic"; then
   EGGTRAY_LIBS=`echo $EGGTRAY_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the wnck module
+build_wnck=false
+PKG_CHECK_MODULES(WNCK, libwnck-1.0 >= wnck_required_version,
+  build_wnck=true,
+  build_wnck=false)
+AM_CONDITIONAL(BUILD_WNCK, $build_wnck)
+if test -n "$export_dynamic"; then
+  WNCK_LIBS=`echo $WNCK_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
@@ -175,6 +185,7 @@ AC_CONFIG_FILES(
   gtksourceview/Makefile
   egg/Makefile
   egg/tray/Makefile
+  wnck/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -188,6 +199,7 @@ $build_gnomeprint        && echo     gnomeprint
 $build_gnomeprintui      && echo     gnomeprint.ui
 $build_gtksourceview     && echo     gtksourceview
 $build_eggtray           && echo     egg.trayicon
+$build_wnck              && echo     wnck
 echo
 
 echo "The following modules will NOT be built:"
@@ -198,4 +210,5 @@ $build_gnomeprint        || echo     gnomeprint
 $build_gnomeprintui      || echo     gnomeprint.ui
 $build_gtksourceview     || echo     gtksourceview
 $build_eggtray           || echo     egg.trayicon
+$build_wnck              || echo     wnck
 

@@ -1,0 +1,103 @@
+/* -*- Mode: C; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+
+#include "pygobject.h"
+#include <libwnck/libwnck.h>
+#include <libwnck/class-group.h>
+#include <libwnck/window-action-menu.h>
+%%
+modulename wnck
+%%
+import gobject.GObject as PyGObject_Type
+import gtk.Container as PyGtkContainer_Type
+import gtk.Window as PyGtkWindow_Type
+%%
+ignore-glob
+ _*
+ *_get_type
+%%
+override wnck_application_get_windows noargs
+static PyObject*
+_wrap_wnck_application_get_windows (PyGObject *self, PyObject args)
+{
+    GList *list, *tmp;
+    PyObject *ret;
+
+    list = wnck_application_get_windows(WNCK_APPLICATION(self->obj));
+
+    ret = PyList_New(0);
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+        GtkWidget *widget = tmp->data;
+        PyObject *item = pygobject_new((GObject *)widget);
+
+        PyList_Append(ret, item);
+        Py_DECREF(item);
+    }
+    g_list_free(list);
+    return ret;
+}
+%%
+override wnck_screen_get_windows noargs
+static PyObject*
+_wrap_wnck_screen_get_windows (PyGObject *self, PyObject args)
+{
+    GList *list, *tmp;
+    PyObject *ret;
+
+    list = wnck_screen_get_windows(WNCK_SCREEN(self->obj));
+
+    ret = PyList_New(0);
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+        GtkWidget *widget = tmp->data;
+        PyObject *item = pygobject_new((GObject *)widget);
+
+        PyList_Append(ret, item);
+        Py_DECREF(item);
+    }
+    g_list_free(list);
+    return ret;
+}
+%%
+override wnck_screen_get_windows_stacked noargs
+static PyObject*
+_wrap_wnck_screen_get_windows_stacked(PyGObject *self, PyObject args)
+{
+    GList *list, *tmp;
+    PyObject *ret;
+
+    list = wnck_screen_get_windows_stacked(WNCK_SCREEN(self->obj));
+
+    ret = PyList_New(0);
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+        GtkWidget *widget = tmp->data;
+        PyObject *item = pygobject_new((GObject *)widget);
+
+        PyList_Append(ret, item);
+        Py_DECREF(item);
+    }
+    g_list_free(list);
+    return ret;
+}
+%%
+override wnck_class_group_get_windows_stacked noargs
+static PyObject*
+_wrap_wnck_class_group_get_windows_stacked(PyGObject *self, PyObject args)
+{
+    GList *list, *tmp;
+    PyObject *ret;
+
+    list = wnck_class_group_get_windows_stacked(WNCK_CLASS_GROUP(self->obj));
+
+    ret = PyList_New(0);
+    for (tmp = list; tmp != NULL; tmp = tmp->next) {
+        GtkWidget *widget = tmp->data;
+        PyObject *item = pygobject_new((GObject *)widget);
+
+        PyList_Append(ret, item);
+        Py_DECREF(item);
+    }
+    g_list_free(list);
+    return ret;
+}

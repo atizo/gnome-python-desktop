@@ -1,3 +1,18 @@
+2004-11-24  Johan Dahlin  <johan@gnome.org>
+
+	* Makefile.am:
+	* autogen.sh:
+	* configure.ac:
+	* gtkhtml2/Makefile.am:
+	* wnck/.cvsignore:
+	* wnck/Makefile.am:
+	* wnck/wnck.defs:
+	* wnck/wnck.override:
+	* wnck/wnckmodule.c:
+
+	Add wnck bindings and change automake requirement from 1.9.2 to
+	1.7.x
+	
 2004-11-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* gnomeapplet/Makefile.am (pygnome_PYTHON): Install compat dummy

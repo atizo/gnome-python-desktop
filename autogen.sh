@@ -6,7 +6,7 @@ test -z "$srcdir" && srcdir=.
 
 PKG_NAME="gnome-python-extras"
 REQUIRED_AUTOCONF_VERSION=2.59
-REQUIRED_AUTOMAKE_VERSION=1.9.2
+REQUIRED_AUTOMAKE_VERSION=1.7
 
 (test -f $srcdir/configure.ac \
   && test -f $srcdir/autogen.sh) || {
