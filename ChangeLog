@@ -1,3 +1,7 @@
+2005-01-22  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* configure.ac: Requires libgtop 2.9.5.
+
 2005-01-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: Require gtksourceview 1.1.90.
