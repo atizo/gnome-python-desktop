@@ -3,8 +3,8 @@ AC_PREREQ(2.52)
 
 dnl the gnome-python version number
 m4_define(gnome_python_extras_major_version, 2)
-m4_define(gnome_python_extras_minor_version, 9)
-m4_define(gnome_python_extras_micro_version, 4)
+m4_define(gnome_python_extras_minor_version, 10)
+m4_define(gnome_python_extras_micro_version, 0)
 m4_define(gnome_python_extras_version, gnome_python_extras_major_version.gnome_python_extras_minor_version.gnome_python_extras_micro_version)
 
 dnl required versions of other packages
@@ -14,7 +14,7 @@ m4_define(pygtk_required_micro_version, 0)
 m4_define(pygtk_required_version, pygtk_required_major_version.pygtk_required_minor_version.pygtk_required_micro_version)
 m4_define(glib_required_version,              2.6.0)
 m4_define(gtk_required_version,               2.4.0)
-m4_define(gnome_python_required_version,      2.9.0)
+m4_define(gnome_python_required_version,      2.10.0)
 m4_define(libpanelapplet_required_version,    2.0.0)
 m4_define(gtkhtml2_required_version,          2.3.1)
 m4_define(libgnomeprint_required_version,     2.2.0)
