@@ -80,6 +80,9 @@ NAUTILUS_VERSION=libnautilus_required_version
 BONOBO_ACTIVATION_VERSION=bonobo_activation_required_version
 LIBBONOBO_VERSION=libbonobo_required_version
 LIBBONOBOUI_VERSION=libbonoboui_required_version
+GCONF_VERSION=gconf_required_version
+LIBPANELAPPLET_VERSION=libpanelapplet_required_version
+GTKHTML2_VERSION=gtkhtml2_required_version
 AC_SUBST(PYGTK_VERSION)
 AC_SUBST(LIBGNOMECANVAS_VERSION)
 AC_SUBST(LIBGNOME_VERSION)
@@ -91,6 +94,9 @@ AC_SUBST(NAUTILUS_VERSION)
 AC_SUBST(BONOBO_ACTIVATION_VERSION)
 AC_SUBST(LIBBONOBO_VERSION)
 AC_SUBST(LIBBONOBOUI_VERSION)
+AC_SUBST(GCONF_VERSION)
+AC_SUBST(LIBPANELAPPLET_VERSION)
+AC_SUBST(GTKHTML2_VERSION)
 
 dnl check for glib
 AM_PATH_GLIB_2_0(glib_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
