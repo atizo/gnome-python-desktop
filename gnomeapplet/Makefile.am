@@ -10,6 +10,10 @@ EXTRA_DIST = $(defs_DATA)
 pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
+pygnomedir = $(pkgpythondir)/gnome
+pygnome_PYTHON = applet.py # compat dummy module
+
+
 common_ldflags = -module -avoid-version
 
 pkgpyexec_LTLIBRARIES = gnomeapplet.la
@@ -37,3 +41,5 @@ applet.c: applet.defs applet.override
 	&& cp gen-$*.c $*.c \
 	&& rm -f gen-$*.c
 
+install-exec-hook: # Remove old deprecated modules
+	-$(LIBTOOL) --mode=uninstall rm -f $(pygnomeexecdir)/applet.la

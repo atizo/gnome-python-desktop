@@ -1,3 +1,9 @@
+2004-11-23  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* gnomeapplet/Makefile.am (pygnome_PYTHON): Install compat dummy
+	applet.py module here instead of in gnome-python.
+	(install-exec-hook): Remove old module applet.la.
+
 2004-11-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* gtksourceview/Makefile.am (.defs.c): fix path to gnomeprint defs
