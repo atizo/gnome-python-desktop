@@ -1,4 +1,4 @@
-/* -*- mode: C -*- */
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 %%
 headers
 #define NO_IMPORT_PYGOBJECT
@@ -11,6 +11,7 @@ headers
 modulename totem.plparser
 %%
 import gobject.GObject as PyGObject_Type
+import gtk.TreeModel as PyGtkTreeModel_Type
 %%
 ignore-glob
   *_get_type
@@ -18,60 +19,58 @@ ignore-glob
 %%
 override totem_pl_parser_write kwargs
 
-#define pl_parser_get_has_error(model) (GPOINTER_TO_INT(g_object_get_data (G_OBJECT(model), "__py_pl_parser_error")))
-#define pl_parser_set_has_error(model) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_error", GINT_TO_POINTER(TRUE)))
-#define pl_parser_reset_has_error(model) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_error", NULL))
-
-#define pl_parser_get_iter_func(model) ((PyObject *)g_object_get_data (G_OBJECT(model), "__py_pl_parser_func"))
-#define pl_parser_set_iter_func(model,iter_func) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_func", (iter_func)))
-
-#define pl_parser_get_self(model) ((PyObject *)g_object_get_data (G_OBJECT(model), "__py_pl_parser_self"))
-#define pl_parser_set_self(model,self) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_self", (self)))
+typedef struct {
+	PyObject *func;
+	PyObject *data;
+	gboolean has_error;
+} PyPlParserIterFuncData;
 
 static void
-_pl_parser_iter_func (GtkTreeModel *model, GtkTreeIter *iter, char **uri, char **title)
+_pl_parser_iter_func (GtkTreeModel *model, GtkTreeIter *iter, char **uri, char **title,
+		      gpointer user_data)
 {
-	PyObject *py_iter_func = NULL;
 	PyObject *args = NULL;
 	PyObject *result = NULL;
-	PyObject *py_iter = NULL;
 	char *tmp_uri = NULL, *tmp_title = NULL;
-	if (pl_parser_get_has_error(model))
+	PyPlParserIterFuncData *data = user_data;
+
+	if (data->has_error)
 		return;
-	py_iter = pyg_boxed_new(GTK_TYPE_TREE_ITER, iter, TRUE, TRUE);
-	/* prepare callback arguments */
-	args = Py_BuildValue ("(OO)",
-	                      pl_parser_get_self(model),
-	                      py_iter);
-	if (args == NULL) {
-		Py_DECREF (py_iter);
-		pl_parser_set_has_error(model);
-		return;
-	}
-	/* call function */
-	py_iter_func = pl_parser_get_iter_func(model);
-	result = PyEval_CallObject (py_iter_func, args);
-	
-	/* these arguments are not needed anymore */
+
+	if (data->data)
+		args = Py_BuildValue ("(NNO)",
+				      pygobject_new((GObject *)model),
+				      pyg_boxed_new(GTK_TYPE_TREE_ITER, iter, TRUE, TRUE),
+				      data->data);
+	else
+		args = Py_BuildValue ("(NN)",
+				      pygobject_new((GObject *)model),
+				      pyg_boxed_new(GTK_TYPE_TREE_ITER, iter, TRUE, TRUE));
+	result = PyEval_CallObject (data->func, args);
 	Py_DECREF (args);
-	Py_DECREF (py_iter);
 	
-	/* check result's integrity */
 	if (result == NULL) {
-		pl_parser_set_has_error(model);
+		data->has_error = TRUE;
 		return;
 	}
-	PyObject_Print (result, stdout, 0);
+	  /* ?! */
+	/* PyObject_Print (result, stdout, 0); */
 
 	if (PyString_Check (result)) {
 		tmp_uri = PyString_AsString (result);
 		if (tmp_uri == NULL) {
-			PyErr_SetString (PyExc_TypeError, "Callback function must return one string or a tuple of two strings.");
-			pl_parser_set_has_error(model);
+			PyErr_SetString (PyExc_TypeError,
+					 "Callback function must return one"
+					 " string or a tuple of two strings.");
+			data->has_error = TRUE;
 		}
-	} else if (!PyTuple_Check (result) || PyTuple_Check (result) && !PyArg_ParseTuple (result, "ss", &tmp_uri, &tmp_title)) {
-		PyErr_SetString (PyExc_TypeError, "Callback function must return one string or a tuple of two strings.");
-		pl_parser_set_has_error(model);
+	} else if (!PyTuple_Check (result) ||
+		   !PyArg_ParseTuple (result, "ss", &tmp_uri, &tmp_title))
+	{
+		PyErr_SetString (PyExc_TypeError,
+				 "Callback function must return one "
+				 "string or a tuple of two strings.");
+		data->has_error = TRUE;
 	}
 	
 	/* g_strdup handles NULL case for us */
@@ -86,46 +85,31 @@ _wrap_totem_pl_parser_write (PyGObject *self, PyObject *args, PyObject *kwargs)
 {
 	static char *kwlist[] = {"model", "iter_func", "output", "type", NULL};
 	PyGObject *model;
-	PyObject *iter_func;
 	char *output;
 	TotemPlParserType type;
 	GError *error = NULL;
-	gboolean has_error;
+	PyPlParserIterFuncData data = {0, };
 	
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOsi:Parser.write", kwlist, &model, &iter_func, &output, &type))
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O!Osi|O:Parser.write",
+					 kwlist, &PyGtkTreeModel_Type, &model,
+					 &data.func, &output, &type, &data.data))
 		return NULL;
 	/* verify arguments' integrity */
-	if (!PyCallable_Check (iter_func)) {
+	if (!PyCallable_Check (data.func)) {
 		PyErr_SetString (PyExc_TypeError, "iter_func must be callable");
 		return NULL;
 	}
-	if (!GTK_IS_TREE_MODEL (model->obj)) {
-		PyErr_SetString (PyExc_TypeError, "model must be a gtk.TreeModel");
-		return NULL;
-	}
-	/* hold two temporary variables */
-	pl_parser_set_iter_func (model->obj, iter_func);
-	pl_parser_set_self (model->obj, model);
 	if (!totem_pl_parser_write (TOTEM_PL_PARSER(self->obj),
 	                            GTK_TREE_MODEL(model->obj),
 	                            _pl_parser_iter_func,
-	                            output,
-	                            type,
-	                            &error)) {
+	                            output,type, &data, &error))
+	{
 		/* return an GError */
 		pyg_error_check(&error);
 		return NULL;
 	}
-	/* remove temp vars */
-	pl_parser_set_iter_func (model->obj, NULL);
-	pl_parser_set_self (model->obj, NULL);
-	has_error = pl_parser_get_has_error (model->obj);
-	pl_parser_reset_has_error(model->obj);
-	
-	if (has_error) {
+	if (data.has_error)
 		return NULL;
-	}
-	/* return None */
 	Py_INCREF(Py_None);
 	return Py_None;
 }

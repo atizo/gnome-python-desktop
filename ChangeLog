@@ -1,3 +1,9 @@
+2005-01-06  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* totem/plparser.override: Update to new totem-plparser API (new
+	user_data parameter).  Optionally pass user_data to the python
+	callback.  General code cleanup.
+
 2005-01-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* totem/*: Add Tiago Cogumbreiro's totem playlist parser bindings
