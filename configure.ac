@@ -8,9 +8,11 @@ m4_define(gnome_python_micro_version, 0)
 m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_version.gnome_python_micro_version)
 
 dnl required versions of other packages
-m4_define(pygtk_required_version,             2.4.0)
+m4_define(pygtk_required_major_version, 2)
+m4_define(pygtk_required_minor_version, 4)
+m4_define(pygtk_required_micro_version, 0)
+m4_define(pygtk_required_version, pygtk_required_major_version.pygtk_required_minor_version.pygtk_required_micro_version)
 m4_define(pyorbit_required_version,           2.0.1)
-
 m4_define(glib_required_version,              2.4.0)
 m4_define(gtk_required_version,               2.4.0)
 m4_define(libgnome_required_version,          2.0.0)
@@ -37,6 +39,11 @@ AM_INIT_AUTOMAKE
 AC_DEFINE(GNOME_PYTHON_MAJOR_VERSION, gnome_python_major_version, [Gnome-Python major version])
 AC_DEFINE(GNOME_PYTHON_MINOR_VERSION, gnome_python_minor_version, [Gnome-Python minor version])
 AC_DEFINE(GNOME_PYTHON_MICRO_VERSION, gnome_python_micro_version, [Gnome-Python macro version])
+
+dnl Define pygtk required version, for runtime check
+AC_DEFINE(PYGTK_REQUIRED_MAJOR_VERSION, pygtk_required_major_version, [PyGTK required major version])
+AC_DEFINE(PYGTK_REQUIRED_MINOR_VERSION, pygtk_required_minor_version, [PyGTK required minor version])
+AC_DEFINE(PYGTK_REQUIRED_MICRO_VERSION, pygtk_required_micro_version, [PyGTK required micro version])
 
 
 dnl put the ACLOCAL flags in the makefile
