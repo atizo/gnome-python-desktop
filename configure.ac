@@ -1,4 +1,4 @@
-AC_INIT(gnome-python, 1.99.4,
+AC_INIT(gnome-python, 1.99.5,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
 dnl AC_CONFIG_SRCDIR([gnome/uimodule.c])
 AM_CONFIG_HEADER(config.h)
