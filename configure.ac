@@ -109,5 +109,6 @@ dnl
 AC_CONFIG_FILES(
   Makefile
   gnome/Makefile
+  bonobo/Makefile
   gnome-python.spec)
 AC_OUTPUT

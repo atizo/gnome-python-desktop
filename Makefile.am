@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = 1.5
 
-SUBDIRS = gnome
+SUBDIRS = gnome bonobo
 
 EXTRA_DIST = \
   gnome-python.spec \
