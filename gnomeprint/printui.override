@@ -44,10 +44,12 @@ override gnome_print_dialog_get_copies
 static PyObject *
 _wrap_gnome_print_dialog_get_copies(PyGObject *self)
 {
-    int copies, collate;
+    int copies;
+    gboolean collate, duplex, tumble;
 
-    gnome_print_dialog_get_copies(GNOME_PRINT_DIALOG(self->obj), &copies, &collate);
-    return Py_BuildValue("ii", copies, collate);
+    gnome_print_dialog_get_copies(GNOME_PRINT_DIALOG(self->obj), &copies,
+				  &collate, &duplex, &tumble);
+    return Py_BuildValue("iiii", copies, collate, duplex, tumble);
 }
 
 %%

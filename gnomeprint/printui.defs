@@ -60,7 +60,8 @@
 (define-method get_copies
   (of-object "GnomePrintDialog")
   (c-name "gnome_print_dialog_get_copies")
-  (return-type "gint")	; actually return is copies(int), collate(int)
+  (return-type "gint")	; actually return is ( copies(int), collate(boolean),
+					;      collate(duplex), collate(tumble) )
 )
 
 (define-method set_copies
@@ -69,7 +70,10 @@
   (return-type "none")
   (parameters
    '("gint" "copies")
-   '("gint" "collate"))
+   '("gboolean" "collate")
+   '("gboolean" "duplex")
+   '("gboolean" "tumble")
+   )
 )
 
 (define-method get_config
