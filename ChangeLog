@@ -1,3 +1,10 @@
+=== 2.9.0 ===
+2004-11-22  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* NEWS: Update.
+
+	* Makefile.am (EXTRA_DIST): s/EXTRAS_DIST/EXTRA_DIST/.
+
 2004-11-21  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* Makefile.am (EXTRAS_DIST): Add trayicon example to dist.

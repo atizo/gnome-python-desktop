@@ -20,7 +20,7 @@ endif
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 
-EXTRAS_DIST = \
+EXTRA_DIST = \
   gnome-python-extras-2.0.pc.in \
   ltihooks.py \
   examples/gtksourceview/test-widget.py \

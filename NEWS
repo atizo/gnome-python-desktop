@@ -1,0 +1,11 @@
+gnome-python-extras 2.9.0
+==========================
+* Now targetting gnome 2.10 platform (though currently compiles with 2.8)
+* Module layout:
+ - gnomeapplet imported from gnome-python
+ - gnomeprint* imported from gnome-python
+ - gtkhtml2 imported from gnome-python
+ - gtksourceview imported from external pygtksourceview package
+ - egg.trayicon imported from l-wrap[1] with minor modifications
+
+[1] ftp://www6.software.ibm.com/software/developer/library/l-wrap/l-wrap.zip
