@@ -1,3 +1,4 @@
+=== 2.9.3 ===
 2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* totem/Makefile.am (CLEANFILES): Clean plparser.c.
