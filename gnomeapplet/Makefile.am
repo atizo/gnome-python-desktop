@@ -11,6 +11,8 @@ pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
 pygnomedir = $(pkgpythondir)/gnome
+pygnomeexecdir = $(pkgpyexecdir)/gnome
+
 pygnome_PYTHON = applet.py # compat dummy module
 
 
