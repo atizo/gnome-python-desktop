@@ -48,7 +48,7 @@
 (define-method get_orient
   (of-object "PanelApplet")
   (c-name "panel_applet_get_orient")
-  (return-type "PanelAppletOrient")
+  (return-type "int") ; "PanelAppletOrient")
 )
 
 (define-method get_size
@@ -60,7 +60,7 @@
 (define-method get_background
   (of-object "PanelApplet")
   (c-name "panel_applet_get_background")
-  (return-type "PanelAppletBackgroundType")
+  (return-type "int") ; "PanelAppletBackgroundType")
   (parameters
     '("GdkColor*" "color")
     '("GdkPixmap**" "pixmap")
