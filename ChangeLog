@@ -1,5 +1,20 @@
 2004-12-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* Makefile.am (EXTRA_DIST): Add gtkspell example.
+
+	* examples/gtkspell/test.py: Add, from pygtkspell 0.3.1's source
+	tarball.
+
+	* gtkspell/Makefile.am (INCLUDES): Remove redundant *_CFLAGS.
+
+	* gtkspell/gtkspellmodule.c: Move all wrappers above the method
+	list variable.  Make everything static except initgtkspell().
+
+	* gtkspell/pygtkspell.h: Removed.
+
+	* gtkspell/pygtkspell.h: Code here doesn't belong in a header
+	file.  Move everything to gtkspellmodule.c.
+
 	* gtkspell/*: Add pygtkspell (0.3.1) sources, by John (J5)
 	Palmieri <johnp@martianrock.com>.  Fixes #162067.
 

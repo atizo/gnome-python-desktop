@@ -58,5 +58,5 @@ EXTRA_DIST = \
   examples/gnomeprint/example_10.py \
   examples/gnomeprint/example_11.py \
   examples/gnomeprint/README \
-  examples/gnomeprint/sample-image.png
-
+  examples/gnomeprint/sample-image.png \
+  examples/gtkspell/test.py
