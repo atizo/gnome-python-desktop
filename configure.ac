@@ -162,6 +162,16 @@ if test -n "$export_dynamic"; then
   EGGTRAY_LIBS=`echo $EGGTRAY_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the egg.recent module?
+build_eggrecent=false
+PKG_CHECK_MODULES(EGG_RECENT, gtk+-2.0 >= 2.0.0 gnome-vfs-2.0 libbonoboui-2.0 librsvg-2.0 libgnomeui-2.0,
+  build_eggrecent=true,
+  build_eggrecent=false)
+AM_CONDITIONAL(BUILD_EGGRECENT, $build_eggrecent)
+if test -n "$export_dynamic"; then
+  EGGRECENT_LIBS=`echo $EGGRECENT_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl should we build the wnck module
 build_wnck=false
 PKG_CHECK_MODULES(WNCK, libwnck-1.0 >= wnck_required_version,
@@ -174,7 +184,8 @@ fi
 
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
-JH_ADD_CFLAG([-std=c9x])
+dnl commented because it causes compilation problems in egg/recent
+dnl JH_ADD_CFLAG([-std=c9x])
 JH_ADD_CFLAG([-fno-strict-aliasing])
 
 AC_CONFIG_FILES(
@@ -185,6 +196,7 @@ AC_CONFIG_FILES(
   gtksourceview/Makefile
   egg/Makefile
   egg/tray/Makefile
+  egg/recent/Makefile
   wnck/Makefile
   gnome-python-extras-2.0.pc
 )

@@ -1,3 +1,24 @@
+2004-11-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac, egg/Makefile.am: Detect/build egg.recent module.
+	* egg/recent/egg-recent-item.c
+	* egg/recent/egg-recent-item.h
+	* egg/recent/egg-recent-model.c
+	* egg/recent/egg-recent-model.h
+	* egg/recent/egg-recent-util.c
+	* egg/recent/egg-recent-util.h
+	* egg/recent/egg-recent-view-bonobo.c
+	* egg/recent/egg-recent-view-bonobo.h
+	* egg/recent/egg-recent-view-gtk.c
+	* egg/recent/egg-recent-view-gtk.h
+	* egg/recent/egg-recent-view.c
+	* egg/recent/egg-recent-view.h
+	* egg/recent/egg-recent.h
+	* egg/recent/eggrecent.defs
+	* egg/recent/eggrecent.override
+	* egg/recent/eggrecentmodule.c
+	* egg/recent/populate-recent.c: sources taken from libegg.
+
 2004-11-24  Johan Dahlin  <johan@gnome.org>
 
 	* Makefile.am:
