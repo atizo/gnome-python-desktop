@@ -7,6 +7,8 @@
 /* include this first, before NO_IMPORT_PYGOBJECT is defined */
 #include <pygobject.h>
 #include <panel-applet.h>
+#include <bonobo/bonobo-main.h>
+#include <signal.h>
 
 void pyapplet_register_classes (PyObject *d);
 
@@ -16,6 +18,11 @@ DL_EXPORT(void)
 initapplet(void)
 {
     PyObject *m, *d;
+
+    struct sigaction sa;
+    PyObject *av;
+    int argc, i;
+    char **argv;
 	
     init_pygobject ();
 
@@ -44,7 +51,41 @@ initapplet(void)
     PyModule_AddIntConstant (m, "EXPAND_MINOR", PANEL_APPLET_EXPAND_MINOR);
     PyModule_AddIntConstant (m, "HAS_HANDLE", PANEL_APPLET_HAS_HANDLE);
 
-    bonobo_init();
-	
+    /* make sure ORBit2-python is ready? */
+    /* this code is copy-pasted from bonobomodule.c */
+
+    av = PySys_GetObject("argv");
+    if (av != NULL) {
+	argc = PyList_Size(av);
+
+	argv = g_new(char *, argc);
+	for (i = 0; i < argc; i++)
+	    argv[i] = g_strdup(PyString_AsString(PyList_GetItem(av, i)));
+    } else {
+	argc = 0;
+	argv = NULL;
+    }
+    memset(&sa, 0, sizeof(sa));
+    sigaction(SIGCHLD, NULL, &sa);
+
+    if (!bonobo_init(&argc, argv)) {
+	if (argv != NULL) {
+	    for (i = 0; i < argc; i++)
+		g_free(argv[i]);
+	    g_free(argv);
+	}
+	sigaction(SIGCHLD, &sa, NULL);
+	PyErr_SetString(PyExc_RuntimeError, "could not initialise Bonobo");
+	return;
+    }
+    sigaction(SIGCHLD, &sa, NULL);
+
+    if (argv != NULL) {
+	PySys_SetArgv(argc, argv);
+	for (i = 0; i < argc; i++)
+	    g_free(argv[i]);
+	g_free(argv);
+    }
+
     gnome_program_module_register (LIBGNOMEUI_MODULE);
 }
