@@ -30,6 +30,19 @@ EXTRA_DIST = \
   examples/gconf/simple-view.py \
   examples/gtkhtml2/simple-browser.py \
   examples/gnomeprint/test-print.py \
+  examples/gnomeprint/example_01.py \
+  examples/gnomeprint/example_02.py \
+  examples/gnomeprint/example_03.py \
+  examples/gnomeprint/example_04.py \
+  examples/gnomeprint/example_05.py \
+  examples/gnomeprint/example_06.py \
+  examples/gnomeprint/example_08.py \
+  examples/gnomeprint/example_09.py \
+  examples/gnomeprint/example_10.glade \
+  examples/gnomeprint/example_10.py \
+  examples/gnomeprint/example_11.py \
+  examples/gnomeprint/README \
+  examples/gnomeprint/sample-image.png \
   examples/nautilus/README \
   examples/nautilus/Nautilus_View_pysample.server \
   examples/nautilus/sample.py \
