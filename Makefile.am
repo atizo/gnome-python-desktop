@@ -1,4 +1,4 @@
-AUTOMAKE_OPTIONS = 1.5
+AUTOMAKE_OPTIONS = 1.6
 
 SUBDIRS = gconf gnome bonobo gtkhtml2
 
