@@ -36,10 +36,20 @@ AC_PATH_PROG(PYGTK_CODEGEN, pygtk-codegen-2.0, no)
 if test "x$PYGTK_CODEGEN" = xno; then
   AC_MSG_ERROR(could not find pygtk-codegen-2.0 script)
 fi
+
 AC_MSG_CHECKING(for pygtk defs)
-defsdir=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
-AC_SUBST(defsdir)
-AC_MSG_RESULT($defsdir)
+PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
+AC_SUBST(PYGTK_DEFSDIR)
+AC_MSG_RESULT($PYGTK_DEFSDIR)
+
+PYGTK_VERSION=`$PKG_CONFIG --modversion pygtk-2.0`
+AC_SUBST(PYGTK_VERSION)
+
+LIBGNOMECANVAS_VERSION=`$PKG_CONFIG --modversion libgnomecanvas-2.0`
+AC_SUBST(LIBGNOMECANVAS_VERSION)
+
+GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
+AC_SUBST(GTK_VERSION)
 
 dnl check to make sure we can find gtk
 AM_PATH_GTK_2_0(1.3.7,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
@@ -57,5 +67,6 @@ dnl
 AC_CONFIG_FILES(
   Makefile
   gnome/Makefile)
-AC_OUTPUT
-
+AC_OUTPUT([
+gnome-python.spec
+])
