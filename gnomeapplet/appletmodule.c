@@ -40,6 +40,10 @@ initapplet(void)
     PyModule_AddIntConstant (m, "SIZE_X_LARGE", GNOME_Vertigo_PANEL_X_LARGE);
     PyModule_AddIntConstant (m, "SIZE_XX_LARGE", GNOME_Vertigo_PANEL_XX_LARGE);
 
+    PyModule_AddIntConstant (m, "EXPAND_MAJOR", PANEL_APPLET_EXPAND_MAJOR);
+    PyModule_AddIntConstant (m, "EXPAND_MINOR", PANEL_APPLET_EXPAND_MINOR);
+    PyModule_AddIntConstant (m, "HAS_HANDLE", PANEL_APPLET_HAS_HANDLE);
+
     bonobo_init();
 	
     gnome_program_module_register (LIBGNOMEUI_MODULE);

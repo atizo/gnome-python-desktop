@@ -83,18 +83,18 @@
   )
 )
 
-(define-method get_flags
+(define-method get_applet_flags
   (of-object "PanelApplet")
   (c-name "panel_applet_get_flags")
-  (return-type "PanelAppletFlags")
+  (return-type "int") ;"PanelAppletFlags")
 )
 
-(define-method set_flags
+(define-method set_applet_flags
   (of-object "PanelApplet")
   (c-name "panel_applet_set_flags")
   (return-type "none")
   (parameters
-    '("PanelAppletFlags" "flags")
+    '("int" "flags") ;'("PanelAppletFlags" "flags")
   )
 )
 
