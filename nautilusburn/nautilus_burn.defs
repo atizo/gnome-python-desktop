@@ -16,6 +16,26 @@
   )
 )
 
+(define-enum NautilusBurnMediaType
+  (in-module "NautilusBurn")
+  (c-name "NautilusBurnRecorderActions")
+  (gtype-id "NAUTILUS_BURN_TYPE_MEDIA_TYPE")
+  (values
+    '("busy" "NAUTILUS_BURN_MEDIA_TYPE_BUSY")
+    '("error" "NAUTILUS_BURN_MEDIA_TYPE_ERROR")
+    '("unknown" "NAUTILUS_BURN_MEDIA_TYPE_UNKNOWN")
+    '("cd" "NAUTILUS_BURN_MEDIA_TYPE_CD")
+    '("cdr" "NAUTILUS_BURN_MEDIA_TYPE_CDR")
+    '("cdrw" "NAUTILUS_BURN_MEDIA_TYPE_CDRW")
+    '("dvd" "NAUTILUS_BURN_MEDIA_TYPE_DVD")
+    '("dvdr" "NAUTILUS_BURN_MEDIA_TYPE_DVDR")
+    '("dvdrw" "NAUTILUS_BURN_MEDIA_TYPE_DVDRW")
+    '("dvd-ram" "NAUTILUS_BURN_MEDIA_TYPE_DVD_RAM")
+    '("dvd-plus-r" "NAUTILUS_BURN_MEDIA_TYPE_DVD_PLUS_R")
+    '("dvd-plus-rw" "NAUTILUS_BURN_MEDIA_TYPE_DVD_PLUS_RW")
+  )
+)
+
 (define-enum NautilusBurnRecorderActions
   (in-module "NautilusBurn")
   (c-name "NautilusBurnRecorderActions")

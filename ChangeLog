@@ -1,3 +1,8 @@
+2005-02-09  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
+
+	* nautilusburn/nautilus_burn.defs: Add def for enum
+	NautilusBurnMediaType.
+
 === 2.9.3 ===
 2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
