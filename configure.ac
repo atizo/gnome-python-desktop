@@ -48,13 +48,16 @@ AC_SUBST(PYGTK_VERSION)
 LIBGNOMECANVAS_VERSION=`$PKG_CONFIG --modversion libgnomecanvas-2.0`
 AC_SUBST(LIBGNOMECANVAS_VERSION)
 
+LIBGNOME_VERSION=`$PKG_CONFIG --modversion libgnome-2.0`
+AC_SUBST(LIBGNOME_VERSION)
+
 GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
 AC_SUBST(GTK_VERSION)
 
 dnl check to make sure we can find gtk
 AM_PATH_GTK_2_0(1.3.10,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
 
-PKG_CHECK_MODULES(GNOME, [libgnome-2.0 >= 1.104.0],,
+PKG_CHECK_MODULES(GNOME, [libgnome-2.0 >= 1.107.0],,
   [AC_MSG_ERROR(libgnome-2.0 is required.)])
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
