@@ -2,14 +2,14 @@
 AC_PREREQ(2.52)
 
 dnl the gnome-python version number
-m4_define(gnome_python_major_version, 1)
-m4_define(gnome_python_minor_version, 99)
-m4_define(gnome_python_micro_version, 18)
+m4_define(gnome_python_major_version, 2)
+m4_define(gnome_python_minor_version, 0)
+m4_define(gnome_python_micro_version, 0)
 m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_version.gnome_python_micro_version)
 
 dnl required versions of other packages
-m4_define(pygtk_required_version,             1.99.18)
-m4_define(pyorbit_required_version,           1.99.7)
+m4_define(pygtk_required_version,             2.0.0)
+m4_define(pyorbit_required_version,           2.0.0)
 
 m4_define(glib_required_version,              2.0.0)
 m4_define(gtk_required_version,               2.0.0)
@@ -33,7 +33,7 @@ AC_INIT(gnome-python, gnome_python_version,
 dnl AC_CONFIG_SRCDIR([gnome/uimodule.c])
 AM_CONFIG_HEADER(config.h)
 
-AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_INIT_AUTOMAKE
 
 dnl put the ACLOCAL flags in the makefile
 ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
@@ -42,21 +42,7 @@ AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
 dnl check for python
-dnl AM_PATH_PYTHON(2.2)
-AM_PATH_PYTHON
-AC_MSG_CHECKING(for python >= 2.2)
-prog="
-import sys, string
-minver = (2,2,0,'final',0)
-if sys.version_info < minver:
-  sys.exit(1)
-sys.exit(0)"
-if $PYTHON -c "$prog" 1>&AC_FD_CC 2>&AC_FD_CC
-then
-  AC_MSG_RESULT(okay)
-else
-  AC_MSG_ERROR(too old)
-fi
+AM_PATH_PYTHON(2.2)
 AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 dnl check for pygtk
@@ -306,7 +292,8 @@ AC_CONFIG_FILES(
   gnomeprint/Makefile
   bonobo/Makefile
   gnome-python.spec
-  gnome-python-2.0.pc)
+  gnome-python-2.0.pc
+  PKG-INFO)
 AC_OUTPUT
 
 echo
