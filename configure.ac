@@ -1,4 +1,20 @@
-AC_INIT(gnome-python, 1.99.5,
+-*- mode: m4 -*-
+AC_PREREQ(2.52)
+
+dnl the gnome-python version number
+m4_define(gnome_python_major_version, 1)
+m4_define(gnome_python_minor_version, 99)
+m4_define(gnome_python_micro_version, 6)
+m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_version.gnome_python_micro_version)
+
+dnl required versions of other packages
+m4_define(pygtk_required_version,          1.99.6)
+m4_define(gtk_required_version,            1.3.12)
+m4_define(libgnome_required_version,       1.108.0)
+m4_define(libgnomecanvas_required_version, 1.108.0)
+m4_define(libzvt_required_version,         1.108.0)
+
+AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
 dnl AC_CONFIG_SRCDIR([gnome/uimodule.c])
 AM_CONFIG_HEADER(config.h)
@@ -14,10 +30,10 @@ AC_PROG_LIBTOOL
 dnl check for python
 dnl AM_PATH_PYTHON(2.2)
 AM_PATH_PYTHON
-AC_MSG_CHECKING(for python >= 2.2b1)
+AC_MSG_CHECKING(for python >= 2.2)
 prog="
 import sys, string
-minver = (2,2,0,'beta',1)
+minver = (2,2,0,'final',0)
 if sys.version_info < minver:
   sys.exit(1)
 sys.exit(0)"
@@ -30,7 +46,7 @@ fi
 AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 dnl check for pygtk
-PKG_CHECK_MODULES(PYGTK, [pygtk-2.0 >= 1.99.4])
+PKG_CHECK_MODULES(PYGTK, pygtk-2.0 >= pygtk_required_version)
 AC_SUBST(PYGTK_CFLAGS)
 AC_PATH_PROG(PYGTK_CODEGEN, pygtk-codegen-2.0, no)
 if test "x$PYGTK_CODEGEN" = xno; then
@@ -42,32 +58,29 @@ PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
 AC_SUBST(PYGTK_DEFSDIR)
 AC_MSG_RESULT($PYGTK_DEFSDIR)
 
-PYGTK_VERSION=`$PKG_CONFIG --modversion pygtk-2.0`
+dnl required version substitutions for use in the spec file
+PYGTK_VERSION=pygtk_required_version
+LIBGNOMECANVAS_VERSION=libgnomecanvas_required_version
+LIBGNOME_VERSION=libgnome_required_version
+GTK_VERSION=gtk_required_version
+LIBZVT_VERSION=libzvt_required_version
 AC_SUBST(PYGTK_VERSION)
-
-LIBGNOMECANVAS_VERSION=`$PKG_CONFIG --modversion libgnomecanvas-2.0`
 AC_SUBST(LIBGNOMECANVAS_VERSION)
-
-LIBGNOME_VERSION=`$PKG_CONFIG --modversion libgnome-2.0`
 AC_SUBST(LIBGNOME_VERSION)
-
-GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
 AC_SUBST(GTK_VERSION)
-
-LIBZVT_VERSION=`$PKG_CONFIG --modversion libzvt-2.0`
 AC_SUBST(LIBZVT_VERSION)
 
 dnl check to make sure we can find gtk
-AM_PATH_GTK_2_0(1.3.10,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
+AM_PATH_GTK_2_0(gtk_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
 
-PKG_CHECK_MODULES(GNOME, [libgnome-2.0 >= 1.107.0],,
+PKG_CHECK_MODULES(GNOME, libgnome-2.0 >= libgnome_required_version,,
   [AC_MSG_ERROR(libgnome-2.0 is required.)])
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
 
 dnl should we build the gnome.canvas module?
 build_gnomecanvas=false
-PKG_CHECK_MODULES(GNOMECANVAS, [libgnomecanvas-2.0 >= 1.102.0],
+PKG_CHECK_MODULES(GNOMECANVAS, libgnomecanvas-2.0 >= libgnomecanvas_required_version,
   build_gnomecanvas=true,
   build_gnomecanvas=false)
 AC_SUBST(GNOMECANVAS_CFLAGS)
@@ -76,7 +89,7 @@ AM_CONDITIONAL(BUILD_GNOMECANVAS, $build_gnomecanvas)
 
 dnl should we build the gnome.zvt module?
 build_zvt=false
-PKG_CHECK_MODULES(LIBZVT, [libzvt-2.0 >= 1.105.0],
+PKG_CHECK_MODULES(LIBZVT, libzvt-2.0 >= libzvt_required_version,
   build_zvt=true,
   build_zvt=false)
 AC_SUBST(LIBZVT_CFLAGS)
