@@ -839,6 +839,9 @@
   (of-object "WnckWindow")
   (c-name "wnck_window_unminimize")
   (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
 )
 
 (define-method maximize
@@ -950,6 +953,9 @@
   (of-object "WnckWindow")
   (c-name "wnck_window_activate")
   (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
 )
 
 (define-method is_active
@@ -968,6 +974,9 @@
   (of-object "WnckWindow")
   (c-name "wnck_window_activate_transient")
   (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
 )
 
 (define-method get_icon
@@ -1126,6 +1135,9 @@
   (of-object "WnckWorkspace")
   (c-name "wnck_workspace_activate")
   (return-type "none")
+  (parameters
+    '("guint32" "timestamp")
+  )
 )
 
 (define-method get_width
