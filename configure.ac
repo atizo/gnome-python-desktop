@@ -16,6 +16,7 @@ m4_define(gtk_required_version,               2.0.0)
 m4_define(libgnome_required_version,          1.112.1)
 m4_define(libgnomeui_required_version,        1.112.1)
 m4_define(libgnomecanvas_required_version,    1.112.1)
+m4_define(libgnomevfs_required_version,       1.9.16)
 m4_define(libzvt_required_version,            1.112.0)
 m4_define(gconf_required_version,             1.1.8)
 m4_define(bonobo_activation_required_version, 0.9.5)
@@ -73,6 +74,7 @@ dnl required version substitutions for use in the spec file
 PYGTK_VERSION=pygtk_required_version
 LIBGNOMECANVAS_VERSION=libgnomecanvas_required_version
 LIBGNOME_VERSION=libgnome_required_version
+LIBGNOMEVFS_VERSION=libgnomevfs_required_version
 GTK_VERSION=gtk_required_version
 LIBZVT_VERSION=libzvt_required_version
 ORBIT_PYTHON_VERSION=orbit_python_required_version
@@ -86,6 +88,7 @@ GTKHTML2_VERSION=gtkhtml2_required_version
 AC_SUBST(PYGTK_VERSION)
 AC_SUBST(LIBGNOMECANVAS_VERSION)
 AC_SUBST(LIBGNOME_VERSION)
+AC_SUBST(LIBGNOMEVFS_VERSION)
 AC_SUBST(GLIB_VERSION)
 AC_SUBST(GTK_VERSION)
 AC_SUBST(LIBZVT_VERSION)
@@ -131,6 +134,14 @@ PKG_CHECK_MODULES(GNOMECANVAS, libgnomecanvas-2.0 >= libgnomecanvas_required_ver
 AC_SUBST(GNOMECANVAS_CFLAGS)
 AC_SUBST(GNOMECANVAS_LIBS)
 AM_CONDITIONAL(BUILD_GNOMECANVAS, $build_gnomecanvas)
+
+build_gnomevfs=false
+PKG_CHECK_MODULES(GNOMEVFS, gnome-vfs-2.0 >= libgnomevfs_required_version,
+  build_gnomevfs=true,
+  build_gnomevfs=false)
+AC_SUBST(GNOMEVFS_CFLAGS)
+AC_SUBST(GNOMEVFS_LIBS)
+AM_CONDITIONAL(BUILD_GNOMEVFS, $build_gnomevfs)
 
 dnl should we build the gnome.zvt module?
 build_zvt=false
