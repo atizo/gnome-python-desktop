@@ -1,3 +1,12 @@
+2005-01-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Require gtksourceview 1.1.90.
+
+2005-01-19  Stéphan Kochen  <stephan@kochen.nl>
+
+	* gtksourceview/gtksourceview.defs: Add
+	gtksourceview.SourceView.[gs]set_highlight_current_line.
+
 2005-01-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* Makefile.am (SUBDIRS): Add nautilusburn.
