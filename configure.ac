@@ -312,5 +312,5 @@ else
   echo
   echo "Note: PyORBit pyorbit_required_version or later is required by bonobo, gnomeui"
   echo "and nautilus bindings."
-  echo "Download it from: http://ftp.gnome.org/pub/GNOME/pyorbit/1.99/"
+  echo "Download it from: http://ftp.gnome.org/pub/GNOME/sources/pyorbit/2.0/"
 fi
