@@ -1,5 +1,21 @@
 2004-11-21  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* configure.ac: Check for EGGTRAY packages.  Write egg/Makefile
+	and egg/tray/Makefile.
+
+	* egg/tray/Makefile.am,
+	* egg/tray/eggtrayicon.c,
+	* egg/tray/eggtrayicon.h,
+	* egg/tray/trayicon.defs,
+	* egg/tray/trayicon.override,
+	* egg/tray/trayiconmodule.c: Add trayicon wrapper, copied from
+	http://www-106.ibm.com/developerworks/linux/library/l-wrap/, added
+	automake integration and update eggtrayicon.[ch] to current cvs
+	sources.
+
+	* egg/Makefile.am, egg/__init__.py: Add 'egg' package, only
+	providing a namespace for future libegg wrappers.
+
 	* configure.ac: Copy code from pygtksourceview to support new
 	gtksourceview module.
 

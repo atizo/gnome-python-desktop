@@ -151,7 +151,15 @@ if test -n "$export_dynamic"; then
   GTKSOURCEVIEW_LIBS=`echo $GTKSOURCEVIEW_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-
+dnl should we build the egg.trayicon module?
+build_eggtray=false
+PKG_CHECK_MODULES(EGGTRAY, gtk+-2.0 >= 2.2.0 libgnomeui-2.0 >=  2.2.0,
+  build_eggtray=true,
+  build_eggtray=false)
+AM_CONDITIONAL(BUILD_EGGTRAY, $build_gtksourceview)
+if test -n "$export_dynamic"; then
+  EGGTRAY_LIBS=`echo $EGGTRAY_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 
 dnl add required cflags ...
@@ -165,6 +173,8 @@ AC_CONFIG_FILES(
   gnomeapplet/Makefile
   gnomeprint/Makefile
   gtksourceview/Makefile
+  egg/Makefile
+  egg/tray/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -177,6 +187,7 @@ $build_applet            && $have_pyorbit && echo     gnomeapplet
 $build_gnomeprint        && echo     gnomeprint
 $build_gnomeprintui      && echo     gnomeprint.ui
 $build_gtksourceview     && echo     gtksourceview
+$build_eggtray           && echo     egg.trayicon
 echo
 
 echo "The following modules will NOT be built:"
@@ -186,4 +197,5 @@ $build_applet            && $have_pyorbit || echo     gnomeapplet
 $build_gnomeprint        || echo     gnomeprint
 $build_gnomeprintui      || echo     gnomeprint.ui
 $build_gtksourceview     || echo     gtksourceview
+$build_eggtray           || echo     egg.trayicon
 

@@ -1,5 +1,5 @@
 
-SUBDIRS =
+SUBDIRS = egg
 
 if BUILD_GNOMEPRINT
   SUBDIRS += gnomeprint
