@@ -1,5 +1,11 @@
 2004-12-04  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* examples/egg/recent/Bonobo_Sample_Hello.xml: Add this, based on
+	the bonoboui example in gnome-python.
+
+	* examples/egg/recent/bonobo-view.py: Add bonobo recent files
+	example, based on the bonoboui example in gnome-python.
+
 	* examples/egg/recent/gtk-view.py: Add jdahlin's GtkUIManager
 	example, modified to support recent files and gnomevfs.
 
