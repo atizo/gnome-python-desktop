@@ -1,3 +1,11 @@
+2005-01-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gdl/gdl.override (_wrap_gdl_dock_object_dock): Handle
+	'other_data' parameter.
+
+	* gdl/gdl.defs (gdl_dock_new): Add (caller-owns-return #f) to
+	avoid overriding the constructor.
+
 2005-01-15  John Palmieri  <johnp@martianrock.com>
 
 	* Makefile.am (SUBDIRS): Conditionally add gdl to SUBDIRS.
