@@ -29,6 +29,10 @@ EXTRA_DIST = \
   ltihooks.py \
   examples/gtksourceview/test-widget.py \
   examples/egg/trayicon.py \
+  examples/egg/recent/populate-recent.py \
+  examples/egg/recent/gtk-view.py \
+  examples/egg/recent/bonobo-view.py \
+  examples/egg/recent/Bonobo_Sample_Hello.xml \
   examples/applet/applet.py \
   examples/applet/GNOME_PythonAppletSample.server \
   examples/applet/README \

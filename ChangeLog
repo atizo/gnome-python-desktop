@@ -1,5 +1,7 @@
 2004-12-04  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* Makefile.am (EXTRA_DIST): Add egg/recent examples to dist.
+
 	* examples/egg/recent/Bonobo_Sample_Hello.xml: Add this, based on
 	the bonoboui example in gnome-python.
 
