@@ -1,5 +1,25 @@
 2005-01-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* gtkmozembed/Makefile.am (pkgpyexec_LTLIBRARIES): Remove
+	'module' suffix from library name.
+
+	* gtksourceview/Makefile.am (pkgpyexec_LTLIBRARIES): Remove
+	'module' suffix from library name.
+
+	* gtkspell/Makefile.am (pkgpyexecdir): Install gtkspell inside the
+	gtk-2.0 pygtk subdir.
+	(gtkspell_la_LDFLAGS): Add -export-symbols-regex initgtkspell.
+
+	* gtop/gtop.c: Add Benoît Dejean's libgtop module, from gdesklets.
+
+	* gtop/Makefile.am: Makefile to build gtop module.
+
+	* gdl/Makefile.am (pkgpyexec_LTLIBRARIES): Rename gdlmodule.la to
+	gdl.la.
+	(INCLUDES): Remove redundant $(PYGTK_CFLAGS).
+
+	* configure.ac: Check for gtop libs.
+
 	* gdl/gdl.defs (gdl_dock_item_new_with_stock): Convert to property
 	based constructor.
 	(gdl_dock_paned_new): idem.

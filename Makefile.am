@@ -37,6 +37,10 @@ if BUILD_TOTEM_PLPARSER
   SUBDIRS += totem
 endif
 
+if BUILD_GTOP
+  SUBDIRS += gtop
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 

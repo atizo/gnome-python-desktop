@@ -8,11 +8,11 @@ pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
 # gtksourceview module
-pkgpyexec_LTLIBRARIES = gtksourceviewmodule.la
-gtksourceviewmodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initgtksourceview
-gtksourceviewmodule_la_LIBADD = $(GTKSOURCEVIEW_LIBS)
-gtksourceviewmodule_la_SOURCES = gtksourceviewmodule.c 
-nodist_gtksourceviewmodule_la_SOURCES = gtksourceview.c
+pkgpyexec_LTLIBRARIES = gtksourceview.la
+gtksourceview_la_LDFLAGS = -module -avoid-version -export-symbols-regex initgtksourceview
+gtksourceview_la_LIBADD = $(GTKSOURCEVIEW_LIBS)
+gtksourceview_la_SOURCES = gtksourceviewmodule.c 
+nodist_gtksourceview_la_SOURCES = gtksourceview.c
 gtksourceview.c: gtksourceview.defs gtksourceview.override
 CLEANFILES = gtksourceview.c
 

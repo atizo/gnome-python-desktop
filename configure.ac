@@ -210,7 +210,6 @@ build_gdl=false
 PKG_CHECK_MODULES(GDL, [gdl-1.0 >= 0.4.0 pygtk-2.0 >= pygtk_required_version],
   build_gdl=true,
   build_gdl=false)
-
 AM_CONDITIONAL(BUILD_GDL, $build_gdl)
 if test -n "$export_dynamic"; then
   GDL_LIBS=`echo $GDL_LIBS | sed -e "s/$export_dynamic//"`
@@ -226,6 +225,15 @@ if test -n "$export_dynamic"; then
   TOTEM_PLPARSER_LIBS=`echo $TOTEM_PLPARSER_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gtop module?
+build_gtop=false
+PKG_CHECK_MODULES(GTOP, [libgtop-2.0 >= 2.9.1 pygtk-2.0 >= pygtk_required_version],
+  build_gtop=true,
+  build_gtop=false)
+AM_CONDITIONAL(BUILD_GTOP, $build_gtop)
+if test -n "$export_dynamic"; then
+  GTOP_LIBS=`echo $GTOP_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
@@ -248,6 +256,7 @@ AC_CONFIG_FILES(
   gtkspell/Makefile
   gdl/Makefile
   totem/Makefile
+  gtop/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -267,6 +276,7 @@ $build_gtkmozembed       && echo     gtkmozembed
 $build_gtkspell          && echo     gtkspell
 $build_gdl               && echo     gdl
 $build_totem_plparser    && echo     totem.plparser
+$build_gtop              && echo     gtop
 echo
 
 echo "The following modules will NOT be built:"
@@ -283,3 +293,4 @@ $build_gtkmozembed       || echo     gtkmozembed
 $build_gtkspell          || echo     gtkspell
 $build_gdl               || echo     gdl
 $build_totem_plparser    || echo     totem.plparser
+$build_gtop              || echo     gtop
