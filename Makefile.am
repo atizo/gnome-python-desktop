@@ -21,4 +21,5 @@ EXTRA_DIST = \
   examples/nautilus/README \
   examples/nautilus/Nautilus_View_pysample.server \
   examples/nautilus/sample.py \
-  examples/zvt/zvt-demo.py
+  examples/zvt/zvt-demo.py \
+  examples/vfs/shell.py
