@@ -11,6 +11,7 @@ dnl required versions of other packages
 m4_define(pygtk_required_version,          1.99.6)
 m4_define(gtk_required_version,            1.3.12)
 m4_define(libgnome_required_version,       1.108.0)
+m4_define(libgnomeui_required_version,     1.108.0)
 m4_define(libgnomecanvas_required_version, 1.108.0)
 m4_define(libzvt_required_version,         1.108.0)
 
@@ -77,6 +78,14 @@ PKG_CHECK_MODULES(GNOME, libgnome-2.0 >= libgnome_required_version,,
   [AC_MSG_ERROR(libgnome-2.0 is required.)])
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
+
+build_gnomeui=false
+PKG_CHECK_MODULES(GNOMEUI, libgnomeui-2.0 >= libgnomeui_required_version,
+  build_gnomeui=true,
+  build_gnomeui=false)
+AC_SUBST(GNOMEUI_CFLAGS)
+AC_SUBST(GNOMEUI_LIBS)
+AM_CONDITIONAL(BUILD_GNOMEUI, $build_gnomeui)
 
 dnl should we build the gnome.canvas module?
 build_gnomecanvas=false
