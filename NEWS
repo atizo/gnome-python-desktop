@@ -1,5 +1,15 @@
 Overview of Changes from gnome-python-extras 2.9.2 to gnome-python-extras 2.9.3
 ===============================================================================
+* New module totem.plparser, wrapping the new totem playlist parsing
+library (Tiago Cogumbreiro)
+* New module gdl, wrapping Gnome Devtool Libraries (John Palmieri)
+* New module gtop, wrapping libgtop (Benoît Dejean)
+* gtksourceview
+ - Allow changing syntax highlighting styles (Stéphan Kochen)
+ - Add SourceView.[gs]set_highlight_current_line (Stéphan Kochen)
+* New module nautilusburn, wrapping libnautilusburn (Tiago Cogumbreiro)
+* egg.recent
+ - Update to CVS libegg (Gustavo)
 
 
 Overview of Changes from gnome-python-extras 2.9.1 to gnome-python-extras 2.9.2

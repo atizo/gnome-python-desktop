@@ -1,5 +1,8 @@
 2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* egg/recent/egg-recent-model.c: Apply patch in comment #4 of bug
+	#160531 to fix the huge startup delay.  Thanks Paolo Maggi.
+
 	* egg/recent/eggrecent.defs: EggRecentItem.[gs]et_count removed.
 
 	* egg/recent/egg-recent-item.c,
