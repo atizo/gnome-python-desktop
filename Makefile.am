@@ -41,6 +41,10 @@ if BUILD_GTOP
   SUBDIRS += gtop
 endif
 
+if BUILD_NAUTILUSBURN
+  SUBDIRS += nautilusburn
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 
@@ -73,4 +77,7 @@ EXTRA_DIST = \
   examples/gnomeprint/README \
   examples/gnomeprint/sample-image.png \
   examples/gtkspell/test.py \
-  examples/gdl/gdl_test.py
+  examples/gdl/gdl_test.py \
+  examples/nautilusburn/blank_disc.py \
+  examples/nautilusburn/drive_selection.py \
+  examples/nautilusburn/write_iso.py

@@ -23,6 +23,7 @@ m4_define(gtksourceview_required_version,     1.1.0)
 m4_define(wnck_required_version,              2.8.0)
 m4_define(mozilla_required_version,           1.2b)
 m4_define(libgtop_required_version,           2.9.4)
+m4_define(libnautilus_burn_required_version,  2.9.4)
 
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
@@ -237,6 +238,17 @@ if test -n "$export_dynamic"; then
   GTOP_LIBS=`echo $GTOP_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the nautilusburn module?
+build_nautilusburn=false
+PKG_CHECK_MODULES(NAUTILUSBURN, [libnautilus-burn >= libnautilus_burn_required_version
+                                 pygtk-2.0 >= pygtk_required_version],
+  build_nautilusburn=true,
+  build_nautilusburn=false)
+AM_CONDITIONAL(BUILD_NAUTILUSBURN, $build_nautilusburn)
+if test -n "$export_dynamic"; then
+  NAUTILUSBURN_LIBS=`echo $NAUTILUSBURN_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 dnl commented because it causes compilation problems in egg/recent
@@ -259,6 +271,7 @@ AC_CONFIG_FILES(
   gdl/Makefile
   totem/Makefile
   gtop/Makefile
+  nautilusburn/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -279,6 +292,7 @@ $build_gtkspell          && echo     gtkspell
 $build_gdl               && echo     gdl
 $build_totem_plparser    && echo     totem.plparser
 $build_gtop              && echo     gtop
+$build_nautilusburn      && echo     nautilusburn
 echo
 
 echo "The following modules will NOT be built:"
@@ -296,3 +310,4 @@ $build_gtkspell          || echo     gtkspell
 $build_gdl               || echo     gdl
 $build_totem_plparser    || echo     totem.plparser
 $build_gtop              || echo     gtop
+$build_nautilusburn      || echo     nautilusburn

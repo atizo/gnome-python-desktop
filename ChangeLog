@@ -1,3 +1,19 @@
+2005-01-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (SUBDIRS): Add nautilusburn.
+	(EXTRA_DIST): Add nautilusburn examples.
+
+	* configure.ac: Check for libnautilus-burn, prepare to build
+	nautilusburn module.
+
+	* COPYING: Add license information for new nautilusburn module.
+
+2005-01-18  Tiago Cogumbreiro  <cogumbreiro@users.sf.net>
+
+	* examples/nautilusburn/*: Add examples for new nautilusburn module.
+
+	* nautilusburn/*: Add bindings for libnautilus-burn.
+	
 2005-01-17  Benoît Dejean  <TazForEver@dlfp.org>
 
 	* configure.ac: Requires glib >= 2.6.0 and libgtop >= 2.9.4.
