@@ -4,11 +4,11 @@ AC_PREREQ(2.52)
 dnl the gnome-python version number
 m4_define(gnome_python_major_version, 1)
 m4_define(gnome_python_minor_version, 99)
-m4_define(gnome_python_micro_version, 14)
+m4_define(gnome_python_micro_version, 15)
 m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_version.gnome_python_micro_version)
 
 dnl required versions of other packages
-m4_define(pygtk_required_version,             1.99.14)
+m4_define(pygtk_required_version,             1.99.15)
 m4_define(pyorbit_required_version,           1.99.3)
 
 m4_define(glib_required_version,              2.0.0)
@@ -345,7 +345,7 @@ $build_nautilus          || echo     nautilus
 $build_gnomeprint        || echo     gnomeprint
 $build_gnomeprintui      || echo     gnomeprint.ui
 
-if [ ! $have_pyorbit ]; then
+if [ "$have_pyorbit" = "false" ]; then
   echo
   echo "Note: PyORBit pyorbit_required_version or later is required by bonobo, gnomeui"
   echo "and nautilus bindings."
