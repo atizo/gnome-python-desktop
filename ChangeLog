@@ -1,3 +1,12 @@
+2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* AUTHORS: Update.
+
+	* configure.ac: Use new macro GNOME_COMMON_INIT from gnome-common
+	instead of manually changing ACLOCAL variable.  Support linking to
+	either mozilla or firefox for gtkmozembed, and add
+	--with-gtkmozembed to manually select one of them.
+
 2005-01-22  Benoît Dejean  <TazForEver@dlfp.org>
 
 	* configure.ac: Requires libgtop 2.9.5.

@@ -22,6 +22,7 @@ m4_define(libgnomeprintui_required_version,   2.2.0)
 m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(wnck_required_version,              2.8.0)
 m4_define(mozilla_required_version,           1.2b)
+m4_define(firefox_required_version,           1.0)
 m4_define(libgtop_required_version,           2.9.5)
 m4_define(libnautilus_burn_required_version,  2.9.4)
 
@@ -40,9 +41,7 @@ AC_DEFINE(GNOME_PYTHON_EXTRAS_MINOR_VERSION, gnome_python_extras_minor_version,
 AC_DEFINE(GNOME_PYTHON_EXTRAS_MICRO_VERSION, gnome_python_extras_micro_version,
                                             [Gnome-Python-Extras macro version])
 
-
-dnl put the ACLOCAL flags in the makefile
-ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
+GNOME_COMMON_INIT
 
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -187,16 +186,45 @@ fi
 
 dnl should we build the gtkmozembed module?
 build_gtkmozembed=false
+AC_ARG_WITH(gtkmozembed, AS_HELP_STRING(
+                         [--with-gtkmozembed=mozilla|firefox],
+                         [package that provides libgtkmozembed]),
+            [mozpackage=$withval], [mozpackage=any])
+
+if test $mozpackage = any ; then
+
+PKG_CHECK_MODULES(GTKMOZEMBED, [firefox-gtkmozembed >= firefox_required_version
+                                gtk+-2.0            >= gtk_required_version],
+  [build_gtkmozembed=true; mozpackage=firefox],
+  [
 PKG_CHECK_MODULES(GTKMOZEMBED, [mozilla-gtkmozembed >= mozilla_required_version
+                                gtk+-2.0            >= gtk_required_version],
+  [build_gtkmozembed=true; mozpackage=mozilla],
+  build_gtkmozembed=false)
+  ])
+
+else
+
+case $mozpackage in
+     firefox) mozpackage_required_version=firefox_required_version ;;
+     mozilla) mozpackage_required_version=mozilla_required_version ;;
+     *) AC_MSG_ERROR([--with-gtkmozembed argument must be either 'mozilla' or 'firefox'])
+esac
+
+PKG_CHECK_MODULES(GTKMOZEMBED, [mozilla-gtkmozembed >= $mozpackage_required_version,
                                 gtk+-2.0            >= gtk_required_version],
   build_gtkmozembed=true,
   build_gtkmozembed=false)
+
+fi
+
 AM_CONDITIONAL(BUILD_GTKMOZEMBED, $build_gtkmozembed)
 if test -n "$export_dynamic"; then
   GTKMOZEMBED_LIBS=`echo $GTKMOZEMBED_LIBS | sed -e "s/$export_dynamic//"`
 fi
-MOZILLA_HOME="`$PKG_CONFIG --variable=libdir mozilla-gtkmozembed`"
+MOZILLA_HOME="`$PKG_CONFIG --variable=libdir $mozpackage-gtkmozembed`"
 AC_SUBST(MOZILLA_HOME)
+
 
 dnl should we build the gtkspell module?
 build_gtkspell=false
@@ -287,7 +315,7 @@ $build_gtksourceview     && echo     gtksourceview
 $build_eggtray           && echo     egg.trayicon
 $build_eggrecent         && echo     egg.recent
 $build_wnck              && echo     wnck
-$build_gtkmozembed       && echo     gtkmozembed
+$build_gtkmozembed       && echo     gtkmozembed	"(linking to $mozpackage)"
 $build_gtkspell          && echo     gtkspell
 $build_gdl               && echo     gdl
 $build_totem_plparser    && echo     totem.plparser
