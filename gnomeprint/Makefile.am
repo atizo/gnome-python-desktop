@@ -44,6 +44,7 @@ printui.c: printui.defs printui.override
 .defs.c:
 	(cd $(srcdir) \
 	 && $(PYGTK_CODEGEN) \
+	    --load-types print-arg-types.py \
 	    --register $(PYGTK_DEFSDIR)/pango-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \

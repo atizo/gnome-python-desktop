@@ -8,6 +8,9 @@ headers
 #include <libgnomeprint/gnome-print-job.h>
 #include "art-gtype.h"
 
+gboolean pygnomeprint_check_error (GnomePrintReturnCode error);
+
+
 %%
 modulename gnomeprint
 %%

@@ -187,19 +187,19 @@
 (define-method close
   (of-object "GnomePrintContext")
   (c-name "gnome_print_context_close")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method newpath
   (of-object "GnomePrintContext")
   (c-name "gnome_print_newpath")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method moveto
   (of-object "GnomePrintContext")
   (c-name "gnome_print_moveto")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x")
    '("gdouble" "y"))
@@ -208,7 +208,7 @@
 (define-method lineto
   (of-object "GnomePrintContext")
   (c-name "gnome_print_lineto")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x")
    '("gdouble" "y"))
@@ -217,7 +217,7 @@
 (define-method curveto
   (of-object "GnomePrintContext")
   (c-name "gnome_print_curveto")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x1")
    '("gdouble" "y1")
@@ -230,13 +230,13 @@
 (define-method closepath
   (of-object "GnomePrintContext")
   (c-name "gnome_print_closepath")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method strokepath
   (of-object "GnomePrintContext")
   (c-name "gnome_print_strokepath")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method bpath
@@ -245,7 +245,7 @@
   (parameters
    '("ArtBpath*" "bpath")		; actually sequence<ArtBpath>
    '("gboolean"  "append"))
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method vpath
@@ -254,13 +254,13 @@
   (parameters
    '("ArtVpath*" "vpath")		; actually sequence<ArtVpath>
    '("gboolean"  "append"))
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method arcto
   (of-object "GnomePrintContext")
   (c-name "gnome_print_arcto")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x")
    '("gdouble" "y")
@@ -273,7 +273,7 @@
 (define-method setrgbcolor
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setrgbcolor")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "r")
    '("gdouble" "g")
@@ -283,7 +283,7 @@
 (define-method setopacity
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setopacity")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "opacity"))
 )
@@ -291,7 +291,7 @@
 (define-method setlinewidth
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setlinewidth")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "width"))
 )
@@ -299,7 +299,7 @@
 (define-method setmiterlimit
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setmiterlimit")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "limit"))
 )
@@ -307,7 +307,7 @@
 (define-method setlinejoin
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setlinejoin")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gint" "jointype"))
 )
@@ -315,7 +315,7 @@
 (define-method setlinecap
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setlinecap")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gint" "captype"))
 )
@@ -323,7 +323,7 @@
 (define-method setdash
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setdash")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "values") ; actually sequence<float>
    '("gdouble" "offset"))
@@ -332,7 +332,7 @@
 (define-method setfont
   (of-object "GnomePrintContext")
   (c-name "gnome_print_setfont")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("GnomeFont*" "font"))
 )
@@ -340,19 +340,19 @@
 (define-method clip
   (of-object "GnomePrintContext")
   (c-name "gnome_print_clip")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method eoclip
   (of-object "GnomePrintContext")
   (c-name "gnome_print_eoclip")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method concat
   (of-object "GnomePrintContext")
   (c-name "gnome_print_concat")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "matrix"))	 ; actually sequence<float> with len=6
 )
@@ -360,7 +360,7 @@
 (define-method scale
   (of-object "GnomePrintContext")
   (c-name "gnome_print_scale")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "sx")
    '("gdouble" "sy"))
@@ -369,7 +369,7 @@
 (define-method rotate
   (of-object "GnomePrintContext")
   (c-name "gnome_print_rotate")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "theta"))
 )
@@ -377,7 +377,7 @@
 (define-method translate
   (of-object "GnomePrintContext")
   (c-name "gnome_print_translate")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x")
    '("gdouble" "y"))
@@ -386,33 +386,33 @@
 (define-method gsave
   (of-object "GnomePrintContext")
   (c-name "gnome_print_gsave")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 
 (define-method fill
   (of-object "GnomePrintContext")
   (c-name "gnome_print_fill")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method eofill
   (of-object "GnomePrintContext")
   (c-name "gnome_print_eofill")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 (define-method stroke
   (of-object "GnomePrintContext")
   (c-name "gnome_print_stroke")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 
 (define-method show
   (of-object "GnomePrintContext")
   (c-name "gnome_print_show")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("const-gchar*" "text"))
 )
@@ -420,7 +420,7 @@
 (define-method glyphlist
   (of-object "GnomePrintContext")
   (c-name "gnome_print_glyphlist")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("GnomeGlyphList*" "glyphlist"))
 )
@@ -429,7 +429,7 @@
 (define-method grayimage
   (of-object "GnomePrintContext")
   (c-name "gnome_print_grayimage")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("const-guchar*" "data")
    '("gint"          "width")
@@ -441,7 +441,7 @@
 (define-method rgbimage
   (of-object "GnomePrintContext")
   (c-name "gnome_print_rgbimage")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("const-guchar*" "data")
    '("gint"          "width")
@@ -453,7 +453,7 @@
 (define-method rgbaimage
   (of-object "GnomePrintContext")
   (c-name "gnome_print_rgbaimage")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("const-guchar*" "data")
    '("gint"          "width")
@@ -464,7 +464,7 @@
 (define-method beginpage
   (of-object "GnomePrintContext")
   (c-name "gnome_print_beginpage")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("const-gchar*" "name"))
 )
@@ -472,7 +472,7 @@
 (define-method showpage
   (of-object "GnomePrintContext")
   (c-name "gnome_print_showpage")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
 )
 
 ; gnome_print_page_callback
@@ -493,7 +493,7 @@
 (define-method line_stroked
   (of-object "GnomePrintContext")
   (c-name "gnome_print_line_stroked")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x0")
    '("gdouble" "y0")
@@ -504,7 +504,7 @@
 (define-method rect_stroked
   (of-object "GnomePrintContext")
   (c-name "gnome_print_rect_stroked")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x")
    '("gdouble" "y")
@@ -515,7 +515,7 @@
 (define-method rect_filled
   (of-object "GnomePrintContext")
   (c-name "gnome_print_rect_filled")
-  (return-type "gint")
+  (return-type "GnomePrintReturnCode")
   (parameters
    '("gdouble" "x")
    '("gdouble" "y")

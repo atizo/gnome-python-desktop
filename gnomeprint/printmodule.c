@@ -11,6 +11,54 @@
 void pyprint_register_classes (PyObject *d);
 extern PyMethodDef pyprint_functions[];
 
+static PyObject *pygnomeprint_exception;
+static PyObject *pygnomeprint_bad_value_exception;
+static PyObject *pygnomeprint_no_current_point_exception;
+static PyObject *pygnomeprint_no_current_path_exception;
+static PyObject *pygnomeprint_text_corrupt_exception;
+static PyObject *pygnomeprint_bad_context_exception;
+static PyObject *pygnomeprint_no_page_exception;
+static PyObject *pygnomeprint_no_match_exception;
+static PyObject *pygnomeprint_unknown_exception;
+
+gboolean
+pygnomeprint_check_error (GnomePrintReturnCode error)
+{
+    if (error >= 0)
+	return FALSE;
+    switch (error)
+    {
+    case GNOME_PRINT_ERROR_BADVALUE:
+	PyErr_SetString(pygnomeprint_bad_value_exception, "Bad value");
+	return TRUE;
+    case GNOME_PRINT_ERROR_NOCURRENTPOINT:
+	PyErr_SetString(pygnomeprint_no_current_point_exception, "No current point");
+	return TRUE;
+    case GNOME_PRINT_ERROR_NOCURRENTPATH:
+	PyErr_SetString(pygnomeprint_no_current_path_exception, "No current path");
+	return TRUE;
+    case GNOME_PRINT_ERROR_TEXTCORRUPT:
+	PyErr_SetString(pygnomeprint_text_corrupt_exception, "Corrupt text");
+	return TRUE;
+    case GNOME_PRINT_ERROR_BADCONTEXT:
+	PyErr_SetString(pygnomeprint_bad_context_exception, "Bad context");
+	return TRUE;
+    case GNOME_PRINT_ERROR_NOPAGE:
+	PyErr_SetString(pygnomeprint_no_page_exception, "No page");
+	return TRUE;
+    case GNOME_PRINT_ERROR_NOMATCH:
+	PyErr_SetString(pygnomeprint_no_match_exception, "No match");
+	return TRUE;
+    case GNOME_PRINT_OK:
+	g_assert_not_reached();
+    case GNOME_PRINT_ERROR_UNKNOWN:
+    default:
+	PyErr_SetString(pygnomeprint_unknown_exception, "Unknown errror");
+	return TRUE;
+    }
+}
+
+
 void
 pyprint_add_defined_constants (PyObject *dict)
 {
@@ -91,6 +139,29 @@ pyprint_add_defined_constants (PyObject *dict)
 
 }
 
+static void initialize_exceptions (PyObject *d)
+{
+    pygnomeprint_exception = PyErr_NewException ("gnomeprint.Error",
+						 PyExc_RuntimeError, NULL);
+    PyDict_SetItemString(d, "Error", pygnomeprint_exception);
+
+#define register_exception(c_name, py_name)				\
+    pygnomeprint_##c_name##_exception =					\
+	PyErr_NewException ("gnomeprint." py_name "Error",		\
+			    pygnomeprint_exception, NULL);		\
+    PyDict_SetItemString(d, py_name "Error", pygnomeprint_##c_name##_exception);
+
+    register_exception(bad_value,        "BadValue");
+    register_exception(no_current_point, "NoCurrentPoint");
+    register_exception(no_current_path,  "NoCurrentPath");
+    register_exception(text_corrupt,     "TextCorrupt");
+    register_exception(bad_context,      "BadContext");
+    register_exception(no_page,          "NoPage");
+    register_exception(no_match,         "NoMatch");
+    register_exception(unknown,          "Unknown");
+#undef register_exception
+}
+
 
 DL_EXPORT(void)
 init_print (void)
@@ -101,7 +172,7 @@ init_print (void)
     
     m = Py_InitModule ("_print", pyprint_functions);
     d = PyModule_GetDict (m);
-	
+    initialize_exceptions (d);
     pyprint_register_classes (d);
     pyprint_add_defined_constants (m);
 
