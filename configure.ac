@@ -158,7 +158,7 @@ AM_CONDITIONAL(BUILD_BONOBO, $have_orbit_python && $build_bonobo)
 
 dnl should we build the bonobo.ui module?
 build_bonoboui=false
-PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version,
+PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version libgnome-2.0 >= libgnome_required_version,
   build_bonoboui=true, build_bonoboui=false)
 AC_SUBST(BONOBOUI_CFLAGS)
 AC_SUBST(BONOBOUI_LIBS)
@@ -173,7 +173,21 @@ AC_SUBST(LIBNAUTILUS_CFLAGS)
 AC_SUBST(LIBNAUTILUS_LIBS)
 AM_CONDITIONAL(BUILD_NAUTILUS, $have_orbit_python && $build_nautilus)
 
-dnl 
+dnl add debugging options ...
+changequote(,)dnl
+if test "x$GCC" = xyes; then
+  case " $CFLAGS " in
+  *[\	\ ]-Wall[\	\ ]*) ;;
+  *) CFLAGS="$CFLAGS -Wall" ;;
+  esac
+
+  case " $CFLAGS " in
+  *[\	\ ]-ansi[\	\ ]*) ;;
+  *) CFLAGS="$CFLAGS -ansi" ;;
+  esac
+fi
+changequote([,])dnl
+dnl
 AC_CONFIG_FILES(
   Makefile
   gconf/Makefile
