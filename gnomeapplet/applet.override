@@ -6,6 +6,8 @@ headers
 
 #include "pygobject.h"
 %%
+modulename gnome.applet
+%%
 import gobject.GObject as PyGObject_Type
 import gtk.EventBox as PyGtkEventBox_Type
 %%
