@@ -9,15 +9,18 @@ EXTRA_DIST = $(defs_DATA) print-arg-types.py
 pkgpythondir = $(pythondir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
+common_ldflags = -module -avoid-version
+
 pygnomedir = $(pkgpythondir)/gnomeprint
 pygnome_PYTHON = __init__.py
 
 pygnomeexecdir = $(pkgpyexecdir)/gnomeprint
-pygnomeexec_LTLIBRARIES = _print.la
+pygnomeexec_LTLIBRARIES =
 
 # libgnomeprint binding
+pygnomeexec_LTLIBRARIES += _print.la
 _print_la_CFLAGS = $(LIBGNOMEPRINT_CFLAGS)
-_print_la_LDFLAGS = -module -avoid-version -export-symbols-regex init_print
+_print_la_LDFLAGS = $(common_ldflags) -export-symbols-regex init_print
 _print_la_LIBADD = $(LIBGNOMEPRINT_LIBS)
 _print_la_SOURCES = printmodule.c art-gtype.h art-gtype.c
 nodist__print_la_SOURCES = print.c
@@ -27,11 +30,10 @@ print.c: print.defs print.override
 
 # libgnomeprintui binding
 if BUILD_GNOMEPRINTUI
-gnomeprintui_la = ui.la
+pygnomeexec_LTLIBRARIES += ui.la
 endif
-pygnomeexec_LTLIBRARIES += $(gnomeprintui_la)
 ui_la_CFLAGS = $(LIBGNOMEPRINTUI_CFLAGS)
-ui_la_LDFLAGS = -module -avoid-version -export-symbols-regex initui
+ui_la_LDFLAGS = $(common_ldflags) -export-symbols-regex initui
 ui_la_LIBADD = $(LIBGNOMEPRINTUI_LIBS)
 ui_la_SOURCES = printuimodule.c
 nodist_ui_la_SOURCES = printui.c
