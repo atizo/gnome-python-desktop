@@ -1144,3 +1144,69 @@
    '("gint"    "flags"))
 )
 
+;; From /opt/gnome-2.5/include/libgnomeprint-2.2/libgnomeprint/gnome-print-pango.h
+(ifdef HAVE_GNOMEPRINT28
+
+(define-function pango_font_map_new
+  (c-name "gnome_print_pango_font_map_new")
+  (return-type "PangoFontMap*")
+)
+
+(define-function pango_get_default_font_map
+  (c-name "gnome_print_pango_get_default_font_map")
+  (return-type "PangoFontMap*")
+)
+
+(define-function pango_create_context
+  (c-name "gnome_print_pango_create_context")
+  (return-type "PangoContext*")
+  (parameters
+    '("PangoFontMap*" "fontmap")
+  )
+)
+
+(define-function pango_update_context
+  (c-name "gnome_print_pango_update_context")
+  (return-type "none")
+  (parameters
+    '("PangoContext*" "context")
+    '("GnomePrintContext*" "gpc")
+  )
+)
+
+(define-method pango_create_layout
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_pango_create_layout")
+  (return-type "PangoLayout*")
+)
+
+(define-method pango_glyph_string
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_pango_glyph_string")
+  (return-type "none")
+  (parameters
+    '("PangoFont*" "font")
+    '("PangoGlyphString*" "glyphs")
+  )
+)
+
+(define-method pango_layout_line
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_pango_layout_line")
+  (return-type "none")
+  (parameters
+    '("PangoLayoutLine*" "line")
+  )
+)
+
+(define-method pango_layout
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_pango_layout")
+  (return-type "none")
+  (parameters
+    '("PangoLayout*" "layout")
+  )
+)
+
+)
+

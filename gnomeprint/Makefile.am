@@ -19,7 +19,7 @@ pygnomeexec_LTLIBRARIES =
 
 # libgnomeprint binding
 pygnomeexec_LTLIBRARIES += _print.la
-_print_la_CFLAGS = $(LIBGNOMEPRINT_CFLAGS)
+_print_la_CFLAGS = $(LIBGNOMEPRINT_CFLAGS) $(PYGNOMEPRINT_DEFS)
 _print_la_LDFLAGS = $(common_ldflags) -export-symbols-regex init_print
 _print_la_LIBADD = $(LIBGNOMEPRINT_LIBS)
 _print_la_SOURCES = printmodule.c art-gtype.h art-gtype.c
@@ -46,6 +46,7 @@ printui.c: printui.defs printui.override
 .defs.c:
 	(cd $(srcdir) \
 	 && $(PYGTK_CODEGEN) \
+	    $(PYGNOMEPRINT_DEFS) \
 	    --load-types print-arg-types.py \
 	    --register $(PYGTK_DEFSDIR)/pango-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
