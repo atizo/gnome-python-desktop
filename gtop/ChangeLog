@@ -1,0 +1,9 @@
+2005-01-18  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* .cvsignore: Added.
+
+	* gtop.c: (gtop_fsusage), (gtop_proc_args), (gtop_netlist),
+	(hwaddress_format_for_display), (gtop_netload), (get_smp_cpu),
+	(gtop_cpu), (open_files_entry_to_Struct), (gtop_proc_open_files),
+	(register_constants): Got rid of the workaround for older libgtop.
+

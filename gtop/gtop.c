@@ -41,10 +41,6 @@
 #include <glibtop/close.h>
 #include <glibtop/union.h>
 
-#ifndef LIBGTOP_CHECK_VERSION
-#define LIBGTOP_CHECK_VERSION(X, Y, Z) (0)
-#endif
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -572,33 +568,12 @@ static PyObject* gtop_fsusage(PyObject *self, PyObject *args)
 
 	my_dict_add_and_decref(d, "block_size", PyL_ULL(buf.block_size));
 
-#if LIBGTOP_CHECK_VERSION(2, 8, 0)
-
 	my_dict_add_and_decref(d, "read",  PyL_ULL(buf.read));
 	my_dict_add_and_decref(d, "write", PyL_ULL(buf.write));
-#endif
 
 	return _struct_new(d);
 }
 
-
-/* TODO: remove it when available */
-#if !GLIB_CHECK_VERSION(2, 5, 3)
-static guint
-my_g_strv_length (gchar **str_array)
-{
-  guint i = 0;
-
-  g_return_val_if_fail (str_array != NULL, 0);
-
-  while (str_array[i])
-    ++i;
-
-  return i;
-}
-
-#define g_strv_length my_g_strv_length
-#endif /* !GLIB_CHECK_VERSION(2, 5, 3) */
 
 
 static PyObject* gtop_proc_args(PyObject *self, PyObject *args)
@@ -612,12 +587,7 @@ static PyObject* gtop_proc_args(PyObject *self, PyObject *args)
 	if(!PyArg_ParseTuple(args, "I", &pid))
 		return NULL;
 
-#if LIBGTOP_CHECK_VERSION(2, 8, 0)
 	argv = glibtop_get_proc_argv(&buf, pid, -1);
-#else
-	argv = g_malloc(sizeof(char*));
-	argv[0] = NULL;
-#endif /* LIBGTOP_CHECK_VERSION(2, 8, 0) */
 	argc = g_strv_length(argv);
 
 	INIT_LIST_WITH(t, PyS_S, argv, argc);
@@ -719,7 +689,6 @@ static PyObject* gtop_swap(PyObject *self, PyObject *args)
 
 
 
-#if LIBGTOP_CHECK_VERSION(2, 9, 0)
 static PyObject* gtop_netlist(PyObject *self, PyObject *args)
 {
 	glibtop_netlist buf;
@@ -737,11 +706,9 @@ static PyObject* gtop_netlist(PyObject *self, PyObject *args)
 
 	return t;
 }
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 0) */
 
 
 
-#if LIBGTOP_CHECK_VERSION(2, 8, 0)
 static char* hwaddress_format_for_display(const glibtop_netload *buf,
 					 char *stringHW, size_t size)
 {
@@ -753,7 +720,6 @@ static char* hwaddress_format_for_display(const glibtop_netload *buf,
 
 	return stringHW;
 }
-#endif /* LIBGTOP_CHECK_VERSION(2, 8, 0) */
 
 
 static PyObject* gtop_netload(PyObject *self, PyObject *args)
@@ -796,9 +762,6 @@ static PyObject* gtop_netload(PyObject *self, PyObject *args)
 	my_dict_add_and_decref(d, "errors_total", PyL_ULL(buf.errors_total));
 	my_dict_add_and_decref(d, "collisions",   PyL_ULL(buf.collisions));
 
-
-#if LIBGTOP_CHECK_VERSION(2, 8, 0)
-
 	my_dict_add_and_decref(d, "prefix6",
 			     PyS_S(inet_ntop(AF_INET6, buf.prefix6, addr.ip6, sizeof addr.ip6)));
 	my_dict_add_and_decref(d, "address6",
@@ -807,8 +770,6 @@ static PyObject* gtop_netload(PyObject *self, PyObject *args)
 
 	my_dict_add_and_decref(d, "hwaddress",
 			     PyS_S(hwaddress_format_for_display(&buf, addr.hw, sizeof addr.hw)));
-
-#endif /* LIBGTOP_CHECK_VERSION(2, 8, 0) */
 
 	return _struct_new(d);
 }
@@ -870,12 +831,9 @@ static inline PyObject * get_smp_cpu(glibtop_cpu *buf, unsigned i)
 	my_dict_add_and_decref(d, "nice",  PyL_ULL(buf->xcpu_nice[i]));
 	my_dict_add_and_decref(d, "sys",   PyL_ULL(buf->xcpu_sys[i]));
 	my_dict_add_and_decref(d, "idle",  PyL_ULL(buf->xcpu_idle[i]));
-
-#if LIBGTOP_CHECK_VERSION(2, 9, 4)
 	my_dict_add_and_decref(d, "iowait",	PyL_ULL(buf->xcpu_iowait[i]));
 	my_dict_add_and_decref(d, "irq",	PyL_ULL(buf->xcpu_irq[i]));
 	my_dict_add_and_decref(d, "sofr_irq",	PyL_ULL(buf->xcpu_softirq[i]));
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 4) */
 
 	return _struct_new(d);
 }
@@ -901,18 +859,9 @@ static PyObject* gtop_cpu(PyObject *self, PyObject *args)
 	my_dict_add_and_decref(d, "sys",   PyL_ULL(buf.sys));
 	my_dict_add_and_decref(d, "idle",  PyL_ULL(buf.idle));
 	my_dict_add_and_decref(d, "frequency", PyL_ULL(buf.frequency));
-
-#if LIBGTOP_CHECK_VERSION(2, 9, 4)
 	my_dict_add_and_decref(d, "iowait",	PyL_ULL(buf.iowait));
 	my_dict_add_and_decref(d, "irq",	PyL_ULL(buf.irq));
 	my_dict_add_and_decref(d, "sofr_irq",	PyL_ULL(buf.softirq));
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 4) */
-
-/*	ADD_ARRAY_TO_DICT(d, "xcpu_total", PyL_ULL, buf.xcpu_total);
-	ADD_ARRAY_TO_DICT(d, "xcpu_user",  PyL_ULL, buf.xcpu_user);
-	ADD_ARRAY_TO_DICT(d, "xcpu_nice",  PyL_ULL, buf.xcpu_nice);
-	ADD_ARRAY_TO_DICT(d, "xcpu_sys",   PyL_ULL, buf.xcpu_sys);
-	ADD_ARRAY_TO_DICT(d, "xcpu_idle",  PyL_ULL, buf.xcpu_idle); */
 
 	smp = PyTuple_New(glibtop_global_server->ncpu);
 
@@ -1194,7 +1143,7 @@ static PyObject* gtop_proc_uid(PyObject *self, PyObject *args)
 }
 
 
-#if LIBGTOP_CHECK_VERSION(2, 9, 4)
+
 static inline PyObject*
 open_files_entry_to_Struct(const glibtop_open_files_entry *e)
 {
@@ -1203,7 +1152,6 @@ open_files_entry_to_Struct(const glibtop_open_files_entry *e)
 	d = PyDict_New();
 
 	my_dict_add_and_decref(d, "fd", PyI_L(e->fd));
-
 	my_dict_add_and_decref(d, "type", PyI_L(e->type));
 
 	switch(e->type)
@@ -1220,10 +1168,8 @@ open_files_entry_to_Struct(const glibtop_open_files_entry *e)
 
 	return _struct_new(d);
 }
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 4) */
 
 
-#if LIBGTOP_CHECK_VERSION(2, 9, 4)
 static PyObject* gtop_proc_open_files(PyObject *self, PyObject *args)
 {
 	glibtop_proc_open_files buf;
@@ -1242,7 +1188,6 @@ static PyObject* gtop_proc_open_files(PyObject *self, PyObject *args)
 
 	return t;
 }
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 4) */
 
 
 
@@ -1254,9 +1199,7 @@ static PyMethodDef gtop_methods[] =
 	{"loadavg",	gtop_loadavg,		METH_VARARGS, doc_gtop_loadavg},
 	{"mem",		gtop_mem,		METH_VARARGS, NULL},
 	{"mountlist",	gtop_mountlist,		METH_VARARGS, NULL},
-#if LIBGTOP_CHECK_VERSION(2, 9, 0)
 	{"netlist",	gtop_netlist,		METH_VARARGS, NULL},
-#endif /*  LIBGTOP_CHECK_VERSION(2, 9, 0) */
 	{"netload",	gtop_netload,		METH_VARARGS, NULL},
 	{"ppp",		gtop_ppp,		METH_VARARGS, NULL},
 	{"proc_args",	gtop_proc_args,		METH_VARARGS, NULL},
@@ -1264,9 +1207,7 @@ static PyMethodDef gtop_methods[] =
 	{"proc_state",	gtop_proc_state,	METH_VARARGS, NULL},
 	{"proc_map",	gtop_proc_map,		METH_VARARGS, NULL},
 	{"proc_mem",	gtop_proc_mem,		METH_VARARGS, NULL},
-#if LIBGTOP_CHECK_VERSION(2, 9, 4)
 	{"proc_open_files", gtop_proc_open_files, METH_VARARGS, NULL},
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 4) */
 	{"proc_segment",gtop_proc_segment,	METH_VARARGS, NULL},
 	{"proc_signal", gtop_proc_signal,	METH_VARARGS, NULL},
 	{"proc_time",   gtop_proc_time,		METH_VARARGS, NULL},
@@ -1308,13 +1249,11 @@ static void register_constants(PyObject *module)
 	add_flag("NETLOAD_IF_FLAGS_SIMPLEX",     GLIBTOP_IF_FLAGS_SIMPLEX);
 	add_flag("NETLOAD_IF_FLAGS_UP",		 GLIBTOP_IF_FLAGS_UP);
 
-#if LIBGTOP_CHECK_VERSION(2, 8, 0)
 	add_int("NETLOAD_SCOPE6_GLOBAL",  GLIBTOP_IF_IN6_SCOPE_GLOBAL);
 	add_int("NETLOAD_SCOPE6_HOST",    GLIBTOP_IF_IN6_SCOPE_HOST);
 	add_int("NETLOAD_SCOPE6_LINK",    GLIBTOP_IF_IN6_SCOPE_LINK);
 	add_int("NETLOAD_SCOPE6_SITE",    GLIBTOP_IF_IN6_SCOPE_SITE);
 	add_int("NETLOAD_SCOPE6_UNKNOWN", GLIBTOP_IF_IN6_SCOPE_UNKNOWN);
-#endif /* LIBGTOP_CHECK_VERSION(2, 8, 0) */
 
 	add_int("PROCLIST_KERN_PROC_ALL",	GLIBTOP_KERN_PROC_ALL);
 	add_int("PROCLIST_KERN_PROC_PID",	GLIBTOP_KERN_PROC_PID);
@@ -1338,10 +1277,7 @@ static void register_constants(PyObject *module)
 	add_int("PROCESS_ZOMBIE",		GLIBTOP_PROCESS_ZOMBIE);
 	add_int("PROCESS_STOPPED",		GLIBTOP_PROCESS_STOPPED);
 	add_int("PROCESS_SWAPPING",		GLIBTOP_PROCESS_SWAPPING);
-
-#if LIBGTOP_CHECK_VERSION(2, 8, 0)
 	add_int("PROCESS_DEAD",			GLIBTOP_PROCESS_DEAD);
-#endif /* LIBGTOP_CHECK_VERSION(2, 8, 0) */
 
 	add_int("MAP_PERM_READ",	GLIBTOP_MAP_PERM_READ);
 	add_int("MAP_PERM_WRITE",	GLIBTOP_MAP_PERM_WRITE);
@@ -1349,13 +1285,10 @@ static void register_constants(PyObject *module)
 	add_int("MAP_PERM_SHARED",	GLIBTOP_MAP_PERM_SHARED);
 	add_int("MAP_PERM_PRIVATE", GLIBTOP_MAP_PERM_PRIVATE);
 
-#if LIBGTOP_CHECK_VERSION(2, 9, 4)
 	add_int("FILE_TYPE_FILE",	 GLIBTOP_FILE_TYPE_FILE);
 	add_int("FILE_TYPE_PIPE",	 GLIBTOP_FILE_TYPE_PIPE);
 	add_int("FILE_TYPE_INETSOCKET",  GLIBTOP_FILE_TYPE_INETSOCKET);
 	add_int("FILE_TYPE_LOCALSOCKET", GLIBTOP_FILE_TYPE_LOCALSOCKET);
-#endif /* LIBGTOP_CHECK_VERSION(2, 9, 4) */
-
 
 #undef add_flag
 #undef add_int
