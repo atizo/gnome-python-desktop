@@ -47,8 +47,8 @@ printui.c: printui.defs printui.override
 	    --register $(PYGTK_DEFSDIR)/pango-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \
-	    --register $(srcdir)/print.defs \
-	    --register $(top_srcdir)/gnome/canvas.defs \
+	    --register print.defs \
+	    --register ../gnome/canvas.defs \
 	    --override $*.override \
 	    --prefix py$* $*.defs) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
