@@ -182,8 +182,8 @@ if test "x$GCC" = xyes; then
   esac
 
   case " $CFLAGS " in
-  *[\	\ ]-ansi[\	\ ]*) ;;
-  *) CFLAGS="$CFLAGS -ansi" ;;
+  *[\	\ ]-std=c9x[\	\ ]*) ;;
+  *) CFLAGS="$CFLAGS -std=c9x" ;;
   esac
 fi
 changequote([,])dnl
