@@ -2,7 +2,7 @@ CLEANFILES=
 INCLUDES = $(PYTHON_INCLUDES) $(PYGTK_CFLAGS)
 
 defsdir = $(datadir)/pygtk/2.0/defs
-defs_DATA = print.defs printui.defs
+defs_DATA = print.defs printui.defs art.defs
 
 EXTRA_DIST = $(defs_DATA)
 
@@ -22,19 +22,19 @@ _printmodule_la_LIBADD = $(LIBGNOMEPRINT_LIBS)
 _printmodule_la_SOURCES = printmodule.c art-gtype.h art-gtype.c
 nodist__printmodule_la_SOURCES = print.c
 CLEANFILES += print.c
-EXTRA_DIST += print.override  
+EXTRA_DIST += print.override
 print.c: print.defs print.override
 
 # libgnomeprintui binding
 if BUILD_GNOMEPRINTUI
-gnomeprintui_la = uimodule.la
+gnomeprintui_la = printuimodule.la
 endif
 pygnomeexec_LTLIBRARIES += $(gnomeprintui_la)
-uimodule_la_CFLAGS = $(LIBGNOMEPRINTUI_CFLAGS)
-uimodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initui
-uimodule_la_LIBADD = $(LIBGNOMEPRINTUI_LIBS)
-uimodule_la_SOURCES = printuimodule.c
-nodist_uimodule_la_SOURCES = printui.c
+printuimodule_la_CFLAGS = $(LIBGNOMEPRINTUI_CFLAGS)
+printuimodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initui
+printuimodule_la_LIBADD = $(LIBGNOMEPRINTUI_LIBS)
+printuimodule_la_SOURCES = printuimodule.c
+nodist_printuimodule_la_SOURCES = printui.c
 CLEANFILES += printui.c
 EXTRA_DIST += printui.override  
 printui.c: printui.defs printui.override

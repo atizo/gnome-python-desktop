@@ -13,6 +13,8 @@ EXTRA_DIST = \
   gnome-python.spec \
   gnome-python.spec.in \
   gnome-python-2.0.pc.in \
+  setup.py \
+  dsextras.py \
   examples/bonobo/bonoboui/Bonobo_Sample_Hello.xml \
   examples/bonobo/bonoboui/hello.py \
   examples/bonobo/echo/README \
