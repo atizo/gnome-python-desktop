@@ -1,3 +1,7 @@
+2005-01-17  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* configure.ac: Requires glib >= 2.6.0 and libgtop >= 2.9.4.
+
 2005-01-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* COPYING: Update.  libtotem-plparser is officially now LGPL.
