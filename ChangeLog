@@ -1,3 +1,12 @@
+2005-02-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/recent/egg-recent-item.c, egg/recent/egg-recent-item.h:
+	Re-merge with libegg HEAD to get latest fixes.
+
+	* egg/recent/eggrecent.override (_wrap_egg_recent_item_new):
+	Override, accept optional 'uri' parameter (calls
+	egg_recent_item_new_from_uri).
+
 2005-02-09  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
 
 	* nautilusburn/nautilus_burn.defs: Add def for enum
