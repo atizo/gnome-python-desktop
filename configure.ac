@@ -4,12 +4,12 @@ AC_PREREQ(2.52)
 dnl the gnome-python version number
 m4_define(gnome_python_major_version, 1)
 m4_define(gnome_python_minor_version, 99)
-m4_define(gnome_python_micro_version, 16)
+m4_define(gnome_python_micro_version, 18)
 m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_version.gnome_python_micro_version)
 
 dnl required versions of other packages
-m4_define(pygtk_required_version,             1.99.16)
-m4_define(pyorbit_required_version,           1.99.4)
+m4_define(pygtk_required_version,             1.99.18)
+m4_define(pyorbit_required_version,           1.99.7)
 
 m4_define(glib_required_version,              2.0.0)
 m4_define(gtk_required_version,               2.0.0)
@@ -24,9 +24,9 @@ m4_define(libbonobo_required_version,         2.0.0)
 m4_define(libbonoboui_required_version,       2.0.0)
 m4_define(libnautilus_required_version,       2.0.0)
 m4_define(libpanelapplet_required_version,    2.0.0)
-m4_define(gtkhtml2_required_version,          1.99.9)
-m4_define(libgnomeprint_required_version,     2.1.9)
-m4_define(libgnomeprintui_required_version,   2.1.9)
+m4_define(gtkhtml2_required_version,          2.0.0)
+m4_define(libgnomeprint_required_version,     2.2.0)
+m4_define(libgnomeprintui_required_version,   2.2.0)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])

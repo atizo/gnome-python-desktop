@@ -161,9 +161,5 @@ init_print (void)
     initialize_exceptions (d);
     pyprint_register_classes (d);
     pyprint_add_defined_constants (m);
-
-    if (PyErr_Occurred ()) {
-	Py_FatalError ("can't initialise module gnome.print");
-    }
 }
 

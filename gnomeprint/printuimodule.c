@@ -63,9 +63,5 @@ initui (void)
 	
     pyprintui_register_classes (d);
     pyprintui_add_defined_constants (d);
-
-    if (PyErr_Occurred ()) {
-	Py_FatalError ("can't initialise module gnomeprint.ui");
-    }
 }
 

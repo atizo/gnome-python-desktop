@@ -14,7 +14,6 @@ EXTRA_DIST = \
   gnome-python.spec.in \
   gnome-python-2.0.pc.in \
   setup.py \
-  dsextras.py \
   examples/applet/applet.py \
   examples/applet/GNOME_PythonAppletSample.server \
   examples/applet/README \
