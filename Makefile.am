@@ -25,6 +25,8 @@ EXTRA_DIST = \
   examples/bonobo/bonoboui/hello.py \
   examples/bonobo/echo/README \
   examples/bonobo/echo/echo-client.py \
+  examples/bonobo/unknown.py \
+  examples/bonobo/bonobo-application.py \
   examples/canvas/canvas-example.py \
   examples/gconf/basic-gconf-app.py \
   examples/gconf/simple-controller.py \
