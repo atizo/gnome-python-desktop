@@ -191,7 +191,6 @@ dnl
 AC_CONFIG_FILES(
   Makefile
   gconf/Makefile
-  gconf/enum/Makefile
   gnome/Makefile
   bonobo/Makefile
   gnome-python.spec)
