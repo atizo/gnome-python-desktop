@@ -13,12 +13,17 @@ if BUILD_APPLET
   SUBDIRS += gnomeapplet
 endif
 
+if BUILD_GTKSOURCEVIEW
+  SUBDIRS += gtksourceview
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 
 EXTRAS_DIST = \
   gnome-python-extras-2.0.pc.in \
   ltihooks.py \
+  examples/gtksourceview/test-widget.py \
   examples/applet/applet.py \
   examples/applet/GNOME_PythonAppletSample.server \
   examples/applet/README \

@@ -19,6 +19,7 @@ m4_define(libpanelapplet_required_version,    2.0.0)
 m4_define(gtkhtml2_required_version,          2.3.1)
 m4_define(libgnomeprint_required_version,     2.2.0)
 m4_define(libgnomeprintui_required_version,   2.2.0)
+m4_define(gtksourceview_required_version,     1.1.0)
 
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
@@ -140,6 +141,19 @@ if test -n "$export_dynamic"; then
   LIBGNOMEPRINTUI_LIBS=`echo $LIBGNOMEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gtksourceview module?
+build_gtksourceview=false
+PKG_CHECK_MODULES(GTKSOURCEVIEW, gtksourceview-1.0 >= gtksourceview_required_version,
+  build_gtksourceview=true,
+  build_gtksourceview=false)
+AM_CONDITIONAL(BUILD_GTKSOURCEVIEW, $build_gtksourceview)
+if test -n "$export_dynamic"; then
+  GTKSOURCEVIEW_LIBS=`echo $GTKSOURCEVIEW_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
+
+
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 JH_ADD_CFLAG([-std=c9x])
@@ -150,6 +164,7 @@ AC_CONFIG_FILES(
   gtkhtml2/Makefile
   gnomeapplet/Makefile
   gnomeprint/Makefile
+  gtksourceview/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -161,6 +176,7 @@ $build_gtkhtml2          && echo     gtkhtml2
 $build_applet            && $have_pyorbit && echo     gnomeapplet
 $build_gnomeprint        && echo     gnomeprint
 $build_gnomeprintui      && echo     gnomeprint.ui
+$build_gtksourceview     && echo     gtksourceview
 echo
 
 echo "The following modules will NOT be built:"
@@ -169,4 +185,5 @@ $build_gtkhtml2          || echo     gtkhtml2
 $build_applet            && $have_pyorbit || echo     gnomeapplet
 $build_gnomeprint        || echo     gnomeprint
 $build_gnomeprintui      || echo     gnomeprint.ui
+$build_gtksourceview     || echo     gtksourceview
 

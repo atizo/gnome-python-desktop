@@ -14,8 +14,7 @@ config.sub
 configure
 configure.scan
 depcomp
-gnome-python-2.0.pc
-gnome-python.spec
+gnome-python-extras-2.0.pc
 install-sh
 libtool
 ltconfig
@@ -33,4 +32,5 @@ stamp-h*
 dist
 build
 PKG-INFO
-
+compile
+ltmain.sh

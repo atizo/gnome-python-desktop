@@ -1,3 +1,21 @@
+2004-11-21  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* configure.ac: Copy code from pygtksourceview to support new
+	gtksourceview module.
+
+	* Makefile.am (EXTRAS_DIST): Add gtksourceview example to dist.
+
+	* examples/gtksourceview/test-widget.py: Add, copied from
+	pygtksourceview/tests.
+
+	* AUTHORS: Add contents of pygtksourceview's AUTHORS.
+
+	* gtksourceview/Makefile.am,
+	* gtksourceview/gtksourceview.defs,
+	* gtksourceview/gtksourceview.override,
+	* gtksourceview/gtksourceviewmodule.c: Import gtksourceview
+	module, from pygtksourceview 1.1.
+
 2004-11-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* gnomeapplet/appletmodule.c (initgnomeapplet): Change name of
