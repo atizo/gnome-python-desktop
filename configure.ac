@@ -75,12 +75,22 @@ LIBGNOMECANVAS_VERSION=libgnomecanvas_required_version
 LIBGNOME_VERSION=libgnome_required_version
 GTK_VERSION=gtk_required_version
 LIBZVT_VERSION=libzvt_required_version
+ORBIT_PYTHON_VERSION=orbit_python_required_version
+NAUTILUS_VERSION=libnautilus_required_version
+BONOBO_ACTIVATION_VERSION=bonobo_activation_required_version
+LIBBONOBO_VERSION=libbonobo_required_version
+LIBBONOBOUI_VERSION=libbonoboui_required_version
 AC_SUBST(PYGTK_VERSION)
 AC_SUBST(LIBGNOMECANVAS_VERSION)
 AC_SUBST(LIBGNOME_VERSION)
 AC_SUBST(GLIB_VERSION)
 AC_SUBST(GTK_VERSION)
 AC_SUBST(LIBZVT_VERSION)
+AC_SUBST(ORBIT_PYTHON_VERSION)
+AC_SUBST(NAUTILUS_VERSION)
+AC_SUBST(BONOBO_ACTIVATION_VERSION)
+AC_SUBST(LIBBONOBO_VERSION)
+AC_SUBST(LIBBONOBOUI_VERSION)
 
 dnl check for glib
 AM_PATH_GLIB_2_0(glib_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
