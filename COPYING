@@ -12,10 +12,10 @@ gnomeprint		LGPL
 gnomeprint.ui		LGPL
 gtksourceview		GPL
 egg.trayicon		LGPL
-egg.recent		GPL
+egg.recent		GPL?
 wnck			LGPL
 gtkmozembed		LGPL
 gtkspell		GPL
 gdl			GPL
-totem.plparser		?
+totem.plparser		LGPL
 gtop			GPL
