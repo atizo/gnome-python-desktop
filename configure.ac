@@ -30,7 +30,7 @@ fi
 AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 dnl check for pygtk
-PKG_CHECK_MODULES(PYGTK, [pygtk-2.0 >= 1.99])
+PKG_CHECK_MODULES(PYGTK, [pygtk-2.0 >= 1.99.3])
 AC_SUBST(PYGTK_CFLAGS)
 AC_PATH_PROG(PYGTK_CODEGEN, pygtk-codegen-2.0, no)
 if test "x$PYGTK_CODEGEN" = xno; then
