@@ -15,7 +15,7 @@ void pyapplet_register_classes (PyObject *d);
 extern PyMethodDef pyapplet_functions[];
 
 DL_EXPORT(void)
-initapplet(void)
+initgnomeapplet(void)
 {
     PyObject *m, *d;
 
@@ -26,7 +26,7 @@ initapplet(void)
 	
     init_pygobject ();
 
-    m = Py_InitModule ("applet", pyapplet_functions);
+    m = Py_InitModule ("gnomeapplet", pyapplet_functions);
     d = PyModule_GetDict (m);
 	
     pyapplet_register_classes (d);

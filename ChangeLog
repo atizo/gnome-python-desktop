@@ -1,0 +1,27 @@
+2004-11-17  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* gnomeapplet/appletmodule.c (initgnomeapplet): Change name of
+	module to "gnomeapplet".
+
+	* gnomeprint/Makefile.am (.defs.c): grab the canvas defs from
+	$(PYGTK_DEFSDIR) instead of ../gnome.
+
+	* AUTHORS: Add myself as author.
+
+	* gnome-python-extras-2.0.pc.in: don't need to define defsdir or
+	argtypesdir.
+
+	* gnomeapplet/Makefile.am: Makefile to build gnomeapplet
+	module. Based on gnome-python's gnome/Makefile.am.  Renamed applet
+	module to gnomeapplet.
+
+	* configure.ac: s/gnome_python/gnome_python_extras/.  Remove
+	checks for libaries not used.  Check for gnome-python 2.5.90.
+	AC_SUBST variable GNOME_PYTHON_ARGTYPES_DIR, whose value is taken
+	from the variable 'argtyes' of gnome-python's pkgconfig file.
+	Require python 2.3.
+
+	* Makefile.am (EXTRAS_DIST): Remove all examples unrelated to this
+	package. s/gnome-python-extras-2.0.pc.in/gnome-python-2.0.pc.in/.
+	Change SUBDIRS definition to match new layout.
+
