@@ -20,8 +20,19 @@
 ;  )
 ;)
 
+;(define-flags AppletFlags
+;  (in-module "Panel")
+;  (c-name "PanelAppletFlags")
+;  (gtype-id "PANEL_TYPE_APPLET_FLAGS")
+;  (values
+;    '("flags-none" "PANEL_APPLET_FLAGS_NONE")
+;    '("expand-major" "PANEL_APPLET_EXPAND_MAJOR")
+;    '("expand-minor" "PANEL_APPLET_EXPAND_MINOR")
+;  )
+;)
 
-;; From /home/zilch/cvs/gnome2/gnome-core/libpanel-applet/panel-applet.h
+
+;; From /home/jdahlin/cvs/gnome2/gnome-panel/libpanel-applet/panel-applet.h
 
 (define-function panel_applet_get_type
   (c-name "panel_applet_get_type")
@@ -34,12 +45,6 @@
   (return-type "GtkWidget*")
 )
 
-(define-method construct
-  (of-object "PanelApplet")
-  (c-name "panel_applet_construct")
-  (return-type "none")
-)
-
 (define-method get_orient
   (of-object "PanelApplet")
   (c-name "panel_applet_get_orient")
@@ -50,6 +55,16 @@
   (of-object "PanelApplet")
   (c-name "panel_applet_get_size")
   (return-type "guint")
+)
+
+(define-method get_background
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_background")
+  (return-type "PanelAppletBackgroundType")
+  (parameters
+    '("GdkColor*" "color")
+    '("GdkPixmap**" "pixmap")
+  )
 )
 
 (define-method get_preferences_key
@@ -68,23 +83,18 @@
   )
 )
 
-(define-method get_expand_flags
+(define-method get_flags
   (of-object "PanelApplet")
-  (c-name "panel_applet_get_expand_flags")
-  (return-type "none")
-  (parameters
-    '("gboolean*" "expand_major")
-    '("gboolean*" "expand_minor")
-  )
+  (c-name "panel_applet_get_flags")
+  (return-type "PanelAppletFlags")
 )
 
-(define-method set_expand_flags
+(define-method set_flags
   (of-object "PanelApplet")
-  (c-name "panel_applet_set_expand_flags")
+  (c-name "panel_applet_set_flags")
   (return-type "none")
   (parameters
-    '("gboolean" "expand_major")
-    '("gboolean" "expand_minor")
+    '("PanelAppletFlags" "flags")
   )
 )
 
@@ -124,21 +134,23 @@
   )
 )
 
-(define-function panel_applet_factory_main
+(define-function factory_main
   (c-name "panel_applet_factory_main")
   (return-type "int")
   (parameters
     '("const-gchar*" "iid")
+    '("GType" "applet_type")
     '("PanelAppletFactoryCallback" "callback")
     '("gpointer" "data")
   )
 )
 
-(define-function panel_applet_factory_main_closure
+(define-function factory_main
   (c-name "panel_applet_factory_main_closure")
   (return-type "int")
   (parameters
     '("const-gchar*" "iid")
+    '("GType" "applet_type")
     '("GClosure*" "closure")
   )
 )
@@ -148,6 +160,7 @@
   (return-type "Bonobo_Unknown")
   (parameters
     '("const-char*" "iid")
+    '("GType" "applet_type")
     '("PortableServer_POA" "poa")
     '("gpointer" "impl_ptr")
     '("PanelAppletFactoryCallback" "callback")
@@ -161,6 +174,7 @@
   (return-type "Bonobo_Unknown")
   (parameters
     '("const-char*" "iid")
+    '("GType" "applet_type")
     '("PortableServer_POA" "poa")
     '("gpointer" "impl_ptr")
     '("GClosure*" "closure")
@@ -174,6 +188,19 @@
   (parameters
     '("int" "argc")
     '("char*-argv" "[]")
+  )
+)
+
+(define-function bonobo_factory
+  (c-name "panel__applet_bonobo_factory")
+  (return-type "none")
+  (parameters
+    '("char*" "iid")
+    '("GType" "type")
+    '("char*" "name")
+    '("char*" "version")
+    '("PanelAppletFactoryCallback" "callback")
+    '("gpointer" "data")    
   )
 )
 

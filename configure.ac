@@ -20,7 +20,7 @@ m4_define(libzvt_required_version,            1.110.0)
 m4_define(gconf_required_version,             1.1.6)
 m4_define(bonobo_activation_required_version, 0.9.3)
 m4_define(libbonobo_required_version,         1.110.0)
-m4_define(libbonoboui_required_version,       1.110.0)
+m4_define(libbonoboui_required_version,       1.112.0)
 m4_define(libnautilus_required_version,       1.1.3)
 m4_define(libpanelapplet_required_version,    1.5.5)
 
