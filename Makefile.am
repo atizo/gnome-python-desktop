@@ -15,6 +15,7 @@ EXTRA_DIST = \
   gnome-python-2.0.pc.in \
   PKG-INFO \
   PKG-INFO.in \
+  ChangeLog.pre-2-0 \
   setup.py \
   examples/applet/applet.py \
   examples/applet/GNOME_PythonAppletSample.server \
