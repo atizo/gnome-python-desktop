@@ -1,5 +1,11 @@
 2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* totem/Makefile.am (CLEANFILES): Clean plparser.c.
+
+	* nautilusburn/Makefile.am (nautilusburn_la_SOURCES): Add missing
+	nb_drive.h, nb_track.h, and nb_typebuiltins.h.
+	(defs_DATA): Add missing nb_drive_selection.defs.
+
 	* egg/recent/egg-recent-model.c: Apply patch in comment #4 of bug
 	#160531 to fix the huge startup delay.  Thanks Paolo Maggi.
 

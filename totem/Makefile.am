@@ -33,3 +33,4 @@ plparser_la_LIBADD =				\
 
 EXTRA_DIST = plparser.defs plparser.override
 
+CLEANFILES = plparser.c
