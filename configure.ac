@@ -193,5 +193,6 @@ AC_CONFIG_FILES(
   gconf/Makefile
   gnome/Makefile
   bonobo/Makefile
-  gnome-python.spec)
+  gnome-python.spec
+  gnome-python-2.0.pc)
 AC_OUTPUT

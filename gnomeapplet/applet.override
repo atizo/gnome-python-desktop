@@ -3,6 +3,7 @@
 headers
 #include <Python.h>
 #include <panel-applet.h>
+#include <bonobo/bonobo-ui-util.h>
 
 #include "pygobject.h"
 %%
@@ -47,7 +48,7 @@ _wrap_panel_applet_factory_main_closure (PyGObject * self,
     return PyInt_FromLong (retval);
 }
 %%
-override panel__applet_bonobo_factory
+override panel__applet_bonobo_factory kwargs
 static PyObject *
 _wrap_panel__applet_bonobo_factory (PyGObject * self,
  			            PyObject *  args,
@@ -67,7 +68,7 @@ _wrap_panel__applet_bonobo_factory (PyGObject * self,
 	int i;
 	
 	if (!PyArg_ParseTupleAndKeywords(args, kwargs,
-					 "sOssO|O:gnome.applet.BONOBO_FACTORY",
+					 "sOssO|O:gnome.applet.bonobo_factory",
 					 kwlist, &iid, &pytype, &name, &version, &callback, &params)) {
 		return NULL;
 	}
@@ -89,8 +90,7 @@ _wrap_panel__applet_bonobo_factory (PyGObject * self,
 	
 	gnome_program_init (name, version,     
 			    LIBGNOMEUI_MODULE,             
-			    argc,
-			    argv,                                         
+			    argc, argv,                                         
 			    GNOME_PARAM_NONE,
 			    NULL);            
 
@@ -158,6 +158,66 @@ _wrap_panel_applet_setup_menu (PyGObject * self,
 					   pyg_closure_new (callback, params, NULL));
     }
 
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+%%
+override panel_applet_setup_menu_from_file kwargs
+static PyObject *
+_wrap_panel_applet_setup_menu_from_file (PyGObject * self,
+					 PyObject *  args,
+					 PyObject *  kwargs)
+{
+    static char *kwlist[] = { "opt_datadir", "file", "opt_app_name", "list", "extra_data", NULL };
+    gchar *             opt_datadir;
+    gchar *             file;
+    gchar *             opt_app_name;
+    PyObject *          list;
+    PyObject *          params = NULL;
+    BonoboUIComponent * popup_component;
+    gchar *             app_name = NULL;
+    int                 len, i;
+    PyObject *          item;
+    char *              cname;
+    PyObject *          callback;
+    
+    if (!PyArg_ParseTupleAndKeywords (args, kwargs,
+				      "zszO|O:PanelApplet.setup_menu_from_file", 
+				      kwlist, &opt_datadir, &file, &opt_app_name, &list, &params)) {
+	return NULL;
+    }
+
+    if (!PySequence_Check (list)) {
+	PyErr_SetString (PyExc_TypeError, "entries must be a sequence");
+	return NULL;
+    }
+    
+    /* Copied from panel-applet.c */
+    if (!opt_app_name)
+	opt_app_name = app_name = g_strdup_printf ("%d", getpid ());
+
+    popup_component = panel_applet_get_popup_component (PANEL_APPLET (self->obj));
+
+    bonobo_ui_util_set_ui (popup_component, opt_datadir, file, opt_app_name, NULL);
+    /* end copy */
+    
+    len = PySequence_Size (list);
+    for (i = 0; i < len; i++) {
+	item = PySequence_GetItem (list, i);
+	Py_DECREF (item);
+	
+	if (!PyArg_ParseTuple (item, "sO", &cname, &callback)) {
+	    return NULL;
+	}
+
+	bonobo_ui_component_add_verb_full (popup_component, cname,
+					   pyg_closure_new (callback, params, NULL));
+    }
+    
+    if (app_name) {
+	g_free (app_name);
+    }
+    
     Py_INCREF(Py_None);
     return Py_None;
 }
