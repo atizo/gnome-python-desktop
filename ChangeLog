@@ -1,5 +1,10 @@
 2005-01-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* COPYING: Replace GPL license with a table indicating license per
+	python module.
+
+	* Makefile.am (EXTRA_DIST): Add COPYING.GPL and COPYING.LGPL.
+
 	* gtkmozembed/Makefile.am (pkgpyexec_LTLIBRARIES): Remove
 	'module' suffix from library name.
 
