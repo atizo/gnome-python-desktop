@@ -1,4 +1,16 @@
+2004-11-27  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/eggrecent.override: override
+	_wrap_egg_recent_model_set_filter_(uri_schemes|groups|mime_types).
+
 2004-11-26  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/egg-recent-model.h, egg/recent/egg-recent-modelc:
+	Implement binding friendly variants of
+	egg_recent_model_set_filter_mime_types,
+	egg_recent_model_set_filter_groups, and
+	egg_recent_model_set_filter_uri_schemes, accepting a null
+	terminated string array instead of variable number of arguments.
 
 	* egg/recent/eggrecent.defs: Add missing definition of
 	RecentViewBonobo.
