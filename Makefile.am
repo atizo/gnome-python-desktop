@@ -47,4 +47,5 @@ EXTRA_DIST = \
   examples/nautilus/Nautilus_View_pysample.server \
   examples/nautilus/sample.py \
   examples/zvt/zvt-demo.py \
-  examples/vfs/shell.py
+  examples/vfs/shell.py \
+  examples/popt/popt.py
