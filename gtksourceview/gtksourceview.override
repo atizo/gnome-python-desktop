@@ -312,14 +312,16 @@ override-attr GtkSourceTagStyle.foreground
 static int
 _wrap_gtk_source_tag_style__set_foreground(PyGObject *self, PyObject *value, void *closure)
 {
-    if (!pyg_boxed_check (value, GDK_TYPE_COLOR)) {
-        PyErr_SetString(PyExc_TypeError, "a gtk.gdk.Color object is required");
-        return -1;
+    if (value == Py_None)
+        pyg_boxed_get (self, GtkSourceTagStyle)->mask &= ~GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
+    else {
+        if (!pyg_boxed_check (value, GDK_TYPE_COLOR)) {
+            PyErr_SetString(PyExc_TypeError, "a gtk.gdk.Color object or None is required");
+            return -1;
+        }
+        pyg_boxed_get (self, GtkSourceTagStyle)->foreground = *(pyg_boxed_get (value, GdkColor));
+        pyg_boxed_get (self, GtkSourceTagStyle)->mask |= GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
     }
-    
-    pyg_boxed_get (self, GtkSourceTagStyle)->foreground = *(pyg_boxed_get (value, GdkColor));
-    pyg_boxed_get (self, GtkSourceTagStyle)->mask |= GTK_SOURCE_TAG_STYLE_USE_FOREGROUND;
-    
     return 0;
 }
 %%
@@ -328,14 +330,16 @@ override-attr GtkSourceTagStyle.background
 static int
 _wrap_gtk_source_tag_style__set_background(PyGObject *self, PyObject *value, void *closure)
 {
-    if (!pyg_boxed_check (value, GDK_TYPE_COLOR)) {
-        PyErr_SetString(PyExc_TypeError, "a gtk.gdk.Color object is required");
-        return -1;
-    }
-    
-    pyg_boxed_get (self, GtkSourceTagStyle)->background = *(pyg_boxed_get (value, GdkColor));
-    pyg_boxed_get (self, GtkSourceTagStyle)->mask |= GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
-    
+    if (value == Py_None)
+        pyg_boxed_get (self, GtkSourceTagStyle)->mask &= ~GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
+    else {
+        if (!pyg_boxed_check (value, GDK_TYPE_COLOR)) {
+            PyErr_SetString(PyExc_TypeError, "a gtk.gdk.Color object or None is required");
+            return -1;
+        }
+        pyg_boxed_get (self, GtkSourceTagStyle)->background = *(pyg_boxed_get (value, GdkColor));
+        pyg_boxed_get (self, GtkSourceTagStyle)->mask |= GTK_SOURCE_TAG_STYLE_USE_BACKGROUND;
+    }    
     return 0;
 }
 %%

@@ -17,6 +17,12 @@
 	(_wrap_gtk_source_languages_manager_get_lang_files_dirs): Add
 	const to avoid compiler warning.  Don't free the return value.
 	(_gslist_to_pylist_strs): Make parameter const.
+	(_wrap_gtk_source_tag_style__set_foreground): Accept also None, in
+	which case the flag GTK_SOURCE_TAG_STYLE_USE_FOREGROUND is cleared
+	in the mask.
+	(_wrap_gtk_source_tag_style__set_background): Accept also None, in
+	which case the flag GTK_SOURCE_TAG_STYLE_USE_BACKGROUND is cleared
+	in the mask.
 
 2005-01-15  Stéphan Kochen  <stephan@kochen.nl>
 
