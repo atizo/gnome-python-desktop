@@ -1,6 +1,5 @@
 CLEANFILES=
 INCLUDES = $(PYTHON_INCLUDES) $(PYGTK_CFLAGS)
-#INCLUDES = $(PYTHON_INCLUDES) $(PYGTK_CFLAGS) -I$(top_srcdir)/libart_lgpl
 
 defsdir = $(datadir)/pygtk/2.0/defs
 defs_DATA = print.defs printui.defs
@@ -14,7 +13,7 @@ pygnomedir = $(pkgpythondir)/gnomeprint
 pygnome_PYTHON = __init__.py
 
 pygnomeexecdir = $(pkgpyexecdir)/gnomeprint
-pygnomeexec_LTLIBRARIES = _printmodule.la uimodule.la
+pygnomeexec_LTLIBRARIES = _printmodule.la
 
 # libgnomeprint binding
 _printmodule_la_CFLAGS = $(LIBGNOMEPRINT_CFLAGS)
@@ -27,6 +26,10 @@ EXTRA_DIST += print.override
 print.c: print.defs print.override
 
 # libgnomeprintui binding
+if BUILD_GNOMEPRINTUI
+gnomeprintui_la = uimodule.la
+endif
+pygnomeexec_LTLIBRARIES += $(gnomeprintui_la)
 uimodule_la_CFLAGS = $(LIBGNOMEPRINTUI_CFLAGS)
 uimodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initui
 uimodule_la_LIBADD = $(LIBGNOMEPRINTUI_LIBS)
@@ -45,7 +48,7 @@ printui.c: printui.defs printui.override
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \
 	    --register $(srcdir)/print.defs \
-	    --register $(srcdir)/../canvas.defs \
+	    --register $(top_srcdir)/gnome/canvas.defs \
 	    --override $*.override \
 	    --prefix py$* $*.defs) > gen-$*.c \
 	&& cp gen-$*.c $*.c \

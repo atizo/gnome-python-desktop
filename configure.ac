@@ -25,8 +25,8 @@ m4_define(libbonoboui_required_version,       2.0.0)
 m4_define(libnautilus_required_version,       2.0.0)
 m4_define(libpanelapplet_required_version,    2.0.0)
 m4_define(gtkhtml2_required_version,          1.99.9)
-m4_define(libgnomeprint_required_version,     2.1.6)
-m4_define(libgnomeprintui_required_version,   2.1.6)
+m4_define(libgnomeprint_required_version,     2.1.9)
+m4_define(libgnomeprintui_required_version,   2.1.9)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -250,7 +250,6 @@ AC_SUBST(LIBGNOMEPRINTUI_CFLAGS)
 AC_SUBST(LIBGNOMEPRINTUI_LIBS)
 AM_CONDITIONAL(BUILD_GNOMEPRINTUI, $build_gnomeprintui)
 LIBGNOMEPRINTUI_LIBS=`echo $LIBGNOMEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
-
 
 dnl add debugging options ...
 changequote(,)dnl

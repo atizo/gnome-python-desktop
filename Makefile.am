@@ -1,6 +1,10 @@
 AUTOMAKE_OPTIONS = 1.6
 
-SUBDIRS = gconf gnome bonobo gtkhtml2
+if BUILD_GNOMEPRINT
+  GNOMEPRINT_SUBDIR = gnomeprint
+endif
+
+SUBDIRS = gconf gnome bonobo gtkhtml2 $(GNOMEPRINT_SUBDIR)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-2.0.pc
