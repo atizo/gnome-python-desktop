@@ -11,11 +11,13 @@ dnl required versions of other packages
 m4_define(pygtk_required_version,             1.99.6)
 m4_define(orbit_python_required_version,      1.99.0)
 
+m4_define(glib_required_version,              1.3.12)
 m4_define(gtk_required_version,               1.3.12)
 m4_define(libgnome_required_version,          1.108.0)
 m4_define(libgnomeui_required_version,        1.108.0)
 m4_define(libgnomecanvas_required_version,    1.108.0)
 m4_define(libzvt_required_version,            1.108.0)
+m4_define(gconf_required_version,             1.1.6)
 m4_define(bonobo_activation_required_version, 0.9.3)
 m4_define(libbonobo_required_version,         1.108.0)
 m4_define(libbonoboui_required_version,       1.108.0)
@@ -75,8 +77,12 @@ LIBZVT_VERSION=libzvt_required_version
 AC_SUBST(PYGTK_VERSION)
 AC_SUBST(LIBGNOMECANVAS_VERSION)
 AC_SUBST(LIBGNOME_VERSION)
+AC_SUBST(GLIB_VERSION)
 AC_SUBST(GTK_VERSION)
 AC_SUBST(LIBZVT_VERSION)
+
+dnl check for glib
+AM_PATH_GLIB_2_0(glib_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
 
 dnl check to make sure we can find gtk
 AM_PATH_GTK_2_0(gtk_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
@@ -127,6 +133,13 @@ AC_SUBST(LIBPANELAPPLET_CFLAGS)
 AC_SUBST(LIBPANELAPPLET_LIBS)
 AM_CONDITIONAL(BUILD_APPLET, $build_applet)
 
+PKG_CHECK_MODULES(GCONF, gconf-2.0 >= gconf_required_version,,
+  [AC_MSG_ERROR(gconf-2.0 is required.)])
+GCONF_INCLUDEDIR="`pkg-config gconf-2.0 --variable includedir`/gconf/2/gconf"
+AC_SUBST(GCONF_INCLUDEDIR)
+AC_SUBST(GCONF_CFLAGS)
+AC_SUBST(GCONF_LIBS)
+
 dnl should we build the bonobo.activation module?
 build_bonobo_activation=false
 PKG_CHECK_MODULES(BONOBO_ACTIVATION, bonobo-activation-2.0 >= bonobo_activation_required_version,
@@ -163,6 +176,8 @@ AM_CONDITIONAL(BUILD_NAUTILUS, $have_orbit_python && $build_nautilus)
 dnl 
 AC_CONFIG_FILES(
   Makefile
+  gconf/Makefile
+  gconf/enum/Makefile
   gnome/Makefile
   bonobo/Makefile
   gnome-python.spec)
