@@ -1,3 +1,4 @@
+/* -*- C -*- */
 %%
 headers
 #define NO_IMPORT_PYGOBJECT
@@ -269,6 +270,121 @@ _wrap_gtk_source_style_scheme_get_style_names (PyGObject *self)
     dest = _gslist_to_pylist_strs(source);
     g_slist_free(source);
     return dest;
+}
+%%
+override-attr GtkSourceTagStyle.bold
+
+static int
+_wrap_gtk_source_tag_style__set_bold(PyGObject *self, PyObject *value, void *closure)
+{
+    int n;
+    if (!PyBool_Check (value)) {
+        PyErr_SetString(PyExc_TypeError, "a boolean is required");
+        return -1;
+    }
+    
+    n = PyInt_AsLong (value);
+    pyg_boxed_get (self, GtkSourceTagStyle)->bold = n;
+    
+    return 0;
+}
+%%
+override-attr GtkSourceTagStyle.italic
+
+static int
+_wrap_gtk_source_tag_style__set_italic(PyGObject *self, PyObject *value, void *closure)
+{
+    int n;
+    if (!PyBool_Check (value)) {
+        PyErr_SetString(PyExc_TypeError, "a boolean is required");
+        return -1;
+    }
+    
+    n = PyInt_AsLong (value);
+    pyg_boxed_get (self, GtkSourceTagStyle)->italic = n;
+    
+    return 0;
+}
+%%
+override-attr GtkSourceTagStyle.underline
+
+static int
+_wrap_gtk_source_tag_style__set_underline(PyGObject *self, PyObject *value, void *closure)
+{
+    int n;
+    if (!PyBool_Check (value)) {
+        PyErr_SetString(PyExc_TypeError, "a boolean is required");
+        return -1;
+    }
+    
+    n = PyInt_AsLong (value);
+    pyg_boxed_get (self, GtkSourceTagStyle)->underline = n;
+    
+    return 0;
+}
+%%
+override-attr GtkSourceTagStyle.strikethrough
+
+static int
+_wrap_gtk_source_tag_style__set_strikethrough(PyGObject *self, PyObject *value, void *closure)
+{
+    int n;
+    if (!PyBool_Check (value)) {
+        PyErr_SetString(PyExc_TypeError, "a boolean is required");
+        return -1;
+    }
+    
+    n = PyInt_AsLong (value);
+    pyg_boxed_get (self, GtkSourceTagStyle)->strikethrough = n;
+    
+    return 0;
+}
+%%
+override-attr GtkSourceTagStyle.mask
+
+static int
+_wrap_gtk_source_tag_style__set_mask(PyGObject *self, PyObject *value, void *closure)
+{
+    int n;
+    if (!PyBool_Check (value)) {
+        PyErr_SetString(PyExc_TypeError, "a boolean is required");
+        return -1;
+    }
+    
+    n = PyInt_AsLong (value);
+    pyg_boxed_get (self, GtkSourceTagStyle)->mask = n;
+    
+    return 0;
+}
+%%
+override-attr GtkSourceTagStyle.foreground
+
+static int
+_wrap_gtk_source_tag_style__set_foreground(PyGObject *self, PyObject *value, void *closure)
+{
+    if (!pyg_boxed_check (value, GDK_TYPE_COLOR)) {
+        PyErr_SetString(PyExc_TypeError, "a gtk.gdk.Color object is required");
+        return -1;
+    }
+    
+    pyg_boxed_get (self, GtkSourceTagStyle)->foreground = *(pyg_boxed_get (value, GdkColor));
+    
+    return 0;
+}
+%%
+override-attr GtkSourceTagStyle.background
+
+static int
+_wrap_gtk_source_tag_style__set_background(PyGObject *self, PyObject *value, void *closure)
+{
+    if (!pyg_boxed_check (value, GDK_TYPE_COLOR)) {
+        PyErr_SetString(PyExc_TypeError, "a gtk.gdk.Color object is required");
+        return -1;
+    }
+    
+    pyg_boxed_get (self, GtkSourceTagStyle)->background = *(pyg_boxed_get (value, GdkColor));
+    
+    return 0;
 }
 %%
 override gtk_source_tag_table_add_tags

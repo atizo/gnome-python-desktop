@@ -1,3 +1,9 @@
+2005-01-15  Stéphan Kochen  <stephan@kochen.nl>
+
+	* gtksourceview/gtksourceview.override: Implement setters for
+	GtkSourceTagStyle attributes bold, italic, underline,
+	strikethrough, mask, foreground, and background.
+
 2005-01-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* COPYING: Replace GPL license with a table indicating license per
