@@ -1,3 +1,14 @@
+2004-11-26  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/eggrecent.defs: Add missing definition of
+	RecentViewBonobo.
+	(get_ui_component): Remove const- from return type.
+
+	* egg/recent/Makefile.am (.defs.c): Register bonobo types.
+
+	* egg/recent/eggrecent.override (EGG_TYPE_RECENT_VIEW_BONOBO):
+	define, missing from the header.
+
 2004-11-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac, egg/Makefile.am: Detect/build egg.recent module.
