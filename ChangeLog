@@ -1,5 +1,10 @@
 2005-01-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* gdl/gdl.defs (gdl_dock_item_new_with_stock): Convert to property
+	based constructor.
+	(gdl_dock_paned_new): idem.
+	(gdl_dock_tablabel_new): idem.
+
 	* gdl/gdl.override (_wrap_gdl_dock_object_dock): Handle
 	'other_data' parameter.
 
