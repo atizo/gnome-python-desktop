@@ -3,6 +3,7 @@
 	* egg/recent/eggrecent.defs: Add missing definition of
 	RecentViewBonobo.
 	(get_ui_component): Remove const- from return type.
+	(RecentItem): Add missing declation for the RecentItem boxed type.
 
 	* egg/recent/Makefile.am (.defs.c): Register bonobo types.
 
