@@ -15,6 +15,7 @@ EXTRA_DIST = \
   gnome-python-2.0.pc.in \
   setup.py \
   dsextras.py \
+  examples/gnomeprint/test-print.py \
   examples/bonobo/bonoboui/Bonobo_Sample_Hello.xml \
   examples/bonobo/bonoboui/hello.py \
   examples/bonobo/echo/README \
