@@ -1,0 +1,13 @@
+/* -*- Mode: C; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+#include <panel-applet.h>
+
+#include "pygobject.h"
+%%
+import gobject.GObject as PyGObject_Type
+import gtk.EventBox as PyGtkEventBox_Type
+%%
+ignore-glob
+  *_get_type

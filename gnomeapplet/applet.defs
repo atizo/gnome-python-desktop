@@ -1,0 +1,180 @@
+;; -*- scheme -*-
+; object definitions ...
+(define-object Applet
+  (in-module "Panel")
+  (parent "GtkEventBox")
+  (c-name "PanelApplet")
+  (gtype-id "PANEL_TYPE_APPLET")
+)
+
+;; Enumerations and flags ...
+
+;(define-enum AppletBackgroundType
+;  (in-module "Panel")
+;  (c-name "PanelAppletBackgroundType")
+;  (gtype-id "PANEL_TYPE_APPLET_BACKGROUND_TYPE")
+;  (values
+;    '("no-background" "PANEL_NO_BACKGROUND")
+;    '("color-background" "PANEL_COLOR_BACKGROUND")
+;    '("pixmap-background" "PANEL_PIXMAP_BACKGROUND")
+;  )
+;)
+
+
+;; From /home/zilch/cvs/gnome2/gnome-core/libpanel-applet/panel-applet.h
+
+(define-function panel_applet_get_type
+  (c-name "panel_applet_get_type")
+  (return-type "GType")
+)
+
+(define-function panel_applet_new
+  (c-name "panel_applet_new")
+  (is-constructor-of PanelApplet)
+  (return-type "GtkWidget*")
+)
+
+(define-method construct
+  (of-object "PanelApplet")
+  (c-name "panel_applet_construct")
+  (return-type "none")
+)
+
+(define-method get_orient
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_orient")
+  (return-type "PanelAppletOrient")
+)
+
+(define-method get_size
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_size")
+  (return-type "guint")
+)
+
+(define-method get_preferences_key
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_preferences_key")
+  (return-type "gchar*")
+)
+
+(define-method add_preferences
+  (of-object "PanelApplet")
+  (c-name "panel_applet_add_preferences")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "schema_dir")
+    '("GError**" "opt_error")
+  )
+)
+
+(define-method get_expand_flags
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_expand_flags")
+  (return-type "none")
+  (parameters
+    '("gboolean*" "expand_major")
+    '("gboolean*" "expand_minor")
+  )
+)
+
+(define-method set_expand_flags
+  (of-object "PanelApplet")
+  (c-name "panel_applet_set_expand_flags")
+  (return-type "none")
+  (parameters
+    '("gboolean" "expand_major")
+    '("gboolean" "expand_minor")
+  )
+)
+
+(define-method get_control
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_control")
+  (return-type "BonoboControl*")
+)
+
+(define-method get_popup_component
+  (of-object "PanelApplet")
+  (c-name "panel_applet_get_popup_component")
+  (return-type "BonoboUIComponent*")
+)
+
+(define-method setup_menu
+  (of-object "PanelApplet")
+  (c-name "panel_applet_setup_menu")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "xml")
+    '("const-BonoboUIVerb*" "verb_list")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-method setup_menu_from_file
+  (of-object "PanelApplet")
+  (c-name "panel_applet_setup_menu_from_file")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "opt_datadir")
+    '("const-gchar*" "file")
+    '("const-gchar*" "opt_app_name")
+    '("const-BonoboUIVerb*" "verb_list")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-function panel_applet_factory_main
+  (c-name "panel_applet_factory_main")
+  (return-type "int")
+  (parameters
+    '("const-gchar*" "iid")
+    '("PanelAppletFactoryCallback" "callback")
+    '("gpointer" "data")
+  )
+)
+
+(define-function panel_applet_factory_main_closure
+  (c-name "panel_applet_factory_main_closure")
+  (return-type "int")
+  (parameters
+    '("const-gchar*" "iid")
+    '("GClosure*" "closure")
+  )
+)
+
+(define-function panel_applet_shlib_factory
+  (c-name "panel_applet_shlib_factory")
+  (return-type "Bonobo_Unknown")
+  (parameters
+    '("const-char*" "iid")
+    '("PortableServer_POA" "poa")
+    '("gpointer" "impl_ptr")
+    '("PanelAppletFactoryCallback" "callback")
+    '("gpointer" "user_data")
+    '("CORBA_Environment*" "ev")
+  )
+)
+
+(define-function panel_applet_shlib_factory_closure
+  (c-name "panel_applet_shlib_factory_closure")
+  (return-type "Bonobo_Unknown")
+  (parameters
+    '("const-char*" "iid")
+    '("PortableServer_POA" "poa")
+    '("gpointer" "impl_ptr")
+    '("GClosure*" "closure")
+    '("CORBA_Environment*" "ev")
+  )
+)
+
+(define-function main
+  (c-name "main")
+  (return-type "int")
+  (parameters
+    '("int" "argc")
+    '("char*-argv" "[]")
+  )
+)
+
+
