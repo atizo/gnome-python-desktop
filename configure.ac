@@ -9,7 +9,7 @@ m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_ve
 
 dnl required versions of other packages
 m4_define(pygtk_required_version,             1.99.13)
-m4_define(orbit_python_required_version,      1.99.0)
+m4_define(pyorbit_required_version,           1.99.1)
 
 m4_define(glib_required_version,              2.0.0)
 m4_define(gtk_required_version,               2.0.0)
@@ -77,7 +77,7 @@ LIBGNOME_VERSION=libgnome_required_version
 LIBGNOMEVFS_VERSION=libgnomevfs_required_version
 GTK_VERSION=gtk_required_version
 LIBZVT_VERSION=libzvt_required_version
-ORBIT_PYTHON_VERSION=orbit_python_required_version
+PYORBIT_VERSION=pyorbit_required_version
 NAUTILUS_VERSION=libnautilus_required_version
 BONOBO_ACTIVATION_VERSION=bonobo_activation_required_version
 LIBBONOBO_VERSION=libbonobo_required_version
@@ -92,7 +92,7 @@ AC_SUBST(LIBGNOMEVFS_VERSION)
 AC_SUBST(GLIB_VERSION)
 AC_SUBST(GTK_VERSION)
 AC_SUBST(LIBZVT_VERSION)
-AC_SUBST(ORBIT_PYTHON_VERSION)
+AC_SUBST(PYORBIT_VERSION)
 AC_SUBST(NAUTILUS_VERSION)
 AC_SUBST(BONOBO_ACTIVATION_VERSION)
 AC_SUBST(LIBBONOBO_VERSION)
@@ -112,11 +112,11 @@ PKG_CHECK_MODULES(GNOME, libgnome-2.0 >= libgnome_required_version,,
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
 
-have_orbit_python=false
-PKG_CHECK_MODULES(ORBIT_PYTHON,
-  orbit-python-2.0 >= orbit_python_required_version,
-  have_orbit_python=true, have_orbit_python=false)
-AC_SUBST(ORBIT_PYTHON_CFLAGS)
+have_pyorbit=false
+PKG_CHECK_MODULES(PYORBIT,
+  pyorbit-2 >= pyorbit_required_version,
+  have_pyorbit=true, have_pyorbit=false)
+AC_SUBST(PYORBIT_CFLAGS)
 
 build_gnomeui=false
 PKG_CHECK_MODULES(GNOMEUI, libgnomeui-2.0 >= libgnomeui_required_version,
@@ -124,7 +124,7 @@ PKG_CHECK_MODULES(GNOMEUI, libgnomeui-2.0 >= libgnomeui_required_version,
   build_gnomeui=false)
 AC_SUBST(GNOMEUI_CFLAGS)
 AC_SUBST(GNOMEUI_LIBS)
-AM_CONDITIONAL(BUILD_GNOMEUI, $have_orbit_python && $build_gnomeui)
+AM_CONDITIONAL(BUILD_GNOMEUI, $have_pyorbit && $build_gnomeui)
 
 dnl should we build the gnome.canvas module?
 build_gnomecanvas=false
@@ -181,7 +181,7 @@ PKG_CHECK_MODULES(BONOBO_ACTIVATION, bonobo-activation-2.0 >= bonobo_activation_
   build_bonobo_activation=true, build_bonobo_activation=false)
 AC_SUBST(BONOBO_ACTIVATION_CFLAGS)
 AC_SUBST(BONOBO_ACTIVATION_LIBS)
-AM_CONDITIONAL(BUILD_BONOBO_ACTIVATION, $have_orbit_python && $build_bonobo_activation)
+AM_CONDITIONAL(BUILD_BONOBO_ACTIVATION, $have_pyorbit && $build_bonobo_activation)
 
 dnl should we build the bonobo._bonobo module?
 build_bonobo=false
@@ -189,7 +189,7 @@ PKG_CHECK_MODULES(BONOBO, libbonobo-2.0 >= libbonobo_required_version,
   build_bonobo=true, build_bonobo=false)
 AC_SUBST(BONOBO_CFLAGS)
 AC_SUBST(BONOBO_LIBS)
-AM_CONDITIONAL(BUILD_BONOBO, $have_orbit_python && $build_bonobo)
+AM_CONDITIONAL(BUILD_BONOBO, $have_pyorbit && $build_bonobo)
 
 dnl should we build the bonobo.ui module?
 build_bonoboui=false
@@ -197,7 +197,7 @@ PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version libg
   build_bonoboui=true, build_bonoboui=false)
 AC_SUBST(BONOBOUI_CFLAGS)
 AC_SUBST(BONOBOUI_LIBS)
-AM_CONDITIONAL(BUILD_BONOBOUI, $have_orbit_python && $build_bonoboui)
+AM_CONDITIONAL(BUILD_BONOBOUI, $have_pyorbit && $build_bonoboui)
 
 dnl should we build the nautilus module?
 build_nautilus=false
@@ -206,7 +206,7 @@ PKG_CHECK_MODULES(LIBNAUTILUS, libnautilus >= libnautilus_required_version,
   build_nautilus=false)
 AC_SUBST(LIBNAUTILUS_CFLAGS)
 AC_SUBST(LIBNAUTILUS_LIBS)
-AM_CONDITIONAL(BUILD_NAUTILUS, $have_orbit_python && $build_nautilus)
+AM_CONDITIONAL(BUILD_NAUTILUS, $have_pyorbit && $build_nautilus)
 
 dnl add debugging options ...
 changequote(,)dnl
