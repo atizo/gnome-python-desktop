@@ -9,6 +9,8 @@ m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_ve
 
 dnl required versions of other packages
 m4_define(pygtk_required_version,          1.99.6)
+m4_define(orbit_python_required_version,   1.99.0)
+
 m4_define(gtk_required_version,            1.3.12)
 m4_define(libgnome_required_version,       1.108.0)
 m4_define(libgnomeui_required_version,     1.108.0)
@@ -82,13 +84,19 @@ PKG_CHECK_MODULES(GNOME, libgnome-2.0 >= libgnome_required_version,,
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
 
+have_orbit_python=false
+PKG_CHECK_MODULES(ORBIT_PYTHON,
+  orbit-python-2.0 >= orbit_python_required_version,
+  have_orbit_python=true, have_orbit_python=false)
+AC_SUBST(ORBIT_PYTHON_CFLAGS)
+
 build_gnomeui=false
 PKG_CHECK_MODULES(GNOMEUI, libgnomeui-2.0 >= libgnomeui_required_version,
   build_gnomeui=true,
   build_gnomeui=false)
 AC_SUBST(GNOMEUI_CFLAGS)
 AC_SUBST(GNOMEUI_LIBS)
-AM_CONDITIONAL(BUILD_GNOMEUI, $build_gnomeui)
+AM_CONDITIONAL(BUILD_GNOMEUI, $have_orbit_python && $build_gnomeui)
 
 dnl should we build the gnome.canvas module?
 build_gnomecanvas=false
@@ -114,7 +122,7 @@ PKG_CHECK_MODULES(BONOBO, libbonobo-2.0 >= libbonobo_required_version,
   build_bonobo=true, build_bonobo=false)
 AC_SUBST(BONOBO_CFLAGS)
 AC_SUBST(BONOBO_LIBS)
-AM_CONDITIONAL(BUILD_BONOBO, $build_bonobo)
+AM_CONDITIONAL(BUILD_BONOBO, $have_orbit_python && $build_bonobo)
 
 dnl should we build the bonobo.ui module?
 build_bonoboui=false
@@ -122,7 +130,7 @@ PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version,
   build_bonoboui=true, build_bonoboui=false)
 AC_SUBST(BONOBOUI_CFLAGS)
 AC_SUBST(BONOBOUI_LIBS)
-AM_CONDITIONAL(BUILD_BONOBOUI, $build_bonoboui)
+AM_CONDITIONAL(BUILD_BONOBOUI, $have_orbit_python && $build_bonoboui)
 
 dnl should we build the nautilus module?
 build_nautilus=false
@@ -131,7 +139,7 @@ PKG_CHECK_MODULES(LIBNAUTILUS, libnautilus >= libnautilus_required_version,
   build_nautilus=false)
 AC_SUBST(LIBNAUTILUS_CFLAGS)
 AC_SUBST(LIBNAUTILUS_LIBS)
-AM_CONDITIONAL(BUILD_NAUTILUS, $build_nautilus)
+AM_CONDITIONAL(BUILD_NAUTILUS, $have_orbit_python && $build_nautilus)
 
 dnl 
 AC_CONFIG_FILES(
