@@ -90,6 +90,38 @@
   (return-type "gint")
 )
 
+
+(define-method construct_range_custom
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_construct_range_custom")
+  (parameters
+   '("GtkWidget*" "custom"))
+  (return-type "none")
+)
+
+(define-method construct_range_any
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_construct_range_any")
+  (parameters
+   '("gint" 	    "flags")
+   '("GtkWidget*"   "rage_widget")
+   '("const-gchar*" "currentlabel")
+   '("const-gchar*" "rangelabel"))
+  (return-type "none")
+)
+
+(define-method construct_range_page
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_construct_range_page")
+  (parameters
+   '("gint" 	    "flags")
+   '("gint"         "start")
+   '("gint"         "end")
+   '("const-gchar*" "currentlabel")
+   '("const-gchar*" "rangelabel"))
+  (return-type "none")
+)
+
 ;; gnome-print-preview.h
 
 (define-function gnome_print_preview_new
