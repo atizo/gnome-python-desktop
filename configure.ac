@@ -14,6 +14,8 @@ m4_define(libgnome_required_version,       1.108.0)
 m4_define(libgnomeui_required_version,     1.108.0)
 m4_define(libgnomecanvas_required_version, 1.108.0)
 m4_define(libzvt_required_version,         1.108.0)
+m4_define(libbonobo_required_version,      1.108.0)
+m4_define(libbonoboui_required_version,    1.108.0)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -104,6 +106,22 @@ PKG_CHECK_MODULES(LIBZVT, libzvt-2.0 >= libzvt_required_version,
 AC_SUBST(LIBZVT_CFLAGS)
 AC_SUBST(LIBZVT_LIBS)
 AM_CONDITIONAL(BUILD_ZVT, $build_zvt)
+
+dnl should we build the bonobo._bonobo module?
+build_bonobo=false
+PKG_CHECK_MODULES(BONOBO, libbonobo-2.0 >= libbonobo_required_version,
+  build_bonobo=true, build_bonobo=false)
+AC_SUBST(BONOBO_CFLAGS)
+AC_SUBST(BONOBO_LIBS)
+AM_CONDITIONAL(BUILD_BONOBO, $build_bonobo)
+
+dnl should we build the bonobo.ui module?
+build_bonoboui=false
+PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version,
+  build_bonoboui=true, build_bonoboui=false)
+AC_SUBST(BONOBOUI_CFLAGS)
+AC_SUBST(BONOBOUI_LIBS)
+AM_CONDITIONAL(BUILD_BONOBOUI, $build_bonoboui)
 
 dnl 
 AC_CONFIG_FILES(
