@@ -4,7 +4,7 @@ if BUILD_GNOMEPRINT
   GNOMEPRINT_SUBDIR = gnomeprint
 endif
 
-SUBDIRS = gconf gnome bonobo gtkhtml2 $(GNOMEPRINT_SUBDIR)
+SUBDIRS = gconf gnome bonobo gtkhtml2 $(GNOMEPRINT_SUBDIR) tests
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-2.0.pc
@@ -17,6 +17,7 @@ EXTRA_DIST = \
   PKG-INFO.in \
   ChangeLog.pre-2-0 \
   setup.py \
+  ltihooks.py \
   examples/applet/applet.py \
   examples/applet/GNOME_PythonAppletSample.server \
   examples/applet/README \
