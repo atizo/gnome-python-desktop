@@ -8,17 +8,19 @@ m4_define(gnome_python_micro_version, 6)
 m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_version.gnome_python_micro_version)
 
 dnl required versions of other packages
-m4_define(pygtk_required_version,          1.99.6)
-m4_define(orbit_python_required_version,   1.99.0)
+m4_define(pygtk_required_version,             1.99.6)
+m4_define(orbit_python_required_version,      1.99.0)
 
-m4_define(gtk_required_version,            1.3.12)
-m4_define(libgnome_required_version,       1.108.0)
-m4_define(libgnomeui_required_version,     1.108.0)
-m4_define(libgnomecanvas_required_version, 1.108.0)
-m4_define(libzvt_required_version,         1.108.0)
-m4_define(libbonobo_required_version,      1.108.0)
-m4_define(libbonoboui_required_version,    1.108.0)
-m4_define(libnautilus_required_version,    1.0.5)
+m4_define(gtk_required_version,               1.3.12)
+m4_define(libgnome_required_version,          1.108.0)
+m4_define(libgnomeui_required_version,        1.108.0)
+m4_define(libgnomecanvas_required_version,    1.108.0)
+m4_define(libzvt_required_version,            1.108.0)
+m4_define(bonobo_activation_required_version, 0.9.3)
+m4_define(libbonobo_required_version,         1.108.0)
+m4_define(libbonoboui_required_version,       1.108.0)
+m4_define(libnautilus_required_version,       1.0.5)
+m4_define(libpanelapplet_required_version,    1.5.3)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -115,6 +117,23 @@ PKG_CHECK_MODULES(LIBZVT, libzvt-2.0 >= libzvt_required_version,
 AC_SUBST(LIBZVT_CFLAGS)
 AC_SUBST(LIBZVT_LIBS)
 AM_CONDITIONAL(BUILD_ZVT, $build_zvt)
+
+dnl should we build the gnome.zvt module?
+build_applet=false
+PKG_CHECK_MODULES(LIBPANELAPPLET, libpanelapplet-2.0 >= libpanelapplet_required_version,
+  build_applet=true,
+  build_applet=false)
+AC_SUBST(LIBPANELAPPLET_CFLAGS)
+AC_SUBST(LIBPANELAPPLET_LIBS)
+AM_CONDITIONAL(BUILD_APPLET, $build_applet)
+
+dnl should we build the bonobo.activation module?
+build_bonobo_activation=false
+PKG_CHECK_MODULES(BONOBO_ACTIVATION, bonobo-activation-2.0 >= bonobo_activation_required_version,
+  build_bonobo_activation=true, build_bonobo_activation=false)
+AC_SUBST(BONOBO_ACTIVATION_CFLAGS)
+AC_SUBST(BONOBO_ACTIVATION_LIBS)
+AM_CONDITIONAL(BUILD_BONOBO_ACTIVATION, $have_orbit_python && $build_bonobo_activation)
 
 dnl should we build the bonobo._bonobo module?
 build_bonobo=false
