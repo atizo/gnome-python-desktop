@@ -1,5 +1,12 @@
 2005-01-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* egg/recent/eggrecent.defs: EggRecentItem.[gs]et_count removed.
+
+	* egg/recent/egg-recent-item.c,
+	* egg/recent/egg-recent-item.h,
+	* egg/recent/egg-recent-model.c,
+	* egg/recent/egg-recent-model.h: Update to CVS libegg versions.
+
 	* AUTHORS: Update.
 
 	* configure.ac: Use new macro GNOME_COMMON_INIT from gnome-common

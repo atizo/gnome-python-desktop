@@ -1,3 +1,7 @@
+Overview of Changes from gnome-python-extras 2.9.2 to gnome-python-extras 2.9.3
+===============================================================================
+
+
 Overview of Changes from gnome-python-extras 2.9.1 to gnome-python-extras 2.9.2
 ===============================================================================
 * egg.recent GUI stuff (bonoboui and pure gtk flavours) now actually
