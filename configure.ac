@@ -193,6 +193,8 @@ AM_CONDITIONAL(BUILD_GTKMOZEMBED, $build_gtkmozembed)
 if test -n "$export_dynamic"; then
   GTKMOZEMBED_LIBS=`echo $GTKMOZEMBED_LIBS | sed -e "s/$export_dynamic//"`
 fi
+MOZILLA_HOME="`$PKG_CONFIG --variable=libdir mozilla-gtkmozembed`"
+AC_SUBST(MOZILLA_HOME)
 
 
 dnl add required cflags ...

@@ -1,3 +1,10 @@
+2004-12-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Detect/define MOZILLA_HOME.
+
+	* gtkmozembed/Makefile.am (gtkmozembedmodule_la_LDFLAGS): Add
+	-R$(MOZILLA_HOME), copy-pasted from galeon.
+
 2004-12-14  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* gtkmozembed/*: Add Johan Dahlin's pymozembed (0.1) module.
