@@ -1,5 +1,11 @@
 2004-12-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* gtkmozembed/gtkmozembedmodule.c (initgtkmozembed): Call
+	pygtkmozembed_add_constants.
+
+	* gtkmozembed/gtkmozembed.defs: Uncomment enums and flags, but
+	remove the gtype-id fields.
+
 	* configure.ac: Detect/define MOZILLA_HOME.
 
 	* gtkmozembed/Makefile.am (gtkmozembedmodule_la_LDFLAGS): Add
