@@ -1,3 +1,9 @@
+2005-04-04  Murray Cumming  <murrayc@murrayc.com>
+
+	* Added gda, a first attempt at wrapping libgda 1.2. This is 
+	the code from pygda 0.3.0, with some changes.
+	* examples/: Added gda/.
+
 2005-03-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* gnomeapplet/applet.override (_wrap_panel__applet_bonobo_factory)

@@ -45,6 +45,10 @@ if BUILD_NAUTILUSBURN
   SUBDIRS += nautilusburn
 endif
 
+if BUILD_GDA
+  SUBDIRS += gda
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 
