@@ -1,4 +1,12 @@
+2004-12-03  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* examples/egg/recent/populate-recent.py: A port of
+	populate-recent.c from libegg to python.
+
+=== 2.9.1 ===
 2004-11-29  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* NEWS: Update.
 
 	* egg/recent/Makefile.am (EXTRA_DIST): Add missing eggrecent.defs.
 	(DISTCLEANFILES): Add stamp-eggtypebuiltins.h eggtypebuiltins.c
