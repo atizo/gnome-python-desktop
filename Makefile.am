@@ -5,5 +5,5 @@ SUBDIRS = gnome
 EXTRA_DIST = \
   gnome-python.spec \
   gnome-python.spec.in \
-  examples/canvas/canvas-example.py
+  examples/canvas/canvas-example.py \
   examples/zvt/zvt-demo.py
