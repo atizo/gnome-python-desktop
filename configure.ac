@@ -16,6 +16,7 @@ m4_define(libgnomecanvas_required_version, 1.108.0)
 m4_define(libzvt_required_version,         1.108.0)
 m4_define(libbonobo_required_version,      1.108.0)
 m4_define(libbonoboui_required_version,    1.108.0)
+m4_define(libnautilus_required_version,    1.0.5)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -122,6 +123,15 @@ PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version,
 AC_SUBST(BONOBOUI_CFLAGS)
 AC_SUBST(BONOBOUI_LIBS)
 AM_CONDITIONAL(BUILD_BONOBOUI, $build_bonoboui)
+
+dnl should we build the nautilus module?
+build_nautilus=false
+PKG_CHECK_MODULES(LIBNAUTILUS, libnautilus >= libnautilus_required_version,
+  build_nautilus=true,
+  build_nautilus=false)
+AC_SUBST(LIBNAUTILUS_CFLAGS)
+AC_SUBST(LIBNAUTILUS_LIBS)
+AM_CONDITIONAL(BUILD_NAUTILUS, $build_nautilus)
 
 dnl 
 AC_CONFIG_FILES(
