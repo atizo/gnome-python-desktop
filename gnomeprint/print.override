@@ -685,3 +685,75 @@ _wrap_gnome_glyphlist_bbox(PyObject *self, PyObject *args, PyObject *kwargs)
     return pyg_boxed_new(ART_TYPE_DRECT, (ArtDRect *) &drect, TRUE, TRUE);
 }
 
+%%
+override gnome_font_face_get_stdbbox
+static PyObject *
+_wrap_gnome_font_face_get_stdbbox(PyGObject *self)
+{
+    ArtDRect const *ret;
+
+    ret = gnome_font_face_get_stdbbox(GNOME_FONT_FACE(self->obj));
+    /* pyg_boxed_new handles NULL checking */
+    return pyg_boxed_new(ART_TYPE_DRECT, (ArtDRect *) ret, TRUE, TRUE);
+}
+
+%%
+override gnome_print_unit_get_identity kwargs
+static PyObject *
+_wrap_gnome_print_unit_get_identity(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "base", NULL };
+    int base;
+    GnomePrintUnit const *ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "i:unit_get_identity", kwlist, &base))
+        return NULL;
+    ret = gnome_print_unit_get_identity(base);
+    /* pyg_boxed_new handles NULL checking */
+    return pyg_boxed_new(GNOME_TYPE_PRINT_UNIT, (GnomePrintUnit *) ret, TRUE, TRUE);
+}
+
+%%
+override gnome_print_unit_get_default
+static PyObject *
+_wrap_gnome_print_unit_get_default(PyObject *self)
+{
+    GnomePrintUnit const *ret;
+
+    ret = gnome_print_unit_get_default();
+    /* pyg_boxed_new handles NULL checking */
+    return pyg_boxed_new(GNOME_TYPE_PRINT_UNIT, (GnomePrintUnit *) ret, TRUE, TRUE);
+}
+
+%%
+override gnome_print_unit_get_by_name kwargs
+static PyObject *
+_wrap_gnome_print_unit_get_by_name(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "name", NULL };
+    char *name;
+    GnomePrintUnit const *ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:unit_get_by_name", kwlist, &name))
+        return NULL;
+    ret = gnome_print_unit_get_by_name(name);
+    /* pyg_boxed_new handles NULL checking */
+    return pyg_boxed_new(GNOME_TYPE_PRINT_UNIT, (GnomePrintUnit *) ret, TRUE, TRUE);
+}
+
+%%
+override gnome_print_unit_get_by_abbreviation kwargs
+static PyObject *
+_wrap_gnome_print_unit_get_by_abbreviation(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "abbreviation", NULL };
+    char *abbreviation;
+    GnomePrintUnit const *ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:unit_get_by_abbreviation", kwlist, &abbreviation))
+        return NULL;
+    ret = gnome_print_unit_get_by_abbreviation(abbreviation);
+    /* pyg_boxed_new handles NULL checking */
+    return pyg_boxed_new(GNOME_TYPE_PRINT_UNIT, (GnomePrintUnit *) ret, TRUE, TRUE);
+}
+
