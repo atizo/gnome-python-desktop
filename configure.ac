@@ -25,6 +25,8 @@ m4_define(libbonoboui_required_version,       2.0.0)
 m4_define(libnautilus_required_version,       2.0.0)
 m4_define(libpanelapplet_required_version,    2.0.0)
 m4_define(gtkhtml2_required_version,          1.99.9)
+m4_define(libgnomeprint_required_version,     2.1.6)
+m4_define(libgnomeprintui_required_version,   2.1.6)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -85,6 +87,8 @@ LIBBONOBOUI_VERSION=libbonoboui_required_version
 GCONF_VERSION=gconf_required_version
 LIBPANELAPPLET_VERSION=libpanelapplet_required_version
 GTKHTML2_VERSION=gtkhtml2_required_version
+LIBGNOMEPRINT_VERSION=libgnomeprint_required_version
+LIBGNOMEPRINTUI_VERSION=libgnomeprintui_required_version
 AC_SUBST(PYGTK_VERSION)
 AC_SUBST(LIBGNOMECANVAS_VERSION)
 AC_SUBST(LIBGNOME_VERSION)
@@ -100,6 +104,8 @@ AC_SUBST(LIBBONOBOUI_VERSION)
 AC_SUBST(GCONF_VERSION)
 AC_SUBST(LIBPANELAPPLET_VERSION)
 AC_SUBST(GTKHTML2_VERSION)
+AC_SUBST(LIBGNOMEPRINT_VERSION)
+AC_SUBST(LIBGNOMEPRINTUI_VERSION)
 
 dnl get rid of the -export-dynamic stuff from the configure flags ...
 export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec) | sh`
@@ -225,6 +231,27 @@ AC_SUBST(LIBNAUTILUS_LIBS)
 AM_CONDITIONAL(BUILD_NAUTILUS, $have_pyorbit && $build_nautilus)
 LIBNAUTILUS_LIBS=`echo $LIBNAUTILUS_LIBS | sed -e "s/$export_dynamic//"`
 
+dnl should we build the gnomeprint module?
+build_gnomeprint=false
+PKG_CHECK_MODULES(LIBGNOMEPRINT, libgnomeprint-2.2 >= libgnomeprint_required_version,
+  build_gnomeprint=true,
+  build_gnomeprint=false)
+AC_SUBST(LIBGNOMEPRINT_CFLAGS)
+AC_SUBST(LIBGNOMEPRINT_LIBS)
+AM_CONDITIONAL(BUILD_GNOMEPRINT, $build_gnomeprint)
+LIBGNOMEPRINT_LIBS=`echo $LIBGNOMEPRINT_LIBS | sed -e "s/$export_dynamic//"`
+
+dnl should we build the gnomeprint.ui module?
+build_gnomeprintui=false
+PKG_CHECK_MODULES(LIBGNOMEPRINTUI, libgnomeprintui-2.2 >= libgnomeprintui_required_version,
+  build_gnomeprintui=true,
+  build_gnomeprintui=false)
+AC_SUBST(LIBGNOMEPRINTUI_CFLAGS)
+AC_SUBST(LIBGNOMEPRINTUI_LIBS)
+AM_CONDITIONAL(BUILD_GNOMEPRINTUI, $build_gnomeprintui)
+LIBGNOMEPRINTUI_LIBS=`echo $LIBGNOMEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
+
+
 dnl add debugging options ...
 changequote(,)dnl
 if test "x$GCC" = xyes; then
@@ -245,6 +272,7 @@ AC_CONFIG_FILES(
   gconf/Makefile
   gtkhtml2/Makefile
   gnome/Makefile
+  gnomeprint/Makefile
   bonobo/Makefile
   gnome-python.spec
   gnome-python-2.0.pc)

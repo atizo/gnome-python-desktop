@@ -1,0 +1,63 @@
+/* -*- Mode: C; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+
+#include <pygobject.h>
+#include <pygtk/pygtk.h>
+
+#include <libgnomeprintui/gnome-print-dialog.h>
+#include <libgnomeprintui/gnome-font-dialog.h>
+#include <libgnomeprintui/gnome-print-job-preview.h>
+#include <libgnomeprintui/gnome-print-preview.h>
+#include <libgnomeprintui/gnome-print-paper-selector.h>
+#include <libgnomeprintui/gnome-print-unit-selector.h>
+
+    /* This should (and will) be in gnome-print-config.h */
+#define GNOME_TYPE_PRINT_CONFIG         (gnome_print_config_get_type ())
+#define GNOME_PRINT_CONFIG(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GNOME_TYPE_PRINT_CONFIG, GnomePrintConfig))
+#define GNOME_PRINT_CONFIG_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST ((k), GNOME_TYPE_PRINT_CONFIG, GnomePrintConfigClass))
+#define GNOME_IS_PRINT_CONFIG(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GNOME_TYPE_PRINT_CONFIG))
+#define GNOME_IS_PRINT_CONFIG_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GNOME_TYPE_PRINT_CONFIG))
+#define GNOME_PRINT_CONFIG_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), GNOME_TYPE_PRINT_CONFIG, GnomePrintConfigClass))
+
+
+%%
+modulename gnomeprint.ui
+%%
+import gobject.GObject     as PyGObject_Type
+import gnomeprint.Job      as PyGnomePrintJob_Type
+import gnomeprint.Context  as PyGnomePrintContext_Type
+import gnomeprint.Config   as PyGnomePrintConfig_Type
+import gnomeprint.Font     as PyGnomeFont_Type
+import gnomeprint.FontFace as PyGnomeFontFace_Type
+import gtk.Dialog          as PyGtkDialog_Type
+import gtk.Window          as PyGtkWindow_Type
+import gtk.Widget          as PyGtkWidget_Type
+import gnome.canvas.Canvas as PyGnomeCanvas_Type
+%%
+ignore-glob 
+  *_get_type
+
+%%
+override gnome_print_dialog_get_copies
+static PyObject *
+_wrap_gnome_print_dialog_get_copies(PyGObject *self)
+{
+    int copies, collate;
+
+    gnome_print_dialog_get_copies(GNOME_PRINT_DIALOG(self->obj), &copies, &collate);
+    return Py_BuildValue("ii", copies, collate);
+}
+
+%%
+override gnome_print_dialog_get_range_page
+static PyObject *
+_wrap_gnome_print_dialog_get_range_page(PyGObject *self)
+{
+    gint ret, start, end;
+
+    ret = gnome_print_dialog_get_range_page(GNOME_PRINT_DIALOG(self->obj), &start, &end);
+    return Py_BuildValue("iii", ret, start, end);
+}
+

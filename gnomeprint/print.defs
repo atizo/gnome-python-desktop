@@ -1,0 +1,1128 @@
+;; -*- scheme -*-
+
+(include "art.defs")
+
+; boxed types
+(define-boxed Unit
+  (c-name "GnomePrintUnit")
+  (gtype-id "GNOME_TYPE_PRINT_UNIT")
+  (fields
+   '("guint"   "base")
+   '("gdouble" "unittobase")
+   '("gchar*"  "name")
+   '("gchar*"  "abbr")
+   '("gchar*"  "plural")
+   '("gchar*"  "abbr_plural"))
+)
+
+(define-boxed GlyphList
+  (c-name "GnomeGlyphList")
+  (gtype-id "GNOME_TYPE_GLYPHLIST")
+)
+
+; object definitions ...
+(define-object Config
+  (parent "GObject")
+  (c-name "GnomePrintConfig")
+  (gtype-id "GNOME_TYPE_PRINT_CONFIG")
+)
+
+(define-object Context
+  (parent "GObject")
+  (c-name "GnomePrintContext")
+  (gtype-id "GNOME_TYPE_PRINT_CONTEXT")
+)
+
+(define-object Font
+  (parent "GObject")
+  (c-name "GnomeFont")
+  (gtype-id "GNOME_TYPE_FONT")
+)
+
+(define-object FontFace
+  (parent "GObject")
+  (c-name "GnomeFontFace")
+  (gtype-id "GNOME_TYPE_FONT_FACE")
+)
+
+(define-object Job
+  (parent "GObject")
+  (c-name "GnomePrintJob")
+  (gtype-id "GNOME_TYPE_PRINT_JOB")
+)
+
+; --- GnomePrintConfig ---
+(define-method get
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_get")
+  (return-type "gchar*")
+  (parameters
+   '("const-gchar*" "key"))
+)
+
+(define-method set
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_set")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key")
+   '("const-gchar*" "value"))
+)
+
+(define-method get_boolean
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_get_boolean")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key"))
+)
+
+(define-method get_int
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_get_int")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key"))
+)
+
+(define-method get_double
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_get_double")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key"))
+)
+
+(define-method get_length
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_get_length")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*"    "key")
+   '("GnomePrintUnit*" "unit"))
+)
+
+
+(define-method set_boolean
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_set_boolean")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key")
+   '("gboolean"     "value"))
+)
+
+
+(define-method set_int
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_set_int")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key")
+   '("gint"     "value"))
+)
+
+(define-method set_double
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_set_double")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*" "key")
+   '("gdouble"      "value"))
+)
+
+(define-method set_length
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_set_length")
+  (return-type "gboolean")
+  (parameters
+   '("const-gchar*"    "key")
+   '("gdouble"         "value")
+   '("GnomePrintUnit*" "unit"))
+)
+
+(define-method to_string
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_to_string")
+  (return-type "gchar*")
+  (parameters
+   '("guint" "flags" (default "0")))
+)
+
+
+(define-function config_from_string
+  ;(is-constructor-of "GnomePrintConfig")
+  (c-name "gnome_print_config_from_string")
+  (return-type "GnomePrintConfig*")
+  (parameters
+   '("const-gchar*" "str")
+   '("guint"        "flags" (default "0")))
+)
+
+
+(define-function config_default
+  ;(is-constructor-of "GnomePrintConfig")
+  (c-name "gnome_print_config_default")
+  (return-type "GnomePrintConfig*")
+)
+
+
+(define-method dump
+  (of-object "GnomePrintConfig")
+  (c-name "gnome_print_config_dump")
+  (return-type "none")
+)
+
+
+; --- GnomePrintContext ---
+
+(define-function gnome_print_context_new
+  (is-constructor-of "GnomePrintContext")
+  (c-name "gnome_print_context_new")
+  (return-type "GnomePrintContext*")
+  (parameters
+   '("GnomePrintConfig*" "config"))
+)
+
+(define-method close
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_context_close")
+  (return-type "gint")
+)
+
+(define-method newpath
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_newpath")
+  (return-type "gint")
+)
+
+(define-method moveto
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_moveto")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y"))
+)
+
+(define-method lineto
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_lineto")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y"))
+)
+
+(define-method curveto
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_curveto")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x1")
+   '("gdouble" "y1")
+   '("gdouble" "x2")
+   '("gdouble" "y2")
+   '("gdouble" "x3")
+   '("gdouble" "y3"))
+)
+
+(define-method closepath
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_closepath")
+  (return-type "gint")
+)
+
+(define-method strokepath
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_strokepath")
+  (return-type "gint")
+)
+
+(define-method bpath
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_bpath")
+  (parameters
+   '("ArtBpath*" "bpath")		; actually sequence<ArtBpath>
+   '("gboolean"  "append"))
+  (return-type "gint")
+)
+
+(define-method vpath
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_vpath")
+  (parameters
+   '("ArtVpath*" "vpath")		; actually sequence<ArtVpath>
+   '("gboolean"  "append"))
+  (return-type "gint")
+)
+
+(define-method arcto
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_arcto")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y")
+   '("gdouble" "radius")
+   '("gdouble" "angle1")
+   '("gdouble" "angle2")
+   '("gint"    "direction"))
+)
+
+(define-method setrgbcolor
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setrgbcolor")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "r")
+   '("gdouble" "g")
+   '("gdouble" "b"))
+)
+
+(define-method setopacity
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setopacity")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "opacity"))
+)
+
+(define-method setlinewidth
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setlinewidth")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "width"))
+)
+
+(define-method setmiterlimit
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setmiterlimit")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "limit"))
+)
+
+(define-method setlinejoin
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setlinejoin")
+  (return-type "gint")
+  (parameters
+   '("gint" "jointype"))
+)
+
+(define-method setlinecap
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setlinecap")
+  (return-type "gint")
+  (parameters
+   '("gint" "captype"))
+)
+
+(define-method setdash
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setdash")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "values") ; actually sequence<float>
+   '("gdouble" "offset"))
+)
+
+(define-method setfont
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_setfont")
+  (return-type "gint")
+  (parameters
+   '("GnomeFont*" "font"))
+)
+
+(define-method clip
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_clip")
+  (return-type "gint")
+)
+
+(define-method eoclip
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_eoclip")
+  (return-type "gint")
+)
+
+(define-method concat
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_concat")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "matrix"))	 ; actually sequence<float> with len=6
+)
+
+(define-method scale
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_scale")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "sx")
+   '("gdouble" "sy"))
+)
+
+(define-method rotate
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_rotate")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "theta"))
+)
+
+(define-method translate
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_translate")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y"))
+)
+
+(define-method gsave
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_gsave")
+  (return-type "gint")
+)
+
+
+(define-method fill
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_fill")
+  (return-type "gint")
+)
+
+(define-method eofill
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_eofill")
+  (return-type "gint")
+)
+
+(define-method stroke
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_stroke")
+  (return-type "gint")
+)
+
+
+(define-method show
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_show")
+  (return-type "gint")
+  (parameters
+   '("const-gchar*" "text"))
+)
+
+(define-method glyphlist
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_glyphlist")
+  (return-type "gint")
+  (parameters
+   '("GnomeGlyphList*" "glyphlist"))
+)
+
+; This one is overridden only to do runtime bounds checking on data
+(define-method grayimage
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_grayimage")
+  (return-type "gint")
+  (parameters
+   '("const-guchar*" "data")
+   '("gint"          "width")
+   '("gint"          "height")
+   '("gint"          "rowstride"))
+)
+
+; This one is overridden only to do runtime bounds checking on data
+(define-method rgbimage
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_rgbimage")
+  (return-type "gint")
+  (parameters
+   '("const-guchar*" "data")
+   '("gint"          "width")
+   '("gint"          "height")
+   '("gint"          "rowstride"))
+)
+
+; This one is overridden only to do runtime bounds checking on data
+(define-method rgbaimage
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_rgbaimage")
+  (return-type "gint")
+  (parameters
+   '("const-guchar*" "data")
+   '("gint"          "width")
+   '("gint"          "height")
+   '("gint"          "rowstride"))
+)
+
+(define-method beginpage
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_beginpage")
+  (return-type "gint")
+  (parameters
+   '("const-gchar*" "name"))
+)
+
+(define-method showpage
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_showpage")
+  (return-type "gint")
+)
+
+; gnome_print_page_callback
+; gnome_print_page_callback_closure
+
+;; This is wrapped around #ifdef GNOME_PRINT_ENABLE_PAGE_CALLBACKS
+
+;(define-method page_callback
+;  (of-object "GnomePrintContext")
+;  (c-name "gnome_print_page_callback_closure")
+;  (parameters
+;   '("const-gchar*" "name")
+;   '("gpointer"     "pagedata")
+;   '("gpointer"     "docdata")
+;   '("GClosure*"    "closure"))
+;  (return-type "gint"))
+
+(define-method line_stroked
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_line_stroked")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x0")
+   '("gdouble" "y0")
+   '("gdouble" "x1")
+   '("gdouble" "y1"))
+)
+
+(define-method rect_stroked
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_rect_stroked")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y")
+   '("gdouble" "width")
+   '("gdouble" "height"))
+)
+
+(define-method rect_filled
+  (of-object "GnomePrintContext")
+  (c-name "gnome_print_rect_filled")
+  (return-type "gint")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y")
+   '("gdouble" "width")
+   '("gdouble" "height"))
+)
+
+
+; --- GnomeFont ---
+
+(define-method get_name
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_family_name
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_family_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_species_name
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_species_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_ps_name
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_ps_name")
+  (return-type "const-gchar*")
+)
+
+(define-method lookup_default
+  (of-object "GnomeFont")
+  (c-name "gnome_font_lookup_default")
+  (return-type "gint")
+  (parameters
+   '("gint" "unicode"))
+)
+
+(define-method get_glyph_stdbbox
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_glyph_stdbbox")
+  (parameters
+   '("gint"       "glyph"))
+  (return-type "ArtDRect*")
+)
+(define-method get_glyph_stdadvance
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_glyph_stdadvance")
+  (parameters
+   '("gint"       "glyph"))
+  (return-type "ArtPoint*")
+)
+(define-method get_glyph_stdoutline
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_glyph_stdoutline")
+  (parameters
+   '("gint"       "glyph"))
+  (return-type "ArtBpath*")
+)
+(define-method get_glyph_stdkerning
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_glyph_stdkerning")
+  (parameters
+   '("gint"       "glyph0")
+   '("gint"       "glyph1"))
+  (return-type "ArtPoint*")
+)
+
+(define-method get_face
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_face")
+  (return-type "GnomeFontFace*")
+)
+
+(define-method get_size
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_size")
+  (return-type "gdouble")
+)
+
+(define-method get_ascender
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_ascender")
+  (return-type "gdouble")
+)
+
+(define-method get_descender
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_descender")
+  (return-type "gdouble")
+)
+
+(define-method get_underline_position
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_underline_position")
+  (return-type "gdouble")
+)
+
+(define-method get_underline_thickness
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_underline_thickness")
+  (return-type "gdouble")
+)
+
+(define-method get_glyph_width
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_glyph_width")
+  (return-type "gdouble")
+  (parameters
+   '("gint" "glyph"))
+)
+
+;; This one is declared in gnome-font.h but not implemented anywhere!
+; (define-method get_glyph_kerning
+;   (of-object "GnomeFont")
+;   (c-name "gnome_font_get_glyph_kerning")
+;   (return-type "gdouble")
+;   (parameters
+;    '("gint" "glyph1")
+;    '("gint" "glyph2"))
+; )
+
+(define-function font_find_closest_from_weight_slant
+  (c-name "gnome_font_find_closest_from_weight_slant")
+  (return-type "GnomeFont*")
+  (parameters
+   '("const-gchar*" "family")
+   '("gint"         "weight")
+   '("gboolean"     "italic")
+   '("gdouble"      "size"))
+)
+
+(define-function font_find
+  (c-name "gnome_font_find")
+  (is-constructor-of "GnomeFont")
+  (return-type "GnomeFont*")
+  (parameters
+   '("const-gchar*" "name")
+   '("gdouble"      "size"))
+)
+
+(define-function font_find_closest
+  (c-name "gnome_font_find_closest")
+  (return-type "GnomeFont*")
+  (parameters
+   '("const-gchar*" "name")
+   '("gdouble"      "size"))
+)
+
+(define-function font_find_closest_from_full_name
+  (c-name "gnome_font_find_closest_from_full_name")
+  (return-type "GnomeFont*")
+  (parameters
+   '("const-gchar*" "full_name"))
+)
+
+(define-function font_list
+  (c-name "gnome_font_list")
+  (return-type "gint")			; actually tuple<string>
+)
+
+(define-function font_family_list
+  (c-name "gnome_font_family_list")
+  (return-type "gint")			; actually tuple<string>
+)
+
+(define-function font_style_list
+  (c-name "gnome_font_style_list")
+  (return-type "gint")			; actually tuple<string>
+  (parameters
+   '("const-gchar*" "family"))
+)
+
+(define-method get_full_name
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_full_name")
+  (return-type "gchar*")
+  (caller-owns-return #t)
+)
+
+(define-method get_width_utf8
+  (of-object "GnomeFont")
+  (c-name "gnome_font_get_width_utf8")
+  (return-type "double")
+  (parameters
+   '("const-gchar*" "str"))
+)
+
+; --- GnomeFontFace ---
+
+(define-function font_face_find
+  (c-name "gnome_font_face_find")
+  (is-constructor-of "GnomeFontFace")
+  (return-type "GnomeFontFace*")
+  (parameters
+   '("const-gchar*" "name"))
+)
+
+(define-function font_face_find_closest
+  (c-name "gnome_font_face_find_closest")
+  (is-constructor-of "GnomeFontFace")
+  (return-type "GnomeFontFace*")
+  (parameters
+   '("const-gchar*" "name"))
+)
+
+
+(define-function font_face_find_closest_from_weight_slant
+  (c-name "gnome_font_face_find_closest_from_weight_slant")
+  (return-type "GnomeFontFace*")
+  (parameters
+   '("const-gchar*" "family")
+   '("gint"         "weigth")
+   '("gboolean"     "italic"))
+)
+
+(define-function font_face_find_closest_from_pango_font
+  (c-name "gnome_font_face_find_closest_from_pango_font")
+  (return-type "GnomeFontFace*")
+  (parameters
+   '("PangoFont*" "pfont"))
+)
+
+(define-function font_face_find_closest_from_pango_description
+  (c-name "gnome_font_face_find_closest_from_pango_description")
+  (return-type "GnomeFontFace*")
+  (parameters
+   '("PangoFontDescription*" "desc"))
+)
+
+(define-function font_face_find_from_family_and_style
+  (c-name "gnome_font_face_find_from_family_and_style")
+  (return-type "GnomeFontFace*")
+  (parameters
+   '("const-gchar*" "family")
+   '("const-gchar*" "style"))
+)
+
+(define-method get_font
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_font")
+  (return-type "GnomeFont*")
+  (parameters
+   '("gdouble" "size")
+   '("gdouble" "xres" (default "600.0"))
+   '("gdouble" "yres" (default "600.0")))
+)
+
+(define-method get_name
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_family_name
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_family_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_species_name
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_species_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_ps_name
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_ps_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_num_glyphs
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_num_glyphs")
+  (return-type "gint")
+)
+
+(define-method lookup_default
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_lookup_default")
+  (return-type "gint")
+  (parameters
+   '("gint" "unicode"))
+)
+(define-method get_stdbbox
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_stdbbox")
+  (caller-owns-return #f)
+  (return-type "ArtDRect*")
+)
+(define-method get_glyph_stdbbox
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_glyph_stdbbox")
+  (parameters
+   '("gint"       "glyph"))
+  (return-type "ArtDRect*")
+)
+(define-method get_glyph_stdadvance
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_glyph_stdadvance")
+  (parameters
+   '("gint"       "glyph"))
+  (return-type "ArtPoint*")
+)
+(define-method get_glyph_stdoutline
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_glyph_stdoutline")
+  (parameters
+   '("gint"       "glyph"))
+  (return-type "ArtBpath*")
+)
+(define-method get_glyph_stdkerning
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_glyph_stdkerning")
+  (parameters
+   '("gint"       "glyph0")
+   '("gint"       "glyph1"))
+  (return-type "ArtPoint*")
+)
+
+(define-method get_sample
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_sample")
+  (return-type "const-gchar*")
+)
+
+(define-method get_weight_code
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_weight_code")
+  (return-type "gint")
+)
+
+(define-method is_italic
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_is_italic")
+  (return-type "gboolean")
+)
+
+(define-method is_fixed_width
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_is_fixed_width")
+  (return-type "gboolean")
+)
+
+(define-method get_ascender
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_ascender")
+  (return-type "gdouble")
+)
+
+(define-method get_descender
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_descender")
+  (return-type "gdouble")
+)
+
+(define-method get_underline_position
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_underline_position")
+  (return-type "gdouble")
+)
+
+(define-method get_underline_thickness
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_underline_thickness")
+  (return-type "gdouble")
+)
+
+(define-method get_glyph_width
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_glyph_width")
+  (return-type "gdouble")
+  (parameters
+   '("gint" "glyph"))
+)
+
+;; This one is declared in gnome-font-face.h but not implemented anywhere!
+; (define-method get_glyph_kerning
+;   (of-object "GnomeFontFace")
+;   (c-name "gnome_font_face_get_glyph_kerning")
+;   (return-type "gdouble")
+;   (parameters
+;    '("gint" "glyph1")
+;    '("gint" "glyph2"))
+; )
+
+(define-method get_glyph_ps_name
+  (of-object "GnomeFontFace")
+  (c-name "gnome_font_face_get_glyph_ps_name")
+  (return-type "const-gchar*")
+  (parameters
+   '("gint" "glyph"))
+)
+
+
+;; ----- GnomePrintJob -----
+
+(define-function new
+  (is-constructor-of "GnomePrintJob")
+  (c-name "gnome_print_job_new")
+  (return-type "GnomePrintJob*")
+  (parameters
+   '("GnomePrintConfig*" "config"))
+)
+
+(define-method get_config
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_get_config")
+  (return-type "GnomePrintConfig*")
+  (caller-owns-return #t)
+)
+
+(define-method get_context
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_get_context")
+  (return-type "GnomePrintContext*")
+  (caller-owns-return #t)
+)
+
+(define-method close
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_close")
+  (return-type "gint")
+)
+
+(define-method print
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_print")
+  (return-type "gint")
+)
+
+(define-method render
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_render")
+  (return-type "gint")
+  (parameters
+   '("GnomePrintContext*" "context"))
+)
+
+(define-method render_page
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_render_page")
+  (return-type "gint")
+  (parameters
+   '("GnomePrintContext*" "context")
+   '("gint"                "page")
+   '("gboolean"            "pageops"))
+)
+
+(define-method get_pages
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_get_pages")
+  (return-type "gint")
+)
+
+; This function actually returns (width, height) or None in case of error
+; FIXME: shouldn't this be a method of GnomePrintConfig?...
+(define-function job_get_page_size_from_config
+  (c-name "gnome_print_job_get_page_size_from_config")
+  (return-type "gdouble")
+  (parameters
+   '("GnomePrintConfig*" "config"))
+)
+
+(define-method print_to_file
+  (of-object "GnomePrintJob")
+  (c-name "gnome_print_job_print_to_file")
+  (return-type "gint")
+  (parameters
+   '("const-gchar*" "output"))
+)
+
+; --- GnomePrintUnit ---
+
+(define-function unit_get_identity
+  (c-name "gnome_print_unit_get_identity")
+  (return-type "GnomePrintUnit*")
+  (parameters
+   '("guint" "base"))
+)
+
+(define-function unit_get_default
+  (c-name "gnome_print_unit_get_default")
+  (return-type "GnomePrintUnit*")
+)
+
+(define-function unit_get_by_name
+  (c-name "gnome_print_unit_get_by_name")
+  (return-type "GnomePrintUnit*")
+  (parameters
+   '("const-gchar*" "name"))
+)
+
+(define-function unit_get_by_abbreviation
+  (c-name "gnome_print_unit_get_by_abbreviation")
+  (return-type "GnomePrintUnit*")
+  (parameters
+   '("const-gchar*" "abbreviation"))
+)
+
+; --- GnomeGlyphList ---
+
+(define-function gnome_glyphlist_new
+  (c-name "gnome_glyphlist_new")
+  (return-type "GnomeGlyphList*")
+  (caller-owns-return #t)
+)
+
+(define-method duplicate
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_duplicate")
+  (return-type "GnomeGlyphList*")
+  (caller-owns-return #t)
+)
+
+(define-function glyphlist_from_text_dumb
+  (c-name "gnome_glyphlist_from_text_dumb")
+  (return-type "GnomeGlyphList*")
+  (caller-owns-return #t)
+  (parameters
+   '("GnomeFont*"   "font")
+   '("guint32"      "color")
+   '("gdouble"      "kerning")
+   '("gdouble"      "letterspace")
+   '("const-gchar*" "text"))
+)
+
+(define-method advance
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_advance")
+  (parameters
+   '("gboolean" "advance"))
+)
+
+(define-method kerning
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_kerning")
+  (parameters
+   '("gboolean" "kerning"))
+)
+
+(define-method letterspace
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_letterspace")
+  (parameters
+   '("gdouble" "letterspace"))
+)
+(define-method font
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_font")
+  (parameters
+   '("GnomeFont*" "font"))
+)
+(define-method color
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_color")
+  (parameters
+   '("guint32" "color"))
+)
+
+(define-method moveto
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_moveto")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y"))
+)
+
+(define-method rmoveto
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_rmoveto")
+  (parameters
+   '("gdouble" "x")
+   '("gdouble" "y"))
+)
+
+(define-method glyph
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_glyph")
+  (parameters
+   '("gint" "glyph"))
+)
+
+(define-method glyphs
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_glyphs")
+  (parameters
+   '("gint" "glyphs"))			; actually sequence<int>
+)
+
+(define-method text_dumb
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_text_dumb")
+  (parameters
+   '("const-gchar*" "text"))
+)
+
+(define-method bbox
+  (of-object "GnomeGlyphList")
+  (c-name "gnome_glyphlist_bbox")
+  (parameters
+   '("gdouble" "transform")		; actually sequence of 6 floats
+   '("gint"    "flags"))
+)
+

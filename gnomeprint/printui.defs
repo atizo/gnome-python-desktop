@@ -1,0 +1,210 @@
+;; -*- scheme -*-
+
+;; object definitions ...
+(define-object Dialog
+  (parent "GtkDialog")
+  (c-name "GnomePrintDialog")
+  (gtype-id "GNOME_TYPE_PRINT_DIALOG")
+)
+
+(define-object Preview
+  (parent "GnomePrintContext")
+  (c-name "GnomePrintPreview")
+  (gtype-id "GNOME_TYPE_PRINT_PREVIEW")
+)
+
+(define-object JobPreview
+  (parent "GtkWindow")
+  (c-name "GnomePrintJobPreview")
+  (gtype-id "GNOME_TYPE_PRINT_JOB_PREVIEW")
+)
+
+(define-object PaperSelector
+  (parent "GtkWidget")
+  (c-name "GnomePaperSelector")
+  (gtype-id "GNOME_TYPE_PAPER_SELECTOR")
+)
+
+(define-object FontSelection
+  (parent "GtkWidget")
+  (c-name "GnomeFontSelection")
+  (gtype-id "GNOME_TYPE_FONT_SELECTION")
+)
+
+(define-object FontPreview
+  (parent "GtkWidget")
+  (c-name "GnomeFontPreview")
+  (gtype-id "GNOME_TYPE_FONT_PREVIEW")
+)
+
+(define-object FontDialog
+  (parent "GtkWidget")
+  (c-name "GnomeFontDialog")
+  (gtype-id "GNOME_TYPE_FONT_DIALOG")
+)
+
+
+;; gnome-print-dialog.h
+
+(define-function gnome_print_dialog_new
+  (is-constructor-of "GnomePrintDialog")
+  (c-name "gnome_print_dialog_new")
+  (return-type "GnomePrintDialog*")
+  (parameters
+   '("GnomePrintJob*" "job")
+   '("const-gchar*"   "title")
+   '("gint"           "flags" (default "0")))
+)
+
+
+(define-method get_copies
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_get_copies")
+  (return-type "gint")	; actually return is copies(int), collate(int)
+)
+
+(define-method set_copies
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_set_copies")
+  (return-type "none")
+  (parameters
+   '("gint" "copies")
+   '("gint" "collate"))
+)
+
+(define-method get_config
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_get_config")
+  (return-type "GnomePrintConfig*")
+)
+
+(define-method get_range
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_get_range")
+  (return-type "gint")
+)
+
+(define-method get_range_page
+  (of-object "GnomePrintDialog")
+  (c-name "gnome_print_dialog_get_range_page")
+  (return-type "gint")
+)
+
+;; gnome-print-preview.h
+
+(define-function gnome_print_preview_new
+  (is-constructor-of "GnomePrintPreview")
+  (c-name "gnome_print_preview_new")
+  (return-type "GnomePrintContext*")
+  (parameters
+   '("GnomePrintConfig*" "config")
+   '("GnomeCanvas*"      "canvas"))
+)
+
+;; gnome-print-job-preview.h
+
+(define-function gnome_print_job_preview_new
+  (is-constructor-of "GnomePrintJobPreview")
+  (c-name "gnome_print_job_preview_new")
+  (return-type "GtkWidget*")
+  (parameters
+   '("GnomePrintJob*" "job")
+   '("const-gchar*"   "title"))
+)
+
+;; gnome-print-paper-selector.h
+
+(define-function gnome_print_paper_selector_new_with_flags
+  (is-constructor-of "GnomePaperSelector")
+  (c-name "gnome_paper_selector_new_with_flags")
+  (return-type "GtkWidget*")
+  (parameters
+   '("GnomePrintConfig*" "config")
+   '("gint"              "flags" (default "0")))
+)
+
+;; gnome-font-dialog.h
+
+
+(define-function gnome_font_selection_new
+  (is-constructor-of "GnomeFontSelection")
+  (c-name "gnome_font_selection_new")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_face
+  (of-object "GnomeFontSelection")
+  (c-name "gnome_font_selection_get_face")
+  (return-type "GnomeFontFace*")
+)
+
+(define-method get_size
+  (of-object "GnomeFontSelection")
+  (c-name "gnome_font_selection_get_size")
+  (return-type "gdouble")
+)
+
+(define-method get_font
+  (of-object "GnomeFontSelection")
+  (c-name "gnome_font_selection_get_font")
+  (return-type "GnomeFont*")
+)
+
+(define-method set_font
+  (of-object "GnomeFontSelection")
+  (c-name "gnome_font_selection_set_font")
+  (return-type "none")
+  (parameters
+   '("GnomeFont*" "font"))
+)
+
+(define-function gnome_font_preview_new
+  (is-constructor-of "GnomeFontPreview")
+  (c-name "gnome_font_preview_new")
+  (return-type "GtkWidget*")
+)
+
+(define-method set_phrase
+  (of-object "GnomeFontPreview")
+  (c-name "gnome_font_preview_set_phrase")
+  (return-type "none")
+  (parameters
+   '("const-gchar*" "phrase"))
+)
+
+(define-method set_font
+  (of-object "GnomeFontPreview")
+  (c-name "gnome_font_preview_set_font")
+  (return-type "none")
+  (parameters
+   '("GnomeFont*" "font"))
+)
+
+(define-method set_color
+  (of-object "GnomeFontPreview")
+  (c-name "gnome_font_preview_set_color")
+  (return-type "none")
+  (parameters
+   '("guint32" "color"))
+)
+
+(define-function gnome_font_dialog_new
+  (is-constructor-of "GnomeFontDialog")
+  (c-name "gnome_font_dialog_new")
+  (return-type "GtkWidget*")
+  (parameters
+   '("const-gchar*" "title"))
+)
+
+(define-method get_fontsel
+  (of-object "GnomeFontDialog")
+  (c-name "gnome_font_dialog_get_fontsel")
+  (return-type "GtkWidget*")
+)
+
+(define-method get_preview
+  (of-object "GnomeFontDialog")
+  (c-name "gnome_font_dialog_get_preview")
+  (return-type "GtkWidget*")
+)
+
