@@ -345,7 +345,9 @@ $build_nautilus          && $have_pyorbit || echo     nautilus
 $build_gnomeprint        || echo     gnomeprint
 $build_gnomeprintui      || echo     gnomeprint.ui
 
-if [ ! $have_pyorbit ]; then
+if $have_pyorbit; then
+  :
+else
   echo
   echo "Note: PyORBit pyorbit_required_version or later is required by bonobo, gnomeui"
   echo "and nautilus bindings."
