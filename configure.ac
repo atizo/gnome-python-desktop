@@ -112,17 +112,23 @@ export_dynamic=`(./libtool --config; echo eval echo \\$export_dynamic_flag_spec)
 
 dnl check for glib
 AM_PATH_GLIB_2_0(glib_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
-GLIB_LIBS=`echo $GLIB_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GLIB_LIBS=`echo $GLIB_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl check to make sure we can find gtk
 AM_PATH_GTK_2_0(gtk_required_version,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
-GTK_LIBS=`echo $GTK_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GTK_LIBS=`echo $GTK_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 PKG_CHECK_MODULES(GNOME, libgnome-2.0 >= libgnome_required_version,,
   [AC_MSG_ERROR(libgnome-2.0 is required.)])
 AC_SUBST(GNOME_CFLAGS)
 AC_SUBST(GNOME_LIBS)
-GNOME_LIBS=`echo $GNOME_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GNOME_LIBS=`echo $GNOME_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 have_pyorbit=false
 PKG_CHECK_MODULES(PYORBIT,
@@ -137,7 +143,9 @@ PKG_CHECK_MODULES(GNOMEUI, libgnomeui-2.0 >= libgnomeui_required_version,
 AC_SUBST(GNOMEUI_CFLAGS)
 AC_SUBST(GNOMEUI_LIBS)
 AM_CONDITIONAL(BUILD_GNOMEUI, $have_pyorbit && $build_gnomeui)
-GNOMEUI_LIBS=`echo $GNOMEUI_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GNOMEUI_LIBS=`echo $GNOMEUI_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the gnome.canvas module?
 build_gnomecanvas=false
@@ -147,7 +155,9 @@ PKG_CHECK_MODULES(GNOMECANVAS, libgnomecanvas-2.0 >= libgnomecanvas_required_ver
 AC_SUBST(GNOMECANVAS_CFLAGS)
 AC_SUBST(GNOMECANVAS_LIBS)
 AM_CONDITIONAL(BUILD_GNOMECANVAS, $build_gnomecanvas)
-GNOMECANVAS_LIBS=`echo $GNOMECANVAS_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GNOMECANVAS_LIBS=`echo $GNOMECANVAS_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 build_gnomevfs=false
 PKG_CHECK_MODULES(GNOMEVFS, gnome-vfs-2.0 >= libgnomevfs_required_version,
@@ -156,7 +166,9 @@ PKG_CHECK_MODULES(GNOMEVFS, gnome-vfs-2.0 >= libgnomevfs_required_version,
 AC_SUBST(GNOMEVFS_CFLAGS)
 AC_SUBST(GNOMEVFS_LIBS)
 AM_CONDITIONAL(BUILD_GNOMEVFS, $build_gnomevfs)
-GNOMEVFS_LIBS=`echo $GNOMEVFS_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GNOMEVFS_LIBS=`echo $GNOMEVFS_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the gnome.zvt module?
 build_zvt=false
@@ -166,7 +178,9 @@ PKG_CHECK_MODULES(LIBZVT, libzvt-2.0 >= libzvt_required_version,
 AC_SUBST(LIBZVT_CFLAGS)
 AC_SUBST(LIBZVT_LIBS)
 AM_CONDITIONAL(BUILD_ZVT, $build_zvt)
-LIBZVT_LIBS=`echo $LIBZVT_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  LIBZVT_LIBS=`echo $LIBZVT_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the gnome.zvt module?
 build_applet=false
@@ -176,7 +190,9 @@ PKG_CHECK_MODULES(LIBPANELAPPLET, libpanelapplet-2.0 >= libpanelapplet_required_
 AC_SUBST(LIBPANELAPPLET_CFLAGS)
 AC_SUBST(LIBPANELAPPLET_LIBS)
 AM_CONDITIONAL(BUILD_APPLET, $build_applet)
-LIBPANELAPPLET_LIBS=`echo $LIBPANELAPPLET_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  LIBPANELAPPLET_LIBS=`echo $LIBPANELAPPLET_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 PKG_CHECK_MODULES(GCONF, gconf-2.0 >= gconf_required_version,,
   [AC_MSG_ERROR(gconf-2.0 is required.)])
@@ -184,7 +200,9 @@ GCONF_INCLUDEDIR="`pkg-config gconf-2.0 --variable includedir`/gconf/2/gconf"
 AC_SUBST(GCONF_INCLUDEDIR)
 AC_SUBST(GCONF_CFLAGS)
 AC_SUBST(GCONF_LIBS)
-GCONF_LIBS=`echo $GCONF_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GCONF_LIBS=`echo $GCONF_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 PKG_CHECK_MODULES(GTKHTML2, libgtkhtml-2.0 >= gtkhtml2_required_version,
   build_gtkhtml2=true,
@@ -192,7 +210,9 @@ PKG_CHECK_MODULES(GTKHTML2, libgtkhtml-2.0 >= gtkhtml2_required_version,
 AC_SUBST(GTKHTML2_CFLAGS)
 AC_SUBST(GTKHTML2_LIBS)
 AM_CONDITIONAL(BUILD_GTKHTML2, $build_gtkhtml2)
-GTKHTML2_LIBS=`echo $GTKHTML2_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  GTKHTML2_LIBS=`echo $GTKHTML2_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the bonobo.activation module?
 build_bonobo_activation=false
@@ -201,7 +221,9 @@ PKG_CHECK_MODULES(BONOBO_ACTIVATION, bonobo-activation-2.0 >= bonobo_activation_
 AC_SUBST(BONOBO_ACTIVATION_CFLAGS)
 AC_SUBST(BONOBO_ACTIVATION_LIBS)
 AM_CONDITIONAL(BUILD_BONOBO_ACTIVATION, $have_pyorbit && $build_bonobo_activation)
-BONOBO_ACTIVATION_LIBS=`echo $BONOBO_ACTIVATION_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  BONOBO_ACTIVATION_LIBS=`echo $BONOBO_ACTIVATION_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the bonobo._bonobo module?
 build_bonobo=false
@@ -210,7 +232,9 @@ PKG_CHECK_MODULES(BONOBO, libbonobo-2.0 >= libbonobo_required_version,
 AC_SUBST(BONOBO_CFLAGS)
 AC_SUBST(BONOBO_LIBS)
 AM_CONDITIONAL(BUILD_BONOBO, $have_pyorbit && $build_bonobo)
-BONOBO_LIBS=`echo $BONOBO_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  BONOBO_LIBS=`echo $BONOBO_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the bonobo.ui module?
 build_bonoboui=false
@@ -219,7 +243,9 @@ PKG_CHECK_MODULES(BONOBOUI, libbonoboui-2.0 >= libbonoboui_required_version libg
 AC_SUBST(BONOBOUI_CFLAGS)
 AC_SUBST(BONOBOUI_LIBS)
 AM_CONDITIONAL(BUILD_BONOBOUI, $have_pyorbit && $build_bonoboui)
-BONOBOUI_LIBS=`echo $BONOBOUI_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  BONOBOUI_LIBS=`echo $BONOBOUI_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the nautilus module?
 build_nautilus=false
@@ -229,7 +255,9 @@ PKG_CHECK_MODULES(LIBNAUTILUS, libnautilus >= libnautilus_required_version,
 AC_SUBST(LIBNAUTILUS_CFLAGS)
 AC_SUBST(LIBNAUTILUS_LIBS)
 AM_CONDITIONAL(BUILD_NAUTILUS, $have_pyorbit && $build_nautilus)
-LIBNAUTILUS_LIBS=`echo $LIBNAUTILUS_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  LIBNAUTILUS_LIBS=`echo $LIBNAUTILUS_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the gnomeprint module?
 build_gnomeprint=false
@@ -239,7 +267,9 @@ PKG_CHECK_MODULES(LIBGNOMEPRINT, libgnomeprint-2.2 >= libgnomeprint_required_ver
 AC_SUBST(LIBGNOMEPRINT_CFLAGS)
 AC_SUBST(LIBGNOMEPRINT_LIBS)
 AM_CONDITIONAL(BUILD_GNOMEPRINT, $build_gnomeprint)
-LIBGNOMEPRINT_LIBS=`echo $LIBGNOMEPRINT_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  LIBGNOMEPRINT_LIBS=`echo $LIBGNOMEPRINT_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl should we build the gnomeprint.ui module?
 build_gnomeprintui=false
@@ -249,7 +279,9 @@ PKG_CHECK_MODULES(LIBGNOMEPRINTUI, libgnomeprintui-2.2 >= libgnomeprintui_requir
 AC_SUBST(LIBGNOMEPRINTUI_CFLAGS)
 AC_SUBST(LIBGNOMEPRINTUI_LIBS)
 AM_CONDITIONAL(BUILD_GNOMEPRINTUI, $build_gnomeprintui)
-LIBGNOMEPRINTUI_LIBS=`echo $LIBGNOMEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
+if test -n "$export_dynamic"; then
+  LIBGNOMEPRINTUI_LIBS=`echo $LIBGNOMEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
+fi
 
 dnl add debugging options ...
 changequote(,)dnl
