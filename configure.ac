@@ -1,4 +1,4 @@
-AC_INIT(gnome-python, 1.99.3,
+AC_INIT(gnome-python, 1.99.4,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
 dnl AC_CONFIG_SRCDIR([gnome/uimodule.c])
 AM_CONFIG_HEADER(config.h)
@@ -30,7 +30,7 @@ fi
 AM_CHECK_PYTHON_HEADERS(,[AC_MSG_ERROR(could not find Python headers)])
 
 dnl check for pygtk
-PKG_CHECK_MODULES(PYGTK, [pygtk-2.0 >= 1.99.3])
+PKG_CHECK_MODULES(PYGTK, [pygtk-2.0 >= 1.99.4])
 AC_SUBST(PYGTK_CFLAGS)
 AC_PATH_PROG(PYGTK_CODEGEN, pygtk-codegen-2.0, no)
 if test "x$PYGTK_CODEGEN" = xno; then
@@ -52,7 +52,7 @@ GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
 AC_SUBST(GTK_VERSION)
 
 dnl check to make sure we can find gtk
-AM_PATH_GTK_2_0(1.3.7,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
+AM_PATH_GTK_2_0(1.3.10,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
 
 PKG_CHECK_MODULES(GNOME, [libgnome-2.0 >= 1.104.0],,
   [AC_MSG_ERROR(libgnome-2.0 is required.)])
