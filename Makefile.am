@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = 1.5
 
-SUBDIRS = gconf gnome bonobo
+SUBDIRS = gconf gnome bonobo gtkhtml2
 
 EXTRA_DIST = \
   gnome-python.spec \

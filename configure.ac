@@ -23,6 +23,7 @@ m4_define(libbonobo_required_version,         1.112.0)
 m4_define(libbonoboui_required_version,       1.112.1)
 m4_define(libnautilus_required_version,       1.1.9)
 m4_define(libpanelapplet_required_version,    1.5.13)
+m4_define(gtkhtml2_required_version,          1.99.5)
 
 AC_INIT(gnome-python, gnome_python_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -140,6 +141,13 @@ AC_SUBST(GCONF_INCLUDEDIR)
 AC_SUBST(GCONF_CFLAGS)
 AC_SUBST(GCONF_LIBS)
 
+PKG_CHECK_MODULES(GTKHTML2, libgtkhtml-2.0 >= gtkhtml2_required_version,
+  build_gtkhtml2=true,
+  build_gtkhtml2=false)
+AC_SUBST(GTKHTML2_CFLAGS)
+AC_SUBST(GTKHTML2_LIBS)
+AM_CONDITIONAL(BUILD_GTKHTML2, $build_gtkhtml2)
+
 dnl should we build the bonobo.activation module?
 build_bonobo_activation=false
 PKG_CHECK_MODULES(BONOBO_ACTIVATION, bonobo-activation-2.0 >= bonobo_activation_required_version,
@@ -191,6 +199,7 @@ dnl
 AC_CONFIG_FILES(
   Makefile
   gconf/Makefile
+  gtkhtml2/Makefile
   gnome/Makefile
   bonobo/Makefile
   gnome-python.spec
