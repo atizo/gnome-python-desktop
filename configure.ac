@@ -143,7 +143,8 @@ if test -n "$export_dynamic"; then
 fi
 
 build_gnomevfs=false
-PKG_CHECK_MODULES(GNOMEVFS, gnome-vfs-2.0 >= libgnomevfs_required_version,
+PKG_CHECK_MODULES(GNOMEVFS, gnome-vfs-2.0 >= libgnomevfs_required_version dnl
+			    pyorbit-2 >= pyorbit_required_version,
   build_gnomevfs=true,
   build_gnomevfs=false)
 AC_SUBST(GNOMEVFS_CFLAGS)
