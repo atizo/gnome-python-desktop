@@ -66,7 +66,6 @@ AM_CONDITIONAL(BUILD_GNOMECANVAS, $build_gnomecanvas)
 dnl 
 AC_CONFIG_FILES(
   Makefile
-  gnome/Makefile)
-AC_OUTPUT([
-gnome-python.spec
-])
+  gnome/Makefile
+  gnome-python.spec)
+AC_OUTPUT
