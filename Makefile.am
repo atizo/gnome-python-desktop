@@ -24,6 +24,7 @@ EXTRAS_DIST = \
   gnome-python-extras-2.0.pc.in \
   ltihooks.py \
   examples/gtksourceview/test-widget.py \
+  examples/egg/trayicon.py \
   examples/applet/applet.py \
   examples/applet/GNOME_PythonAppletSample.server \
   examples/applet/README \
