@@ -196,6 +196,16 @@ fi
 MOZILLA_HOME="`$PKG_CONFIG --variable=libdir mozilla-gtkmozembed`"
 AC_SUBST(MOZILLA_HOME)
 
+dnl should we build the gtkspell module?
+build_gtkspell=false
+PKG_CHECK_MODULES(GTKSPELL, [gtkspell-2.0 >= 2.0.0 pygtk-2.0 >= 2.0.0],
+  build_gtkspell=true,
+  build_gtkspell=false)
+AM_CONDITIONAL(BUILD_GTKSPELL, $build_gtkspell)
+if test -n "$export_dynamic"; then
+  GTKSPELL_LIBS=`echo $GTKSPELL_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
@@ -215,6 +225,7 @@ AC_CONFIG_FILES(
   egg/recent/Makefile
   wnck/Makefile
   gtkmozembed/Makefile
+  gtkspell/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -231,6 +242,7 @@ $build_eggtray           && echo     egg.trayicon
 $build_eggrecent         && echo     egg.recent
 $build_wnck              && echo     wnck
 $build_gtkmozembed       && echo     gtkmozembed
+$build_gtkspell          && echo     gtkspell
 echo
 
 echo "The following modules will NOT be built:"
@@ -244,4 +256,5 @@ $build_eggtray           || echo     egg.trayicon
 $build_eggrecent         || echo     egg.recent
 $build_wnck              || echo     wnck
 $build_gtkmozembed       || echo     gtkmozembed
+$build_gtkspell          || echo     gtkspell
 

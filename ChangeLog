@@ -1,3 +1,12 @@
+2004-12-26  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkspell/*: Add pygtkspell (0.3.1) sources, by John (J5)
+	Palmieri <johnp@martianrock.com>.  Fixes #162067.
+
+	* Makefile.am (SUBDIRS): Add gtkspell.
+
+	* configure.ac: Check for gtkspell libs.
+
 2004-12-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* gtkmozembed/gtkmozembedmodule.c (initgtkmozembed): Call
