@@ -243,6 +243,17 @@ if test -n "$export_dynamic"; then
   LIBGNOMEPRINT_LIBS=`echo $LIBGNOMEPRINT_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+if [ $build_gnomeprint = true ]; then
+   AC_MSG_CHECKING([for libgnomeprint 2.8 API])
+   if $PKG_CONFIG --modversion "libgnomeprint-2.2 >= 2.7.2" > /dev/null 2>&1; then
+      AC_MSG_RESULT([found])
+      PYGNOMEPRINT_DEFS="-DHAVE_GNOMEPRINT28";
+   else
+      AC_MSG_RESULT([not found])
+   fi
+fi
+AC_SUBST(PYGNOMEPRINT_DEFS)
+
 dnl should we build the gnomeprint.ui module?
 build_gnomeprintui=false
 PKG_CHECK_MODULES(LIBGNOMEPRINTUI, libgnomeprintui-2.2 >= libgnomeprintui_required_version,
