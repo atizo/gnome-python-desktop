@@ -29,6 +29,10 @@ if BUILD_GTKSPELL
   SUBDIRS += gtkspell
 endif
 
+if BUILD_TOTEM_PLPARSER
+  SUBDIRS += totem
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 

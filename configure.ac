@@ -198,12 +198,22 @@ AC_SUBST(MOZILLA_HOME)
 
 dnl should we build the gtkspell module?
 build_gtkspell=false
-PKG_CHECK_MODULES(GTKSPELL, [gtkspell-2.0 >= 2.0.0 pygtk-2.0 >= 2.0.0],
+PKG_CHECK_MODULES(GTKSPELL, [gtkspell-2.0 >= 2.0.0 pygtk-2.0 >= pygtk_required_version],
   build_gtkspell=true,
   build_gtkspell=false)
 AM_CONDITIONAL(BUILD_GTKSPELL, $build_gtkspell)
 if test -n "$export_dynamic"; then
   GTKSPELL_LIBS=`echo $GTKSPELL_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
+dnl should we build the totem.plparser module?
+build_totem_plparser=false
+PKG_CHECK_MODULES(TOTEM_PLPARSER, [totem-plparser pygtk-2.0 >= pygtk_required_version],
+  build_totem_plparser=true,
+  build_totem_plparser=false)
+AM_CONDITIONAL(BUILD_TOTEM_PLPARSER, $build_totem_plparser)
+if test -n "$export_dynamic"; then
+  TOTEM_PLPARSER_LIBS=`echo $TOTEM_PLPARSER_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
 
@@ -226,6 +236,7 @@ AC_CONFIG_FILES(
   wnck/Makefile
   gtkmozembed/Makefile
   gtkspell/Makefile
+  totem/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -243,6 +254,7 @@ $build_eggrecent         && echo     egg.recent
 $build_wnck              && echo     wnck
 $build_gtkmozembed       && echo     gtkmozembed
 $build_gtkspell          && echo     gtkspell
+$build_totem_plparser    && echo     totem.plparser
 echo
 
 echo "The following modules will NOT be built:"
@@ -257,4 +269,4 @@ $build_eggrecent         || echo     egg.recent
 $build_wnck              || echo     wnck
 $build_gtkmozembed       || echo     gtkmozembed
 $build_gtkspell          || echo     gtkspell
-
+$build_totem_plparser    || echo     totem.plparser

@@ -1,0 +1,131 @@
+/* -*- mode: C -*- */
+%%
+headers
+#define NO_IMPORT_PYGOBJECT
+#include "pygobject.h"
+#include "totem-pl-parser.h"
+#include "totem-pl-parser-builtins.h"
+#include <gtk/gtk.h>
+#include <glib.h>
+%%
+modulename totem.plparser
+%%
+import gobject.GObject as PyGObject_Type
+%%
+ignore-glob
+  *_get_type
+  *_error_quark
+%%
+override totem_pl_parser_write kwargs
+
+#define pl_parser_get_has_error(model) (GPOINTER_TO_INT(g_object_get_data (G_OBJECT(model), "__py_pl_parser_error")))
+#define pl_parser_set_has_error(model) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_error", GINT_TO_POINTER(TRUE)))
+#define pl_parser_reset_has_error(model) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_error", NULL))
+
+#define pl_parser_get_iter_func(model) ((PyObject *)g_object_get_data (G_OBJECT(model), "__py_pl_parser_func"))
+#define pl_parser_set_iter_func(model,iter_func) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_func", (iter_func)))
+
+#define pl_parser_get_self(model) ((PyObject *)g_object_get_data (G_OBJECT(model), "__py_pl_parser_self"))
+#define pl_parser_set_self(model,self) (g_object_set_data (G_OBJECT(model), "__py_pl_parser_self", (self)))
+
+static void
+_pl_parser_iter_func (GtkTreeModel *model, GtkTreeIter *iter, char **uri, char **title)
+{
+	PyObject *py_iter_func = NULL;
+	PyObject *args = NULL;
+	PyObject *result = NULL;
+	PyObject *py_iter = NULL;
+	char *tmp_uri = NULL, *tmp_title = NULL;
+	if (pl_parser_get_has_error(model))
+		return;
+	py_iter = pyg_boxed_new(GTK_TYPE_TREE_ITER, iter, TRUE, TRUE);
+	/* prepare callback arguments */
+	args = Py_BuildValue ("(OO)",
+	                      pl_parser_get_self(model),
+	                      py_iter);
+	if (args == NULL) {
+		Py_DECREF (py_iter);
+		pl_parser_set_has_error(model);
+		return;
+	}
+	/* call function */
+	py_iter_func = pl_parser_get_iter_func(model);
+	result = PyEval_CallObject (py_iter_func, args);
+	
+	/* these arguments are not needed anymore */
+	Py_DECREF (args);
+	Py_DECREF (py_iter);
+	
+	/* check result's integrity */
+	if (result == NULL) {
+		pl_parser_set_has_error(model);
+		return;
+	}
+	PyObject_Print (result, stdout, 0);
+
+	if (PyString_Check (result)) {
+		tmp_uri = PyString_AsString (result);
+		if (tmp_uri == NULL) {
+			PyErr_SetString (PyExc_TypeError, "Callback function must return one string or a tuple of two strings.");
+			pl_parser_set_has_error(model);
+		}
+	} else if (!PyTuple_Check (result) || PyTuple_Check (result) && !PyArg_ParseTuple (result, "ss", &tmp_uri, &tmp_title)) {
+		PyErr_SetString (PyExc_TypeError, "Callback function must return one string or a tuple of two strings.");
+		pl_parser_set_has_error(model);
+	}
+	
+	/* g_strdup handles NULL case for us */
+	*uri = g_strdup (tmp_uri);
+	*title = g_strdup (tmp_title);
+	
+	Py_DECREF (result);
+}
+
+static PyObject *
+_wrap_totem_pl_parser_write (PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+	static char *kwlist[] = {"model", "iter_func", "output", "type", NULL};
+	PyGObject *model;
+	PyObject *iter_func;
+	char *output;
+	TotemPlParserType type;
+	GError *error = NULL;
+	gboolean has_error;
+	
+	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OOsi:Parser.write", kwlist, &model, &iter_func, &output, &type))
+		return NULL;
+	/* verify arguments' integrity */
+	if (!PyCallable_Check (iter_func)) {
+		PyErr_SetString (PyExc_TypeError, "iter_func must be callable");
+		return NULL;
+	}
+	if (!GTK_IS_TREE_MODEL (model->obj)) {
+		PyErr_SetString (PyExc_TypeError, "model must be a gtk.TreeModel");
+		return NULL;
+	}
+	/* hold two temporary variables */
+	pl_parser_set_iter_func (model->obj, iter_func);
+	pl_parser_set_self (model->obj, model);
+	if (!totem_pl_parser_write (TOTEM_PL_PARSER(self->obj),
+	                            GTK_TREE_MODEL(model->obj),
+	                            _pl_parser_iter_func,
+	                            output,
+	                            type,
+	                            &error)) {
+		/* return an GError */
+		pyg_error_check(&error);
+		return NULL;
+	}
+	/* remove temp vars */
+	pl_parser_set_iter_func (model->obj, NULL);
+	pl_parser_set_self (model->obj, NULL);
+	has_error = pl_parser_get_has_error (model->obj);
+	pl_parser_reset_has_error(model->obj);
+	
+	if (has_error) {
+		return NULL;
+	}
+	/* return None */
+	Py_INCREF(Py_None);
+	return Py_None;
+}

@@ -1,3 +1,15 @@
+2005-01-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* totem/*: Add Tiago Cogumbreiro's totem playlist parser bindings
+	 (http://s1x.homelinux.net/projects/totem-pl-parser-python), with
+	some modifications to Makefile.am.  Fixes #162359.
+
+	* Makefile.am: Add totem conditionally to SUBDIRS.
+
+	* configure.ac: Require pygtk version `pygtk_required_version'
+	instead of 2.0.0 for pygtkspell.
+	Check for totem-plparser library; write totem/Makefile.
+
 2004-12-31  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: Post-release version bump to 2.9.3.
