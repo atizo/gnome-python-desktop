@@ -277,3 +277,47 @@ AC_CONFIG_FILES(
   gnome-python.spec
   gnome-python-2.0.pc)
 AC_OUTPUT
+
+echo
+echo "The following modules will be built:"
+echo
+$build_gnome             && echo     gnome
+$build_gnomeui           && echo     gnome.ui
+$build_gnomecanvas       && echo     gnome.canvas
+$build_gnomevfs          && echo     gnome.vfs
+$build_zvt               && echo     zvt
+$build_gconf             && echo     gconf
+$build_gtkhtml2          && echo     gtkhtml2
+$build_bonobo            && echo     bonobo
+$build_bonobo_activation && echo     bonobo.activation
+$build_bonoboui          && echo     bonobo.ui
+$build_applet            && echo     gnome.applet
+$build_nautilus          && echo     nautilus
+$build_gnomeprint        && echo     gnomeprint
+$build_gnomeprintui      && echo     gnomeprint.ui
+echo
+
+echo "The following modules will NOT be built:"
+echo
+$build_gnome             || echo     gnome
+$build_gnomeui           || echo     gnome.ui
+$build_gnomecanvas       || echo     gnome.canvas
+$build_gnomevfs          || echo     gnome.vfs
+$build_zvt               || echo     zvt
+$build_gconf             || echo     gconf
+$build_gtkhtml2          || echo     gtkhtml2
+$build_bonobo            || echo     bonobo
+$build_bonobo_activation || echo     bonobo.activation
+$build_bonoboui          || echo     bonobo.ui
+$build_applet            || echo     gnome.applet
+$build_nautilus          || echo     nautilus
+$build_gnomeprint        || echo     gnomeprint
+$build_gnomeprintui      || echo     gnomeprint.ui
+
+if [ ! $have_pyorbit ]; then
+  echo
+  echo "Note: PyORBit pyorbit_required_version or later is required by bonobo, gnomeui"
+  echo "and nautilus bindings."
+  echo "Download it from: http://ftp.gnome.org/pub/GNOME/pyorbit/1.99/"
+  echo
+fi
