@@ -1,3 +1,11 @@
+2005-03-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* examples/applet/applet.py: Solve deprecation warnings.  Be a bit
+	more verbose.
+
+	* examples/applet/README: Update, there is no need anymore to
+	restart b-a-s if you copy the .server to /usr/lib/bonobo/servers.
+
 === 2.10.0 ===
 2005-03-07  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
