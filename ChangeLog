@@ -1,3 +1,12 @@
+2004-11-29  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/Makefile.am (EXTRA_DIST): Add missing eggrecent.defs.
+	(DISTCLEANFILES): Add stamp-eggtypebuiltins.h eggtypebuiltins.c
+	eggtypebuiltins.h.
+
+	* configure.ac: version <- 2.9.1
+	Output build status information for egg.recent.
+
 2004-11-27  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
 	* egg/recent/eggrecent.override: override
