@@ -23,7 +23,7 @@ CLEANFILES = gtksourceview.c
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/pango-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \
-	    --register $(top_srcdir)/gnomeprint/print.defs \
+	    --register ../gnomeprint/print.defs \
 		--prefix py$* $*.defs) > gen-$*.c \
 	    && cp gen-$*.c $*.c \
 	    && rm -f gen-$*.c
