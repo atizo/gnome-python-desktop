@@ -29,6 +29,10 @@ if BUILD_GTKSPELL
   SUBDIRS += gtkspell
 endif
 
+if BUILD_GDL
+  SUBDIRS += gdl
+endif
+
 if BUILD_TOTEM_PLPARSER
   SUBDIRS += totem
 endif
@@ -63,4 +67,5 @@ EXTRA_DIST = \
   examples/gnomeprint/example_11.py \
   examples/gnomeprint/README \
   examples/gnomeprint/sample-image.png \
-  examples/gtkspell/test.py
+  examples/gtkspell/test.py \
+  examples/gdl/gdl_test.py

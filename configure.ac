@@ -23,7 +23,6 @@ m4_define(gtksourceview_required_version,     1.1.0)
 m4_define(wnck_required_version,              2.8.0)
 m4_define(mozilla_required_version,           1.2b)
 
-
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
 dnl AC_CONFIG_SRCDIR([gnome/uimodule.c])
@@ -206,6 +205,17 @@ if test -n "$export_dynamic"; then
   GTKSPELL_LIBS=`echo $GTKSPELL_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gdl module?
+build_gdl=false
+PKG_CHECK_MODULES(GDL, [gdl-1.0 >= 0.4.0 pygtk-2.0 >= pygtk_required_version],
+  build_gdl=true,
+  build_gdl=false)
+
+AM_CONDITIONAL(BUILD_GDL, $build_gdl)
+if test -n "$export_dynamic"; then
+  GDL_LIBS=`echo $GDL_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl should we build the totem.plparser module?
 build_totem_plparser=false
 PKG_CHECK_MODULES(TOTEM_PLPARSER, [totem-plparser pygtk-2.0 >= pygtk_required_version],
@@ -236,6 +246,7 @@ AC_CONFIG_FILES(
   wnck/Makefile
   gtkmozembed/Makefile
   gtkspell/Makefile
+  gdl/Makefile
   totem/Makefile
   gnome-python-extras-2.0.pc
 )
@@ -254,6 +265,7 @@ $build_eggrecent         && echo     egg.recent
 $build_wnck              && echo     wnck
 $build_gtkmozembed       && echo     gtkmozembed
 $build_gtkspell          && echo     gtkspell
+$build_gdl               && echo     gdl
 $build_totem_plparser    && echo     totem.plparser
 echo
 
@@ -269,4 +281,5 @@ $build_eggrecent         || echo     egg.recent
 $build_wnck              || echo     wnck
 $build_gtkmozembed       || echo     gtkmozembed
 $build_gtkspell          || echo     gtkspell
+$build_gdl               || echo     gdl
 $build_totem_plparser    || echo     totem.plparser

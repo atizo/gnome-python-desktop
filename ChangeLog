@@ -1,3 +1,17 @@
+2005-01-15  John Palmieri  <johnp@martianrock.com>
+
+	* Makefile.am (SUBDIRS): Conditionally add gdl to SUBDIRS.
+
+	* configure.ac: Check for gdl libraries.
+
+	* gdl/*: Add new gdl module, wrapping the C gdl library.
+
+	* examples/gdl/gdl_test.py: New gdl example.
+
+	* Makefile.am (EXTRA_DIST): Include the gdl example.
+
+	Fixes #163250 (New gdl module).
+
 2005-01-06  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* totem/plparser.override: Update to new totem-plparser API (new
