@@ -45,11 +45,11 @@ static PyObject *
 _wrap_gnome_print_dialog_get_copies(PyGObject *self)
 {
     int copies;
-    gboolean collate, duplex, tumble;
+    gboolean collate;
 
     gnome_print_dialog_get_copies(GNOME_PRINT_DIALOG(self->obj), &copies,
-				  &collate, &duplex, &tumble);
-    return Py_BuildValue("iiii", copies, collate, duplex, tumble);
+				  &collate);
+    return Py_BuildValue("ii", copies, collate);
 }
 
 %%
