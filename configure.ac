@@ -54,6 +54,9 @@ AC_SUBST(LIBGNOME_VERSION)
 GTK_VERSION=`$PKG_CONFIG --modversion gtk+-2.0`
 AC_SUBST(GTK_VERSION)
 
+LIBZVT_VERSION=`$PKG_CONFIG --modversion libzvt-2.0`
+AC_SUBST(LIBZVT_VERSION)
+
 dnl check to make sure we can find gtk
 AM_PATH_GTK_2_0(1.3.10,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
 
@@ -70,6 +73,15 @@ PKG_CHECK_MODULES(GNOMECANVAS, [libgnomecanvas-2.0 >= 1.102.0],
 AC_SUBST(GNOMECANVAS_CFLAGS)
 AC_SUBST(GNOMECANVAS_LIBS)
 AM_CONDITIONAL(BUILD_GNOMECANVAS, $build_gnomecanvas)
+
+dnl should we build the gnome.zvt module?
+build_zvt=false
+PKG_CHECK_MODULES(LIBZVT, [libzvt-2.0 >= 1.105.0],
+  build_zvt=true,
+  build_zvt=false)
+AC_SUBST(LIBZVT_CFLAGS)
+AC_SUBST(LIBZVT_LIBS)
+AM_CONDITIONAL(BUILD_ZVT, $build_zvt)
 
 dnl 
 AC_CONFIG_FILES(
