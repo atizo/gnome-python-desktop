@@ -1,4 +1,15 @@
+=== 2.9.4 ===
 2005-02-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* examples/gnomeprint/test-print.py (render_to_job): Add a Hello
+	World string rendered with pango layout.  Code heavily based on
+	John C Barstow's post to pygtk list,
+	http://www.daa.com.au/pipermail/pygtk/2005-February/009580.html,
+	slightly modified.
+
+	* configure.ac: Version 2.9.4.
 
 	* egg/recent/egg-recent-item.c, egg/recent/egg-recent-item.h:
 	Re-merge with libegg HEAD to get latest fixes.

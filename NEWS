@@ -1,3 +1,10 @@
+Overview of Changes from gnome-python-extras 2.9.3 to gnome-python-extras 2.9.4
+===============================================================================
+* Add missing NautilusBurnMediaType in module nautilusburn (Tiago Cogumbreiro)
+* Update a gnomeprint example with pango stuff (Gustavo, John C Barstow)
+* egg.recent updated to latest libegg (Gustavo)
+
+
 Overview of Changes from gnome-python-extras 2.9.2 to gnome-python-extras 2.9.3
 ===============================================================================
 * New module totem.plparser, wrapping the new totem playlist parsing
