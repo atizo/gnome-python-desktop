@@ -54,6 +54,11 @@ AC_SUBST(GTK_VERSION)
 dnl check to make sure we can find gtk
 AM_PATH_GTK_2_0(1.3.7,,[AC_MSG_ERROR(maybe you want the gtk-gnome-1-2 branch?)],$extra_mods)
 
+PKG_CHECK_MODULES(GNOME, [libgnome-2.0 >= 1.104.0],,
+  [AC_MSG_ERROR(libgnome-2.0 is required.)])
+AC_SUBST(GNOME_CFLAGS)
+AC_SUBST(GNOME_LIBS)
+
 dnl should we build the gnome.canvas module?
 build_gnomecanvas=false
 PKG_CHECK_MODULES(GNOMECANVAS, [libgnomecanvas-2.0 >= 1.102.0],
