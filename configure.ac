@@ -9,7 +9,7 @@ m4_define(gnome_python_version, gnome_python_major_version.gnome_python_minor_ve
 
 dnl required versions of other packages
 m4_define(pygtk_required_version,             2.3.96)
-m4_define(pyorbit_required_version,           2.0.0)
+m4_define(pyorbit_required_version,           2.0.1)
 
 m4_define(glib_required_version,              2.4.0)
 m4_define(gtk_required_version,               2.4.0)
