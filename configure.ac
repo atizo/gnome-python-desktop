@@ -254,21 +254,11 @@ if test -n "$export_dynamic"; then
   LIBGNOMEPRINTUI_LIBS=`echo $LIBGNOMEPRINTUI_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl add debugging options ...
-changequote(,)dnl
-if test "x$GCC" = xyes; then
-  case " $CFLAGS " in
-  *[\	\ ]-Wall[\	\ ]*) ;;
-  *) CFLAGS="$CFLAGS -Wall" ;;
-  esac
+dnl add required cflags ...
+JH_ADD_CFLAG([-Wall])
+JH_ADD_CFLAG([-std=c9x])
+JH_ADD_CFLAG([-fno-strict-aliasing])
 
-  case " $CFLAGS " in
-  *[\	\ ]-std=c9x[\	\ ]*) ;;
-  *) CFLAGS="$CFLAGS -std=c9x" ;;
-  esac
-fi
-changequote([,])dnl
-dnl
 AC_CONFIG_FILES(
   Makefile
   gconf/Makefile
