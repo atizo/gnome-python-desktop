@@ -27,14 +27,14 @@ print.c: print.defs print.override
 
 # libgnomeprintui binding
 if BUILD_GNOMEPRINTUI
-gnomeprintui_la = printuimodule.la
+gnomeprintui_la = uimodule.la
 endif
 pygnomeexec_LTLIBRARIES += $(gnomeprintui_la)
-printuimodule_la_CFLAGS = $(LIBGNOMEPRINTUI_CFLAGS)
-printuimodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initui
-printuimodule_la_LIBADD = $(LIBGNOMEPRINTUI_LIBS)
-printuimodule_la_SOURCES = printuimodule.c
-nodist_printuimodule_la_SOURCES = printui.c
+uimodule_la_CFLAGS = $(LIBGNOMEPRINTUI_CFLAGS)
+uimodule_la_LDFLAGS = -module -avoid-version -export-symbols-regex initui
+uimodule_la_LIBADD = $(LIBGNOMEPRINTUI_LIBS)
+uimodule_la_SOURCES = printuimodule.c
+nodist_uimodule_la_SOURCES = printui.c
 CLEANFILES += printui.c
 EXTRA_DIST += printui.override  
 printui.c: printui.defs printui.override
