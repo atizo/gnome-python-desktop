@@ -4,7 +4,7 @@ INCLUDES = $(PYTHON_INCLUDES) $(PYGTK_CFLAGS)
 defsdir = $(datadir)/pygtk/2.0/defs
 defs_DATA = print.defs printui.defs art.defs
 
-EXTRA_DIST = $(defs_DATA)
+EXTRA_DIST = $(defs_DATA) print-arg-types.py
 
 pkgpythondir = $(pythondir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
