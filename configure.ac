@@ -21,6 +21,7 @@ m4_define(libgnomeprint_required_version,     2.2.0)
 m4_define(libgnomeprintui_required_version,   2.2.0)
 m4_define(gtksourceview_required_version,     1.1.0)
 m4_define(wnck_required_version,              2.8.0)
+m4_define(mozilla_required_version,           1.2b)
 
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
@@ -182,11 +183,24 @@ if test -n "$export_dynamic"; then
   WNCK_LIBS=`echo $WNCK_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gtkmozembed module?
+build_gtkmozembed=false
+PKG_CHECK_MODULES(GTKMOZEMBED, [mozilla-gtkmozembed >= mozilla_required_version
+                                gtk+-2.0            >= gtk_required_version],
+  build_gtkmozembed=true,
+  build_gtkmozembed=false)
+AM_CONDITIONAL(BUILD_GTKMOZEMBED, $build_gtkmozembed)
+if test -n "$export_dynamic"; then
+  GTKMOZEMBED_LIBS=`echo $GTKMOZEMBED_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 dnl commented because it causes compilation problems in egg/recent
 dnl JH_ADD_CFLAG([-std=c9x])
 JH_ADD_CFLAG([-fno-strict-aliasing])
+
 
 AC_CONFIG_FILES(
   Makefile
@@ -198,6 +212,7 @@ AC_CONFIG_FILES(
   egg/tray/Makefile
   egg/recent/Makefile
   wnck/Makefile
+  gtkmozembed/Makefile
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
@@ -213,6 +228,7 @@ $build_gtksourceview     && echo     gtksourceview
 $build_eggtray           && echo     egg.trayicon
 $build_eggrecent         && echo     egg.recent
 $build_wnck              && echo     wnck
+$build_gtkmozembed       && echo     gtkmozembed
 echo
 
 echo "The following modules will NOT be built:"
@@ -225,4 +241,5 @@ $build_gtksourceview     || echo     gtksourceview
 $build_eggtray           || echo     egg.trayicon
 $build_eggrecent         || echo     egg.recent
 $build_wnck              || echo     wnck
+$build_gtkmozembed       || echo     gtkmozembed
 

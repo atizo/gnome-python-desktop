@@ -21,6 +21,10 @@ if BUILD_WNCK
   SUBDIRS += wnck
 endif
 
+if BUILD_GTKMOZEMBED
+  SUBDIRS += gtkmozembed
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 

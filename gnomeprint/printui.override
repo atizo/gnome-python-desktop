@@ -34,7 +34,7 @@ import gnomeprint.FontFace as PyGnomeFontFace_Type
 import gtk.Dialog          as PyGtkDialog_Type
 import gtk.Window          as PyGtkWindow_Type
 import gtk.Widget          as PyGtkWidget_Type
-import gnome.canvas.Canvas as PyGnomeCanvas_Type
+import gnomecanvas.Canvas  as PyGnomeCanvas_Type
 %%
 ignore-glob 
   *_get_type
