@@ -1,5 +1,7 @@
 2004-11-21  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
 
+	* egg/Makefile.am (SUBDIRS): make tray subdir conditional.
+
 	* configure.ac: Check for EGGTRAY packages.  Write egg/Makefile
 	and egg/tray/Makefile.
 
