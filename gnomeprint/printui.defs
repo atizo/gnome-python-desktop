@@ -38,7 +38,7 @@
 )
 
 (define-object FontDialog
-  (parent "GtkWidget")
+  (parent "GtkDialog")
   (c-name "GnomeFontDialog")
   (gtype-id "GNOME_TYPE_FONT_DIALOG")
 )
