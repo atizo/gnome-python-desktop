@@ -17,7 +17,6 @@ m4_define(libgnome_required_version,          2.0.0)
 m4_define(libgnomeui_required_version,        2.0.0)
 m4_define(libgnomecanvas_required_version,    2.0.0)
 m4_define(libgnomevfs_required_version,       2.0.0)
-m4_define(libzvt_required_version,            2.0.0)
 m4_define(gconf_required_version,             1.2.0)
 m4_define(bonobo_activation_required_version, 1.0.0)
 m4_define(libbonobo_required_version,         2.0.0)
@@ -64,7 +63,6 @@ LIBGNOMECANVAS_VERSION=libgnomecanvas_required_version
 LIBGNOME_VERSION=libgnome_required_version
 LIBGNOMEVFS_VERSION=libgnomevfs_required_version
 GTK_VERSION=gtk_required_version
-LIBZVT_VERSION=libzvt_required_version
 PYORBIT_VERSION=pyorbit_required_version
 NAUTILUS_VERSION=libnautilus_required_version
 BONOBO_ACTIVATION_VERSION=bonobo_activation_required_version
@@ -81,7 +79,6 @@ AC_SUBST(LIBGNOME_VERSION)
 AC_SUBST(LIBGNOMEVFS_VERSION)
 AC_SUBST(GLIB_VERSION)
 AC_SUBST(GTK_VERSION)
-AC_SUBST(LIBZVT_VERSION)
 AC_SUBST(PYORBIT_VERSION)
 AC_SUBST(NAUTILUS_VERSION)
 AC_SUBST(BONOBO_ACTIVATION_VERSION)
@@ -156,19 +153,7 @@ if test -n "$export_dynamic"; then
   GNOMEVFS_LIBS=`echo $GNOMEVFS_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl should we build the gnome.zvt module?
-build_zvt=false
-PKG_CHECK_MODULES(LIBZVT, libzvt-2.0 >= libzvt_required_version,
-  build_zvt=true,
-  build_zvt=false)
-AC_SUBST(LIBZVT_CFLAGS)
-AC_SUBST(LIBZVT_LIBS)
-AM_CONDITIONAL(BUILD_ZVT, $build_zvt)
-if test -n "$export_dynamic"; then
-  LIBZVT_LIBS=`echo $LIBZVT_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-dnl should we build the gnome.zvt module?
+dnl should we build the gnome.applet module?
 build_applet=false
 PKG_CHECK_MODULES(LIBPANELAPPLET, libpanelapplet-2.0 >= libpanelapplet_required_version,
   build_applet=true,
@@ -303,7 +288,6 @@ $build_gnome             && echo     gnome
 $build_gnomeui           && $have_pyorbit && echo     gnome.ui
 $build_gnomecanvas       && echo     gnome.canvas
 $build_gnomevfs          && echo     gnome.vfs
-$build_zvt               && echo     zvt
 $build_gconf             && echo     gconf
 $build_gtkhtml2          && echo     gtkhtml2
 $build_bonobo            && $have_pyorbit && echo     bonobo
@@ -321,7 +305,6 @@ $build_gnome             || echo     gnome
 $build_gnomeui           && $have_pyorbit || echo     gnome.ui
 $build_gnomecanvas       || echo     gnome.canvas
 $build_gnomevfs          || echo     gnome.vfs
-$build_zvt               || echo     zvt
 $build_gconf             || echo     gconf
 $build_gtkhtml2          || echo     gtkhtml2
 $build_bonobo            && $have_pyorbit || echo     bonobo
