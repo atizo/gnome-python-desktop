@@ -9,7 +9,7 @@
 	* wnck/wnck.defs:
 	* wnck/wnck.override:
 	(_wrap_wnck_create_window_menu): Wrap this..
-	(_wrap_wnck_create_window_menu): ...and this.
+	(_wrap_wnck_class_group_get_windows): ...and this.
 
 	* wnck/wnckmodule.c:
 
