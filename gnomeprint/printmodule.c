@@ -95,20 +95,6 @@ pyprint_add_defined_constants (PyObject *dict)
 #undef add_item
 
 #define add_item(short)\
-    PyModule_AddIntConstant (dict, #short, GNOME_PRINT_##short)
-      /* error codes */
-    add_item(OK);
-    add_item(ERROR_UNKNOWN);
-    add_item(ERROR_BADVALUE);
-    add_item(ERROR_NOCURRENTPOINT);
-    add_item(ERROR_NOCURRENTPATH);
-    add_item(ERROR_TEXTCORRUPT);
-    add_item(ERROR_BADCONTEXT);
-    add_item(ERROR_NOPAGE);
-    add_item(ERROR_NOMATCH);
-#undef add_item
-
-#define add_item(short)\
     PyModule_AddIntConstant (dict, #short, GNOME_##short)
       /* GnomeFontWeight values */
     add_item(FONT_LIGHTEST);
