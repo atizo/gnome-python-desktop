@@ -1,5 +1,9 @@
 2005-03-25  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* gnomeapplet/applet.override (_wrap_panel__applet_bonobo_factory)
+	(_wrap_panel__applet_bonobo_factory): Unblock threads. Fixes
+	#168057.
+
 	* examples/applet/applet.py: Solve deprecation warnings.  Be a bit
 	more verbose.
 

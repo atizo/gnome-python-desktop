@@ -43,9 +43,11 @@ _wrap_panel_applet_factory_main_closure (PyGObject * self,
     
     type = pyg_type_from_object (pytype);
     
+    pyg_begin_allow_threads;
     retval = panel_applet_factory_main_closure (iid,
     	     				       	type,
                                                 pyg_closure_new (callback, params, NULL));
+    pyg_end_allow_threads;
     return PyInt_FromLong (retval);
 }
 %%
@@ -95,9 +97,11 @@ _wrap_panel__applet_bonobo_factory (PyGObject * self,
 			    GNOME_PARAM_NONE,
 			    NULL);            
 
+        pyg_begin_allow_threads;
         panel_applet_factory_main_closure (iid,
 	                                   type,
 					   pyg_closure_new (callback, params, NULL));
+        pyg_end_allow_threads;
 	
 	/* TODO: Check if it's really neccessary to set argc and argv here */
 	PySys_SetArgv (argc, argv);
