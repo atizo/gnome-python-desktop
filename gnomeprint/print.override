@@ -3,6 +3,7 @@
 headers
 #include <Python.h>
 
+#define NO_IMPORT_PYGOBJECT
 #include "pygobject.h"
 #include <libgnomeprint/gnome-print.h>
 #include <libgnomeprint/gnome-print-job.h>

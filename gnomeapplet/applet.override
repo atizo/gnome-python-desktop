@@ -5,6 +5,7 @@ headers
 #include <panel-applet.h>
 #include <bonobo/bonobo-ui-util.h>
 
+#define NO_IMPORT_GOBJECT
 #include "pygobject.h"
 %%
 modulename gnome.applet
