@@ -23,7 +23,7 @@ m4_define(libbonobo_required_version,         2.5.4)
 m4_define(libbonoboui_required_version,       2.0.0)
 m4_define(libnautilus_required_version,       2.0.0)
 m4_define(libpanelapplet_required_version,    2.0.0)
-m4_define(gtkhtml2_required_version,          2.0.0)
+m4_define(gtkhtml2_required_version,          2.3.1)
 m4_define(libgnomeprint_required_version,     2.2.0)
 m4_define(libgnomeprintui_required_version,   2.2.0)
 
