@@ -1,4 +1,21 @@
+2004-12-04  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* examples/egg/recent/gtk-view.py: Add jdahlin's GtkUIManager
+	example, modified to support recent files and gnomevfs.
+
+	* egg/recent/eggrecent.defs: RecentView is actually an interface,
+	not an object.
+
 2004-12-03  Gustavo J. A. M. Carneiro  <gustavo@users.sourceforge.net>
+
+	* egg/recent/eggrecent.override (EGG_TYPE_RECENT_VIEW_GTK):
+	define, missing from egg sources.
+	import gtk.Widget type.
+
+	* egg/recent/eggrecent.c: 
+
+	* egg/recent/eggrecent.defs: Add missing GObject declaration for
+	RecentViewGtk -- somehow h2def missed it.
 
 	* examples/egg/recent/populate-recent.py: A port of
 	populate-recent.c from libegg to python.
