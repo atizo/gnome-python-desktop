@@ -15,7 +15,9 @@ EXTRA_DIST = \
   gnome-python-2.0.pc.in \
   setup.py \
   dsextras.py \
-  examples/gnomeprint/test-print.py \
+  examples/applet/applet.py \
+  examples/applet/GNOME_PythonAppletSample.server \
+  examples/applet/README \
   examples/bonobo/bonoboui/Bonobo_Sample_Hello.xml \
   examples/bonobo/bonoboui/hello.py \
   examples/bonobo/echo/README \
@@ -25,6 +27,7 @@ EXTRA_DIST = \
   examples/gconf/simple-controller.py \
   examples/gconf/simple-view.py \
   examples/gtkhtml2/simple-browser.py \
+  examples/gnomeprint/test-print.py \
   examples/nautilus/README \
   examples/nautilus/Nautilus_View_pysample.server \
   examples/nautilus/sample.py \

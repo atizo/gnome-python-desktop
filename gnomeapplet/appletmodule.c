@@ -27,7 +27,10 @@ initapplet(void)
 	PyModule_AddIntConstant (m, "COLOR_BACKGROUND", PANEL_COLOR_BACKGROUND);
 	PyModule_AddIntConstant (m, "PIXMAP_BACKGROUND", PANEL_PIXMAP_BACKGROUND);
 	
+	bonobo_init();
+	
 	gnome_program_module_register (LIBGNOMEUI_MODULE);
+
 	
 	if (PyErr_Occurred ()) {
 		Py_FatalError ("can't initialise module applet");
