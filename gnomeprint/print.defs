@@ -1026,6 +1026,18 @@
    '("const-gchar*" "abbreviation"))
 )
 
+(define-function convert_distance
+  (c-name "gnome_print_convert_distance")
+  (parameters
+   '("gdouble" "distance")
+   '("GnomePrintUnit*" "from")
+   '("GnomePrintUnit*" "to"))
+   ;'("gdouble" "ctmscale") ; optional
+   ;'("gdouble" "devicescale") ; optional
+  (return-type "gdouble")
+)
+
+
 ; --- GnomeGlyphList ---
 
 (define-function gnome_glyphlist_new

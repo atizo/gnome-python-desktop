@@ -333,7 +333,7 @@ override gnome_print_config_get_length kwargs
 static PyObject *
 _wrap_gnome_print_config_get_length(PyGObject *self, PyObject *args, PyObject *kwargs)
 {
-    static char *kwlist[] = { "key", "unit", NULL };
+    static char *kwlist[] = { "key", NULL };
     char *key;
     GnomePrintUnit const *unit = NULL;
     gboolean ok;
@@ -758,5 +758,48 @@ _wrap_gnome_print_unit_get_by_abbreviation(PyObject *self, PyObject *args, PyObj
     ret = gnome_print_unit_get_by_abbreviation(abbreviation);
     /* pyg_boxed_new handles NULL checking */
     return pyg_boxed_new(GNOME_TYPE_PRINT_UNIT, (GnomePrintUnit *) ret, TRUE, TRUE);
+}
+
+%%
+override gnome_print_convert_distance kwargs
+static PyObject *
+_wrap_gnome_print_convert_distance(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "distance", "from_", "to", "ctmscale", "devicescale", NULL };
+    PyObject *py_from, *py_to;
+    double distance, ctmscale = G_MAXDOUBLE, devicescale = G_MAXDOUBLE;
+    GnomePrintUnit *from = NULL, *to = NULL;
+    gboolean ok;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "dOO|dd:convert_distance",
+				     kwlist, &distance, &py_from, &py_to,
+				     &ctmscale, &devicescale))
+        return NULL;
+    if (ctmscale != G_MAXDOUBLE && devicescale == G_MAXDOUBLE) {
+        PyErr_SetString(PyExc_TypeError, "ctmscale given but not devicescale");
+        return NULL;
+    }
+    if (pyg_boxed_check(py_from, GNOME_TYPE_PRINT_UNIT))
+        from = pyg_boxed_get(py_from, GnomePrintUnit);
+    else {
+        PyErr_SetString(PyExc_TypeError, "from should be a GnomePrintUnit");
+        return NULL;
+    }
+    if (pyg_boxed_check(py_to, GNOME_TYPE_PRINT_UNIT))
+        to = pyg_boxed_get(py_to, GnomePrintUnit);
+    else {
+        PyErr_SetString(PyExc_TypeError, "to should be a GnomePrintUnit");
+        return NULL;
+    }
+    if (ctmscale == G_MAXDOUBLE)
+	ok = gnome_print_convert_distance(&distance, from, to);
+    else
+	ok = gnome_print_convert_distance_full(&distance, from, to, ctmscale, devicescale);
+    if (!ok) {
+	PyErr_SetString(PyExc_RuntimeError, "gnomeprint.convert_distance:"
+			" could not perform conversion");
+	return NULL;
+    }
+    return PyFloat_FromDouble(distance);
 }
 
