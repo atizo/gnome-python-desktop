@@ -1025,6 +1025,7 @@
 
 (define-function gnome_glyphlist_new
   (c-name "gnome_glyphlist_new")
+  (is-constructor-of "GnomeGlyphList")
   (return-type "GnomeGlyphList*")
   (caller-owns-return #t)
 )
