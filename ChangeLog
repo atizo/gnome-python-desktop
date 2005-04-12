@@ -1,5 +1,11 @@
 2005-04-12  Murray Cumming <murrayc@murrayc.com>
 
+	* gda/gda.defs: Mark gda_value_new_*() functions as 
+	constructors of GdaValues, so that python allows them 
+	to be instantiated.
+
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
 	* gda/gda.override: Added gda.Value::set(). We need the 
 	explicit set_*() methods too.
 
