@@ -1,3 +1,13 @@
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* examples/gda/select.py: Now works.
+	* gda/gda.defs: Added define-boxed for FieldAttributes.
+	* gda/gda.override: _wrap_gda_data_source_info_tp_setattr():
+	Allow setting of the cnc_string too. I wish we could tell 
+	pygtk to generate setters automatically.
+	* gda/gdamodule.c: (initgda): Call pygda_add_constants(), so 
+	that enum values are added to the API.
+
 2005-04-12  Murray Cumming  <murrayc@murrayc.com>
 
 	* gda/gdamodule.c: Get the argc and argv and use them to call 
