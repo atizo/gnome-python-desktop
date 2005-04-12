@@ -1,3 +1,8 @@
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.override: Added gda.Value::set(). We need the 
+	explicit set_*() methods too.
+
 2005-04-12  Murray Cumming  <murrayc@murrayc.com>
 
 	* examples/gda/select.py: Use Value::get().
