@@ -1,3 +1,10 @@
+2005-04-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/gdamodule.c: Get the argc and argv and use them to call 
+	gda_init(). This removes the need to initialize gettext ourselves.
+	However, gda_init() requires two extra parameters and I do not 
+	know how to supply them from the application.
+
 2005-04-12  Murray Cumming <murrayc@murrayc.com>
 
 	* gda/gda.defs: Rename gda_config_* method names to 
