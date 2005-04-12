@@ -1,3 +1,16 @@
+2005-04-12  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.defs: Rename gda_config_* method names to 
+	config_. The method name is the name of the method in the binding,
+ 	not the C function name. 
+	* examples/gda/list_data_sources.py:
+	* examples/gda/select.py: Updated for config API change. However, 
+	I guess this should prbably be gda.Config.method_name() instead of 
+	gda.config_method_name().
+	* gda/gda.override: Added a get_config_key() to be used instead of 
+	get_config_key_[type](), because python can do that. From a patch 
+	to the mailing list by Filip Van Raemdonck.
+
 2005-04-04  Murray Cumming  <murrayc@murrayc.com>
 
 	* Added gda, a first attempt at wrapping libgda 1.2. This is 
