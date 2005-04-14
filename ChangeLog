@@ -1,3 +1,9 @@
+2005-04-14  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.override: Ignore the gda_xql_*() functions 
+	because they are useless cruft. However, I can not 
+	find a way to ignore the GdaXql* types.
+
 2005-04-12  Murray Cumming <murrayc@murrayc.com>
 
 	* gda/gda.defs: Mark gda_value_new_*() functions as 
