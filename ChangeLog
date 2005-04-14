@@ -1,5 +1,22 @@
 2005-04-14  Murray Cumming <murrayc@murrayc.com>
 
+	* gda/Makefile.am:
+	Install utility headers and pkg-config file.
+	* gda/gda.override:
+	The GValue get/set functions now use the 
+	functions from pygdavalue_conversions.[h|cc].
+	* gda/pygdavalue_conversions.h:
+	* gda/pygdavalue_conversions.cc:
+	Added pygda_value_from_pyobject() and 
+        pygda_value_as_pyobject(), containing the 
+	code from the get/set functions, because we 
+	might want to reuse this later.
+	* gda/pygda-1.2.pc.in: Added pkg-config file 
+	so that the location of the utility headers 
+	can be discovered.
+
+2005-04-14  Murray Cumming <murrayc@murrayc.com>
+
 	* gda/gda.override: Ignore the gda_xql_*() functions 
 	because they are useless cruft. However, I can not 
 	find a way to ignore the GdaXql* types.

@@ -312,6 +312,7 @@ AC_CONFIG_FILES(
   gtop/Makefile
   nautilusburn/Makefile
   gda/Makefile
+  gda/pygda-1.2.pc
   gnome-python-extras-2.0.pc
 )
 AC_OUTPUT
