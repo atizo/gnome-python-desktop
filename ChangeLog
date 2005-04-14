@@ -1,3 +1,9 @@
+2005-04-14  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* configure.ac: Fix a small copy-paste error (init build_gtop
+	instead of build_libgda, also s/build_libgda/build_gda/).
+	
+
 2005-04-14  Murray Cumming  <murrayc@murrayc.com>
 
 	* gda/Makefile.am: Distribute gdaglue.h

@@ -279,11 +279,11 @@ fi
 
 
 dnl should we build the gda module?
-build_gtop=false
+build_gda=false
 PKG_CHECK_MODULES(GDA, [libgda >= libgda_required_version pygtk-2.0 >= pygtk_required_version],
-  build_libgda=true,
-  build_libgda=false)
-AM_CONDITIONAL(BUILD_GDA, $build_libgda)
+  build_gda=true,
+  build_gda=false)
+AM_CONDITIONAL(BUILD_GDA, $build_gda)
 if test -n "$export_dynamic"; then
   GDA_LIBS=`echo $GDA_LIBS | sed -e "s/$export_dynamic//"`
 fi
