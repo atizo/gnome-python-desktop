@@ -1,3 +1,11 @@
+2005-04-14  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/gda.defs: Add defauilt values for 
+	Client.open_connection(), Connection.execute_single_command(), 
+	gda.Command().
+	* examples/gda/select.py: Use default method 
+	values, to make the code more concise.
+
 2005-04-14  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
 	* configure.ac: Fix a small copy-paste error (init build_gtop
