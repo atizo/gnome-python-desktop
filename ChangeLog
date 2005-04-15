@@ -1,3 +1,8 @@
+2005-04-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* gda/Makefile.am: Export all symbols, not just 
+	initgda(), so we can use the utility functions too.
+
 === 2.11.0 ===
 2005-04-15  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
@@ -9,7 +14,7 @@
 	(initgtkspell): Missing init_pygobject.
 	(gtkspell_methods, gtkspell_functions) Missing NULL terminator.
 
-2005-04-15  Murray Cumming,,,  <murrayc@murrayc.com>
+2005-04-15  Murray Cumming  <murrayc@murrayc.com>
 
 	* gda/pygda-1.2.pc.in: Remove @THREADING_CFLAGS@ which has 
 	no value, and was just copied from the pygtk .pc.in file.
