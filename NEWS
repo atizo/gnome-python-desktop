@@ -1,3 +1,15 @@
+Overview of Changes from gnome-python-extras 2.10.0 to gnome-python-extras 2.11.0
+=================================================================================
+* applet
+ - Unblock threads around gnomeapplet.bonobo_factory() (Gustavo)
+* gda
+ - gda module imported from pygda 0.3 (Murray Cumming)
+ - Added a get_config_key() function (Filip Van Raemdonck)
+ - Automatically call gda_init() with argc/argv from python sys.argv (Murray)
+ - Wrap FieldAttributes boxed type (Murray)
+ - Many more GDA API improvements.. (Murray)
+
+
 Overview of Changes from gnome-python-extras 2.9.4 to gnome-python-extras 2.10.0
 ================================================================================
 * Update to libwnck 2.9.92 API (Sebastien Bacher)
