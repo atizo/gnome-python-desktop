@@ -1,3 +1,11 @@
+2005-04-15  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* gtkspell/gtkspellmodule.c: Remove "static" in
+	gtkspell_SpellType.  Fixes compilation with gcc 4.0.  Thanks
+	Sebastien Bacher.
+	(initgtkspell): Missing init_pygobject.
+	(gtkspell_methods, gtkspell_functions) Missing NULL terminator.
+
 2005-04-15  Murray Cumming,,,  <murrayc@murrayc.com>
 
 	* gda/pygda-1.2.pc.in: Remove @THREADING_CFLAGS@ which has 
