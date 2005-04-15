@@ -8,6 +8,9 @@ Overview of Changes from gnome-python-extras 2.10.0 to gnome-python-extras 2.11.
  - Automatically call gda_init() with argc/argv from python sys.argv (Murray)
  - Wrap FieldAttributes boxed type (Murray)
  - Many more GDA API improvements.. (Murray)
+* gtkspell
+ - Fix compilation error with gcc-4.0 (Gustavo, Sebastien Bacher)
+ - Fix segfault on import on amd64 (Gustavo)
 
 
 Overview of Changes from gnome-python-extras 2.9.4 to gnome-python-extras 2.10.0

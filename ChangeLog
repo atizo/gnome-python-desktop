@@ -1,5 +1,7 @@
 2005-04-15  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
+	* NEWS: Update.
+
 	* gtkspell/gtkspellmodule.c: Remove "static" in
 	gtkspell_SpellType.  Fixes compilation with gcc 4.0.  Thanks
 	Sebastien Bacher.
