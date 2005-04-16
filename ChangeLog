@@ -1,3 +1,10 @@
+2005-04-16  Murray Cumming, <murrayc@murrayc.com>
+
+	* gda/pygdavalue_conversions.c: (pygda_value_as_pyobject):
+	Added casts needed by gcc 3.4.
+	* gda/pygdavalue_conversions.h: Use extern C, so it 
+	can be included by C++.
+
 2005-04-15  Murray Cumming  <murrayc@murrayc.com>
 
 	* gda/Makefile.am: Export all symbols, not just 
