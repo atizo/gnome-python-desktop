@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<chapter id="gtksourcesview-class-reference" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>The GtkSourceView Class Reference</title>
+
+<!-- GTKSOURCEVIEW OBJECTS -->
+
+  <xi:include href="gtksourceview-gtksourceview.xml"/>
+
+</chapter>

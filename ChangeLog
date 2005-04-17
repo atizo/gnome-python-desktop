@@ -1,3 +1,16 @@
+2005-04-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (SUBDIRS): Add docs.
+
+	* configure.ac: Write docs/Makefile and docs/gtksourceview/Makefile.
+
+	* docs/*: General infrasctruture for reference documentation.
+	Parts copied from module pygtk-docs, other stuff copied from
+	gtk-doc.
+
+	* docs/gtksourceview/*: The start of gtksourceview documentation,
+	by Gian Mario Tagliaretti.
+
 2005-04-16  Murray Cumming, <murrayc@murrayc.com>
 
 	* gda/pygdavalue_conversions.c: (pygda_value_as_pyobject):

@@ -314,6 +314,8 @@ AC_CONFIG_FILES(
   gda/Makefile
   gda/pygda-1.2.pc
   gnome-python-extras-2.0.pc
+  docs/Makefile
+  docs/gtksourceview/Makefile
 )
 AC_OUTPUT
 
