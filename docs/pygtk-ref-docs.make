@@ -13,6 +13,7 @@ XSL_FILES =					\
 
 REFERENCE_FO = $(REFERENCE_MAIN_FILE:.xml=.o)
 REFERENCE_PDF = $(REFERENCE_MAIN_FILE:.xml=.pdf)
+REFERENCE_DEVHELP = $(REFERENCE_MAIN_FILE:.xml=.devhelp)
 
 html.stamp: ${XSL_FILES} $(REFERENCE_XML_FILES) $(REFERENCE_MAIN_FILE)
 	@echo '*** Building HTML ***'
@@ -33,13 +34,14 @@ $(REFERENCE_PDF): $(XSL_FILES) $(REFERENCE_XML_FILES) $(REFERENCE_MAIN_FILE)
 	pdfxmltex $(REFERENCE_FO) > output < /dev/null
 	pdfxmltex $(REFERENCE_FO) > output < /dev/null
 
+
 CLEANFILES = $(REFERENCE_FO) $(REFERENCE_PDF) *.aux *.log *.out output
 
 clean-local:
 	-rm -rf html html.stamp
 
 HTML_DIR = $(datadir)/gtk-doc/html
-TARGET_DIR = $(HTML_DIR)/$(DOC_MODULE)
+TARGET_DIR = $(HTML_DIR)/$(REFERENCE_DOC_NAME)
 
 
 install-data-local:

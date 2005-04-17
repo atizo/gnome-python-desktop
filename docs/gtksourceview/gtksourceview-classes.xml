@@ -1,11 +1,32 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
-    "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
-<chapter id="gtksourcesview-class-reference" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>The GtkSourceView Class Reference</title>
+<?xml version='1.0'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+  "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  ]>
+<book id="pygtksourceview" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <bookinfo>
+    <pubdate>April 17, 2005</pubdate>
+    <title>Python GtkSourceView Reference Manual</title>
+    <authorgroup>
+      <author>
+	<firstname>Gian</firstname>
+	<surname>Tagliaretti</surname>
+      </author>
+    </authorgroup>
+    <abstract>
+      <para>This reference describes the classes of the Python GtkSourceView module.</para>
+    </abstract>
+  </bookinfo>
+  <toc>
+  </toc>
 
-<!-- GTKSOURCEVIEW OBJECTS -->
 
-  <xi:include href="gtksourceview-gtksourceview.xml"/>
+  <chapter id="gtksourcesview-class-reference" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>The GtkSourceView Class Reference</title>
 
-</chapter>
+    <!-- GTKSOURCEVIEW OBJECTS -->
+
+    <xi:include href="gtksourceview-gtksourceview.xml"/>
+
+  </chapter>
+
+</book>

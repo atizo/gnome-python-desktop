@@ -6,6 +6,12 @@
 
 2005-04-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* docs/pygtk-ref-docs.make, docs/gtksourceview/Makefile.am: Use
+	variable REFERENCE_DOC_NAME exclusively instead of DOC_MODULE.
+
+	* docs/gtksourceview/gtksourceview-classes.xml: Turn this into a
+	book, so that a .devhelp file is generated.
+
 	* Makefile.am (SUBDIRS): Add docs.
 
 	* configure.ac: Write docs/Makefile and docs/gtksourceview/Makefile.
