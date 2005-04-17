@@ -1,3 +1,9 @@
+2005-04-17  Murray Cumming <murrayc@murrayc.com>
+
+	* gda/pygdavalue_conversions.c: (pygda_value_as_pyobject):
+	Return a PyFloat for a GdaNumeric, instead of a PyLong, 
+	so we do not lose the part after the decimal point.
+
 2005-04-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* Makefile.am (SUBDIRS): Add docs.
