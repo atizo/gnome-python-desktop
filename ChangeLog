@@ -1,3 +1,14 @@
+2005-04-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Add this,
+	written by Gian Mario Tagliaretti.
+
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourcebuffer.xml.
+
+	* docs/gtksourceview/gtksourceview-classes.xml: Include
+	gtksourceview-gtksourcebuffer.xml.
+
 2005-04-17  Murray Cumming <murrayc@murrayc.com>
 
 	* gda/pygdavalue_conversions.c: (pygda_value_as_pyobject):
