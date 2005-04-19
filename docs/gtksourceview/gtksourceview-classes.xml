@@ -27,6 +27,7 @@
 
     <xi:include href="gtksourceview-gtksourceview.xml"/>
     <xi:include href="gtksourceview-gtksourcebuffer.xml"/>
+    <xi:include href="gtksourceview-gtksourcelanguage.xml"/>
 
   </chapter>
 

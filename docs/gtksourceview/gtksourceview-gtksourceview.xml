@@ -399,7 +399,7 @@ value of <parameter>width</parameter>.</para>
     
 	</refsect2>
 
-  <refsect2 id="method-gtksourceview--set_auto_indent">
+  <refsect2 id="method-gtksourceview--set-auto-indent">
       <title>gtksourceview.SourceView.set_auto_indent</title>
 
       <programlisting><methodsynopsis language="python">

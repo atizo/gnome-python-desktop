@@ -131,7 +131,7 @@
     </methodsynopsis>
 	
     <methodsynopsis language="python">
-    <methodname><link linkend="method-gtksourcebuffer--get-marker-in-region">get_marker_in_region</link></methodname>
+    <methodname><link linkend="method-gtksourcebuffer--get-markers-in-region">get_marker_in_region</link></methodname>
     <methodparam><parameter role="keyword">start</parameter></methodparam>
     <methodparam><parameter role="keyword">end</parameter></methodparam>
     </methodsynopsis>
@@ -316,8 +316,8 @@ It also implements support for undo/redo operations.
 
 <para>
 To create a <link linkend="class-gtksourcebuffer"><classname>gtksourceview.SourceBuffer</classname></link> 
-use <link linkend="function-gtk--source-buffer-new"><methodname>gtksourceview.gtk_source_buffer_new</methodname>()</link> 
-or <link linkend="function-gtk--source-buffer-new-with-language"><methodname>gtksourceview.gtk_source_buffer_new_with_language</methodname></link>.
+use <link linkend="function-gtksourcebuffer--new"><methodname>gtksourceview.gtk_source_buffer_new</methodname>()</link> 
+or <link linkend="function-gtksourcebuffer--new-with-language"><methodname>gtksourceview.gtk_source_buffer_new_with_language</methodname></link>.
 The second form is just a convenience function which allows you to initially set a 
 <link linkend="class-gtksourcelanguage"><classname>gtksourceview.SourceLanguage</classname></link>.
 </para>
@@ -411,7 +411,7 @@ Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.Sou
     </para>
   </refsect2>
 
-  <refsect2 id="method-gtksourcebuffer--set_bracket_match_style">
+  <refsect2 id="method-gtksourcebuffer--set-bracket-match-style">
       <title>gtksourceview.SourceBuffer.set_bracket_match_style</title>
       <programlisting><methodsynopsis language="python">
 	  <methodname>set_bracket_match_style</methodname>
@@ -431,7 +431,7 @@ Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.Sou
 	  </para>
   </refsect2>
   
-  <refsect2 id="method-gtksourcebuffer--set_highlight">
+  <refsect2 id="method-gtksourcebuffer--set-highlight">
     <title>gtksourceview.SourceBuffer.set_highlight</title>
     <programlisting><methodsynopsis language="python">
 	    <methodname>set_highlight</methodname>
@@ -531,7 +531,7 @@ Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.Sou
     </para>
   </refsect2>      
   
-  <refsect2 id="method-gtksourcebuffer--set_language">
+  <refsect2 id="method-gtksourcebuffer--set-language">
       <title>gtksourceview.SourceBuffer.set_language</title>
       <programlisting><methodsynopsis language="python">
 	  <methodname>set_language</methodname>
@@ -580,7 +580,7 @@ Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.Sou
     </para>
   </refsect2>
 
-  <refsect2 id="method-gtksourcebuffer--set_escape_char">
+  <refsect2 id="method-gtksourcebuffer--set-escape-char">
       <title>gtksourceview.SourceBuffer.set_escape_char</title>
       <programlisting><methodsynopsis language="python">
 	  <methodname>set_escape_char</methodname>

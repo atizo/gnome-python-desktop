@@ -1,4 +1,17 @@
+2005-04-19  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Fix IDs.
+
+	* docs/gtksourceview/gtksourceview-gtksourceview.xml: Fix IDs.
+	
+	* docs/gtksourceview/gtksourceview-gtksourcelanguage.xml: Add.
+	
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourcelanguage.xml.
+
 2005-04-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add gtksourceview-gtksourcelanguage.xml
 
 	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Add this,
 	written by Gian Mario Tagliaretti.
