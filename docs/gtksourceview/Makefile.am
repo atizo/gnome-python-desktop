@@ -4,9 +4,18 @@ REFERENCE_MAIN_FILE = gtksourceview-classes.xml
 REFERENCE_DOC_NAME = pygtksourceview
 DOC_MODULE = pygtksourceview
 
-REFERENCE_XML_FILES = gtksourceview-gtksourceview.xml	\
-	gtksourceview-gtksourcebuffer.xml		\
-	gtksourceview-gtksourcelanguage.xml
+NULL=
+
+REFERENCE_XML_FILES =				\
+  gtksourceview-gtksourceview.xml		\
+  gtksourceview-gtksourcebuffer.xml		\
+  gtksourceview-gtksourcelanguage.xml		\
+  gtksourceview-gtksourcelanguagesmanager.xml	\
+  gtksourceview-gtksourcemarker.xml		\
+  gtksourceview-gtksourcestylescheme.xml	\
+  gtksourceview-gtksourcetagtable.xml		\
+  gtksourceview-gtksourcetagstyle.xml		\
+  $(NULL)
 
 include $(top_srcdir)/docs/pygtk-ref-docs.make
 

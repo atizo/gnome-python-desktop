@@ -71,11 +71,20 @@
 	    <methodparam></methodparam>
     </methodsynopsis>
   </classsynopsis>
+
+<programlisting>
+<emphasis role="bold">Functions</emphasis>
+
+<methodsynopsis language="python">
+<methodname><link linkend="function-gtksourcelanguage--get-type">gtksourceview.gtk_source_language_get_type</link></methodname>
+<methodparam></methodparam>
+</methodsynopsis></programlisting>
 </refsect1>
 
-<!-- ********************************* -->
-<!-- BEGIN OF GTKSOURCEBUFFER ANCESTRY -->
-<!-- ********************************* -->
+
+<!-- *********************************** -->
+<!-- BEGIN OF GTKSOURCELANGUAGE ANCESTRY -->
+<!-- *********************************** -->
 
 <refsect1>
     <title>Ancestry</title>
@@ -87,9 +96,9 @@
 
 
 
-<!-- ****************************************** -->
-<!-- BEGIN OF GTKSOURCEBUFFER SIGNAL PROTOTYPES -->
-<!-- ****************************************** -->
+<!-- ******************************************** -->
+<!-- BEGIN OF GTKSOURCELANGUAGE SIGNAL PROTOTYPES -->
+<!-- ******************************************** -->
 
 <refsect1>
     <title>Signal Prototypes</title>
@@ -108,11 +117,11 @@
     </variablelist>
 </refsect1>
 
-<!-- ************************************ -->
-<!-- BEGIN OF GTKSOURCEBUFFER DESCRIPTION -->
-<!-- ************************************ -->
+<!-- ************************************** -->
+<!-- BEGIN OF GTKSOURCELANGUAGE DESCRIPTION -->
+<!-- ************************************** -->
 
-<refsect1 id="description-gtktextlanguage">
+<refsect1 id="description-gtksourcelanguage">
     <title>Description</title>
 
 <para>
@@ -120,9 +129,9 @@
 </para>
 </refsect1>
 
-<!-- ******************************** -->
-<!-- BEGIN OF GTKSOURCEBUFFER METHODS -->
-<!-- ******************************** -->
+<!-- ********************************** -->
+<!-- BEGIN OF GTKSOURCELANGUAGE METHODS -->
+<!-- ********************************** -->
 
 <refsect1>
   <title>Methods</title>
@@ -358,10 +367,39 @@
 	  </para>
   </refsect2>
 </refsect1> 
-  
-<!-- ******************************** -->
-<!-- BEGIN OF GTKSOURCEBUFFER SIGNALS -->
-<!-- ******************************** --> 
+
+<!-- ************************************ -->
+<!-- BEGIN OF GTKSOURCELANGUAGE FUNCTIONS -->
+<!-- ************************************ -->
+
+<refsect1>
+    <title>Functions</title>
+
+  <refsect2 id="function-gtksourcelanguage--get-type">
+    <title>gtksourceview.SourceMarker.gtk_source_language_get_type</title>
+    <programlisting><methodsynopsis language="python">
+  	  <methodname>gtksourceview.SourceLanguage.gtk_source_language_get_type</methodname>
+      <methodparam></methodparam>
+      </methodsynopsis></programlisting>
+        
+    <variablelist>
+	    <varlistentry>
+        <term><emphasis>Returns</emphasis>&nbsp;:</term>
+	      <listitem><simpara> .....</simpara></listitem>
+      </varlistentry>
+    </variablelist>
+
+      <para>
+        ...........
+      </para>
+
+  </refsect2>
+</refsect1>
+
+
+<!-- ********************************** -->
+<!-- BEGIN OF GTKSOURCELANGUAGE SIGNALS -->
+<!-- ********************************** --> 
  
 <refsect1>
     <title>Signals</title>

@@ -1,3 +1,15 @@
+2005-04-21  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourcelanguagesmanager.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcemarker.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcestylescheme.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagstyle.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagtable.xml: Add.
+
+	* docs/gtksourceview/gtksourceview-classes.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcelanguage.xml: Some improvements.
+
 2005-04-19  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Fix IDs.

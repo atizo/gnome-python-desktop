@@ -8,7 +8,7 @@
     <title>Python GtkSourceView Reference Manual</title>
     <authorgroup>
       <author>
-	<firstname>Gian</firstname>
+	<firstname>Gian Mario</firstname>
 	<surname>Tagliaretti</surname>
       </author>
     </authorgroup>
@@ -28,7 +28,12 @@
     <xi:include href="gtksourceview-gtksourceview.xml"/>
     <xi:include href="gtksourceview-gtksourcebuffer.xml"/>
     <xi:include href="gtksourceview-gtksourcelanguage.xml"/>
-
+    <xi:include href="gtksourceview-gtksourcelanguagesmanager.xml"/>
+    <xi:include href="gtksourceview-gtksourcemarker.xml"/>
+    <xi:include href="gtksourceview-gtksourcestylescheme.xml"/>
+    <xi:include href="gtksourceview-gtksourcetagtable.xml"/>
+    <xi:include href="gtksourceview-gtksourcetagstyle.xml"/>
+    
   </chapter>
 
 </book>

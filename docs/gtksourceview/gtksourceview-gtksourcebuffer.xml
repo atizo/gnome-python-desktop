@@ -303,7 +303,7 @@
 <!-- BEGIN OF GTKSOURCEBUFFER DESCRIPTION -->
 <!-- ************************************ -->
 
-<refsect1 id="description-gtktextbuffer">
+<refsect1 id="description-gtksourcebuffer">
     <title>Description</title>
 
 <para>
@@ -336,30 +336,30 @@ objects to set the highlighting patterns, and instead you're manually adding
 <!-- ************************************ -->
 
 <refsect1 id="constructor-gtksourcebuffer">
-    <title>Constructor</title>
+  <title>Constructor</title>
 
-    <programlisting><constructorsynopsis language="python">
-	<methodname>gtksourceview.SourceBuffer</methodname>
-	<methodparam><parameter role="keyword">table</parameter><initializer>None</initializer></methodparam>
-    </constructorsynopsis></programlisting>
+  <programlisting><constructorsynopsis language="python">
+	  <methodname>gtksourceview.SourceBuffer</methodname>
+	  <methodparam><parameter role="keyword">table</parameter><initializer>None</initializer></methodparam>
+  </constructorsynopsis></programlisting>
     
-    <variablelist>
+  <variablelist>
     <varlistentry>
-	<term><parameter role="keyword">table</parameter>&nbsp;:</term>
-	<listitem><simpara>a <link linkend="class-gtksourcetable"><classname>gtksourceview.SourceTable</classname></link> 
-    or <literal>None</literal></simpara></listitem>
+	    <term><parameter role="keyword">table</parameter>&nbsp;:</term>
+	    <listitem><simpara>a <link linkend="class-gtksourcetagtable"><classname>gtksourceview.SourceTagTable</classname></link> 
+      or <literal>None</literal></simpara></listitem>
     </varlistentry>
 
     <varlistentry>
-	<term><emphasis>Returns</emphasis>&nbsp;:</term>
-	<listitem><simpara>a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.SourceBuffer</classname></link>.
-    </simpara></listitem>
+	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+	    <listitem><simpara>a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.SourceBuffer</classname></link>.
+        </simpara></listitem>
     </varlistentry>
-    </variablelist>
+  </variablelist>
 
-<para>
-Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.SourceBuffer</classname></link> object.
-</para>
+  <para>
+    Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.SourceBuffer</classname></link> object.
+  </para>
 </refsect1>
 
 <!-- ******************************** -->
@@ -1007,6 +1007,26 @@ Creates a new <link linkend="class-gtksourcebuffer"><classname>gtksourceview.Sou
         Creates a new source buffer using the highlighting patterns in <parameter>language</parameter>. 
         This is equivalent to creating a new source buffer with the default tag table and then calling 
         <methodname><link linkend="method-gtksourcebuffer--set-language">set_language</link></methodname>
+      </para>
+
+  </refsect2>
+  
+  <refsect2 id="function-gtksourcebuffer--get-type">
+    <title>gtksourceview.SourceBuffer.gtk_source_buffer_get_type</title>
+    <programlisting><methodsynopsis language="python">
+  	  <methodname>gtksourceview.SourceBuffer.gtk_source_buffer_get_type</methodname>
+      <methodparam></methodparam>
+      </methodsynopsis></programlisting>
+        
+    <variablelist>
+	    <varlistentry>
+        <term><emphasis>Returns</emphasis>&nbsp;:</term>
+	      <listitem><simpara> .....</simpara></listitem>
+      </varlistentry>
+    </variablelist>
+
+      <para>
+        The <methodname>gtk_source_buffer_get_type</methodname>() function ......
       </para>
 
   </refsect2>
