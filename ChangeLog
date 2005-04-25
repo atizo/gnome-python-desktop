@@ -1,3 +1,9 @@
+2005-04-25  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtkmozembed/*,
+	* docs/Makefile.am:
+	* configure.ac: Add gtkmozembed docs.
+
 2005-04-21  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gtksourceview/gtksourceview-gtksourcelanguagesmanager.xml,

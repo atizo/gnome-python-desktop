@@ -316,6 +316,7 @@ AC_CONFIG_FILES(
   gnome-python-extras-2.0.pc
   docs/Makefile
   docs/gtksourceview/Makefile
+  docs/gtkmozembed/Makefile
 )
 AC_OUTPUT
 
