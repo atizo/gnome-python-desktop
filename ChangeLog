@@ -4,6 +4,9 @@
 	errors in call to PyArg_ParseTuple.  Also check for correct
 	parameter type.
 	(initgtkspell): Import TextView type from module gtk.
+	(_wrap_gtkspell_new_attach): Refactor a bit, check for more
+	errors, and accept a language parameter.
+	(_wrap_gtkspell_detach): Don't DECREF self!
 
 2005-05-01  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
