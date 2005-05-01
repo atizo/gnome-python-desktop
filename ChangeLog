@@ -1,3 +1,10 @@
+2005-05-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_new_attach): Check for
+	errors in call to PyArg_ParseTuple.  Also check for correct
+	parameter type.
+	(initgtkspell): Import TextView type from module gtk.
+
 2005-05-01  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* gtksourceview/gtksourceview.defs: Add objects SourceTag,
