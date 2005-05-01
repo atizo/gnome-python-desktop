@@ -28,6 +28,27 @@
   (gtype-id "GTK_TYPE_SOURCE_PRINT_JOB")
 )
 
+(define-object SourceTag
+  (in-module "Gtk")
+  (parent "GtkTextTag")
+  (c-name "GtkSourceTag")
+  (gtype-id "GTK_TYPE_SOURCE_TAG")
+)
+
+(define-object SyntaxTag
+  (in-module "Gtk")
+  (parent "GtkSourceTag")
+  (c-name "GtkSyntaxTag")
+  (gtype-id "GTK_TYPE_SYNTAX_TAG")
+)
+
+(define-object PatternTag
+  (in-module "Gtk")
+  (parent "GtkSourceTag")
+  (c-name "GtkPatternTag")
+  (gtype-id "GTK_TYPE_PATTERN_TAG")
+)
+
 (define-object SourceTagTable
   (in-module "Gtk")
   (parent "GtkTextTagTable")
