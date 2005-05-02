@@ -1,3 +1,20 @@
+2005-05-03  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-classes.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcelanguage.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcelanguagesmanager.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcemarker.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcestylescheme.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagstyle.xml,
+	* docs/gtksourceview/gtksourceview-gtksourcetagtable.xml:
+	Misc. corrections.
+
+	* docs/gtksourceview/gtksourceview-gtksourcetag.xml: New
+	documentation for class gtksourceview.SourceTag.
+
+	* docs/gtksourceview/Makefile.am: Add gtksourceview-gtksourcetag.xml.
+
 2005-05-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_new_attach): Check for

@@ -13,10 +13,16 @@
 
 <refsect1>
   <title>Synopsis</title>
-  <classsynopsis language="python">
-
+  
+    <classsynopsis language="python">
     <ooclass><classname>gtksourceview.SourceMarker</classname></ooclass>
-    
+    <ooclass><classname><link linkend="class-gtktextmark">gtk.TextMark</link></classname></ooclass>
+
+    <constructorsynopsis language="python">
+	    <methodname><link linkend="constructor-gtksourcemarker">gtksourceview.SourceMarker</link></methodname>
+	    <methodparam><parameter role="keyword"></parameter></methodparam>
+    </constructorsynopsis>    
+
     <methodsynopsis language="python">
 	    <methodname><link linkend="method-gtksourcemarker--set-marker-type">set_marker_type</link></methodname>
 	    <methodparam>type</methodparam>
@@ -52,14 +58,6 @@
 	    <methodparam></methodparam>
     </methodsynopsis>   
   </classsynopsis>
-
-<programlisting>
-<emphasis role="bold">Functions</emphasis>
-
-<methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcemarker--get-type">gtksourceview.gtk_source_marker_get_type</link></methodname>
-<methodparam></methodparam>
-</methodsynopsis></programlisting>
 </refsect1>
 
 <!-- ********************************* -->
@@ -84,6 +82,30 @@
 <para>
 
 </para>
+</refsect1>
+
+<!-- ************************************ -->
+<!-- BEGIN OF GTKSOURCEMARKER CONSTRUCTOR -->
+<!-- ************************************ -->
+
+<refsect1 id="constructor-gtksourcemarker">
+  <title>Constructor</title>
+
+  <programlisting><constructorsynopsis language="python">
+	  <methodname>gtksourceview.SourceMarker</methodname>
+	  <methodparam><parameter role="keyword"></parameter></methodparam>
+  </constructorsynopsis></programlisting>
+    
+  <variablelist>
+    <varlistentry>
+	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+	    <listitem><simpara>a new <link linkend="class-gtksourcemarker"><classname>gtksourceview.SourceMarker</classname></link>.</simpara></listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>
+    Creates a new <link linkend="class-gtksourcemarker"><classname>gtksourceview.SourceMarker</classname></link> object.
+  </para>
 </refsect1>
 
 <!-- ******************************** -->
@@ -226,33 +248,4 @@
 	  </para>
   </refsect2>
 </refsect1> 
-
-
-<!-- ********************************** -->
-<!-- BEGIN OF GTKSOURCEMARKER FUNCTIONS -->
-<!-- ********************************** -->
-
-<refsect1>
-    <title>Functions</title>
-
-  <refsect2 id="function-gtksourcemarker--get-type">
-    <title>gtksourceview.SourceMarker.gtk_source_marker_get_type</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceMarker.gtk_source_marker_get_type</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> .....</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        The <methodname>gtk_source_marker_get_type</methodname>() function ......
-      </para>
-
-  </refsect2>
-</refsect1>
 </refentry>

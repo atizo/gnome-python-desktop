@@ -13,6 +13,7 @@ REFERENCE_XML_FILES =				\
   gtksourceview-gtksourcelanguagesmanager.xml	\
   gtksourceview-gtksourcemarker.xml		\
   gtksourceview-gtksourcestylescheme.xml	\
+  gtksourceview-gtksourcetag.xml		\
   gtksourceview-gtksourcetagtable.xml		\
   gtksourceview-gtksourcetagstyle.xml		\
   $(NULL)

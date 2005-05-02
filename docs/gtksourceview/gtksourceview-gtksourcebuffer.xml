@@ -166,15 +166,9 @@
 <emphasis role="bold">Functions</emphasis>
 
 <methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcebuffer--new">gtksourceview.gtk_source_buffer_new</link></methodname>
-<methodparam><parameter role="keyword"><link linkend="class-gtktextbuffer">gtksourceview.SourceTagTable</link></parameter></methodparam>
-</methodsynopsis><methodsynopsis language="python">
 <methodname><link linkend="function-gtksourcebuffer--new-with-language">gtksourceview.gtk_source_buffer_new_with_language</link></methodname>
 <methodparam><parameter role="keyword"><link linkend="class-gtktextbuffer">gtksourceview.SourceLanguage</link></parameter></methodparam>
-</methodsynopsis><methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcebuffer--get-type">gtksourceview.gtk_source_buffer_get_type</link></methodname>
-<methodparam></methodparam></methodsynopsis>
-</programlisting>
+</methodsynopsis></programlisting>
 </refsect1>
 
 <!-- ********************************* -->
@@ -959,31 +953,6 @@ objects to set the highlighting patterns, and instead you're manually adding
 <refsect1>
     <title>Functions</title>
 
-  <refsect2 id="function-gtksourcebuffer--new">
-    <title>gtksourceview.SourceBuffer.gtk_source_buffer_new</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceBuffer.gtk_source_buffer_new</methodname>
-      <methodparam><parameter role="keyword">table</parameter></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><parameter role="keyword">table</parameter>&nbsp;:</term>
-        <listitem><simpara> a <link linkend="class-gtksourcetagtable"><classname>gtksourceview.SourceTagTable</classname></link>, 
-        or <literal>None</literal> to create a new one.</simpara></listitem>
-      </varlistentry>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> a new source buffer.</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        Creates a new source buffer.
-      </para>
-
-  </refsect2>
-
   <refsect2 id="function-gtksourcebuffer--new-with-language">
     <title>gtksourceview.SourceBuffer.gtk_source_buffer_new_with_language</title>
     <programlisting><methodsynopsis language="python">
@@ -1010,27 +979,6 @@ objects to set the highlighting patterns, and instead you're manually adding
       </para>
 
   </refsect2>
-  
-  <refsect2 id="function-gtksourcebuffer--get-type">
-    <title>gtksourceview.SourceBuffer.gtk_source_buffer_get_type</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceBuffer.gtk_source_buffer_get_type</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> .....</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        The <methodname>gtk_source_buffer_get_type</methodname>() function ......
-      </para>
-
-  </refsect2>
-
 </refsect1> 
   
 <!-- ******************************** -->

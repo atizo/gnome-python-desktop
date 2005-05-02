@@ -13,9 +13,16 @@
 
 <refsect1>
   <title>Synopsis</title>
-  <classsynopsis language="python">
 
+    <classsynopsis language="python">
     <ooclass><classname>gtksourceview.SourceStyleScheme</classname></ooclass>
+    <ooclass><classname><link linkend="class-gobjectginterface">gobject.GInterface</link></classname></ooclass>
+
+    <constructorsynopsis language="python">
+	    <methodname><link linkend="constructor-gtksourcestylescheme">gtksourceview.SourceStyleScheme</link></methodname>
+	    <methodparam><parameter role="keyword"></parameter></methodparam>
+    </constructorsynopsis>
+
     <methodsynopsis language="python">
 	    <methodname><link linkend="method-gtksourcestylescheme--get-tag-style">get_tag_style</link></methodname>
 	    <methodparam>style_name</methodparam>
@@ -36,9 +43,6 @@
 <emphasis role="bold">Functions</emphasis>
 
 <methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcestylescheme--get-type">gtksourceview.gtk_source_style_scheme_get_type</link></methodname>
-<methodparam></methodparam>
-</methodsynopsis><methodsynopsis language="python">
 <methodname><link linkend="function-gtksourcestylescheme--get-default">gtksourceview.gtk_source_style_scheme_get_default</link></methodname>
 <methodparam></methodparam>
 </methodsynopsis></programlisting>
@@ -66,6 +70,30 @@
 <para>
 
 </para>
+</refsect1>
+
+<!-- ***************************************** -->
+<!-- BEGIN OF GTKSOURCESTYLESCHEME CONSTRUCTOR -->
+<!-- ***************************************** -->
+
+<refsect1 id="constructor-gtksourcestylescheme">
+  <title>Constructor</title>
+
+  <programlisting><constructorsynopsis language="python">
+	  <methodname>gtksourceview.SourceStyleScheme</methodname>
+	  <methodparam><parameter role="keyword"></parameter></methodparam>
+  </constructorsynopsis></programlisting>
+    
+  <variablelist>
+    <varlistentry>
+	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+	    <listitem><simpara>a new <link linkend="class-gtksourcestylescheme"><classname>gtksourceview.SourceStyleScheme</classname></link>.</simpara></listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>
+    Creates a new <link linkend="class-gtksourcestylescheme"><classname>gtksourceview.SourceStyleScheme</classname></link> object.
+  </para>
 </refsect1>
 
 <!-- ************************************* -->
@@ -146,30 +174,10 @@
 <refsect1>
     <title>Functions</title>
 
-  <refsect2 id="function-gtksourcestylescheme--get-type">
-    <title>gtksourceview.SourceStyleScheme.gtk_source_style_scheme_get_type</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceStyleScheme.gtk_source_style_scheme_get_type</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> .....</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        ...........
-      </para>
-
-  </refsect2>
-
   <refsect2 id="function-gtksourcestylescheme--get-default">
-    <title>gtksourceview.SourceStyleScheme.gtk_source_style_scheme_get_default</title>
+    <title>gtksourceview.gtk_source_style_scheme_get_default</title>
     <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceStyleScheme.gtk_source_style_scheme_get_default</methodname>
+  	  <methodname>gtksourceview.gtk_source_style_scheme_get_default</methodname>
       <methodparam></methodparam>
       </methodsynopsis></programlisting>
         

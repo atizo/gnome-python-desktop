@@ -13,12 +13,15 @@
 
 <refsect1>
   <title>Synopsis</title>
+  
   <classsynopsis language="python">
-
     <ooclass><classname>gtksourceview.SourceLanguagesManager</classname></ooclass>
+    <ooclass><classname><link linkend="class-gobject">gobject.GObject</link></classname></ooclass>
+
     <constructorsynopsis language="python">
-	    <methodname><link linkend="function-gtksourcelanguagesmanager--new">gtksourceview.gtk_source_languages_manager_new</link></methodname>
-    </constructorsynopsis>   
+	    <methodname><link linkend="constructor-gtksourcelanguagesmanager">gtksourceview.SourceLanguagesManager</link></methodname>
+	    <methodparam><parameter role="keyword"></parameter></methodparam>
+    </constructorsynopsis>    
 
     <methodsynopsis language="python">
 	    <methodname><link linkend="method-gtksourcelanguagesmanager--get-available-languages">get_available_languages</link></methodname>
@@ -35,17 +38,6 @@
 	    <methodparam></methodparam>
     </methodsynopsis>
   </classsynopsis>
-
-<programlisting>
-<emphasis role="bold">Functions</emphasis>
-
-<methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcelanguagesmanager--new">gtksourceview.gtk_source_languages_manager_new</link></methodname>
-<methodparam></methodparam>
-</methodsynopsis><methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcelanguagesmanager--get-type">gtksourceview.gtk_source_languages_manager_get_type</link></methodname>
-<methodparam></methodparam>
-</methodsynopsis></programlisting>
 </refsect1>
 
 <!-- ******************************************* -->
@@ -108,23 +100,21 @@
   <title>Constructor</title>
 
   <programlisting><constructorsynopsis language="python">
-	  <methodname>gtksourceview.gtk_source_languages_manager_new</methodname>
+	  <methodname>gtksourceview.SourceLanguagesManager</methodname>
 	  <methodparam><parameter role="keyword"></parameter></methodparam>
   </constructorsynopsis></programlisting>
     
   <variablelist>
     <varlistentry>
 	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	    <listitem><simpara>a new <link linkend="class-gtksourcelanguage"><classname>gtksourceview.SourceLanguagesManager</classname></link>.
-      </simpara></listitem>
+	    <listitem><simpara>a new <link linkend="class-gtksourcelanguagesmanager"><classname>gtksourceview.SourceLanguagesManager</classname></link>.</simpara></listitem>
     </varlistentry>
   </variablelist>
 
   <para>
-    Creates a new <link linkend="class-gtksourcetagtable"><classname>gtksourceview.SourceTagTable</classname></link> object.
+    Creates a new <link linkend="class-gtksourcelanguagesmanager"><classname>gtksourceview.SourceLanguagesManager</classname></link> object.
   </para>
 </refsect1>
-
 
 <!-- ****************************************** -->
 <!-- BEGIN OF GTKSOURCELANGUAGESMANAGER METHODS -->
@@ -199,53 +189,4 @@
   </refsect2>
 
 </refsect1> 
-
-
-<!-- ******************************************** -->
-<!-- BEGIN OF GTKSOURCELANGUAGESMANAGER FUNCTIONS -->
-<!-- ******************************************** -->
-
-<refsect1>
-    <title>Functions</title>
-
-  <refsect2 id="function-gtksourcelanguagesmanager--new">
-    <title>gtksourceview.SourceLanguagesManager.gtk_source_languages_manager_new</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceLanguagesManager.gtk_source_languages_manager_new</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> a new <link linkend="class-gtksourcelanguagesmanager">gtksourceview.SourceLanguagesManager</link>.</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        Creates a new <link linkend="class-gtksourcelanguagesmanager">gtksourceview.SourceLanguagesManager</link>.
-      </para>
-
-  </refsect2>
-
-  <refsect2 id="function-gtksourcelanguagesmanager--get-type">
-    <title>gtksourceview.SourceLanguagesManager.gtk_source_languages_manager_get_type</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceLanguagesManager.gtk_source_languages_manager_get_type</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> .....</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        The <methodname>gtk_source_languages_manager_get_type</methodname>() function ......
-      </para>
-
-  </refsect2>
-</refsect1>
 </refentry>

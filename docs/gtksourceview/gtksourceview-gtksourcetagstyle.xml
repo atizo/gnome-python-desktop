@@ -16,10 +16,13 @@
 
   <classsynopsis language="python">
   <ooclass><classname>gtksourceview.SourceTagStyle</classname></ooclass>
-  
+  <ooclass><classname><link linkend="class-gobjectgboxed">gobject.GBoxed</link></classname></ooclass>
+
   <constructorsynopsis language="python">
-	  <methodname><link linkend="function-gtksourcetagstyle--new">gtksourceview.gtk_source_tag_style_new</link></methodname>
-  </constructorsynopsis>   
+   <methodname><link linkend="constructor-gtksourcetagstyle">gtksourceview.SourceTagStyle</link></methodname>
+   <methodparam><parameter role="keyword"></parameter></methodparam>
+  </constructorsynopsis>
+
 
   <methodsynopsis language="python">
 	  <methodname><link linkend="method-gtksourcetagstyle--copy">copy</link></methodname>
@@ -31,16 +34,6 @@
 	  <methodparam></methodparam>
   </methodsynopsis>
 </classsynopsis>
-
-<programlisting>
-<emphasis role="bold">Functions</emphasis>
-
-<methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcetagstyle--new">gtksourceview.gtk_source_tag_style_new</link></methodname>
-<methodparam></methodparam></methodsynopsis><methodsynopsis language="python">
-<methodname><link linkend="function-gtksourcetagstyle--get-type">gtksourceview.gtk_source_tag_style_get_type</link></methodname>
-<methodparam></methodparam></methodsynopsis>
-</programlisting>
 </refsect1>
 
 <!-- *********************************** -->
@@ -50,10 +43,8 @@
 <refsect1>
     <title>Ancestry</title>
 
-<synopsis>+-- <link linkend="class-gobject">gobject.GObject</link>
-  +-- <link linkend="class-gtktexttag">gtk.TextTag</link>
-    +-- <link linkend="class-gtksourcetag">gtksourceview.SourceTag</link>
-      +-- <link linkend="class-gtksourcetagstyle">gtksourceview.SourceTagStyle</link>
+<synopsis>+-- <link linkend="class-gobjectgboxed">gobject.GBoxed</link>
+  +-- <link linkend="class-gtksourcetagstyle">gtksourceview.SourceTagStyle</link>
 </synopsis>
 </refsect1>
 
@@ -77,7 +68,7 @@
   <title>Constructor</title>
 
   <programlisting><constructorsynopsis language="python">
-	  <methodname>gtksourceview.gtk_source_tag_style_new</methodname>
+	  <methodname>gtksourceview.SourceTagStyle</methodname>
 	  <methodparam><parameter role="keyword"></parameter></methodparam>
   </constructorsynopsis></programlisting>
     
@@ -132,52 +123,4 @@
   </refsect2>
 
 </refsect1> 
-  
-<!-- ************************************ -->
-<!-- BEGIN OF GTKSOURCETAGSTYLE FUNCTIONS -->
-<!-- ************************************ -->
-
-<refsect1>
-    <title>Functions</title>
-
-  <refsect2 id="function-gtksourcetagstyle--new">
-    <title>gtksourceview.SourceTagStyle.gtk_source_tag_style_new</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceTagStyle.gtk_source_tag_style_new</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> .....</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        The <methodname>gtk_source_tag_style_new</methodname>() function .....
-      </para>
-
-  </refsect2>
-
-  <refsect2 id="function-gtksourcetagstyle--get-type">
-    <title>gtksourceview.SourceTagStyle.gtk_source_tag_style_get_type</title>
-    <programlisting><methodsynopsis language="python">
-  	  <methodname>gtksourceview.SourceTagStyle.gtk_source_tag_style_get_type</methodname>
-      <methodparam></methodparam>
-      </methodsynopsis></programlisting>
-        
-    <variablelist>
-	    <varlistentry>
-        <term><emphasis>Returns</emphasis>&nbsp;:</term>
-	      <listitem><simpara> .....</simpara></listitem>
-      </varlistentry>
-    </variablelist>
-
-      <para>
-        The <methodname>gtk_source_tag_style_get_type</methodname>() function ......
-      </para>
-
-  </refsect2>
-</refsect1>
 </refentry>
