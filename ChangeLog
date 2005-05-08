@@ -1,3 +1,7 @@
+2005-05-08  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtkspell/*: Add gtkspell reference documentation.
+
 2005-05-03  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gtksourceview/gtksourceview-classes.xml,

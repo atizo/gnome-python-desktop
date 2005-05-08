@@ -317,6 +317,7 @@ AC_CONFIG_FILES(
   docs/Makefile
   docs/gtksourceview/Makefile
   docs/gtkmozembed/Makefile
+  docs/gtkspell/Makefile
 )
 AC_OUTPUT
 
