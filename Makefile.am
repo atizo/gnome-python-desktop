@@ -82,6 +82,7 @@ EXTRA_DIST = \
   examples/gnomeprint/README \
   examples/gnomeprint/sample-image.png \
   examples/gtkspell/test.py \
+  examples/gtkspell/gtkspell.py \
   examples/gdl/gdl_test.py \
   examples/nautilusburn/blank_disc.py \
   examples/nautilusburn/drive_selection.py \

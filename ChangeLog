@@ -1,3 +1,10 @@
+2005-05-10  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* examples/gtkspell/gtkspell.py: Add new and improved gtkspell
+	example.
+
+	* Makefile.am (EXTRA_DIST): Include new gtkspell example.
+
 2005-05-08  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gtkspell/*: Add gtkspell reference documentation.
