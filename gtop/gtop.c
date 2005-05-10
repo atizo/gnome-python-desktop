@@ -39,6 +39,7 @@
 
 #include <glibtop.h>
 #include <glibtop/close.h>
+#include <glibtop/signal.h>
 #include <glibtop/union.h>
 
 #include <sys/types.h>
@@ -1299,6 +1300,36 @@ static void register_constants(PyObject *module)
 }
 
 
+static PyObject*
+build_siglist(void)
+{
+	size_t i, len;
+	const glibtop_signame* p;
+	PyObject* tuple;
+
+	for(p = glibtop_sys_siglist; p->number; ++p)
+		;
+
+	len = p - glibtop_sys_siglist;
+
+	tuple = PyTuple_New(len);
+
+	for(i = 0; i < len; ++i)
+	{
+		p = &glibtop_sys_siglist[i];
+		PyObject* d;
+
+		d = PyDict_New();
+		my_dict_add_and_decref(d, "number", PyI_L(p->number));
+		my_dict_add_and_decref(d, "name",   PyS_S(p->name));
+		my_dict_add_and_decref(d, "label",  PyS_S(p->label));
+		PyTuple_SET_ITEM(tuple, i, d);
+	}
+
+	return tuple;
+}
+
+
 /*
  * at last !
  */
@@ -1325,4 +1356,5 @@ initgtop(void)
 	PyObject_SetAttrString(module, "_Struct", (PyObject*) &StructType);
 
 	register_constants(module);
+	PyModule_AddObject(module, "siglist", build_siglist());
 }
