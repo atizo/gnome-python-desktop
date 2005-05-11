@@ -1323,7 +1323,7 @@ build_siglist(void)
 		my_dict_add_and_decref(d, "number", PyI_L(p->number));
 		my_dict_add_and_decref(d, "name",   PyS_S(p->name));
 		my_dict_add_and_decref(d, "label",  PyS_S(p->label));
-		PyTuple_SET_ITEM(tuple, i, d);
+		PyTuple_SET_ITEM(tuple, i, _struct_new(d));
 	}
 
 	return tuple;

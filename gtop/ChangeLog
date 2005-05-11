@@ -1,3 +1,7 @@
+2005-05-11  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* gtop.c: (build_siglist): Struct instead of dict.
+
 2005-05-10  Benoît Dejean  <TazForEver@dlfp.org>
 
 	* gtop.c: (build_siglist), (initgtop): Added siglist.
