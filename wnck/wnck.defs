@@ -1062,18 +1062,6 @@
 
 
 
-;; From /usr/include/libwnck-1.0/libwnck/window-menu.h
-
-(define-function wnck_create_window_menu
-  (c-name "wnck_create_window_menu")
-  (return-type "GtkWidget*")
-  (parameters
-    '("GList*" "windows")
-  )
-)
-
-
-
 ;; From /usr/include/libwnck-1.0/libwnck/wnck-enum-types.h
 
 (define-function wnck_pager_display_mode_get_type

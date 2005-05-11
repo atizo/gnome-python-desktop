@@ -1,5 +1,8 @@
 2005-05-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* wnck/wnck.override, wnck/wnck.defs: Remove
+	wnck_create_window_menu, as it was removed from the C API.
+
 	* nautilusburn/nautilus_burn.defs (get_error_message)
 	(get_error_message_details): Remove these methods, as they were
 	removed from the C API.  I guess the same information is now
