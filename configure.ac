@@ -24,7 +24,7 @@ m4_define(wnck_required_version,              2.9.92)
 m4_define(mozilla_required_version,           1.2b)
 m4_define(firefox_required_version,           1.0)
 m4_define(libgtop_required_version,           2.9.5)
-m4_define(libnautilus_burn_required_version,  2.9.4)
+m4_define(libnautilus_burn_required_version,  2.11.1)
 m4_define(libgda_required_version,  1.2.0)
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,

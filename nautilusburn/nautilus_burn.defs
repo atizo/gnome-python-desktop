@@ -135,14 +135,3 @@
   )
 )
 
-(define-method get_error_message
-  (of-object "NautilusBurnRecorder")
-  (c-name "nautilus_burn_recorder_get_error_message")
-  (return-type "const-char*")
-)
-
-(define-method get_error_message_details
-  (of-object "NautilusBurnRecorder")
-  (c-name "nautilus_burn_recorder_get_error_message_details")
-  (return-type "const-char*")
-)

@@ -1,3 +1,22 @@
+2005-05-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* nautilusburn/nautilus_burn.defs (get_error_message)
+	(get_error_message_details): Remove these methods, as they were
+	removed from the C API.  I guess the same information is now
+	provided through the GError, which maps to an exception in Python.
+
+	* nautilusburn/nautilus_burn.override
+	(_wrap_nautilus_burn_recorder_blank_disc): Update to
+	libnautilus-burn 2.11.1 API changes.
+
+	* configure.ac: Require libnautilus-burn version 2.11.1 now, due
+	to API changes.
+
+	* nautilusburn/nautilus_burn.override: here and there, fix
+	indentation and spaces.
+	(_wrap_nautilus_burn_recorder_write_tracks): Remove redundant
+	PyGIL API calls.  Update to libnautilus-burn 2.11.1 API changes.
+
 2005-05-10  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* examples/gtkspell/gtkspell.py: Add new and improved gtkspell
