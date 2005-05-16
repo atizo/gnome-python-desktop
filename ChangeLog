@@ -1,3 +1,9 @@
+2005-05-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.11.2.
+
 2005-05-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* wnck/wnck.override, wnck/wnck.defs: Remove
@@ -100,7 +106,8 @@
 
 2005-04-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
-	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add gtksourceview-gtksourcelanguage.xml
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourcelanguage.xml
 
 	* docs/gtksourceview/gtksourceview-gtksourcebuffer.xml: Add this,
 	written by Gian Mario Tagliaretti.

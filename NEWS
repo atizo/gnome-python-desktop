@@ -1,3 +1,27 @@
+Overview of Changes from gnome-python-extras 2.11.0 to gnome-python-extras 2.11.2
+=================================================================================
+* gda
+ - Export all symbols in the module (Murray Cumming)
+ - Fix compilation with gcc 3.4 and from C++ (Murray)
+ - Return a float for a GdaNumeric, instead of a long (Murray)
+* gtkspell
+ - New reference documentation (Gian Mario Tagliaretti)
+ - Better error checking, minor fixes (Gustavo Carneiro)
+ - Accept optional language paramter in attach() (Gustavo)
+ - New and improved example (Gian)
+* gnomeapplet
+ - Wrap panel_applet_request_focus() (Gustavo)
+* gtksourceview
+ - New reference documentation (Gian)
+ - Add objects SourceTag, SyntaxTag, and PatternTag (Gian)
+* gtkmozembed
+ - New reference documentation (Gian)
+* wnck
+ - Resolve undefined symbol by removing wrapper for removed function (Gustavo)
+* nautilusburn
+ - Update to new libnautilus-burn 2.11 API (Gustavo)
+
+
 Overview of Changes from gnome-python-extras 2.10.0 to gnome-python-extras 2.11.0
 =================================================================================
 * applet
