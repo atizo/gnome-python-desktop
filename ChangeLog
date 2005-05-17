@@ -1,6 +1,13 @@
 === 2.11.2 ===
 2005-05-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* docs/gtkspell/Makefile.am (EXTRA_DIST): Idem.
+
+	* docs/gtkmozembed/Makefile.am (EXTRA_DIST): Idem.
+
+	* docs/gtksourceview/Makefile.am (EXTRA_DIST): Swap order of html
+	and html.stamp.
+
 	* NEWS: Update.
 
 	* configure.ac: Bump version to 2.11.2.
