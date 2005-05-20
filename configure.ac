@@ -166,7 +166,7 @@ fi
 
 dnl should we build the egg.recent module?
 build_eggrecent=false
-PKG_CHECK_MODULES(EGG_RECENT, gtk+-2.0 >= 2.0.0 gnome-vfs-2.0 libbonoboui-2.0 librsvg-2.0 libgnomeui-2.0,
+PKG_CHECK_MODULES(EGG_RECENT, gtk+-2.0 >= 2.0.0 gnome-vfs-2.0 libbonoboui-2.0 libgnomeui-2.0,
   build_eggrecent=true,
   build_eggrecent=false)
 AM_CONDITIONAL(BUILD_EGGRECENT, $build_eggrecent)
