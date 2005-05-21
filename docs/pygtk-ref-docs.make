@@ -39,6 +39,10 @@ $(REFERENCE_PDF): $(XSL_FILES) $(REFERENCE_XML_FILES) $(REFERENCE_MAIN_FILE)
 	pdfxmltex $(REFERENCE_FO) > output < /dev/null
 	pdfxmltex $(REFERENCE_FO) > output < /dev/null
 
+$(DOC_MODULE).tar.bz2: html.stamp install
+	builddir=`pwd` && cd $(HTML_DIR) && tar jcf $$builddir/$@ $(DOC_MODULE)
+
+tarball: $(DOC_MODULE).tar.bz2
 
 CLEANFILES = $(REFERENCE_FO) $(REFERENCE_PDF) *.aux *.log *.out output
 

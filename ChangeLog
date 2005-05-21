@@ -1,5 +1,7 @@
 2005-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* docs/pygtk-ref-docs.make: Add rule to generate reference tarballs.
+
 	* docs/ref-html-style.xsl: Call template generate.index.
 
 	* docs/common.xsl: Copy-paste "template to create the index.sgml
