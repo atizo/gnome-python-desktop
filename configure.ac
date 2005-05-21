@@ -25,7 +25,9 @@ m4_define(mozilla_required_version,           1.2b)
 m4_define(firefox_required_version,           1.0)
 m4_define(libgtop_required_version,           2.9.5)
 m4_define(libnautilus_burn_required_version,  2.11.1)
-m4_define(libgda_required_version,  1.2.0)
+m4_define(libgda_required_version,            1.2.0)
+m4_define(gksu_required_version,              1.2.5)
+m4_define(gksuui_required_version,            1.0.3)
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -288,6 +290,28 @@ if test -n "$export_dynamic"; then
   GDA_LIBS=`echo $GDA_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gksu module?
+build_gksu=false
+PKG_CHECK_MODULES(GKSU, [libgksu1.2 >= gksu_required_version
+                         pygtk-2.0 >= pygtk_required_version],
+  build_gksu=true,
+  build_gksu=false)
+AM_CONDITIONAL(BUILD_GKSU, $build_gksu)
+if test -n "$export_dynamic"; then
+  GKSU_LIBS=`echo $GKSU_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
+dnl should we build the gksu.ui module?
+build_gksuui=false
+PKG_CHECK_MODULES(GKSUUI, [libgksuui1.0 >= gksuui_required_version
+                           pygtk-2.0 >= pygtk_required_version],
+  build_gksuui=true,
+  build_gksuui=false)
+AM_CONDITIONAL(BUILD_GKSUUI, $build_gksuui)
+if test -n "$export_dynamic"; then
+  GKSUUI_LIBS=`echo $GKSUUI_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 dnl commented because it causes compilation problems in egg/recent
@@ -313,6 +337,7 @@ AC_CONFIG_FILES(
   nautilusburn/Makefile
   gda/Makefile
   gda/pygda-1.2.pc
+  gksu/Makefile
   gnome-python-extras-2.0.pc
   docs/Makefile
   docs/gtksourceview/Makefile
@@ -339,6 +364,8 @@ $build_totem_plparser    && echo     totem.plparser
 $build_gtop              && echo     gtop
 $build_nautilusburn      && echo     nautilusburn
 $build_gda               && echo     gda
+$build_gksu              && echo     gksu
+$build_gksuui            && echo     gksu.ui
 echo
 
 echo "The following modules will NOT be built:"
@@ -358,3 +385,5 @@ $build_totem_plparser    || echo     totem.plparser
 $build_gtop              || echo     gtop
 $build_nautilusburn      || echo     nautilusburn
 $build_gda               || echo     gda
+$build_gksu              || echo     gksu
+$build_gksuui            || echo     gksu.ui

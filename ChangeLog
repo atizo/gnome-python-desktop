@@ -1,5 +1,11 @@
 2005-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* Makefile.am (SUBDIRS): Add gksu.
+
+	* configure.ac: Detect libraries for gksu* modules.
+
+	* gksu/*: New gksu and gksu.ui modules by Gian Mario Tagliaretti.
+
 	* docs/pygtk-ref-docs.make: Add rule to generate reference tarballs.
 
 	* docs/ref-html-style.xsl: Call template generate.index.
