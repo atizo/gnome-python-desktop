@@ -1,3 +1,13 @@
+2005-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/ref-html-style.xsl: Call template generate.index.
+
+	* docs/common.xsl: Copy-paste "template to create the index.sgml
+	anchor index" and "template to output gtkdoclink elements for the
+	unknown targets" from gtk-doc.
+
+	* docs/pygtk-ref-docs.make (html.stamp): Call gtkdoc-fixxref.
+
 2005-05-20  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: egg.recent module doesn't _really_ require

@@ -1,5 +1,8 @@
 # -*- makefile -*-
 
+HTML_DIR = $(datadir)/gtk-doc/html
+TARGET_DIR = $(HTML_DIR)/$(REFERENCE_DOC_NAME)
+
 EXTRA_DIST = $(REFERENCE_XML_FILES) $(REFERENCE_MAIN_FILE)
 
 XSL_FILES =					\
@@ -24,6 +27,8 @@ html.stamp: ${XSL_FILES} $(REFERENCE_XML_FILES) $(REFERENCE_MAIN_FILE)
                  --stringparam gtkdoc.bookname $(REFERENCE_DOC_NAME)		\
                  --stringparam gtkdoc.version $(VERSION)			\
 		$(top_srcdir)/docs/ref-html-style.xsl $(REFERENCE_MAIN_FILE)
+	@echo '-- Fixing Crossreferences' 
+	cd $(srcdir) && gtkdoc-fixxref --module-dir=html --html-dir=$(HTML_DIR) $(FIXXREF_OPTIONS)
 	touch $@
 
 $(REFERENCE_PDF): $(XSL_FILES) $(REFERENCE_XML_FILES) $(REFERENCE_MAIN_FILE)
@@ -40,8 +45,6 @@ CLEANFILES = $(REFERENCE_FO) $(REFERENCE_PDF) *.aux *.log *.out output
 clean-local:
 	-rm -rf html html.stamp
 
-HTML_DIR = $(datadir)/gtk-doc/html
-TARGET_DIR = $(HTML_DIR)/$(REFERENCE_DOC_NAME)
 
 
 install-data-local:

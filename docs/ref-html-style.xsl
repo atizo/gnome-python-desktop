@@ -16,6 +16,7 @@
   <xsl:template match="book|article">
     <xsl:apply-imports/>
     <xsl:call-template name="generate.devhelp"/>
+    <xsl:call-template name="generate.index"/>
   </xsl:template>
  
 </xsl:stylesheet>
