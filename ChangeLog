@@ -1,5 +1,9 @@
 2005-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* configure.ac: Make gnomeapplet and egg.recent depend on
+	gnome-python, due to required bonobo argtypes.
+	Don't check for gnome-python-2.0 unconditionally.
+
 	* Makefile.am (SUBDIRS): Add gksu.
 
 	* configure.ac: Detect libraries for gksu* modules.

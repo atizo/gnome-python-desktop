@@ -65,7 +65,6 @@ PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
 AC_SUBST(PYGTK_DEFSDIR)
 AC_MSG_RESULT($PYGTK_DEFSDIR)
 
-PKG_CHECK_MODULES(GNOME_PYTHON, gnome-python-2.0 >= gnome_python_required_version)
 AC_MSG_CHECKING(for gnome-python argtypes dir)
 GNOME_PYTHON_ARGTYPES_DIR=`$PKG_CONFIG --variable=argtypesdir gnome-python-2.0`
 AC_SUBST(GNOME_PYTHON_ARGTYPES_DIR)
@@ -89,7 +88,8 @@ fi
 
 dnl should we build the gnome.applet module?
 build_applet=false
-PKG_CHECK_MODULES(LIBPANELAPPLET, libpanelapplet-2.0 >= libpanelapplet_required_version,
+PKG_CHECK_MODULES(LIBPANELAPPLET, [libpanelapplet-2.0 >= libpanelapplet_required_version
+                                   gnome-python-2.0 >= gnome_python_required_version],
   build_applet=true,
   build_applet=false)
 AC_SUBST(LIBPANELAPPLET_CFLAGS)
@@ -168,7 +168,9 @@ fi
 
 dnl should we build the egg.recent module?
 build_eggrecent=false
-PKG_CHECK_MODULES(EGG_RECENT, gtk+-2.0 >= 2.0.0 gnome-vfs-2.0 libbonoboui-2.0 libgnomeui-2.0,
+PKG_CHECK_MODULES(EGG_RECENT, [gtk+-2.0 >= 2.0.0 gnome-vfs-2.0
+                               libbonoboui-2.0 libgnomeui-2.0
+                               gnome-python-2.0 >= gnome_python_required_version],
   build_eggrecent=true,
   build_eggrecent=false)
 AM_CONDITIONAL(BUILD_EGGRECENT, $build_eggrecent)
