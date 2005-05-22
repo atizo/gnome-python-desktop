@@ -1,3 +1,7 @@
+2005-05-22  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtkspell/gtkspell-gtkspell.xml: Clarify lang parameter usage.
+
 2005-05-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_new_attach): Method
