@@ -1,3 +1,9 @@
+2005-05-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtkspell/gtkspellmodule.c (_wrap_gtkspell_new_attach): Method
+	name in error message should be __new__, not __init__. Accept
+	lang=None meaning NULL.
+
 2005-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: Make gnomeapplet and egg.recent depend on
