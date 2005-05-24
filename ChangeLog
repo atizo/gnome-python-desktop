@@ -1,3 +1,8 @@
+2005-05-24  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* examples/gnomeprint/test-print.py (render_to_job): Add a drawing
+	from www.pythonchallenge.com, just for fun.
+
 2005-05-22  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gtkspell/gtkspell-gtkspell.xml: Clarify lang parameter usage.
