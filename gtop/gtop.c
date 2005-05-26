@@ -111,15 +111,14 @@ static void _struct_build_repr(StructObject *that)
 /* borrows kw */
 static PyObject* _struct_new(PyObject *kw)
 {
-	PyObject* const self = PyObject_New(StructObject, (PyTypeObject*) &StructType);
-	StructObject* const that = (StructObject*) self;
+	StructObject* const that = PyObject_New(StructObject, (PyTypeObject*) &StructType);
 
-	g_assert(self != NULL && kw != NULL);
+	g_assert(that != NULL && kw != NULL);
 
 	that->dict = kw;
 	that->repr = NULL;
 
-	return self;
+	return (PyObject*)that;
 }
 
 
@@ -1353,7 +1352,7 @@ initgtop(void)
 
 	module = Py_InitModule("gtop", (PyMethodDef*) gtop_methods);
 	PyType_Ready((PyTypeObject*) &StructType);
-	PyObject_SetAttrString(module, "_Struct", (PyObject*) &StructType);
+	PyObject_SetAttrString(module, "_Struct", (void*) &StructType);
 
 	register_constants(module);
 	PyModule_AddObject(module, "siglist", build_siglist());

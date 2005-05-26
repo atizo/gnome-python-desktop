@@ -1,3 +1,7 @@
+2005-05-26  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* gtop.c: (_struct_new), (initgtop): Fixed bad casts.
+
 2005-05-11  Benoît Dejean  <TazForEver@dlfp.org>
 
 	* gtop.c: (build_siglist): Struct instead of dict.
