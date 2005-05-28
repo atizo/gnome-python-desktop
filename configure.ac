@@ -113,7 +113,8 @@ fi
 
 dnl should we build the gnomeprint module?
 build_gnomeprint=false
-PKG_CHECK_MODULES(LIBGNOMEPRINT, libgnomeprint-2.2 >= libgnomeprint_required_version,
+PKG_CHECK_MODULES(LIBGNOMEPRINT, [libgnomeprint-2.2 >= libgnomeprint_required_version
+                                 gnome-python-2.0 >= gnome_python_required_version],
   build_gnomeprint=true,
   build_gnomeprint=false)
 AC_SUBST(LIBGNOMEPRINT_CFLAGS)
@@ -158,7 +159,7 @@ fi
 
 dnl should we build the egg.trayicon module?
 build_eggtray=false
-PKG_CHECK_MODULES(EGGTRAY, gtk+-2.0 >= 2.2.0 libgnomeui-2.0 >=  2.2.0,
+PKG_CHECK_MODULES(EGGTRAY, [gtk+-2.0 >= 2.2.0],
   build_eggtray=true,
   build_eggtray=false)
 AM_CONDITIONAL(BUILD_EGGTRAY, $build_eggtray)

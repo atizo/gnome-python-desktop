@@ -1,3 +1,8 @@
+2005-05-28  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: gnomeprint module depends on gnome-python.
+	egg.trayicon doesn't depend on libgnomeui.
+
 2005-05-24  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* examples/gnomeprint/test-print.py (render_to_job): Add a drawing
