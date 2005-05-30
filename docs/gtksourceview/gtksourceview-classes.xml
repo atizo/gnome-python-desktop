@@ -34,6 +34,7 @@
     <xi:include href="gtksourceview-gtksourcetag.xml"/>
     <xi:include href="gtksourceview-gtksourcetagtable.xml"/>
     <xi:include href="gtksourceview-gtksourcetagstyle.xml"/>
+    <xi:include href="gtksourceview-gtksourceprintjob.xml"/>
     
   </chapter>
 

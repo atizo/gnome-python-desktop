@@ -1,3 +1,13 @@
+2005-05-30  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gtksourceview/gtksourceview-gtksourceprintjob.xml: Add.
+	
+	* docs/gtksourceview/gtksourceview-classes.xml: Include
+	gtksourceview-gtksourceprintjob.xml.
+
+	* docs/gtksourceview/Makefile.am (REFERENCE_XML_FILES): Add
+	gtksourceview-gtksourceprintjob.xml.
+
 2005-05-28  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: gnomeprint module depends on gnome-python.
