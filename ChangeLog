@@ -1,3 +1,11 @@
+2005-06-03  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* configure.ac: Write docs/gnomeprint/Makefile.
+
+	* docs/Makefile.am (SUBDIRS): Add gnomeprint subdir.
+
+	* docs/gnomeprint/*: Add new gnomeprint documentation.
+
 2005-05-30  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gtksourceview/gtksourceview-gtksourceprintjob.xml: Add.

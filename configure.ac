@@ -346,6 +346,7 @@ AC_CONFIG_FILES(
   docs/gtksourceview/Makefile
   docs/gtkmozembed/Makefile
   docs/gtkspell/Makefile
+  docs/gnomeprint/Makefile
 )
 AC_OUTPUT
 
