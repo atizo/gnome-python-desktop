@@ -65,25 +65,25 @@
     </methodsynopsis> 
 
     <methodsynopsis language="python">
-        <methodname><link linkend="method-gnomeprintconfig--set-boolean">get_boolean</link></methodname>
+        <methodname><link linkend="method-gnomeprintconfig--set-boolean">set_boolean</link></methodname>
         <methodparam><parameter role="keyword">key</parameter></methodparam>
         <methodparam><parameter role="keyword">val</parameter></methodparam>
     </methodsynopsis>
     
     <methodsynopsis language="python">
-        <methodname><link linkend="method-gnomeprintconfig--set-int">get_int</link></methodname>
+        <methodname><link linkend="method-gnomeprintconfig--set-int">set_int</link></methodname>
         <methodparam><parameter role="keyword">key</parameter></methodparam>
         <methodparam><parameter role="keyword">val</parameter></methodparam>
     </methodsynopsis>
     
     <methodsynopsis language="python">
-        <methodname><link linkend="method-gnomeprintconfig--set-double">get_double</link></methodname>
+        <methodname><link linkend="method-gnomeprintconfig--set-double">set_double</link></methodname>
         <methodparam><parameter role="keyword">key</parameter></methodparam>
         <methodparam><parameter role="keyword">val</parameter></methodparam>
     </methodsynopsis> 
     
     <methodsynopsis language="python">
-        <methodname><link linkend="method-gnomeprintconfig--set-lenght">get_lenght</link></methodname>
+        <methodname><link linkend="method-gnomeprintconfig--set-lenght">set_lenght</link></methodname>
         <methodparam><parameter role="keyword">key</parameter></methodparam>
         <methodparam><parameter role="keyword">val</parameter></methodparam>
         <methodparam><parameter role="keyword">unit</parameter></methodparam>

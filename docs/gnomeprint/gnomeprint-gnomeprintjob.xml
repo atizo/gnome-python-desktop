@@ -20,7 +20,7 @@
     
     <constructorsynopsis language="python">
 	   <methodname><link linkend="constructor-gnomeprintjob">gnomeprint.Job</link></methodname>
-	   <methodparam><parameter role="keyword"></parameter></methodparam>
+	   <methodparam><parameter role="keyword">config</parameter></methodparam>
     </constructorsynopsis>
     
     <methodsynopsis language="python">
@@ -80,6 +80,39 @@
 </synopsis>
 </refsect1>
 
+<!-- ********************************* -->
+<!-- BEGIN OF GNOMEPRINTJOB PROPERTIES -->
+<!-- ********************************* -->
+
+<refsect1>
+    <title>Properties</title>
+    
+    <blockquote role="properties">
+        <informaltable pgwide="1" frame="none">
+            <tgroup cols="3">
+                <colspec column="1" colwidth="1in"/>
+                <colspec column="2" colwidth="1in"/>
+                <colspec column="3" colwidth="4in"/>
+                <tbody>
+                    
+                    <row valign="top">
+                        <entry>"config"</entry>
+                        <entry>Read</entry>
+                        <entry>The configuration for the print job.</entry>
+                    </row>
+                    
+                    <row valign="top">
+                        <entry>"context"</entry>
+                        <entry>Read-Write</entry>
+                        <entry>The context for the print job.</entry>
+                    </row>
+                    
+                </tbody>
+            </tgroup>
+        </informaltable>
+    </blockquote>
+</refsect1>
+
 <!-- ********************************** -->
 <!-- BEGIN OF GNOMEPRINTJOB DESCRIPTION -->
 <!-- ********************************** -->
@@ -101,11 +134,14 @@
 
   <programlisting><constructorsynopsis language="python">
 	  <methodname>gnomeprint.Job</methodname>
-	  <methodparam><parameter role="keyword"></parameter></methodparam>
+	  <methodparam><parameter role="keyword">config</parameter></methodparam>
   </constructorsynopsis></programlisting>
     
   <variablelist>
-
+    <varlistentry>
+          <term><parameter role="keyword">config</parameter>&nbsp;:</term>
+          <listitem><simpara> a <link linkend="class-gnomeprintconfig"><classname>gnomeprint.Config</classname></link>.</simpara></listitem>
+    </varlistentry>
     <varlistentry>
 	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
 	    <listitem><simpara>a new <link linkend="class-gnomeprintjob"><classname>gnomeprint.Job</classname></link>.

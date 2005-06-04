@@ -1,3 +1,14 @@
+2005-06-04  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+	
+	* docs/gnomeprint/Makefile.am,
+	* docs/gnomeprint/gnomeprint-classes.xml,
+	* docs/gnomeprint/gnomeprint-gnomeprintfont.xml:
+	Add gnomeprint.Font section.
+	
+	* docs/gnomeprint/gnomeprint-gnomeprintconfig.xml:
+	* docs/gnomeprint/gnomeprint-gnomeprintcontext.xml:
+	* docs/gnomeprint/gnomeprint-gnomeprintjob.xml: Misc. fixes.
+
 2005-06-03  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* configure.ac: Write docs/gnomeprint/Makefile.

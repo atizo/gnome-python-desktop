@@ -20,7 +20,7 @@
     
     <constructorsynopsis language="python">
 	   <methodname><link linkend="constructor-gnomeprintcontext">gnomeprint.Context</link></methodname>
-	   <methodparam><parameter role="keyword"></parameter></methodparam>
+	   <methodparam><parameter role="keyword">config</parameter></methodparam>
     </constructorsynopsis>
     
     <methodsynopsis language="python">
@@ -292,11 +292,14 @@
 
   <programlisting><constructorsynopsis language="python">
 	  <methodname>gnomeprint.Context</methodname>
-	  <methodparam><parameter role="keyword"></parameter></methodparam>
+	  <methodparam><parameter role="keyword">config</parameter></methodparam>
   </constructorsynopsis></programlisting>
     
   <variablelist>
-
+    <varlistentry>
+        <term><parameter role="keyword">config</parameter>&nbsp;:</term>
+        <listitem><simpara> a <link linkend="class-gnomeprintconfig"><classname>gnomeprint.Config</classname></link>.</simpara></listitem>
+    </varlistentry>
     <varlistentry>
 	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
 	    <listitem><simpara>a new <link linkend="class-gnomeprintcontext"><classname>gnomeprint.Context</classname></link>.
@@ -324,6 +327,10 @@
             </methodsynopsis></programlisting>
       
             <variablelist>
+                <varlistentry>
+                    <term><parameter role="keyword">config</parameter>&nbsp;:</term>
+                    <listitem><simpara> a <link linkend="class-gnomeprintconfig"><classname>gnomeprint.Config</classname></link>.</simpara></listitem>
+                </varlistentry>
                 <varlistentry>
                     <term><emphasis>Returns</emphasis>&nbsp;:</term>
                     <listitem><simpara> GNOME_PRINT_OK or positive value on success, negative error code on failure.</simpara></listitem>
