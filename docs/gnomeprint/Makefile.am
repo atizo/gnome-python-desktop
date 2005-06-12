@@ -11,6 +11,8 @@ REFERENCE_XML_FILES =                           \
   gnomeprint-gnomeprintconfig.xml               \
   gnomeprint-gnomeprintjob.xml	                \
   gnomeprint-gnomeprintfont.xml	                \
+  gnomeprint-gnomeprintfontface.xml	            \
+  gnomeprint-gnomeprintglyphlist.xml            \
   $(NULL)
 
 include $(top_srcdir)/docs/pygtk-ref-docs.make

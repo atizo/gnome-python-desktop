@@ -29,6 +29,8 @@
     <xi:include href="gnomeprint-gnomeprintconfig.xml"/>
     <xi:include href="gnomeprint-gnomeprintjob.xml"/>
     <xi:include href="gnomeprint-gnomeprintfont.xml"/>
+    <xi:include href="gnomeprint-gnomeprintfontface.xml"/>
+    <xi:include href="gnomeprint-gnomeprintglyphlist.xml"/>
     
   </chapter>
 
