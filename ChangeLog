@@ -1,3 +1,11 @@
+2005-06-15  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
+
+	* docs/gnomeprintui/*: New gnomeprint.ui documentation.
+
+	* configure.ac: Output docs/gnomeprintui/Makefile.
+
+	* docs/Makefile.am (SUBDIRS): Add gnomeprintui.
+
 2005-06-12  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gnomeprint/gnomeprint-gnomeprintfontface.xml: Add new

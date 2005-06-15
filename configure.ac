@@ -347,6 +347,7 @@ AC_CONFIG_FILES(
   docs/gtkmozembed/Makefile
   docs/gtkspell/Makefile
   docs/gnomeprint/Makefile
+  docs/gnomeprintui/Makefile
 )
 AC_OUTPUT
 

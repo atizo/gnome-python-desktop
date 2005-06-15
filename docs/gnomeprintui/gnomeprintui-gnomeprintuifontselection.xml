@@ -1,0 +1,242 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+
+<refentry id="class-gnomeprintuifontselection">
+  <refnamediv>
+    <refname>gnomeprint.ui.FontSelection</refname>
+    <refpurpose>FontSelection object for GnomePrintui</refpurpose>
+  </refnamediv>
+
+<!-- ******************************************* -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION SYNOPSIS -->
+<!-- ******************************************* -->
+
+<refsect1>
+    <title>Synopsis</title>
+
+    <classsynopsis language="python">
+    <ooclass><classname>gnomeprint.ui.FontSelection</classname></ooclass>
+    <ooclass><classname><link linkend="class-gtkwidget">gtk.Widget</link></classname></ooclass>
+    
+    <constructorsynopsis language="python">
+	   <methodname><link linkend="constructor-gnomeprintuifontselection">gnomeprint.ui.FontSelection</link></methodname>
+	   <methodparam></methodparam>
+    </constructorsynopsis>
+    
+    <methodsynopsis language="python">
+	    <methodname><link linkend="method-gnomeprintuifontselection--get-face">get_face</link></methodname>
+	    <methodparam></methodparam>
+    </methodsynopsis>
+ 
+    <methodsynopsis language="python">
+	    <methodname><link linkend="method-gnomeprintuifontselection--get-font">get_font</link></methodname>
+	    <methodparam></methodparam>
+    </methodsynopsis>
+    
+    <methodsynopsis language="python">
+	    <methodname><link linkend="method-gnomeprintuifontselection--get-size">get_size</link></methodname>
+	    <methodparam></methodparam>
+    </methodsynopsis>
+    
+    <methodsynopsis language="python">
+	    <methodname><link linkend="method-gnomeprintuifontselection--set-font">set_font</link></methodname>
+	    <methodparam></methodparam>
+    </methodsynopsis>
+  
+  </classsynopsis>
+</refsect1>
+
+<!-- ******************************************* -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION ANCESTRY -->
+<!-- ******************************************* -->
+
+<refsect1>
+    <title>Ancestry</title>
+
+<synopsis>+-- <link linkend="class-gobject">gobject.GObject</link>
+  +-- <link linkend="class-gtkobject">gtk.Object</link>
+    +-- <link linkend="class-gtkwidget">gtk.Widget</link>
+      +-- <link linkend="class-gnomeprintuifontselection">gnomeprint.ui.FontSelection</link>
+</synopsis>
+</refsect1>
+
+<!-- **************************************************** -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION SIGNAL PROTOTYPES -->
+<!-- **************************************************** -->
+
+<refsect1>
+    <title>Signal Prototypes</title>
+    <variablelist>
+      <varlistentry>
+        <term>"<link linkend="signal-gnomeprintuifontselection--font-set">font-set</link>"</term>
+        <listitem>
+          <methodsynopsis language="python"><methodname>callback</methodname>
+            <methodparam><parameter>fontselection</parameter></methodparam>
+            <methodparam><parameter>data</parameter></methodparam>
+            <methodparam><parameter>...</parameter></methodparam>
+          </methodsynopsis>
+        </listitem>
+      </varlistentry>
+   </variablelist>
+</refsect1>
+
+<!-- ********************************************** -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION DESCRIPTION -->
+<!-- ********************************************** -->
+
+<refsect1 id="description-gnomeprintuifontselection">
+    <title>Description</title>
+
+<para>
+
+</para>
+</refsect1>
+
+<!-- ********************************************** -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION CONSTRUCTOR -->
+<!-- ********************************************** -->
+
+<refsect1 id="constructor-gnomeprintuifontselection">
+  <title>Constructor</title>
+
+  <programlisting><constructorsynopsis language="python">
+	  <methodname>gnomeprint.ui.FontSelection</methodname>
+	  <methodparam></methodparam>
+  </constructorsynopsis></programlisting>
+    
+  <variablelist>
+    <varlistentry>
+	    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+	    <listitem><simpara>a new <link linkend="class-gnomeprintuifontselection"><classname>gnomeprint.ui.FontSelection</classname></link>.
+        </simpara></listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>
+    Creates a new <link linkend="class-gnomeprintuifontselection"><classname>gnomeprint.ui.FontSelection</classname></link> object.
+  </para>
+</refsect1>
+
+<!-- ****************************************** -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION METHODS -->
+<!-- ****************************************** -->
+
+<refsect1>
+    <title>Methods</title>
+
+    <refsect2 id="method-gnomeprintuifontselection--get-face">
+        <title>gnomeprint.ui.FontSelection.get_face</title>
+            <programlisting><methodsynopsis language="python">
+                <methodname>get_face</methodname>
+                    <methodparam></methodparam>
+            </methodsynopsis></programlisting>
+      
+            <variablelist>
+                <varlistentry>
+                    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+                    <listitem><simpara> </simpara></listitem>
+                </varlistentry>
+            </variablelist>
+
+        <para>
+            The <methodname>get_face</methodname>() method 
+        </para>
+    </refsect2>
+  
+    <refsect2 id="method-gnomeprintuifontselection--get-font">
+        <title>gnomeprint.ui.FontSelection.get_font</title>
+            <programlisting><methodsynopsis language="python">
+                <methodname>get_font</methodname>
+                    <methodparam></methodparam>
+            </methodsynopsis></programlisting>
+      
+            <variablelist>
+                <varlistentry>
+                    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+                    <listitem><simpara> </simpara></listitem>
+                </varlistentry>
+            </variablelist>
+
+        <para>
+            The <methodname>get_font</methodname>() method 
+        </para>
+    </refsect2> 
+  
+    <refsect2 id="method-gnomeprintuifontselection--get-size">
+        <title>gnomeprint.ui.FontSelection.get_size</title>
+            <programlisting><methodsynopsis language="python">
+                <methodname>get_size</methodname>
+                    <methodparam></methodparam>
+            </methodsynopsis></programlisting>
+      
+            <variablelist>
+                <varlistentry>
+                    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+                    <listitem><simpara> </simpara></listitem>
+                </varlistentry>
+            </variablelist>
+
+        <para>
+            The <methodname>get_size</methodname>() method 
+        </para>
+    </refsect2> 
+  
+  
+    <refsect2 id="method-gnomeprintuifontselection--set-font">
+        <title>gnomeprint.ui.FontSelection.set_font</title>
+            <programlisting><methodsynopsis language="python">
+                <methodname>set_font</methodname>
+                    <methodparam></methodparam>
+            </methodsynopsis></programlisting>
+      
+            <variablelist>
+                <varlistentry>
+                    <term><emphasis>Returns</emphasis>&nbsp;:</term>
+                    <listitem><simpara> </simpara></listitem>
+                </varlistentry>
+            </variablelist>
+
+        <para>
+            The <methodname>set_font</methodname>() method 
+        </para>
+    </refsect2> 
+  </refsect1>
+  
+<!-- ****************************************** -->
+<!-- BEGIN OF GNOMEPRINTUIFONTSELECTION SIGNALS -->
+<!-- ****************************************** --> 
+ 
+<refsect1>
+    <title>Signals</title>
+
+  <refsect2 id="signal-gnomeprintuifontselection--font-set">
+    <title>The "font-set" gnomeprint.ui.FontSelection Signal</title>
+    <programlisting><methodsynopsis language="python">
+	  <methodname>callback</methodname>
+	  <methodparam><parameter>fontselection</parameter></methodparam>
+	  <methodparam><parameter>data</parameter></methodparam>
+	  <methodparam><parameter>...</parameter></methodparam>
+	  </methodsynopsis></programlisting>
+
+    <variablelist>
+	    <varlistentry>
+	      <term><parameter>fontselection</parameter>&nbsp;:</term>
+	      <listitem><simpara>the fontselection that received the signal</simpara></listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term><parameter>data</parameter>&nbsp;:</term>
+          <listitem><simpara>additional data (if any) specified with the 
+          <link linkend="method-gobject--connect"><methodname>connect</methodname>()</link> method</simpara></listitem>
+	    </varlistentry>
+	    <varlistentry>
+	      <term><parameter>...</parameter>&nbsp;:</term>
+	      <listitem><simpara>additional user parameters (if any)</simpara></listitem>
+	    </varlistentry>
+    </variablelist>
+
+    <para>
+      The "font-set" signal is emitted when 
+    </para>
+  </refsect2>
+ </refsect1>
+</refentry>
