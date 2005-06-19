@@ -1,3 +1,8 @@
+2005-06-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtkmozembed/gtkmozembed-gtkmozembed.xml: Add an inline
+	example "TinyGecko", by Nikos Kouremenos.
+
 2005-06-15  Gian Mario Tagliaretti  <g.tagliaretti@parafernalia.org>
 
 	* docs/gnomeprintui/*: New gnomeprint.ui documentation.
