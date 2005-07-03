@@ -462,8 +462,8 @@ PyDoc_STRVAR(doc_gtop_loadavg,
 	     "@return: Struct having all the following keys\n"
 	     "\n"
 
-	     "- C{loadavg5  : float}\n"
-	     "- C{loadavg10 : float}\n"
+	     "- C{loadavg1  : float}\n"
+	     "- C{loadavg5 : float}\n"
 	     "- C{loadavg15 : float}\n"
 	     "\tNumber of jobs running simultaneously averaged over 1, 5 and 15\n"
 	     "\tminutes.\n"
@@ -496,8 +496,8 @@ static PyObject* gtop_loadavg(PyObject *self, PyObject *args)
 	my_dict_add_and_decref(d, "nr_running", PyL_ULL(buf.nr_running));
 	my_dict_add_and_decref(d, "nr_tasks",   PyL_ULL(buf.nr_tasks));
 	my_dict_add_and_decref(d, "last_pid",   PyL_ULL(buf.last_pid));
-	my_dict_add_and_decref(d, "loadavg5",   PyF_D(buf.loadavg[0]));
-	my_dict_add_and_decref(d, "loadavg10",  PyF_D(buf.loadavg[1]));
+	my_dict_add_and_decref(d, "loadavg1",   PyF_D(buf.loadavg[0]));
+	my_dict_add_and_decref(d, "loadavg5",   PyF_D(buf.loadavg[1]));
 	my_dict_add_and_decref(d, "loadavg15",  PyF_D(buf.loadavg[2]));
 
 	return _struct_new(d);

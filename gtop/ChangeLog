@@ -1,3 +1,7 @@
+2005-07-03  Benoît Dejean  <TazForEver@dlfp.org>
+
+	* gtop.c: (gtop_loadavg): Fixed loadavg keys. (5, 10, 15) -> (1, 5, 15).
+
 2005-05-26  Benoît Dejean  <TazForEver@dlfp.org>
 
 	* gtop.c: (_struct_new), (initgtop): Fixed bad casts.
