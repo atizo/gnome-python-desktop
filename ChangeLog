@@ -1,3 +1,17 @@
+2005-07-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* egg/recent/*: Resync sources with gnome cvs.  Add wrappers for
+	new EggRecentViewUIManager.
+
+	* egg/tray/*: Resync sources with gnome cvs.  Fixes Bug 172479:
+	EggTrayIcons can still appear 1 pixel wide.
+
+2005-07-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.11.3.
+
 2005-07-21  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
 
 	Reviewed by: Gustavo Carneiro  <gjc@inescporto.p>

@@ -1,3 +1,31 @@
+Overview of Changes from gnome-python-extras 2.11.2 to gnome-python-extras 2.11.3
+=================================================================================
+* New modules
+ - gksu and gksu.ui (Gian Mario Tagliaretti)
+* egg.recent
+ - Don't require librsvg-2, since it's not really needed (Gustavo)
+ - Resync sources with gnome cvs (Gustavo)
+ - Add wrappers for new EggRecentViewUIManager (Gustavo)
+* egg.trayicon
+ - Resync sources with gnome cvs; fixes "1 pixel wide" bug (#172479) (Gustavo)
+* general
+ - Fix dependency checks in configure.in; Now, the modules egg.trayicon,
+   gtkmozembed, and gtkspell should build on systems without gnome-python
+   or any gnome libraries installed.
+ - Documentation cross-module references now correctly handled (Gustavo)
+* gtkspell
+ - Accept lang=None meaning NULL (Gustavo)
+ - Clarify lang parameter usage in docs (Gian)
+* gtksourceview
+ - Documentation improvements (Gian)
+* gnomeprint
+ - New gnomeprint and gnomeprint.ui docs (Gian)
+* nautilusburn
+ - Make it compile with nautilus-cd-burner 2.11.3 (Tiago Cogumbreiro)
+ - Add constructor and new methods (get_media_type_full, door_is_open,
+   eject, unmount) to nautilusburn.Drive (Tiago)
+
+
 Overview of Changes from gnome-python-extras 2.11.0 to gnome-python-extras 2.11.2
 =================================================================================
 * gda
