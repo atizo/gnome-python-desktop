@@ -66,7 +66,7 @@ nb_bytes_to_seconds (PyObject *self, PyObject *args)
 	int size;
 	if (!PyArg_ParseTuple (args, "i", &size))
 		return NULL;
-	return Py_BuildValue ("i", SIZE_TO_TIME(size));
+	return Py_BuildValue ("i", NAUTILUS_BURN_DRIVE_SIZE_TO_TIME(size));
 }
 
 static PyMethodDef nb_methods[] = {

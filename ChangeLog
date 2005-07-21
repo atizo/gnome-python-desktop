@@ -1,3 +1,16 @@
+2005-07-21  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
+
+	Reviewed by: Gustavo Carneiro  <gjc@inescporto.p>
+
+	* nautilusburn/nb_drive.c: (nb_Drive_init),
+	(nb_Drive_door_is_open), (nb_Drive_get_media_type_full),
+	(nb_Drive_unmount), (nb_Drive_eject): Add constructor and new
+	methods (get_media_type_full, door_is_open, eject, unmount) to
+	nautilusburn.Drive.
+	
+	* nautilusburn/nb_module.c: (nb_bytes_to_seconds): Update to
+	libnautilus-burn 2.11.3 API changes.
+
 2005-06-19  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* docs/gtkmozembed/gtkmozembed-gtkmozembed.xml: Add an inline

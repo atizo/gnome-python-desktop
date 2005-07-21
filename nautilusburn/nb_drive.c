@@ -46,6 +46,21 @@ nb_drive_new_from_native (const NautilusBurnDrive *drive)
 	return ret;
 }
 
+static int
+nb_Drive_init (nb_Drive *self, PyObject *args, PyObject *kwds)
+{
+	gchar *device = NULL;
+	static char *kwlist[] = {"device_path", NULL};
+
+	if (!PyArg_ParseTupleAndKeywords (args, kwds, "s", kwlist, &device))
+		return -1;
+	
+	self->drive = nautilus_burn_drive_new_from_path (device);
+	self->destroy = TRUE;
+
+	return 0;
+}
+
 static void
 nb_Drive_dealloc (nb_Drive *self)
 {
@@ -108,6 +123,47 @@ nb_Drive_get_media_type (nb_Drive *self)
 	return pyg_enum_from_gtype(NAUTILUS_BURN_TYPE_MEDIA_TYPE, nautilus_burn_drive_get_media_type(self->drive));
 }
 
+static PyObject *
+nb_Drive_door_is_open (nb_Drive *self)
+{
+	return Py_BuildValue ("i", nautilus_burn_drive_door_is_open (self->drive));
+}
+
+static PyObject *
+nb_Drive_get_media_type_full (nb_Drive *self)
+{
+	gboolean is_rw, is_blank, has_data, has_audio;
+	int media_type;
+	media_type = nautilus_burn_drive_get_media_type_full (
+		self->drive,
+		&is_rw,
+		&is_blank,
+		&has_data,
+		&has_audio
+	);
+	
+	return Py_BuildValue (
+		"Niiii",
+		pyg_enum_from_gtype(NAUTILUS_BURN_TYPE_MEDIA_TYPE, media_type),
+		is_rw,
+		is_blank,
+		has_data,
+		has_audio
+	);
+}
+
+static PyObject *
+nb_Drive_unmount (nb_Drive *self)
+{
+	return Py_BuildValue ("i", nautilus_burn_drive_unmount (self->drive));
+}
+
+static PyObject *
+nb_Drive_eject (nb_Drive *self)
+{
+	return Py_BuildValue ("i", nautilus_burn_drive_eject (self->drive));
+}
+
 static PyMethodDef nb_Drive_methods[] = {
 	{"get_media_size", (PyCFunction)nb_Drive_get_media_size, METH_NOARGS,
 		"get_media_size()->long\nReturns the media size."},
@@ -126,6 +182,24 @@ static PyMethodDef nb_Drive_methods[] = {
 		"get_device()->string\nReturns the device filename."},
 	{"get_media_type", (PyCFunction) nb_Drive_get_media_type, METH_NOARGS,
 		"get_media_type()->MEDIA_TYPE_*\nReturns the media type which drive contains."},
+	{"get_media_type_full", (PyCFunction) nb_Drive_get_media_type_full, METH_NOARGS,
+		"get_media_type_full()->MEDIA_TYPE_*, is_rewritable, is_blank, "\
+		"has_data, has_audio\n Same as 'get_media_type' but retrieves "\
+		"more info."},
+	{"door_is_open", (PyCFunction) nb_Drive_door_is_open, METH_NOARGS,
+		"door_is_open()->bool\nReturns if the tray door is open."},
+	{"eject", (PyCFunction) nb_Drive_eject, METH_NOARGS,
+		"eject()->bool\nReturns if it could eject the media.\n"\
+		"Note that in order to use this method you have to initialize "\
+		"the gobject threads system. For example:\n\n"\
+		"import gobject\ngobject.threads_init ()"
+	},
+	{"unmount", (PyCFunction) nb_Drive_unmount, METH_NOARGS,
+		"unmount()->bool\nReturns if could unmount the media.\n"
+                "Note that in order to use this method you have to initialize "\
+                "the gobject threads system. For example:\n\n"\
+                "import gobject\ngobject.threads_init ()"
+	},
     {NULL}  /* Sentinel */
 };
 
@@ -151,24 +225,24 @@ static PyTypeObject nb_Drive_Type = {
     0,                         /*tp_setattro*/
     0,                         /*tp_as_buffer*/
     Py_TPFLAGS_DEFAULT,        /*tp_flags*/
-    "Represents a Drive",    /* tp_doc */
+    "Represents a Drive",      /* tp_doc */
     0,		               /* tp_traverse */
     0,		               /* tp_clear */
     0,		               /* tp_richcompare */
     0,		               /* tp_weaklistoffset */
     0,		               /* tp_iter */
     0,		               /* tp_iternext */
-    nb_Drive_methods,       /* tp_methods */
-    0,             /* tp_members */
+    nb_Drive_methods,          /* tp_methods */
+    0,                         /* tp_members */
     0,                         /* tp_getset */
     0,                         /* tp_base */
     0,                         /* tp_dict */
     0,                         /* tp_descr_get */
     0,                         /* tp_descr_set */
     0,                         /* tp_dictoffset */
-    0,      /* tp_init */
+    (initproc)nb_Drive_init,   /* tp_init */
     0,                         /* tp_alloc */
-    0,                 /* tp_new */
+    0,                         /* tp_new */
 };
 
 int
