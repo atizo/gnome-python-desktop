@@ -216,8 +216,8 @@ case $mozpackage in
      *) AC_MSG_ERROR([--with-gtkmozembed argument must be either 'mozilla' or 'firefox'])
 esac
 
-PKG_CHECK_MODULES(GTKMOZEMBED, [mozilla-gtkmozembed >= $mozpackage_required_version,
-                                gtk+-2.0            >= gtk_required_version],
+PKG_CHECK_MODULES(GTKMOZEMBED, [$mozpackage-gtkmozembed >= $mozpackage_required_version,
+                                gtk+-2.0                >= gtk_required_version],
   build_gtkmozembed=true,
   build_gtkmozembed=false)
 

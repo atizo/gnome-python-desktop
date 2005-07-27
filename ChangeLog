@@ -1,3 +1,9 @@
+2005-07-27  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: In case --with-mozpackage option is given, look
+	for package $mozpackage-gtkmozembed, not mozilla-gtkmozembed.
+	Fixes #311642.  Thanks Joseph Sacco and James Henstridge.
+
 === 2.11.3 ===
 2005-07-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
