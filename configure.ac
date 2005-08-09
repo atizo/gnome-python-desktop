@@ -28,6 +28,8 @@ m4_define(libnautilus_burn_required_version,  2.11.1)
 m4_define(libgda_required_version,            1.2.0)
 m4_define(gksu_required_version,              1.2.5)
 m4_define(gksuui_required_version,            1.0.3)
+m4_define(mediaprofiles_required_version,     2.10.0)
+m4_define(gconf_required_version,             2.10.0)
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -315,6 +317,18 @@ if test -n "$export_dynamic"; then
   GKSUUI_LIBS=`echo $GKSUUI_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the mediaprofiles module?
+build_mediaprofiles=false
+PKG_CHECK_MODULES(MEDIAPROFILES, [gnome-media-profiles >= mediaprofiles_required_version
+                           pygtk-2.0 >= pygtk_required_version
+                           gconf-2.0 >= gconf_required_version],
+  build_mediaprofiles=true,
+  build_mediaprofiles=false)
+AM_CONDITIONAL(BUILD_MEDIAPROFILES, $build_mediaprofiles)
+if test -n "$export_dynamic"; then
+  MEDIAPROFILES_LIBS=`echo $MEDIAPROFILES_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 dnl commented because it causes compilation problems in egg/recent
@@ -341,6 +355,7 @@ AC_CONFIG_FILES(
   gda/Makefile
   gda/pygda-1.2.pc
   gksu/Makefile
+  mediaprofiles/Makefile
   gnome-python-extras-2.0.pc
   docs/Makefile
   docs/gtksourceview/Makefile
@@ -371,6 +386,7 @@ $build_nautilusburn      && echo     nautilusburn
 $build_gda               && echo     gda
 $build_gksu              && echo     gksu
 $build_gksuui            && echo     gksu.ui
+$build_mediaprofiles     && echo     mediaprofiles
 echo
 
 echo "The following modules will NOT be built:"
@@ -392,3 +408,4 @@ $build_nautilusburn      || echo     nautilusburn
 $build_gda               || echo     gda
 $build_gksu              || echo     gksu
 $build_gksuui            || echo     gksu.ui
+$build_mediaprofiles     || echo     mediaprofiles

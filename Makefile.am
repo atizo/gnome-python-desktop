@@ -49,6 +49,9 @@ if BUILD_GDA
   SUBDIRS += gda
 endif
 
+if BUILD_MEDIAPROFILES
+  SUBDIRS += mediaprofiles
+endif
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
@@ -84,6 +87,7 @@ EXTRA_DIST = \
   examples/gtkspell/test.py \
   examples/gtkspell/gtkspell.py \
   examples/gdl/gdl_test.py \
+  examples/mediaprofiles/profiles.py \
   examples/nautilusburn/blank_disc.py \
   examples/nautilusburn/drive_selection.py \
   examples/nautilusburn/write_iso.py

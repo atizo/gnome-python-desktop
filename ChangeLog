@@ -1,3 +1,20 @@
+2005-08-09  Raphael Slinckx  <rslinckx@cvs.gnome.org>
+
+	* AUTHORS:
+	* Makefile.am:
+	* configure.ac:
+	* examples/mediaprofiles/profiles.py:
+	* mediaprofiles/.cvsignore:
+	* mediaprofiles/Makefile.am:
+	* mediaprofiles/mediaprofiles.defs:
+	* mediaprofiles/mediaprofiles.override:
+	* mediaprofiles/mediaprofilesmodule.c:
+
+	Add python bindings for the gnome-media's 
+	gnome-media-profiles package. This allows to retreive
+	audio compression preferences from gconf, used for example
+	by Sound Juicer. See example file for usage.
+
 2005-07-27  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: In case --with-mozpackage option is given, look
