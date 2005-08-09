@@ -1,3 +1,12 @@
+Overview of Changes from gnome-python-extras 2.11.3 to gnome-python-extras 2.11.4
+=================================================================================
+* general
+ - Fix --with-mozpackage configure option (Gustavo)
+* New modules
+ - New mediaprofiles module: python bindings for the gnome-media's
+   gnome-media-profiles package (Raphael Slinckx)
+
+
 Overview of Changes from gnome-python-extras 2.11.2 to gnome-python-extras 2.11.3
 =================================================================================
 * New modules

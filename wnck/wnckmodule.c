@@ -1,4 +1,5 @@
 /* -*- Mode: C; c-basic-offset: 4 -*- */
+#include <Python.h>
 
 #ifdef HAVE_CONFIG_H
 #include "config.h"

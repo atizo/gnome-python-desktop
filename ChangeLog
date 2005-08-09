@@ -1,3 +1,15 @@
+=== 2.11.4 ===
+2005-08-09  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnckmodule.c: idem.
+
+	* gtkhtml2/gtkhtml2module.c: Add #include <Python.h> at the top to
+	avoid preprocessor warning.
+
+	* NEWS: Update.
+
+	* configure.ac: Bump version to 2.11.4.
+
 2005-08-09  Raphael Slinckx  <rslinckx@cvs.gnome.org>
 
 	* AUTHORS:
