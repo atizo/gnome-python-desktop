@@ -127,12 +127,12 @@
 
 ;; From /home/kikidonk/cvs/gnome/gnome-media/profiles/audio-profile-choose.h
 
-(define-function choose_window
+(define-function chooser_combo
   (c-name "gm_audio_profile_choose_new")
   (return-type "GtkWidget*")
 )
 
-(define-function choose_window_get_active
+(define-function chooser_combo_get_profile
   (c-name "gm_audio_profile_choose_get_active")
   (return-type "GMAudioProfile*")
   (parameters
@@ -140,7 +140,7 @@
   )
 )
 
-(define-function choose_window_set_active
+(define-function chooser_combo_set_profile
   (c-name "gm_audio_profile_choose_set_active")
   (return-type "gboolean")
   (parameters
