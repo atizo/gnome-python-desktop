@@ -6,7 +6,7 @@
 #include <pygobject.h>
 #include <pygtk/pygtk.h>
 
-#include <gnome-media/profiles/gnome-media-profiles.h>
+#include <profiles/gnome-media-profiles.h>
 
 void pymediaprofiles_register_classes(PyObject *d);
 extern PyMethodDef pymediaprofiles_functions[];

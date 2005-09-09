@@ -2,7 +2,7 @@
 headers
 #define NO_IMPORT_PYGOBJECT
 #include "pygobject.h"
-#include <gnome-media/profiles/gnome-media-profiles.h>
+#include <profiles/gnome-media-profiles.h>
 %%
 modulename mediaprofiles
 %%
