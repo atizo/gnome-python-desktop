@@ -4,6 +4,9 @@ INCLUDES = $(PYTHON_INCLUDES) $(MEDIAPROFILES_CFLAGS) $(PYGTK_CFLAGS)
 
 EXTRA_DIST = mediaprofiles.defs mediaprofiles.override
 
+defsdir = $(datadir)/pygtk/2.0/defs
+defs_DATA = mediaprofiles.defs
+
 pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 

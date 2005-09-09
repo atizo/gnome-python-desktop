@@ -4,6 +4,9 @@ INCLUDES = $(PYTHON_INCLUDES) $(GTKSOURCEVIEW_CFLAGS) $(PYGTK_CFLAGS)
 
 EXTRA_DIST = gtksourceview.defs gtksourceview.override
 
+defsdir = $(datadir)/pygtk/2.0/defs
+defs_DATA = gtksourceview.defs
+
 pkgpythondir = $(pyexecdir)/gtk-2.0
 pkgpyexecdir = $(pyexecdir)/gtk-2.0
 
