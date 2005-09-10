@@ -1,3 +1,25 @@
+2005-09-10  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gtksourceview/gtksourceview.override
+	(_wrap_gtk_source_view_new): Update to new constructor API.
+
+	* gtkmozembed/gtkmozembed.defs (gtk_moz_embed_set_comp_path):
+	renamed to set_comp_path.
+	(gtk_moz_embed_set_profile_path): renamed to set_profile_path.
+
+	* gtksourceview/gtksourceview.defs
+	(gtk_source_iter_forward_search): renamed to
+	source_iter_forward_search.
+	(gtk_source_iter_backward_search): renamed to
+	source_iter_backward_search.
+	(gtk_source_style_scheme_get_default): renamed to
+	source_style_scheme_get_default.
+	(gtk_source_iter_find_matching_bracket): renamed to
+	source_iter_find_matching_bracket.
+
+	* gtksourceview/gtksourceview.override
+	(_wrap_gtk_source_buffer_new): Update to new constructor API.
+
 2005-09-09  Raphael Slinckx  <rslinckx@cvs.gnome.org>
 
 	* mediaprofiles/mediaprofiles.override:

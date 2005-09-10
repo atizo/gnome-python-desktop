@@ -78,17 +78,18 @@ _wrap_gtk_source_view_new (PyGObject *self, PyObject *args, PyObject *kwargs)
         return -1;
     
     if (buffer)
-        self->obj = (GObject *)gtk_source_view_new_with_buffer (GTK_SOURCE_BUFFER(buffer->obj));
+        pygobject_construct(self, "buffer", buffer->obj);
     else
-        self->obj = (GObject *)gtk_source_view_new ();
+        pygobject_construct(self, NULL);
     
     if (!self->obj) {
         PyErr_SetString (PyExc_RuntimeError, "could not create GtkSourceView object");
         return -1;
     }
-    pygobject_register_wrapper ((PyObject *)self);
     return 0;
 }
+%%
+new-constructor GTK_TYPE_SOURCE_VIEW
 %%
 override gtk_source_buffer_new
 
@@ -97,23 +98,27 @@ _wrap_gtk_source_buffer_new (PyGObject *self, PyObject *args, PyObject *kwargs)
 {
     static char *kwlist[] = { "table", "lang", NULL };
     PyGObject *table = NULL, *lang = NULL;
+
     if (!PyArg_ParseTupleAndKeywords (args, kwargs, "|O!O!:GtkSourceBuffer.__init__", kwlist,
             &PyGtkSourceTagTable_Type, &table, &PyGtkSourceLanguage_Type, &lang))
         return -1;
-    
-    if (lang)
-        self->obj = (GObject *)gtk_source_buffer_new_with_language (GTK_SOURCE_LANGUAGE(lang->obj));
-    else if (table)
-    	self->obj = (GObject *)gtk_source_buffer_new (GTK_SOURCE_TAG_TABLE(table->obj));
+
+    if (lang && !table)
+        pygobject_construct(self, "language", lang->obj, NULL);
+    else if (!lang && table)
+        pygobject_construct(self, "tag_table", table->obj, NULL);
+    else if (lang && table)
+        pygobject_construct(self, "language", lang->obj, "tag_table", table->obj, NULL);
     else
-    	self->obj = (GObject *)gtk_source_buffer_new (NULL);
+        pygobject_construct(self, NULL);
     if (!self->obj) {
         PyErr_SetString (PyExc_RuntimeError, "could not create GtkSourceBuffer object");
         return -1;
     }
-    pygobject_register_wrapper ((PyObject *)self);
     return 0;
 }
+%%
+new-constructor GTK_TYPE_SOURCE_BUFFER
 %%
 override gtk_source_print_job_new
 
@@ -389,3 +394,131 @@ _wrap_gtk_source_print_job_get_text_margins (PyGObject *self)
     return Py_BuildValue("(dddd)", top, bottom, left, right);
 }
 %%
+override gtk_source_iter_forward_search_deprecated kwargs
+static PyObject *
+_wrap_gtk_source_iter_forward_search_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "iter", "str", "flags", "match_start", "match_end", "limit", NULL };
+    PyObject *py_iter, *py_flags = NULL, *py_match_start, *py_match_end, *py_limit;
+    char *str;
+    GtkSourceSearchFlags flags;
+    GtkTextIter *iter = NULL, *match_start = NULL, *match_end = NULL, *limit = NULL;
+    int ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OsOOOO:gtk_source_iter_forward_search", kwlist, &py_iter, &str, &py_flags, &py_match_start, &py_match_end, &py_limit))
+        return NULL;
+    if (PyErr_Warn(PyExc_DeprecationWarning, "renamed to gtksourceview.source_iter_forward_search") < 0)
+        return NULL;
+    if (pyg_boxed_check(py_iter, GTK_TYPE_TEXT_ITER))
+        iter = pyg_boxed_get(py_iter, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "iter should be a GtkTextIter");
+        return NULL;
+    }
+    if (pyg_flags_get_value(GTK_TYPE_SOURCE_SEARCH_FLAGS, py_flags, (gint *)&flags))
+        return NULL;
+    if (pyg_boxed_check(py_match_start, GTK_TYPE_TEXT_ITER))
+        match_start = pyg_boxed_get(py_match_start, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "match_start should be a GtkTextIter");
+        return NULL;
+    }
+    if (pyg_boxed_check(py_match_end, GTK_TYPE_TEXT_ITER))
+        match_end = pyg_boxed_get(py_match_end, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "match_end should be a GtkTextIter");
+        return NULL;
+    }
+    if (pyg_boxed_check(py_limit, GTK_TYPE_TEXT_ITER))
+        limit = pyg_boxed_get(py_limit, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "limit should be a GtkTextIter");
+        return NULL;
+    }
+    ret = gtk_source_iter_forward_search(iter, str, flags, match_start, match_end, limit);
+    return PyBool_FromLong(ret);
+
+}
+%%
+override gtk_source_iter_backward_search_deprecated kwargs
+static PyObject *
+_wrap_gtk_source_iter_backward_search_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "iter", "str", "flags", "match_start", "match_end", "limit", NULL };
+    PyObject *py_iter, *py_flags = NULL, *py_match_start, *py_match_end, *py_limit;
+    char *str;
+    GtkSourceSearchFlags flags;
+    GtkTextIter *iter = NULL, *match_start = NULL, *match_end = NULL, *limit = NULL;
+    int ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "OsOOOO:gtk_source_iter_backward_search", kwlist, &py_iter, &str, &py_flags, &py_match_start, &py_match_end, &py_limit))
+        return NULL;
+    if (PyErr_Warn(PyExc_DeprecationWarning, "renamed to gtksourceview.source_iter_backward_search") < 0)
+        return NULL;
+    if (pyg_boxed_check(py_iter, GTK_TYPE_TEXT_ITER))
+        iter = pyg_boxed_get(py_iter, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "iter should be a GtkTextIter");
+        return NULL;
+    }
+    if (pyg_flags_get_value(GTK_TYPE_SOURCE_SEARCH_FLAGS, py_flags, (gint *)&flags))
+        return NULL;
+    if (pyg_boxed_check(py_match_start, GTK_TYPE_TEXT_ITER))
+        match_start = pyg_boxed_get(py_match_start, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "match_start should be a GtkTextIter");
+        return NULL;
+    }
+    if (pyg_boxed_check(py_match_end, GTK_TYPE_TEXT_ITER))
+        match_end = pyg_boxed_get(py_match_end, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "match_end should be a GtkTextIter");
+        return NULL;
+    }
+    if (pyg_boxed_check(py_limit, GTK_TYPE_TEXT_ITER))
+        limit = pyg_boxed_get(py_limit, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "limit should be a GtkTextIter");
+        return NULL;
+    }
+    ret = gtk_source_iter_backward_search(iter, str, flags, match_start, match_end, limit);
+    return PyBool_FromLong(ret);
+
+}
+%%
+override gtk_source_iter_find_matching_bracket_deprecated kwargs
+static PyObject *
+_wrap_gtk_source_iter_find_matching_bracket_deprecated(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "iter", NULL };
+    PyObject *py_iter;
+    int ret;
+    GtkTextIter *iter = NULL;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "O:gtk_source_iter_find_matching_bracket", kwlist, &py_iter))
+        return NULL;
+    if (PyErr_Warn(PyExc_DeprecationWarning, "renamed to gtksourceview.source_iter_find_matching_bracket") < 0)
+        return NULL;
+    if (pyg_boxed_check(py_iter, GTK_TYPE_TEXT_ITER))
+        iter = pyg_boxed_get(py_iter, GtkTextIter);
+    else {
+        PyErr_SetString(PyExc_TypeError, "iter should be a GtkTextIter");
+        return NULL;
+    }
+    ret = gtk_source_iter_find_matching_bracket(iter);
+    return PyBool_FromLong(ret);
+
+}
+%%
+override gtk_source_style_scheme_get_default_deprecated noargs
+static PyObject *
+_wrap_gtk_source_style_scheme_get_default_deprecated(PyObject *self)
+{
+    GtkSourceStyleScheme *ret;
+
+    if (PyErr_Warn(PyExc_DeprecationWarning, "renamed to gtksourceview.source_style_scheme_get_default") < 0)
+        return NULL;
+    ret = gtk_source_style_scheme_get_default();
+    /* pygobject_new handles NULL checking */
+    return pygobject_new((GObject *)ret);
+}
