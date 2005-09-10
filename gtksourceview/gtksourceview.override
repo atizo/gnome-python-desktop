@@ -78,7 +78,7 @@ _wrap_gtk_source_view_new (PyGObject *self, PyObject *args, PyObject *kwargs)
         return -1;
     
     if (buffer)
-        pygobject_construct(self, "buffer", buffer->obj);
+        pygobject_construct(self, "buffer", buffer->obj, NULL);
     else
         pygobject_construct(self, NULL);
     
