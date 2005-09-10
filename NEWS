@@ -1,3 +1,18 @@
+Overview of Changes from gnome-python-extras 2.11.4 to gnome-python-extras 2.12.0
+=================================================================================
+* mediaprofiles
+ - Change names of a few functions (Raphael Slinckx)
+ - Install mediaprofiles.defs (Gustavo)
+ - Fix the include header, remove gnome-media prefix (Raphael)
+* gtkmozembed
+ - Install gtkmozembed.defs (Gustavo)
+ - A couple of functions renamed, removing silly gtk_moz_embed_ prefix (Gustavo)
+* gtksourceview
+ - Install gtksourceview.defs (Gustavo)
+ - A couple of functions renamed (Gustavo)
+ - SourceView and SourceBuffer constructors updated to allow sublcassing (Gustavo)
+
+
 Overview of Changes from gnome-python-extras 2.11.3 to gnome-python-extras 2.11.4
 =================================================================================
 * general

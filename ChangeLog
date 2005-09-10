@@ -1,4 +1,11 @@
+=== 2.12.0 ===
 2005-09-10  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* docs/gtkmozembed/gtkmozembed-gtkmozembed.xml: Fix open-uri
+	parameter, should be 'uri' instead of 'visibility'.  Thanks
+	Baptiste Mille-Mathias.
+
+	* configure.ac: Version 2.12.0
 
 	* gtksourceview/gtksourceview.override
 	(_wrap_gtk_source_view_new): Update to new constructor API.
