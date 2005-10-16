@@ -787,9 +787,9 @@
   (return-type "gboolean")
 )
 
-(define-method demands_attention
+(define-method needs_attention
   (of-object "WnckWindow")
-  (c-name "wnck_window_demands_attention")
+  (c-name "wnck_window_needs_attention")
   (return-type "gboolean")
 )
 
