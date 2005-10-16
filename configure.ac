@@ -357,6 +357,7 @@ AC_CONFIG_FILES(
   gksu/Makefile
   mediaprofiles/Makefile
   gnome-python-extras-2.0.pc
+  tests/Makefile
   docs/Makefile
   docs/gtksourceview/Makefile
   docs/gtkmozembed/Makefile

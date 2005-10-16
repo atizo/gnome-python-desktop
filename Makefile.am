@@ -1,5 +1,5 @@
 
-SUBDIRS = gksu egg docs
+SUBDIRS = gksu egg docs tests
 
 if BUILD_GNOMEPRINT
   SUBDIRS += gnomeprint

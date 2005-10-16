@@ -1,3 +1,14 @@
+2005-10-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnck.defs (needs_attention): wnck_window_needs_attention
+	was renamed to wnck_window_needs_attention.  Thanks to Dave
+	Malcolm.
+
+	* tests/: Add test suite.  For now, all it does is import each
+	module, to catch undefined symbol errors.
+
+	* configure.ac, Makefile.am: Add tests dir.
+
 === 2.12.0 ===
 2005-09-10  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
