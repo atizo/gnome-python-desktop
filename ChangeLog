@@ -1,3 +1,9 @@
+2005-10-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gda/pygdavalue_conversions.c: Disable support for date/time
+	values if Python version <= 2.3, so that it at least compiles on
+	python23.
+
 2005-10-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* wnck/wnck.defs (needs_attention): wnck_window_needs_attention
