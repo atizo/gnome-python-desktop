@@ -1,3 +1,18 @@
+2005-10-23  Murray Cumming <murrayc@murrayc.com>
+
+	* configure.ac: Require libgda-2.0 instead of libgda (1.2).
+	* gda/Makefile.am:
+	* gda/pygda-1.2.pc.in:
+	* gda/pygda-2.0.pc.in: Renamed the file, so that the pygda 
+	API version matches the libgda version. Require libgda-2.0 
+	instead of libgda (1.2).
+	* gda/gda.defs: Regenerate with h2defs.py
+	* gda/gda.override: Do not include xgl stuff that was removed 
+	from libgda.
+	* gda/pygdavalue_conversions.c: (pygda_value_from_pyobject),
+	(pygda_value_as_pyobject): Update for changed GdaValue API and 
+	GdaConnection API.
+
 2005-10-18  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* gda/pygdavalue_conversions.c: Disable support for date/time
