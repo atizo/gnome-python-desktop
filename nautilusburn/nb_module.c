@@ -30,14 +30,14 @@ extern PyMethodDef nautilus_burn_functions[];
 static PyObject *
 nb_get_drives_list (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	int recorders_only, add_image, index, len;
+	int recorders_only = 0, add_image = 0, index, len;
 	GList *cds, *iter;
 	PyObject *cds_tuple, *cd;
 	
 	static char *kws[] = {"recorders_only", "add_image", NULL};
 	/* defaults to 0 */
 	add_image = 0;
-	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "i|i:get_drives_list", kws, &recorders_only,
+	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "|ii:get_drives_list", kws, &recorders_only,
 			&add_image))
 		return NULL;
 	cds = nautilus_burn_drive_get_list (recorders_only, add_image);
@@ -71,6 +71,7 @@ nb_bytes_to_seconds (PyObject *self, PyObject *args)
 
 static PyMethodDef nb_methods[] = {
 	{"get_drives_list", (PyCFunction) nb_get_drives_list, METH_VARARGS | METH_KEYWORDS,
+		"get_drives_list(recorders_only = False, add_image = False)\n" \
 		"Scans for available drives."},
 	{"bytes_to_seconds", (PyCFunction) nb_bytes_to_seconds, METH_VARARGS, "Converts a number of bytes to seconds, usefull for converting the Drive.get_media_size into time."},
 	{NULL}

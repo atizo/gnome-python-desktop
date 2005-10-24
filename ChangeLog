@@ -1,3 +1,15 @@
+2005-10-24  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
+
+	* nautilusburn/nb_module.c: Add docstring to get_drives_list.
+	(nb_get_drives_list): Make first parameter optional.  Fix default
+	value for second parameter.
+
+	* nautilusburn/nautilus_burn.override
+	(_wrap_nautilus_burn_recorder_write_tracks): Unblock threads.
+	(_wrap_nautilus_burn_recorder_blank_disc): idem.
+
+	Reviewed by Gustavo J. A. M. Carneiro.
+
 2005-10-23  Murray Cumming <murrayc@murrayc.com>
 
 	* configure.ac: Require libgda-2.0 instead of libgda (1.2).
