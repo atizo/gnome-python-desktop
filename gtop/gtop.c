@@ -946,6 +946,7 @@ static inline PyObject* map_entry_to_Struct(const glibtop_map_entry *e)
 
 	my_dict_add_and_decref(d, "start",	PyL_ULL(e->start));
 	my_dict_add_and_decref(d, "end",		PyL_ULL(e->end));
+	my_dict_add_and_decref(d, "size",	PyL_ULL(e->end - e->start));
 	my_dict_add_and_decref(d, "offset",	PyL_ULL(e->offset));
 	my_dict_add_and_decref(d, "perm",		PyL_ULL(e->perm));
 	my_dict_add_and_decref(d, "inode",	PyL_ULL(e->inode));
