@@ -140,6 +140,17 @@ static PyObject* struct_items(PyObject *self, PyObject* args)
 }
 
 
+static PyObject* struct_dict(PyObject *self, PyObject* args)
+{
+	StructObject * const that = (StructObject*) self;
+
+	if(!PyArg_ParseTuple(args, ""))
+		return NULL;
+
+	return PyDict_Copy(that->dict);
+}
+
+
 
 /*
  * Struct Operators
@@ -244,6 +255,7 @@ static int struct_compare(PyObject *rhs, PyObject *lhs)
 static PyMethodDef Struct_methods[] =
 {
 	{"items", struct_items, METH_VARARGS, NULL},
+	{"dict",  struct_dict,  METH_VARARGS, NULL},
 	{NULL, NULL, 0, NULL}
 };
 

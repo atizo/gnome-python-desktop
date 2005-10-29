@@ -1,3 +1,9 @@
+2005-10-29  Benoît Dejean  <benoit@placenet.org>
+
+	* gtop.c: (struct_dict): Added method to get a copy of struct as
+	a dict. This is a shortcut for dict(s.items()).
+	struct remains immutable.
+
 2005-10-25  Benoît Dejean  <benoit@placenet.org>
 
 	* gtop.c: (map_entry_to_Struct):
