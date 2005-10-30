@@ -1,3 +1,19 @@
+Overview of Changes from 2.12.0 to 2.12.1
+==============================================================================
+* nautilusburn
+ - Unblock threads around recording function (Tiago Cogumbreiro)
+ - Some docstrings and parameter default values fixed (Tiago)
+* gda
+ - Make it compile with python 2.3, with disabled data/time types (Gustavo)
+* wnck
+ - wnck_window_needs_attention renamed to wnck_window_needs_attention
+(Dave Malcolm)
+* gnomeapplet
+ - Wrap panel_applet_get_background (Gustavo)
+* egg.recent
+ - Wrap egg_recent_model_get_list (Gustavo)
+
+
 Overview of Changes from gnome-python-extras 2.11.4 to gnome-python-extras 2.12.0
 =================================================================================
 * mediaprofiles

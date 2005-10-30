@@ -58,7 +58,7 @@
     </methodsynopsis> 
   
     <methodsynopsis language="python">
-        <methodname><link linkend="method-gnomeprintconfig--get-lenght">get_lenght</link></methodname>
+        <methodname><link linkend="method-gnomeprintconfig--get-length">get_lenght</link></methodname>
         <methodparam><parameter role="keyword">key</parameter></methodparam>
         <methodparam><parameter role="keyword">val</parameter></methodparam>
         <methodparam><parameter role="keyword">unit</parameter></methodparam>
@@ -83,7 +83,7 @@
     </methodsynopsis> 
     
     <methodsynopsis language="python">
-        <methodname><link linkend="method-gnomeprintconfig--set-lenght">set_lenght</link></methodname>
+        <methodname><link linkend="method-gnomeprintconfig--set-length">set_lenght</link></methodname>
         <methodparam><parameter role="keyword">key</parameter></methodparam>
         <methodparam><parameter role="keyword">val</parameter></methodparam>
         <methodparam><parameter role="keyword">unit</parameter></methodparam>
@@ -321,10 +321,10 @@
         </para>
     </refsect2>
 
-    <refsect2 id="method-gnomeprintconfig--get-lenght">
-        <title>gnomeprint.Config.get_lenght</title>
+    <refsect2 id="method-gnomeprintconfig--get-length">
+        <title>gnomeprint.Config.get_length</title>
         <programlisting><methodsynopsis language="python">
-                <methodname>get_lenght</methodname>
+                <methodname>get_length</methodname>
                 <methodparam><parameter role="keyword">key</parameter></methodparam>
                 <methodparam><parameter role="keyword">val</parameter></methodparam>
                 <methodparam><parameter role="keyword">unit</parameter></methodparam>
@@ -351,7 +351,7 @@
         </variablelist>
         
         <para>
-            The <methodname>get_lenght</methodname>() method gets the value of key key from the 
+            The <methodname>get_length</methodname>() method gets the value of key key from the 
             <link linkend="class-gnomeprintconfig"><classname>gnomeprint.Config</classname></link> object. Converts values to their double equivalent. The double 
             value will be stored in the variable val and the units will be stored in unit.
         </para>
@@ -444,10 +444,10 @@
         </para>
     </refsect2>
     
-    <refsect2 id="method-gnomeprintconfig--set-lenght">
-        <title>gnomeprint.Config.set_lenght</title>
+    <refsect2 id="method-gnomeprintconfig--set-length">
+        <title>gnomeprint.Config.set_length</title>
         <programlisting><methodsynopsis language="python">
-                <methodname>set_lenght</methodname>
+                <methodname>set_length</methodname>
                 <methodparam><parameter role="keyword">key</parameter></methodparam>
                 <methodparam><parameter role="keyword">val</parameter></methodparam>
                 <methodparam><parameter role="keyword">unit</parameter></methodparam>
@@ -474,8 +474,8 @@
         </variablelist>
         
         <para>
-            The <methodname>set_lenght</methodname>() method sets a double value and the units it is using. This should be used in conjunction with 
-            <link linkend="method-gnomeprintconfig--get-lenght"><methodname>get_lenght</methodname></link> 
+            The <methodname>set_length</methodname>() method sets a double value and the units it is using. This should be used in conjunction with 
+            <link linkend="method-gnomeprintconfig--get-length"><methodname>get_lenght</methodname></link> 
         </para>
     </refsect2>
     

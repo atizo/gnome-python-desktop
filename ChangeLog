@@ -1,3 +1,19 @@
+2005-10-30  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* examples/applet/applet.py (sample_factory): print
+	applet.get_background(), to test.
+
+	* docs/gnomeprint/gnomeprint-gnomeprintconfig.xml:
+	s/lenght/length/.  Thanks Michael R Head.  Closes #314304.
+
+2005-10-30  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* egg/recent/eggrecent.override (_wrap_egg_recent_model_get_list):
+	Implement this. Closes #319960.
+
+	* gnomeapplet/applet.override (_wrap_panel_applet_get_background):
+	Implement this.  Closes #315989.
+
 2005-10-24  Tiago Cogumbreiro  <cogumbreiro@gmail.com>
 
 	* nautilusburn/nb_module.c: Add docstring to get_drives_list.

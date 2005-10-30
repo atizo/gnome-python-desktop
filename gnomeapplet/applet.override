@@ -245,3 +245,30 @@ _wrap_panel_applet_new(PyGObject *self, PyObject *args, PyObject *kwargs)
     pygobject_register_wrapper((PyObject *)self);
     return 0;
 }
+%%
+override panel_applet_get_background noargs
+static PyObject *
+_wrap_panel_applet_get_background(PyGObject *self)
+{
+    PanelAppletBackgroundType ret;
+    GdkColor color;
+    GdkPixmap *pixmap = NULL;
+    PyObject *pyretval = NULL;
+
+    ret = panel_applet_get_background(PANEL_APPLET(self->obj), &color, &pixmap);
+
+    switch (ret)
+    {
+    case PANEL_COLOR_BACKGROUND:
+        return pyg_boxed_new(GDK_TYPE_COLOR, &color, TRUE, TRUE);
+    case PANEL_NO_BACKGROUND:
+        Py_INCREF(Py_None);
+        return Py_None;
+    case PANEL_PIXMAP_BACKGROUND:
+        pyretval = pygobject_new(G_OBJECT(pixmap));
+        g_object_unref(G_OBJECT(pixmap));
+        return pyretval;
+    }
+    PyErr_SetString(PyExc_RuntimeError, "strange value returned by panel_applet_get_background");
+    return NULL;
+}

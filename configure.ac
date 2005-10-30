@@ -4,7 +4,7 @@ AC_PREREQ(2.52)
 dnl the gnome-python version number
 m4_define(gnome_python_extras_major_version, 2)
 m4_define(gnome_python_extras_minor_version, 12)
-m4_define(gnome_python_extras_micro_version, 0)
+m4_define(gnome_python_extras_micro_version, 1)
 m4_define(gnome_python_extras_version, gnome_python_extras_major_version.gnome_python_extras_minor_version.gnome_python_extras_micro_version)
 
 dnl required versions of other packages

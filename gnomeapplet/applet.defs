@@ -62,8 +62,8 @@
   (c-name "panel_applet_get_background")
   (return-type "int") ; "PanelAppletBackgroundType")
   (parameters
-    '("GdkColor*" "color")
-    '("GdkPixmap**" "pixmap")
+    ;'("GdkColor*" "color")
+    ;'("GdkPixmap**" "pixmap")
   )
 )
 
