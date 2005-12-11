@@ -1,3 +1,16 @@
+Overview of Changes from 2.12.1 to 2.13.0
+==============================================================================
+* gda
+ - Require libgda 2.0 instead of 1.2 (Murray Cumming)
+* gnomepanel
+ - Wrap panel_applet_get_background (Gustavo Carneiro)
+* egg.recent
+ - Wrap egg_recent_model_get_list (Gustavo)
+* wnck
+ - Wrap wnck_tasklist_get_size_hint_list (Gustavo)
+ - Double-free fixes (Alex Graveley)
+
+
 Overview of Changes from 2.12.0 to 2.12.1
 ==============================================================================
 * nautilusburn

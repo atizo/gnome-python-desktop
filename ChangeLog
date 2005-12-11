@@ -1,4 +1,9 @@
+=== 2.13.0 ===
 2005-12-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.13.0.
+
+	* NEWS: Update.
 
 	* wnck/wnck.override (_wrap_wnck_tasklist_get_size_hint_list):
 	override/impl.
