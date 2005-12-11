@@ -1,3 +1,13 @@
+2005-12-11  Alex Graveley  <alex@beatniksoftware.com>
+
+	* wnck/wnck.override (_wrap_wnck_application_get_windows)
+	(_wrap_wnck_screen_get_windows)
+	(_wrap_wnck_screen_get_windows_stacked)
+	(_wrap_wnck_class_group_get_windows): Bug 323775: wnck bindings
+	free lists they don't own.
+
+	Reviewed by Gustavo Carneiro.
+
 2005-10-30  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* examples/applet/applet.py (sample_factory): print
