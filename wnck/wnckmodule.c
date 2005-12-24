@@ -26,4 +26,5 @@ initwnck (void)
 	d = PyModule_GetDict (m);
 
 	pywnck_register_classes (d);
+        pywnck_add_constants(m, "WNCK_");
 }

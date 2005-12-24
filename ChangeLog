@@ -1,3 +1,8 @@
+2005-12-24  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* wnck/wnckmodule.c (initwnck): Add missing call to
+	pywnck_add_constants to register flags/enums.
+
 === 2.13.0 ===
 2005-12-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
