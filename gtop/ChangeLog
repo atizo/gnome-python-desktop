@@ -1,3 +1,9 @@
+2005-12-30  Benoît Dejean  <benoit@placenet.org>
+
+	* gtop.c: (map_entry_to_Struct):
+
+	Added smap support.
+
 2005-10-29  Benoît Dejean  <benoit@placenet.org>
 
 	* gtop.c: (struct_dict): Added method to get a copy of struct as

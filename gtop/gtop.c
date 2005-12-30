@@ -957,13 +957,20 @@ static inline PyObject* map_entry_to_Struct(const glibtop_map_entry *e)
 	d = PyDict_New();
 
 	my_dict_add_and_decref(d, "start",	PyL_ULL(e->start));
-	my_dict_add_and_decref(d, "end",		PyL_ULL(e->end));
-	my_dict_add_and_decref(d, "size",	PyL_ULL(e->end - e->start));
+	my_dict_add_and_decref(d, "end",	PyL_ULL(e->end));
+	my_dict_add_and_decref(d, "size",	PyL_ULL(e->size));
 	my_dict_add_and_decref(d, "offset",	PyL_ULL(e->offset));
-	my_dict_add_and_decref(d, "perm",		PyL_ULL(e->perm));
+	my_dict_add_and_decref(d, "perm",	PyL_ULL(e->perm));
 	my_dict_add_and_decref(d, "inode",	PyL_ULL(e->inode));
 	my_dict_add_and_decref(d, "device",	PyL_ULL(e->device));
 	my_dict_add_and_decref(d, "filename",	PyS_S(e->filename));
+
+
+	my_dict_add_and_decref(d, "rss",	   PyL_ULL(e->rss));
+	my_dict_add_and_decref(d, "shared_clean",  PyL_ULL(e->shared_clean));
+	my_dict_add_and_decref(d, "shared_dirty",  PyL_ULL(e->shared_dirty));
+	my_dict_add_and_decref(d, "private_clean", PyL_ULL(e->private_clean));
+	my_dict_add_and_decref(d, "private_dirty", PyL_ULL(e->private_dirty));
 
 	return _struct_new(d);
 }
