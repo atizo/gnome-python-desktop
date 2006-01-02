@@ -1,3 +1,7 @@
+2006-01-02  Benoît Dejean  <benoit@placenet.org>
+
+	* configure.ac: Requires libgtop 2.13.0.
+
 2005-12-24  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* wnck/wnckmodule.c (initwnck): Add missing call to
