@@ -57,6 +57,7 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 
 EXTRA_DIST = \
+  MAINTAINERS \
   COPYING.GPL COPYING.LGPL \
   gnome-python-extras-2.0.pc.in \
   ltihooks.py \

@@ -1,3 +1,12 @@
+=== 2.13.1 ===
+2006-01-02  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.13.1.
+
+	* NEWS: Update.
+
+	* MAINTAINERS: Add.
+
 2006-01-02  Benoît Dejean  <benoit@placenet.org>
 
 	* configure.ac: Requires libgtop 2.13.0.
