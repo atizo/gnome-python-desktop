@@ -1,3 +1,12 @@
+2006-01-11  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* gnomeapplet/applet.override: Import gtk.Widget type.
+
+	* configure.ac: Require libpanelapplet >= 2.13.4 now.
+
+	* gnomeapplet/applet.defs: Declare wrapper for
+	panel_applet_set_background_widget.
+
 === 2.13.1 ===
 2006-01-02  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 

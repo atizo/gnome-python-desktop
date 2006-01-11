@@ -15,7 +15,7 @@ m4_define(pygtk_required_version, pygtk_required_major_version.pygtk_required_mi
 m4_define(glib_required_version,              2.6.0)
 m4_define(gtk_required_version,               2.4.0)
 m4_define(gnome_python_required_version,      2.10.0)
-m4_define(libpanelapplet_required_version,    2.10.0)
+m4_define(libpanelapplet_required_version,    2.13.4)
 m4_define(gtkhtml2_required_version,          2.3.1)
 m4_define(libgnomeprint_required_version,     2.2.0)
 m4_define(libgnomeprintui_required_version,   2.2.0)

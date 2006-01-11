@@ -141,6 +141,15 @@
   )
 )
 
+(define-method set_background_widget
+  (of-object "PanelApplet")
+  (c-name "panel_applet_set_background_widget")
+  (return-type "none")
+  (parameters
+    '("GtkWidget*" "widget")
+  )
+)
+
 (define-function factory_main
   (c-name "panel_applet_factory_main")
   (return-type "int")
