@@ -1,5 +1,20 @@
 2006-01-14  Murray Cumming  <murrayc@murrayc.com>
 
+	* configure.ac:
+	* gda/.cvsignore:
+	* gda/Makefile.am:
+	* gda/gda.defs:
+	* gda/gda.override:
+	* gda/pygda-1.2.pc.in:
+	* gda/pygdavalue_conversions.c: (pygda_value_from_pyobject),
+	(pygda_value_as_pyobject): Revert pygda to wrapping the libgda-1.2 API 
+	instead of the libgda-2.0 API because libgda-2.0 is unlikely to be API-stable 
+	in the next few months. And, because distros package g-p-e as one package, pygda-2.0 
+	would prevent distribution of pygda-1-2, which kills Glom, which is the only thing 
+	that uses pygda.
+
+2006-01-14  Murray Cumming  <murrayc@murrayc.com>
+
 	* configure.ac: Fix the required libgda-2.0 version, because the libgda 
 	version has _decreased_, for laughs.
 

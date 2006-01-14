@@ -25,7 +25,7 @@ m4_define(mozilla_required_version,           1.2b)
 m4_define(firefox_required_version,           1.0)
 m4_define(libgtop_required_version,           2.13.0)
 m4_define(libnautilus_burn_required_version,  2.11.1)
-m4_define(libgda_required_version,            1.3.102)
+m4_define(libgda_required_version,            1.2.0)
 m4_define(gksu_required_version,              1.2.5)
 m4_define(gksuui_required_version,            1.0.3)
 m4_define(mediaprofiles_required_version,     2.10.0)
@@ -287,7 +287,7 @@ fi
 
 dnl should we build the gda module?
 build_gda=false
-PKG_CHECK_MODULES(GDA, [libgda-2.0 >= libgda_required_version pygtk-2.0 >= pygtk_required_version],
+PKG_CHECK_MODULES(GDA, [libgda >= libgda_required_version pygtk-2.0 >= pygtk_required_version],
   build_gda=true,
   build_gda=false)
 AM_CONDITIONAL(BUILD_GDA, $build_gda)
@@ -353,7 +353,7 @@ AC_CONFIG_FILES(
   gtop/Makefile
   nautilusburn/Makefile
   gda/Makefile
-  gda/pygda-2.0.pc
+  gda/pygda-1.2.pc
   gksu/Makefile
   mediaprofiles/Makefile
   gnome-python-extras-2.0.pc
