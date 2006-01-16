@@ -30,6 +30,7 @@ m4_define(gksu_required_version,              1.2.5)
 m4_define(gksuui_required_version,            1.0.3)
 m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(gconf_required_version,             2.10.0)
+m4_define(metacity_required_version,          2.13.13)
 
 AC_INIT(gnome-python-extras, gnome_python_extras_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -329,6 +330,17 @@ if test -n "$export_dynamic"; then
   MEDIAPROFILES_LIBS=`echo $MEDIAPROFILES_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+
+dnl should we build the metacity module
+build_metacity=false
+PKG_CHECK_MODULES(METACITY, libmetacity-private >= metacity_required_version,
+  build_metacity=true,
+  build_metacity=false)
+AM_CONDITIONAL(BUILD_METACITY, $build_metacity)
+if test -n "$export_dynamic"; then
+  METACITY_LIBS=`echo $METACITY_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 dnl commented because it causes compilation problems in egg/recent
@@ -356,6 +368,7 @@ AC_CONFIG_FILES(
   gda/pygda-1.2.pc
   gksu/Makefile
   mediaprofiles/Makefile
+  metacity/Makefile
   gnome-python-extras-2.0.pc
   tests/Makefile
   docs/Makefile
@@ -388,6 +401,7 @@ $build_gda               && echo     gda
 $build_gksu              && echo     gksu
 $build_gksuui            && echo     gksu.ui
 $build_mediaprofiles     && echo     mediaprofiles
+$build_metacity          && echo     metacity
 echo
 
 echo "The following modules will NOT be built:"
@@ -410,3 +424,4 @@ $build_gda               || echo     gda
 $build_gksu              || echo     gksu
 $build_gksuui            || echo     gksu.ui
 $build_mediaprofiles     || echo     mediaprofiles
+$build_metacity          || echo     metacity

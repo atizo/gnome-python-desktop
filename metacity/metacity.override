@@ -1,0 +1,32 @@
+/* -*- Mode: C; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+
+#include "pygobject.h"
+#include <metacity-private/preview-widget.h>
+/* #include <metacity-private/enum-types.h> */
+#include <metacity-private/theme-parser.h>
+
+GType
+meta_theme_get_type(void)
+{
+    static GType type = 0;
+
+    if (!type)
+	type = g_pointer_type_register_static("MetaTheme");
+    return type;
+}
+
+#define META_TYPE_THEME (meta_theme_get_type())
+%%
+modulename metacity
+%%
+import gobject.GObject as PyGObject_Type
+import gtk.gdk.Pixbuf as PyGdkPixbuf_Type
+import gtk.Widget as PyGtkWidget_Type
+import gtk.Bin as PyGtkBin_Type
+%%
+ignore-glob
+ _*u
+ *_get_type

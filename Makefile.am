@@ -53,6 +53,10 @@ if BUILD_MEDIAPROFILES
   SUBDIRS += mediaprofiles
 endif
 
+if BUILD_METACITY
+  SUBDIRS += metacity
+endif
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-extras-2.0.pc
 

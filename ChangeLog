@@ -1,3 +1,15 @@
+2006-01-16  Johan Dahlin  <johan@gnome.org>
+
+	* Makefile.am:
+	* configure.ac:
+	* metacity/.cvsignore:
+	* metacity/Makefile.am:
+	* metacity/metacity.defs:
+	* metacity/metacity.override:
+	* metacity/metacitymodule.c: (initmetacity):
+
+	Add metacity bindings.
+
 2006-01-14  Murray Cumming  <murrayc@murrayc.com>
 
 	* configure.ac:
