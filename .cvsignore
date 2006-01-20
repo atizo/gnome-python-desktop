@@ -14,7 +14,7 @@ config.sub
 configure
 configure.scan
 depcomp
-gnome-python-extras-2.0.pc
+gnome-python-desktop-2.0.pc
 install-sh
 libtool
 ltconfig

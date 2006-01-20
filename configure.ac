@@ -2,10 +2,10 @@
 AC_PREREQ(2.52)
 
 dnl the gnome-python version number
-m4_define(gnome_python_extras_major_version, 2)
-m4_define(gnome_python_extras_minor_version, 13)
-m4_define(gnome_python_extras_micro_version, 2)
-m4_define(gnome_python_extras_version, gnome_python_extras_major_version.gnome_python_extras_minor_version.gnome_python_extras_micro_version)
+m4_define(gnome_python_desktop_major_version, 2)
+m4_define(gnome_python_desktop_minor_version, 13)
+m4_define(gnome_python_desktop_micro_version, 2)
+m4_define(gnome_python_desktop_version, gnome_python_desktop_major_version.gnome_python_desktop_minor_version.gnome_python_desktop_micro_version)
 
 dnl required versions of other packages
 m4_define(pygtk_required_major_version, 2)
@@ -16,35 +16,29 @@ m4_define(glib_required_version,              2.6.0)
 m4_define(gtk_required_version,               2.4.0)
 m4_define(gnome_python_required_version,      2.10.0)
 m4_define(libpanelapplet_required_version,    2.13.4)
-m4_define(gtkhtml2_required_version,          2.3.1)
 m4_define(libgnomeprint_required_version,     2.2.0)
 m4_define(libgnomeprintui_required_version,   2.2.0)
 m4_define(gtksourceview_required_version,     1.1.90)
 m4_define(wnck_required_version,              2.9.92)
-m4_define(mozilla_required_version,           1.2b)
-m4_define(firefox_required_version,           1.0)
 m4_define(libgtop_required_version,           2.13.0)
 m4_define(libnautilus_burn_required_version,  2.11.1)
-m4_define(libgda_required_version,            1.2.0)
-m4_define(gksu_required_version,              1.2.5)
-m4_define(gksuui_required_version,            1.0.3)
 m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(gconf_required_version,             2.10.0)
 m4_define(metacity_required_version,          2.13.13)
 
-AC_INIT(gnome-python-extras, gnome_python_extras_version,
+AC_INIT(gnome-python-desktop, gnome_python_desktop_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
 dnl AC_CONFIG_SRCDIR([gnome/uimodule.c])
 AM_CONFIG_HEADER(config.h)
 
 AM_INIT_AUTOMAKE
 
-AC_DEFINE(GNOME_PYTHON_EXTRAS_MAJOR_VERSION, gnome_python_extras_major_version,
-                                            [Gnome-Python-Extras major version])
-AC_DEFINE(GNOME_PYTHON_EXTRAS_MINOR_VERSION, gnome_python_extras_minor_version,
-                                            [Gnome-Python-Extras minor version])
-AC_DEFINE(GNOME_PYTHON_EXTRAS_MICRO_VERSION, gnome_python_extras_micro_version,
-                                            [Gnome-Python-Extras macro version])
+AC_DEFINE(GNOME_PYTHON_DESKTOP_MAJOR_VERSION, gnome_python_desktop_major_version,
+                                            [Gnome-Python-Desktop major version])
+AC_DEFINE(GNOME_PYTHON_DESKTOP_MINOR_VERSION, gnome_python_desktop_minor_version,
+                                            [Gnome-Python-Desktop minor version])
+AC_DEFINE(GNOME_PYTHON_DESKTOP_MICRO_VERSION, gnome_python_desktop_micro_version,
+                                            [Gnome-Python-Desktop macro version])
 
 GNOME_COMMON_INIT
 
@@ -103,15 +97,6 @@ if test -n "$export_dynamic"; then
 fi
 
 
-PKG_CHECK_MODULES(GTKHTML2, libgtkhtml-2.0 >= gtkhtml2_required_version,
-  build_gtkhtml2=true,
-  build_gtkhtml2=false)
-AC_SUBST(GTKHTML2_CFLAGS)
-AC_SUBST(GTKHTML2_LIBS)
-AM_CONDITIONAL(BUILD_GTKHTML2, $build_gtkhtml2)
-if test -n "$export_dynamic"; then
-  GTKHTML2_LIBS=`echo $GTKHTML2_LIBS | sed -e "s/$export_dynamic//"`
-fi
 
 
 dnl should we build the gnomeprint module?
@@ -160,27 +145,6 @@ if test -n "$export_dynamic"; then
   GTKSOURCEVIEW_LIBS=`echo $GTKSOURCEVIEW_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl should we build the egg.trayicon module?
-build_eggtray=false
-PKG_CHECK_MODULES(EGGTRAY, [gtk+-2.0 >= 2.2.0],
-  build_eggtray=true,
-  build_eggtray=false)
-AM_CONDITIONAL(BUILD_EGGTRAY, $build_eggtray)
-if test -n "$export_dynamic"; then
-  EGGTRAY_LIBS=`echo $EGGTRAY_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-dnl should we build the egg.recent module?
-build_eggrecent=false
-PKG_CHECK_MODULES(EGG_RECENT, [gtk+-2.0 >= 2.0.0 gnome-vfs-2.0
-                               libbonoboui-2.0 libgnomeui-2.0
-                               gnome-python-2.0 >= gnome_python_required_version],
-  build_eggrecent=true,
-  build_eggrecent=false)
-AM_CONDITIONAL(BUILD_EGGRECENT, $build_eggrecent)
-if test -n "$export_dynamic"; then
-  EGGRECENT_LIBS=`echo $EGGRECENT_LIBS | sed -e "s/$export_dynamic//"`
-fi
 
 dnl should we build the wnck module
 build_wnck=false
@@ -192,67 +156,7 @@ if test -n "$export_dynamic"; then
   WNCK_LIBS=`echo $WNCK_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
-dnl should we build the gtkmozembed module?
-build_gtkmozembed=false
-AC_ARG_WITH(gtkmozembed, AS_HELP_STRING(
-                         [--with-gtkmozembed=mozilla|firefox],
-                         [package that provides libgtkmozembed]),
-            [mozpackage=$withval], [mozpackage=any])
 
-if test $mozpackage = any ; then
-
-PKG_CHECK_MODULES(GTKMOZEMBED, [firefox-gtkmozembed >= firefox_required_version
-                                gtk+-2.0            >= gtk_required_version],
-  [build_gtkmozembed=true; mozpackage=firefox],
-  [
-PKG_CHECK_MODULES(GTKMOZEMBED, [mozilla-gtkmozembed >= mozilla_required_version
-                                gtk+-2.0            >= gtk_required_version],
-  [build_gtkmozembed=true; mozpackage=mozilla],
-  build_gtkmozembed=false)
-  ])
-
-else
-
-case $mozpackage in
-     firefox) mozpackage_required_version=firefox_required_version ;;
-     mozilla) mozpackage_required_version=mozilla_required_version ;;
-     *) AC_MSG_ERROR([--with-gtkmozembed argument must be either 'mozilla' or 'firefox'])
-esac
-
-PKG_CHECK_MODULES(GTKMOZEMBED, [$mozpackage-gtkmozembed >= $mozpackage_required_version,
-                                gtk+-2.0                >= gtk_required_version],
-  build_gtkmozembed=true,
-  build_gtkmozembed=false)
-
-fi
-
-AM_CONDITIONAL(BUILD_GTKMOZEMBED, $build_gtkmozembed)
-if test -n "$export_dynamic"; then
-  GTKMOZEMBED_LIBS=`echo $GTKMOZEMBED_LIBS | sed -e "s/$export_dynamic//"`
-fi
-MOZILLA_HOME="`$PKG_CONFIG --variable=libdir $mozpackage-gtkmozembed`"
-AC_SUBST(MOZILLA_HOME)
-
-
-dnl should we build the gtkspell module?
-build_gtkspell=false
-PKG_CHECK_MODULES(GTKSPELL, [gtkspell-2.0 >= 2.0.0 pygtk-2.0 >= pygtk_required_version],
-  build_gtkspell=true,
-  build_gtkspell=false)
-AM_CONDITIONAL(BUILD_GTKSPELL, $build_gtkspell)
-if test -n "$export_dynamic"; then
-  GTKSPELL_LIBS=`echo $GTKSPELL_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-dnl should we build the gdl module?
-build_gdl=false
-PKG_CHECK_MODULES(GDL, [gdl-1.0 >= 0.4.0 pygtk-2.0 >= pygtk_required_version],
-  build_gdl=true,
-  build_gdl=false)
-AM_CONDITIONAL(BUILD_GDL, $build_gdl)
-if test -n "$export_dynamic"; then
-  GDL_LIBS=`echo $GDL_LIBS | sed -e "s/$export_dynamic//"`
-fi
 
 dnl should we build the totem.plparser module?
 build_totem_plparser=false
@@ -286,38 +190,6 @@ if test -n "$export_dynamic"; then
 fi
 
 
-dnl should we build the gda module?
-build_gda=false
-PKG_CHECK_MODULES(GDA, [libgda >= libgda_required_version pygtk-2.0 >= pygtk_required_version],
-  build_gda=true,
-  build_gda=false)
-AM_CONDITIONAL(BUILD_GDA, $build_gda)
-if test -n "$export_dynamic"; then
-  GDA_LIBS=`echo $GDA_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-dnl should we build the gksu module?
-build_gksu=false
-PKG_CHECK_MODULES(GKSU, [libgksu1.2 >= gksu_required_version
-                         pygtk-2.0 >= pygtk_required_version],
-  build_gksu=true,
-  build_gksu=false)
-AM_CONDITIONAL(BUILD_GKSU, $build_gksu)
-if test -n "$export_dynamic"; then
-  GKSU_LIBS=`echo $GKSU_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
-dnl should we build the gksu.ui module?
-build_gksuui=false
-PKG_CHECK_MODULES(GKSUUI, [libgksuui1.0 >= gksuui_required_version
-                           pygtk-2.0 >= pygtk_required_version],
-  build_gksuui=true,
-  build_gksuui=false)
-AM_CONDITIONAL(BUILD_GKSUUI, $build_gksuui)
-if test -n "$export_dynamic"; then
-  GKSUUI_LIBS=`echo $GKSUUI_LIBS | sed -e "s/$export_dynamic//"`
-fi
-
 dnl should we build the mediaprofiles module?
 build_mediaprofiles=false
 PKG_CHECK_MODULES(MEDIAPROFILES, [gnome-media-profiles >= mediaprofiles_required_version
@@ -343,38 +215,25 @@ fi
 
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
-dnl commented because it causes compilation problems in egg/recent
-dnl JH_ADD_CFLAG([-std=c9x])
+JH_ADD_CFLAG([-std=c9x])
 JH_ADD_CFLAG([-fno-strict-aliasing])
 
 
 AC_CONFIG_FILES(
   Makefile
-  gtkhtml2/Makefile
   gnomeapplet/Makefile
   gnomeprint/Makefile
   gtksourceview/Makefile
-  egg/Makefile
-  egg/tray/Makefile
-  egg/recent/Makefile
   wnck/Makefile
-  gtkmozembed/Makefile
-  gtkspell/Makefile
-  gdl/Makefile
   totem/Makefile
   gtop/Makefile
   nautilusburn/Makefile
-  gda/Makefile
-  gda/pygda-1.2.pc
-  gksu/Makefile
   mediaprofiles/Makefile
   metacity/Makefile
-  gnome-python-extras-2.0.pc
+  gnome-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
   docs/gtksourceview/Makefile
-  docs/gtkmozembed/Makefile
-  docs/gtkspell/Makefile
   docs/gnomeprint/Makefile
   docs/gnomeprintui/Makefile
 )
@@ -383,45 +242,27 @@ AC_OUTPUT
 echo
 echo "The following modules will be built:"
 echo
-$build_gtkhtml2          && echo     gtkhtml2
 $build_applet            && $have_pyorbit && echo     gnomeapplet
 $build_gnomeprint        && echo     gnomeprint
 $build_gnomeprintui      && echo     gnomeprint.ui
 $build_gtksourceview     && echo     gtksourceview
-$build_eggtray           && echo     egg.trayicon
-$build_eggrecent         && echo     egg.recent
 $build_wnck              && echo     wnck
-$build_gtkmozembed       && echo     gtkmozembed	"(linking to $mozpackage)"
-$build_gtkspell          && echo     gtkspell
-$build_gdl               && echo     gdl
 $build_totem_plparser    && echo     totem.plparser
 $build_gtop              && echo     gtop
 $build_nautilusburn      && echo     nautilusburn
-$build_gda               && echo     gda
-$build_gksu              && echo     gksu
-$build_gksuui            && echo     gksu.ui
 $build_mediaprofiles     && echo     mediaprofiles
 $build_metacity          && echo     metacity
 echo
 
 echo "The following modules will NOT be built:"
 echo
-$build_gtkhtml2          || echo     gtkhtml2
 $build_applet            && $have_pyorbit || echo     gnomeapplet
 $build_gnomeprint        || echo     gnomeprint
 $build_gnomeprintui      || echo     gnomeprint.ui
 $build_gtksourceview     || echo     gtksourceview
-$build_eggtray           || echo     egg.trayicon
-$build_eggrecent         || echo     egg.recent
 $build_wnck              || echo     wnck
-$build_gtkmozembed       || echo     gtkmozembed
-$build_gtkspell          || echo     gtkspell
-$build_gdl               || echo     gdl
 $build_totem_plparser    || echo     totem.plparser
 $build_gtop              || echo     gtop
 $build_nautilusburn      || echo     nautilusburn
-$build_gda               || echo     gda
-$build_gksu              || echo     gksu
-$build_gksuui            || echo     gksu.ui
 $build_mediaprofiles     || echo     mediaprofiles
 $build_metacity          || echo     metacity

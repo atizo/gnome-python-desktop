@@ -1,3 +1,21 @@
+2006-01-20  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* tests/common.py (modules): Remove modules not in g-p-d.
+
+	* configure.ac: query-replace 'extras' with 'desktop'.  Remove
+	checks for modules not in g-p-d.
+
+	* docs/Makefile.am (SUBDIRS): Remove gtkmozembed and gtkspell.
+
+	* gnome-python-desktop-2.0.pc.in: Renamed from
+	gnome-python-extras-2.0.pc.in.
+
+	* Makefile.am: Remove SUBDIRS that only belong in
+	gnome-pytho-extras.
+
+	* *: Begin gnome-python-desktop module, split from
+	gnome-python-extras.
+
 === 2.13.2 ===
 2006-01-17  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
