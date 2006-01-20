@@ -1,5 +1,11 @@
 2006-01-20  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
 
+	* tests/common.py: Print status of importing each module.
+
+	* configure.ac: Bump version to 2.13.3.
+
+	* README: Describe shortly what's in this (new) package.
+
 	* tests/common.py (modules): Remove modules not in g-p-d.
 
 	* configure.ac: query-replace 'extras' with 'desktop'.  Remove
