@@ -125,7 +125,8 @@ AC_SUBST(PYGNOMEPRINT_DEFS)
 
 dnl should we build the gnomeprint.ui module?
 build_gnomeprintui=false
-PKG_CHECK_MODULES(LIBGNOMEPRINTUI, libgnomeprintui-2.2 >= libgnomeprintui_required_version,
+PKG_CHECK_MODULES(LIBGNOMEPRINTUI, [libgnomeprintui-2.2 >= libgnomeprintui_required_version,
+                                   gnome-python-2.0 >= gnome_python_required_version],
   build_gnomeprintui=true,
   build_gnomeprintui=false)
 AC_SUBST(LIBGNOMEPRINTUI_CFLAGS)
