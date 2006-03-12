@@ -1,3 +1,10 @@
+=== 2.14.0 ===
+2006-03-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Version 2.14.0.
+
+	* NEWS: Update.
+
 2006-02-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac: LIBGNOMEPRINTUI shouldn't build without

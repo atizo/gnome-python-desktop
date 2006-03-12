@@ -1,3 +1,7 @@
+Overview of Changes from 2.13.3 to 2.14.0
+==============================================================================
+- LIBGNOMEPRINTUI shouldn't build without gnome-python (#330861)
+
 Overview of Changes from 2.13.2 to 2.13.3
 ==============================================================================
 * Nothing new, just create this new package from gnome-python-extras.
