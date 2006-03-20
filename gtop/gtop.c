@@ -41,6 +41,7 @@
 #include <glibtop/close.h>
 #include <glibtop/signal.h>
 #include <glibtop/union.h>
+#include <glibtop/sysinfo.h>
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -700,6 +701,48 @@ static PyObject* gtop_swap(PyObject *self, PyObject *args)
 }
 
 
+static void hash_table_to_dict_cb(gpointer key, gpointer value, gpointer user_data)
+{
+	PyObject *d = user_data;
+	PyObject *string_value;
+
+	string_value = PyString_FromString(value);
+
+	PyDict_SetItemString(d, key, string_value);
+
+	Py_DECREF(string_value);
+}
+
+
+static PyObject* gtop_sysinfo(PyObject *self, PyObject *args)
+{
+	const glibtop_sysinfo *infos;
+	PyObject *cpus;
+	size_t i;
+
+	if(!PyArg_ParseTuple(args, ""))
+		return NULL;
+
+	infos = glibtop_get_sysinfo();
+	cpus = PyList_New(0);
+
+	for (i = 0; i < GLIBTOP_NCPU; ++i) {
+
+		const glibtop_entry *entry = &infos->cpuinfo[i];
+		PyObject *d;
+
+		if (!entry->values)
+			break;
+
+		d = PyDict_New();
+		g_hash_table_foreach(entry->values, hash_table_to_dict_cb, d);
+		PyList_Append(cpus, d);
+		Py_DECREF(d);
+	}
+
+	return cpus;
+}
+
 
 static PyObject* gtop_netlist(PyObject *self, PyObject *args)
 {
@@ -1238,6 +1281,7 @@ static PyMethodDef gtop_methods[] =
 	{"proc_uid",    gtop_proc_uid,		METH_VARARGS, NULL},
 	{"proclist",	gtop_proclist,		METH_VARARGS, NULL},
 	{"swap",	gtop_swap,		METH_VARARGS, NULL},
+	{"sysinfo",	gtop_sysinfo,		METH_VARARGS, NULL},
 	{"uptime",	gtop_uptime,		METH_VARARGS, NULL},
 	{NULL,		NULL,			0, NULL}
 };
