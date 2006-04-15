@@ -1,3 +1,9 @@
+2006-04-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* acinclude.m4: Quote AM_CHECK_PYMOD definition.
+
+	* configure.ac: Bump version to 2.15.0.
+
 === 2.14.0 ===
 2006-03-12  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
