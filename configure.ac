@@ -25,6 +25,8 @@ m4_define(libnautilus_burn_required_version,  2.11.1)
 m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(gconf_required_version,             2.10.0)
 m4_define(metacity_required_version,          2.13.13)
+m4_define(rsvg_required_version,              2.13.93)
+
 
 AC_INIT(gnome-python-desktop, gnome_python_desktop_version,
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-python])
@@ -203,6 +205,18 @@ if test -n "$export_dynamic"; then
   MEDIAPROFILES_LIBS=`echo $MEDIAPROFILES_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the rsvg module?
+build_rsvg=false
+PKG_CHECK_MODULES(RSVG, [librsvg-2.0 >= rsvg_required_version
+                         pycairo
+                         pygtk-2.0 >= pygtk_required_version],
+  build_rsvg=true,
+  build_rsvg=false)
+AM_CONDITIONAL(BUILD_RSVG, $build_rsvg)
+if test -n "$export_dynamic"; then
+  RSVG_LIBS=`echo $RSVG_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 
 dnl should we build the metacity module
 build_metacity=false
@@ -231,6 +245,7 @@ AC_CONFIG_FILES(
   nautilusburn/Makefile
   mediaprofiles/Makefile
   metacity/Makefile
+  rsvg/Makefile
   gnome-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
@@ -253,6 +268,7 @@ $build_gtop              && echo     gtop
 $build_nautilusburn      && echo     nautilusburn
 $build_mediaprofiles     && echo     mediaprofiles
 $build_metacity          && echo     metacity
+$build_rsvg              && echo     rsvg
 echo
 
 echo "The following modules will NOT be built:"
@@ -267,3 +283,4 @@ $build_gtop              || echo     gtop
 $build_nautilusburn      || echo     nautilusburn
 $build_mediaprofiles     || echo     mediaprofiles
 $build_metacity          || echo     metacity
+$build_rsvg              || echo     rsvg

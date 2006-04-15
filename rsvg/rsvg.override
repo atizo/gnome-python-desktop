@@ -1,0 +1,18 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+#include <pygobject.h>
+
+#include <pycairo.h>
+extern Pycairo_CAPI_t *Pycairo_CAPI;
+
+#include <librsvg/rsvg.h>
+#include <librsvg/rsvg-cairo.h>
+%%
+modulename rsvg
+%%
+import gobject.GObject as PyGObject_Type
+%%
+ignore-glob *_get_type
+%%

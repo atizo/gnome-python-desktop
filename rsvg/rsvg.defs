@@ -1,0 +1,198 @@
+;; -*- scheme -*-
+; object definitions ...
+
+(define-object Handle
+  (in-module "Rsvg")
+  (parent "GObject")
+  (c-name "RsvgHandle")
+  (gtype-id "RSVG_TYPE_HANDLE")
+)
+
+;; Enumerations and flags ...
+
+;; From ../rsvg.h
+
+(define-function rsvg_handle_get_type
+  (c-name "rsvg_handle_get_type")
+  (return-type "GType")
+)
+
+(define-function set_default_dpi
+  (c-name "rsvg_set_default_dpi")
+  (return-type "none")
+  (parameters
+    '("double" "dpi")
+  )
+)
+
+(define-function set_default_dpi_x_y
+  (c-name "rsvg_set_default_dpi_x_y")
+  (return-type "none")
+  (parameters
+    '("double" "dpi_x")
+    '("double" "dpi_y")
+  )
+)
+
+(define-method set_dpi
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_set_dpi")
+  (return-type "none")
+  (parameters
+    '("double" "dpi")
+  )
+)
+
+(define-method set_dpi_x_y
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_set_dpi_x_y")
+  (return-type "none")
+  (parameters
+    '("double" "dpi_x")
+    '("double" "dpi_y")
+  )
+)
+
+(define-function rsvg_handle_new
+  (c-name "rsvg_handle_new")
+  (is-constructor-of "RsvgHandle")
+  (return-type "RsvgHandle*")
+)
+
+;; TODO make constructor
+(define-function handle_new_from_file
+  (c-name "rsvg_handle_new_from_file")
+  (return-type "RsvgHandle*")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("GError**" "error")
+  )
+)
+
+;; TODO make constructor
+(define-function handle_new_from_data
+  (c-name "rsvg_handle_new_from_data")
+  (return-type "RsvgHandle*")
+  (parameters
+    '("const-guint8*" "data")
+    '("gsize" "data_len")
+    '("GError**" "error")
+  )
+)
+
+(define-method write
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_write")
+  (return-type "gboolean")
+  (parameters
+    '("const-guchar*" "buf")
+    '("gsize" "count")
+    '("GError**" "error")
+  )
+)
+
+(define-method close
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_close")
+  (return-type "gboolean")
+  (parameters
+    '("GError**" "error")
+  )
+)
+
+(define-method get_pixbuf
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_get_pixbuf")
+  (return-type "GdkPixbuf*")
+)
+
+(define-method get_pixbuf_sub
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_get_pixbuf_sub")
+  (return-type "GdkPixbuf*")
+  (parameters
+    '("const-char*" "id")
+  )
+)
+
+(define-method free
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_free")
+  (return-type "none")
+)
+
+(define-function pixbuf_from_file
+  (c-name "rsvg_pixbuf_from_file")
+  (return-type "GdkPixbuf*")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("GError**" "error")
+  )
+)
+
+(define-function pixbuf_from_file_at_zoom
+  (c-name "rsvg_pixbuf_from_file_at_zoom")
+  (return-type "GdkPixbuf*")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("double" "x_zoom")
+    '("double" "y_zoom")
+    '("GError**" "error")
+  )
+)
+
+(define-function pixbuf_from_file_at_size
+  (c-name "rsvg_pixbuf_from_file_at_size")
+  (return-type "GdkPixbuf*")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("gint" "width")
+    '("gint" "height")
+    '("GError**" "error")
+  )
+)
+
+(define-function pixbuf_from_file_at_max_size
+  (c-name "rsvg_pixbuf_from_file_at_max_size")
+  (return-type "GdkPixbuf*")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("gint" "max_width")
+    '("gint" "max_height")
+    '("GError**" "error")
+  )
+)
+
+(define-function pixbuf_from_file_at_zoom_with_max
+  (c-name "rsvg_pixbuf_from_file_at_zoom_with_max")
+  (return-type "GdkPixbuf*")
+  (parameters
+    '("const-gchar*" "file_name")
+    '("double" "x_zoom")
+    '("double" "y_zoom")
+    '("gint" "max_width")
+    '("gint" "max_height")
+    '("GError**" "error")
+  )
+)
+
+;; From ../rsvg-cairo.h
+
+(define-method render_cairo
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_render_cairo")
+  (return-type "none")
+  (parameters
+    '("cairo_t*" "cr")
+  )
+)
+
+(define-method render_cairo_sub
+  (of-object "RsvgHandle")
+  (c-name "rsvg_handle_render_cairo_sub")
+  (return-type "none")
+  (parameters
+    '("cairo_t*" "cr")
+    '("const-char*" "id")
+  )
+)

@@ -37,6 +37,11 @@ if BUILD_METACITY
   SUBDIRS += metacity
 endif
 
+if BUILD_RSVG
+  SUBDIRS += rsvg
+endif
+
+
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-desktop-2.0.pc
 
@@ -66,4 +71,5 @@ EXTRA_DIST = \
   examples/mediaprofiles/profiles.py \
   examples/nautilusburn/blank_disc.py \
   examples/nautilusburn/drive_selection.py \
-  examples/nautilusburn/write_iso.py
+  examples/nautilusburn/write_iso.py \
+  examples/rsvg/rsvg-cairo.py

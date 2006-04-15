@@ -13,6 +13,7 @@ modules = [
     "nautilusburn",
     "mediaprofiles",
     "metacity",
+    "rsvg",
     ]
 
 import ltihooks
