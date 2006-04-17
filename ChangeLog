@@ -1,3 +1,17 @@
+2006-04-17  Sebastian Rittau  <srittau@jroger.in-berlin.de>
+
+	reviewed by: Gustavo Carneiro.
+
+	* rsvg/rsvg.defs:
+	* rsvg/rsvg.override: API changes:
+	  * Remove obsolete functions and methods.
+	  * Merge set_default_dpi_x_y with set_default_dpi.
+	  * Merge Handle.set_dpi_x_y with Handle.set_dpi.
+	  * Remove "len" argument from Handle.write.
+	  * Implement Handle.get_dimension_data.
+	  * Merge Handle.get_pixbuf_sub with Handle.get_pixbuf.
+	  * Merge Handle.render_cairo_sub with Handle.render_cairo.
+
 2006-04-15  Robert Staudinger  <robert.staudinger@gmail.com>
 
 	reviewed by: Gustavo Carneiro.

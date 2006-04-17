@@ -16,3 +16,145 @@ import gobject.GObject as PyGObject_Type
 %%
 ignore-glob *_get_type
 %%
+ignore rsvg_set_default_dpi_x_y
+%%
+ignore rsvg_handle_set_dpi_x_y
+%%
+ignore rsvg_handle_get_pixbuf_sub
+%%
+ignore rsvg_handle_render_cairo_sub
+%%
+override rsvg_set_default_dpi kwargs
+static PyObject *
+_wrap_rsvg_set_default_dpi(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "dpi_x", "dpi_y", NULL };
+    double dpi_x, dpi_y = 0.0;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+                                     "d|d:set_default_dpi",
+                                     kwlist, &dpi_x, &dpi_y))
+        return NULL;
+
+    if (dpi_y == 0.0)
+        rsvg_set_default_dpi(dpi_x);
+    else
+        rsvg_set_default_dpi_x_y(dpi_x, dpi_y);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+%%
+override rsvg_handle_set_dpi kwargs
+static PyObject *
+_wrap_rsvg_handle_set_dpi(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "dpi_x", "dpi_y", NULL };
+    double dpi_x, dpi_y = 0.0;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+                                     "d|d:Handle.set_dpi",
+                                     kwlist, &dpi_x, &dpi_y))
+        return NULL;
+
+    if (dpi_y == 0.0)
+        rsvg_handle_set_dpi(RSVG_HANDLE(self->obj), dpi_x);
+    else
+        rsvg_handle_set_dpi_x_y(RSVG_HANDLE(self->obj), dpi_x, dpi_y);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+%%
+override rsvg_handle_write kwargs
+static PyObject *
+_wrap_rsvg_handle_write(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "buffer", NULL };
+    GError *error = NULL;
+    const guchar *buffer;
+    gsize len;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+                                     "s#:Handle.write",
+                                     kwlist, &buffer, &len))
+        return NULL;
+
+    rsvg_handle_write(RSVG_HANDLE(self->obj), buffer, len, &error);
+    if (pyg_error_check(&error))
+        return NULL;
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+%%
+define RsvgHandle.get_dimension_data noargs
+static PyObject *
+_wrap_rsvg_handle_get_dimension_data(PyGObject *self)
+{
+    RsvgDimensionData dim_data;
+
+    rsvg_handle_get_dimensions(RSVG_HANDLE(self->obj), &dim_data);
+
+    return Py_BuildValue("(iidd)",
+        dim_data.width, dim_data.height, dim_data.em, dim_data.ex);
+}
+
+%%
+override rsvg_handle_get_pixbuf kwargs
+static PyObject *
+_wrap_rsvg_handle_get_pixbuf(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "id", NULL };
+    const char *id = NULL;
+    GdkPixbuf *pb;
+    PyObject *ret;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+                                     "|s:Handle.get_pixbuf",
+                                     kwlist, &id))
+        return NULL;
+
+    if (id != NULL)
+        pb = rsvg_handle_get_pixbuf_sub(RSVG_HANDLE(self->obj), id);
+    else
+        pb = rsvg_handle_get_pixbuf(RSVG_HANDLE(self->obj));
+
+    if (pb == NULL) {
+        Py_INCREF(Py_None);
+        return Py_None;
+    }
+
+    ret = pygobject_new((GObject *) pb);
+    g_object_unref(pb);
+    return ret;
+}
+
+%%
+override rsvg_handle_render_cairo kwargs
+static PyObject *
+_wrap_rsvg_handle_render_cairo(PyGObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "cr", "id", NULL };
+    const char *id = NULL;
+    PyObject *py_cr;
+    cairo_t *cr;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,
+                                     "O!|s:Handle.render_cairo",
+                                     kwlist,
+                                     &PycairoContext_Type, &py_cr, &id))
+        return NULL;
+
+    cr = ((PycairoContext *) py_cr)->ctx;
+    if (id != NULL)
+        rsvg_handle_render_cairo_sub(RSVG_HANDLE(self->obj), cr, id);
+    else
+        rsvg_handle_render_cairo(RSVG_HANDLE(self->obj), cr);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}

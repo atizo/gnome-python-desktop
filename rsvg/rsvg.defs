@@ -115,67 +115,6 @@
   )
 )
 
-(define-method free
-  (of-object "RsvgHandle")
-  (c-name "rsvg_handle_free")
-  (return-type "none")
-)
-
-(define-function pixbuf_from_file
-  (c-name "rsvg_pixbuf_from_file")
-  (return-type "GdkPixbuf*")
-  (parameters
-    '("const-gchar*" "file_name")
-    '("GError**" "error")
-  )
-)
-
-(define-function pixbuf_from_file_at_zoom
-  (c-name "rsvg_pixbuf_from_file_at_zoom")
-  (return-type "GdkPixbuf*")
-  (parameters
-    '("const-gchar*" "file_name")
-    '("double" "x_zoom")
-    '("double" "y_zoom")
-    '("GError**" "error")
-  )
-)
-
-(define-function pixbuf_from_file_at_size
-  (c-name "rsvg_pixbuf_from_file_at_size")
-  (return-type "GdkPixbuf*")
-  (parameters
-    '("const-gchar*" "file_name")
-    '("gint" "width")
-    '("gint" "height")
-    '("GError**" "error")
-  )
-)
-
-(define-function pixbuf_from_file_at_max_size
-  (c-name "rsvg_pixbuf_from_file_at_max_size")
-  (return-type "GdkPixbuf*")
-  (parameters
-    '("const-gchar*" "file_name")
-    '("gint" "max_width")
-    '("gint" "max_height")
-    '("GError**" "error")
-  )
-)
-
-(define-function pixbuf_from_file_at_zoom_with_max
-  (c-name "rsvg_pixbuf_from_file_at_zoom_with_max")
-  (return-type "GdkPixbuf*")
-  (parameters
-    '("const-gchar*" "file_name")
-    '("double" "x_zoom")
-    '("double" "y_zoom")
-    '("gint" "max_width")
-    '("gint" "max_height")
-    '("GError**" "error")
-  )
-)
-
 ;; From ../rsvg-cairo.h
 
 (define-method render_cairo
