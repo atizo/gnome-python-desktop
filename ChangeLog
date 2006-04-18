@@ -1,3 +1,11 @@
+2006-04-18  Sebastian Rittau  <srittau@jroger.in-berlin.de>
+
+	reviewed by: Gustavo Carneiro.
+
+	* rsvg/rsvg.override: Merge handle_new_from_file and
+	handle_new_from_data into Handle constructor as optional arguments.
+	* examples/rsvg/rsvg-cairo.py: Use the new constructor notation.
+
 2006-04-17  Sebastian Rittau  <srittau@jroger.in-berlin.de>
 
 	reviewed by: Gustavo Carneiro.

@@ -35,7 +35,7 @@ def main():
 
     svg = None
     if (len (sys.argv) > 1):
-        svg = rsvg.handle_new_from_file(sys.argv[1])
+        svg = rsvg.Handle(file=sys.argv[1])
     else:
         raise SystemExit("need svg file")
 

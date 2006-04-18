@@ -59,7 +59,6 @@
   (return-type "RsvgHandle*")
 )
 
-;; TODO make constructor
 (define-function handle_new_from_file
   (c-name "rsvg_handle_new_from_file")
   (return-type "RsvgHandle*")
@@ -69,7 +68,6 @@
   )
 )
 
-;; TODO make constructor
 (define-function handle_new_from_data
   (c-name "rsvg_handle_new_from_data")
   (return-type "RsvgHandle*")
