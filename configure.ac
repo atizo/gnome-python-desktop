@@ -26,6 +26,7 @@ m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(gconf_required_version,             2.10.0)
 m4_define(metacity_required_version,          2.13.13)
 m4_define(rsvg_required_version,              2.13.93)
+m4_define(gnomekeyring_required_version,      0.5.0)
 
 
 AC_INIT(gnome-python-desktop, gnome_python_desktop_version,
@@ -228,6 +229,16 @@ if test -n "$export_dynamic"; then
   METACITY_LIBS=`echo $METACITY_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gnomekeyring module
+build_gnomekeyring=false
+PKG_CHECK_MODULES(GNOMEKEYRING, gnome-keyring-1 >= gnomekeyring_required_version,
+  build_gnomekeyring=true,
+  build_gnomekeyring=false)
+AM_CONDITIONAL(BUILD_GNOMEKEYRING, $build_gnomekeyring)
+if test -n "$export_dynamic"; then
+  GNOMEKEYRING_LIBS=`echo $GNOMEKEYRING_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 JH_ADD_CFLAG([-std=c9x])
@@ -246,6 +257,7 @@ AC_CONFIG_FILES(
   mediaprofiles/Makefile
   metacity/Makefile
   rsvg/Makefile
+  gnomekeyring/Makefile
   gnome-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
@@ -269,6 +281,7 @@ $build_nautilusburn      && echo     nautilusburn
 $build_mediaprofiles     && echo     mediaprofiles
 $build_metacity          && echo     metacity
 $build_rsvg              && echo     rsvg
+$build_gnomekeyring      && echo     gnomekeyring
 echo
 
 echo "The following modules will NOT be built:"
@@ -284,3 +297,4 @@ $build_nautilusburn      || echo     nautilusburn
 $build_mediaprofiles     || echo     mediaprofiles
 $build_metacity          || echo     metacity
 $build_rsvg              || echo     rsvg
+$build_gnomekeyring      || echo     gnomekeyring

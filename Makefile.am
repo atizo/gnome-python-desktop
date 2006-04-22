@@ -41,9 +41,14 @@ if BUILD_RSVG
   SUBDIRS += rsvg
 endif
 
+if BUILD_GNOMEKEYRING
+  SUBDIRS += gnomekeyring
+endif
+
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-desktop-2.0.pc
+
 
 EXTRA_DIST = \
   MAINTAINERS \

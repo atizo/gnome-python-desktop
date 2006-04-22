@@ -1,0 +1,935 @@
+;; -*- scheme -*-
+; object definitions ...
+;; Enumerations and flags ...
+
+(define-enum Result
+  (in-module "Gnome")
+  (c-name "GnomeKeyringResult")
+  ;(gtype-id "GNOME_TYPE_KEYRING_RESULT")
+  (values
+    '("ok" "GNOME_KEYRING_RESULT_OK")
+    '("denied" "GNOME_KEYRING_RESULT_DENIED")
+    '("no-keyring-daemon" "GNOME_KEYRING_RESULT_NO_KEYRING_DAEMON")
+    '("already-unlocked" "GNOME_KEYRING_RESULT_ALREADY_UNLOCKED")
+    '("no-such-keyring" "GNOME_KEYRING_RESULT_NO_SUCH_KEYRING")
+    '("bad-arguments" "GNOME_KEYRING_RESULT_BAD_ARGUMENTS")
+    '("io-error" "GNOME_KEYRING_RESULT_IO_ERROR")
+    '("cancelled" "GNOME_KEYRING_RESULT_CANCELLED")
+    '("already-exists" "GNOME_KEYRING_RESULT_ALREADY_EXISTS")
+  )
+)
+
+(define-enum ItemType
+  (in-module "Gnome")
+  (c-name "GnomeKeyringItemType")
+  ;(gtype-id "GNOME_TYPE_KEYRING_ITEM_TYPE")
+  (values
+    '("generic-secret" "GNOME_KEYRING_ITEM_GENERIC_SECRET")
+    '("network-password" "GNOME_KEYRING_ITEM_NETWORK_PASSWORD")
+    '("note" "GNOME_KEYRING_ITEM_NOTE")
+    '("last-type" "GNOME_KEYRING_ITEM_LAST_TYPE")
+    '("no-type" "GNOME_KEYRING_ITEM_NO_TYPE")
+  )
+)
+
+(define-enum AccessRestriction
+  (in-module "Gnome")
+  (c-name "GnomeKeyringAccessRestriction")
+  ;(gtype-id "GNOME_TYPE_KEYRING_ACCESS_RESTRICTION")
+  (values
+    '("ask" "GNOME_KEYRING_ACCESS_ASK")
+    '("deny" "GNOME_KEYRING_ACCESS_DENY")
+    '("allow" "GNOME_KEYRING_ACCESS_ALLOW")
+  )
+)
+
+(define-enum AttributeType
+  (in-module "Gnome")
+  (c-name "GnomeKeyringAttributeType")
+  ;(gtype-id "GNOME_TYPE_KEYRING_ATTRIBUTE_TYPE")
+  (values
+    '("string" "GNOME_KEYRING_ATTRIBUTE_TYPE_STRING")
+    '("uint32" "GNOME_KEYRING_ATTRIBUTE_TYPE_UINT32")
+  )
+)
+
+(define-flags AccessType
+  (in-module "Gnome")
+  (c-name "GnomeKeyringAccessType")
+  ;(gtype-id "GNOME_TYPE_KEYRING_ACCESS_TYPE")
+  (values
+    '("read" "GNOME_KEYRING_ACCESS_READ")
+    '("write" "GNOME_KEYRING_ACCESS_WRITE")
+    '("remove" "GNOME_KEYRING_ACCESS_REMOVE")
+  )
+)
+
+
+;; From /opt/gnome-devel/include/gnome-keyring-1/gnome-keyring.h
+
+(define-method append_string
+  (of-object "GnomeKeyringAttributeList")
+  (c-name "gnome_keyring_attribute_list_append_string")
+  (return-type "none")
+  (parameters
+    '("const-char*" "attribute")
+    '("const-char*" "value")
+  )
+)
+
+(define-method append_uint32
+  (of-object "GnomeKeyringAttributeList")
+  (c-name "gnome_keyring_attribute_list_append_uint32")
+  (return-type "none")
+  (parameters
+    '("const-char*" "attribute")
+    '("guint32" "value")
+  )
+)
+
+(define-method free
+  (of-object "GnomeKeyringAttributeList")
+  (c-name "gnome_keyring_attribute_list_free")
+  (return-type "none")
+)
+
+(define-method copy
+  (of-object "GnomeKeyringAttributeList")
+  (c-name "gnome_keyring_attribute_list_copy")
+  (return-type "GnomeKeyringAttributeList*")
+)
+
+(define-function is_available
+  (c-name "gnome_keyring_is_available")
+  (return-type "gboolean")
+)
+
+(define-function free_password
+  (c-name "gnome_keyring_free_password")
+  (return-type "none")
+  (parameters
+    '("char*" "password")
+  )
+)
+
+(define-method free
+  (of-object "GnomeKeyringFound")
+  (c-name "gnome_keyring_found_free")
+  (return-type "none")
+)
+
+(define-function found_list_free
+  (c-name "gnome_keyring_found_list_free")
+  (return-type "none")
+  (parameters
+    '("GList*" "found_list")
+  )
+)
+
+(define-function cancel_request
+  (c-name "gnome_keyring_cancel_request")
+  (return-type "none")
+  (parameters
+    '("gpointer" "request")
+  )
+)
+
+(define-function set_default_keyring
+  (c-name "gnome_keyring_set_default_keyring")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function set_default_keyring_sync
+  (c-name "gnome_keyring_set_default_keyring_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+  )
+)
+
+(define-function get_default_keyring
+  (c-name "gnome_keyring_get_default_keyring")
+  (return-type "gpointer")
+  (parameters
+    '("GnomeKeyringOperationGetStringCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function get_default_keyring_sync
+  (c-name "gnome_keyring_get_default_keyring_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("char**" "keyring")
+  )
+)
+
+(define-function list_keyring_names
+  (c-name "gnome_keyring_list_keyring_names")
+  (return-type "gpointer")
+  (parameters
+    '("GnomeKeyringOperationGetListCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function list_keyring_names_sync
+  (c-name "gnome_keyring_list_keyring_names_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("GList**" "keyrings")
+  )
+)
+
+(define-function lock_all
+  (c-name "gnome_keyring_lock_all")
+  (return-type "gpointer")
+  (parameters
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function lock_all_sync
+  (c-name "gnome_keyring_lock_all_sync")
+  (return-type "GnomeKeyringResult")
+)
+
+(define-function create
+  (c-name "gnome_keyring_create")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring_name")
+    '("const-char*" "password")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function create_sync
+  (c-name "gnome_keyring_create_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring_name")
+    '("const-char*" "password")
+  )
+)
+
+(define-function unlock
+  (c-name "gnome_keyring_unlock")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("const-char*" "password")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function unlock_sync
+  (c-name "gnome_keyring_unlock_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("const-char*" "password")
+  )
+)
+
+(define-function lock
+  (c-name "gnome_keyring_lock")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function lock_sync
+  (c-name "gnome_keyring_lock_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+  )
+)
+
+(define-function delete
+  (c-name "gnome_keyring_delete")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function delete_sync
+  (c-name "gnome_keyring_delete_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+  )
+)
+
+(define-function change_password
+  (c-name "gnome_keyring_change_password")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("const-char*" "original")
+    '("const-char*" "password")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function change_password_sync
+  (c-name "gnome_keyring_change_password_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("const-char*" "original")
+    '("const-char*" "password")
+  )
+)
+
+(define-function get_info
+  (c-name "gnome_keyring_get_info")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringOperationGetKeyringInfoCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function get_info_sync
+  (c-name "gnome_keyring_get_info_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringInfo**" "info")
+  )
+)
+
+(define-function set_info
+  (c-name "gnome_keyring_set_info")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringInfo*" "info")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function set_info_sync
+  (c-name "gnome_keyring_set_info_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringInfo*" "info")
+  )
+)
+
+(define-function list_item_ids
+  (c-name "gnome_keyring_list_item_ids")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringOperationGetListCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function list_item_ids_sync
+  (c-name "gnome_keyring_list_item_ids_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("GList**" "ids")
+  )
+)
+
+(define-function daemon_set_display_sync
+  (c-name "gnome_keyring_daemon_set_display_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "display")
+  )
+)
+
+(define-method free
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_free")
+  (return-type "none")
+)
+
+(define-method copy
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_copy")
+  (return-type "GnomeKeyringInfo*")
+)
+
+(define-method set_lock_on_idle
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_set_lock_on_idle")
+  (return-type "none")
+  (parameters
+    '("gboolean" "value")
+  )
+)
+
+(define-method get_lock_on_idle
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_get_lock_on_idle")
+  (return-type "gboolean")
+)
+
+(define-method set_lock_timeout
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_set_lock_timeout")
+  (return-type "none")
+  (parameters
+    '("guint32" "value")
+  )
+)
+
+(define-method get_lock_timeout
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_get_lock_timeout")
+  (return-type "guint32")
+)
+
+(define-method get_mtime
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_get_mtime")
+  (return-type "time_t")
+)
+
+(define-method get_ctime
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_get_ctime")
+  (return-type "time_t")
+)
+
+(define-method get_is_locked
+  (of-object "GnomeKeyringInfo")
+  (c-name "gnome_keyring_info_get_is_locked")
+  (return-type "gboolean")
+)
+
+(define-function find_items
+  (c-name "gnome_keyring_find_items")
+  (return-type "gpointer")
+  (parameters
+    '("GnomeKeyringItemType" "type")
+    '("GnomeKeyringAttributeList*" "attributes")
+    '("GnomeKeyringOperationGetListCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function find_itemsv
+  (c-name "gnome_keyring_find_itemsv")
+  (return-type "gpointer")
+  (parameters
+    '("GnomeKeyringItemType" "type")
+    '("GnomeKeyringOperationGetListCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+  (varargs #t)
+)
+
+(define-function find_items_sync
+  (c-name "gnome_keyring_find_items_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("GnomeKeyringItemType" "type")
+    '("GnomeKeyringAttributeList*" "attributes")
+    '("GList**" "found")
+  )
+)
+
+(define-function find_itemsv_sync
+  (c-name "gnome_keyring_find_itemsv_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("GnomeKeyringItemType" "type")
+    '("GList**" "found")
+  )
+  (varargs #t)
+)
+
+(define-function item_create
+  (c-name "gnome_keyring_item_create")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringItemType" "type")
+    '("const-char*" "display_name")
+    '("GnomeKeyringAttributeList*" "attributes")
+    '("const-char*" "secret")
+    '("gboolean" "update_if_exists")
+    '("GnomeKeyringOperationGetIntCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_create_sync
+  (c-name "gnome_keyring_item_create_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("GnomeKeyringItemType" "type")
+    '("const-char*" "display_name")
+    '("GnomeKeyringAttributeList*" "attributes")
+    '("const-char*" "secret")
+    '("gboolean" "update_if_exists")
+    '("guint32*" "item_id")
+  )
+)
+
+(define-function item_delete
+  (c-name "gnome_keyring_item_delete")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_delete_sync
+  (c-name "gnome_keyring_item_delete_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+  )
+)
+
+(define-function item_get_info
+  (c-name "gnome_keyring_item_get_info")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringOperationGetItemInfoCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_get_info_sync
+  (c-name "gnome_keyring_item_get_info_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringItemInfo**" "info")
+  )
+)
+
+(define-function item_set_info
+  (c-name "gnome_keyring_item_set_info")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringItemInfo*" "info")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_set_info_sync
+  (c-name "gnome_keyring_item_set_info_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringItemInfo*" "info")
+  )
+)
+
+(define-function item_get_attributes
+  (c-name "gnome_keyring_item_get_attributes")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringOperationGetAttributesCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_get_attributes_sync
+  (c-name "gnome_keyring_item_get_attributes_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringAttributeList**" "attributes")
+  )
+)
+
+(define-function item_set_attributes
+  (c-name "gnome_keyring_item_set_attributes")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringAttributeList*" "attributes")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_set_attributes_sync
+  (c-name "gnome_keyring_item_set_attributes_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringAttributeList*" "attributes")
+  )
+)
+
+(define-function item_get_acl
+  (c-name "gnome_keyring_item_get_acl")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GnomeKeyringOperationGetListCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_get_acl_sync
+  (c-name "gnome_keyring_item_get_acl_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GList**" "acl")
+  )
+)
+
+(define-function item_set_acl
+  (c-name "gnome_keyring_item_set_acl")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GList*" "acl")
+    '("GnomeKeyringOperationDoneCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function item_set_acl_sync
+  (c-name "gnome_keyring_item_set_acl_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("guint32" "id")
+    '("GList*" "acl")
+  )
+)
+
+(define-method free
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_free")
+  (return-type "none")
+)
+
+(define-function item_info_new
+  (c-name "gnome_keyring_item_info_new")
+  (is-constructor-of "GnomeKeyringItemInfo")
+  (return-type "GnomeKeyringItemInfo*")
+)
+
+(define-method copy
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_copy")
+  (return-type "GnomeKeyringItemInfo*")
+)
+
+(define-method get_type
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_get_type")
+  (return-type "GnomeKeyringItemType")
+)
+
+(define-method set_type
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_set_type")
+  (return-type "none")
+  (parameters
+    '("GnomeKeyringItemType" "type")
+  )
+)
+
+(define-method get_secret
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_get_secret")
+  (return-type "char*")
+)
+
+(define-method set_secret
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_set_secret")
+  (return-type "none")
+  (parameters
+    '("const-char*" "value")
+  )
+)
+
+(define-method get_display_name
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_get_display_name")
+  (return-type "char*")
+)
+
+(define-method set_display_name
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_set_display_name")
+  (return-type "none")
+  (parameters
+    '("const-char*" "value")
+  )
+)
+
+(define-method get_mtime
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_get_mtime")
+  (return-type "time_t")
+)
+
+(define-method get_ctime
+  (of-object "GnomeKeyringItemInfo")
+  (c-name "gnome_keyring_item_info_get_ctime")
+  (return-type "time_t")
+)
+
+(define-function application_ref_new
+  (c-name "gnome_keyring_application_ref_new")
+  (is-constructor-of "GnomeKeyringApplicationRef")
+  (return-type "GnomeKeyringApplicationRef*")
+)
+
+(define-method copy
+  (of-object "GnomeKeyringApplicationRef")
+  (c-name "gnome_keyring_application_ref_copy")
+  (return-type "GnomeKeyringApplicationRef*")
+)
+
+(define-method free
+  (of-object "GnomeKeyringApplicationRef")
+  (c-name "gnome_keyring_application_ref_free")
+  (return-type "none")
+)
+
+(define-function access_control_new
+  (c-name "gnome_keyring_access_control_new")
+  (is-constructor-of "GnomeKeyringAccessControl")
+  (return-type "GnomeKeyringAccessControl*")
+  (parameters
+    '("const-GnomeKeyringApplicationRef*" "application")
+    '("GnomeKeyringAccessType" "types_allowed")
+  )
+)
+
+(define-method copy
+  (of-object "GnomeKeyringAccessControl")
+  (c-name "gnome_keyring_access_control_copy")
+  (return-type "GnomeKeyringAccessControl*")
+)
+
+(define-method free
+  (of-object "GnomeKeyringAccessControl")
+  (c-name "gnome_keyring_access_control_free")
+  (return-type "none")
+)
+
+(define-function acl_copy
+  (c-name "gnome_keyring_acl_copy")
+  (return-type "GList*")
+  (parameters
+    '("GList*" "list")
+  )
+)
+
+(define-function acl_free
+  (c-name "gnome_keyring_acl_free")
+  (return-type "none")
+  (parameters
+    '("GList*" "acl")
+  )
+)
+
+(define-function item_ac_get_display_name
+  (c-name "gnome_keyring_item_ac_get_display_name")
+  (return-type "char*")
+  (parameters
+    '("GnomeKeyringAccessControl*" "ac")
+  )
+)
+
+(define-function item_ac_set_display_name
+  (c-name "gnome_keyring_item_ac_set_display_name")
+  (return-type "none")
+  (parameters
+    '("GnomeKeyringAccessControl*" "ac")
+    '("const-char*" "value")
+  )
+)
+
+(define-function item_ac_get_path_name
+  (c-name "gnome_keyring_item_ac_get_path_name")
+  (return-type "char*")
+  (parameters
+    '("GnomeKeyringAccessControl*" "ac")
+  )
+)
+
+(define-function item_ac_set_path_name
+  (c-name "gnome_keyring_item_ac_set_path_name")
+  (return-type "none")
+  (parameters
+    '("GnomeKeyringAccessControl*" "ac")
+    '("const-char*" "value")
+  )
+)
+
+(define-function item_ac_get_access_type
+  (c-name "gnome_keyring_item_ac_get_access_type")
+  (return-type "GnomeKeyringAccessType")
+  (parameters
+    '("GnomeKeyringAccessControl*" "ac")
+  )
+)
+
+(define-function item_ac_set_access_type
+  (c-name "gnome_keyring_item_ac_set_access_type")
+  (return-type "none")
+  (parameters
+    '("GnomeKeyringAccessControl*" "ac")
+    '("const-GnomeKeyringAccessType" "value")
+  )
+)
+
+(define-function network_password_free
+  (c-name "gnome_keyring_network_password_free")
+  (return-type "none")
+  (parameters
+    '("GnomeKeyringNetworkPasswordData*" "data")
+  )
+)
+
+(define-function network_password_list_free
+  (c-name "gnome_keyring_network_password_list_free")
+  (return-type "none")
+  (parameters
+    '("GList*" "list")
+  )
+)
+
+(define-function find_network_password
+  (c-name "gnome_keyring_find_network_password")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "user")
+    '("const-char*" "domain")
+    '("const-char*" "server")
+    '("const-char*" "object")
+    '("const-char*" "protocol")
+    '("const-char*" "authtype")
+    '("guint32" "port")
+    '("GnomeKeyringOperationGetListCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function find_network_password_sync
+  (c-name "gnome_keyring_find_network_password_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "user")
+    '("const-char*" "domain")
+    '("const-char*" "server")
+    '("const-char*" "object")
+    '("const-char*" "protocol")
+    '("const-char*" "authtype")
+    '("guint32" "port")
+    '("GList**" "result")
+  )
+)
+
+(define-function set_network_password
+  (c-name "gnome_keyring_set_network_password")
+  (return-type "gpointer")
+  (parameters
+    '("const-char*" "keyring")
+    '("const-char*" "user")
+    '("const-char*" "domain")
+    '("const-char*" "server")
+    '("const-char*" "object")
+    '("const-char*" "protocol")
+    '("const-char*" "authtype")
+    '("guint32" "port")
+    '("const-char*" "password")
+    '("GnomeKeyringOperationGetIntCallback" "callback")
+    '("gpointer" "data")
+    '("GDestroyNotify" "destroy_data")
+  )
+)
+
+(define-function set_network_password_sync
+  (c-name "gnome_keyring_set_network_password_sync")
+  (return-type "GnomeKeyringResult")
+  (parameters
+    '("const-char*" "keyring")
+    '("const-char*" "user")
+    '("const-char*" "domain")
+    '("const-char*" "server")
+    '("const-char*" "object")
+    '("const-char*" "protocol")
+    '("const-char*" "authtype")
+    '("guint32" "port")
+    '("const-char*" "password")
+    '("guint32*" "item_id")
+  )
+)
+
+

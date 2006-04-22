@@ -1,0 +1,33 @@
+/* -*- Mode: C; c-basic-offset: 4 -*- */
+%%
+headers
+#include <Python.h>
+#include <pygobject.h>
+#include <gnome-keyring.h>
+
+/* %% */
+/* import gobject.GObject as PyGObject_Type */
+/* import gtk.gdk.Pixbuf as PyGdkPixbuf_Type */
+/* import gtk.Widget as PyGtkWidget_Type */
+/* import gtk.Bin as PyGtkBin_Type */
+%%
+ignore-glob
+ *_get_type
+%%
+ignore
+ gnome_keyring_attribute_list_free
+ gnome_keyring_attribute_list_copy
+ gnome_keyring_free_password
+ gnome_keyring_found_free
+ gnome_keyring_found_list_free
+ gnome_keyring_info_free
+ gnome_keyring_info_copy
+ gnome_keyring_item_info_free
+ gnome_keyring_item_info_copy
+ gnome_keyring_application_ref_copy
+ gnome_keyring_application_ref_free
+ gnome_keyring_access_control_copy
+ gnome_keyring_access_control_free
+ gnome_keyring_acl_free
+ gnome_keyring_network_password_free
+ gnome_keyring_network_password_list_free

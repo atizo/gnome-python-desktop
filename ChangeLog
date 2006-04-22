@@ -1,3 +1,15 @@
+2006-04-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am:
+	* configure.ac:
+	* gnomekeyring/.cvsignore:
+	* gnomekeyring/Makefile.am:
+	* gnomekeyring/gnomekeyring.defs:
+	* gnomekeyring/gnomekeyring.override:
+	* gnomekeyring/gnomekeyringmodule.c:
+	Basic gnome-keyring bindings (bug #338387), albeit with only 17%
+	API coverage so far.
+
 2006-04-18  Sebastian Rittau  <srittau@jroger.in-berlin.de>
 
 	reviewed by: Gustavo Carneiro.
