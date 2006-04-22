@@ -23,11 +23,12 @@ gnomekeyring_la_SOURCES = gnomekeyringmodule.c
 nodist_gnomekeyring_la_SOURCES = gnomekeyring.c
 CLEANFILES = gnomekeyring.c
 EXTRA_DIST += gnomekeyring.override  
-gnomekeyring.c: gnomekeyring.defs gnomekeyring.override
+gnomekeyring.c: gnomekeyring.defs gnomekeyring.override gnomekeyring-argtypes.py
 
 .defs.c:
 	(cd $(srcdir) \
 	 && $(PYGTK_CODEGEN) \
+	    --load-types gnomekeyring-argtypes.py \
             --register $(PYGTK_DEFSDIR)/gtk-types.defs \
             --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --override $*.override \

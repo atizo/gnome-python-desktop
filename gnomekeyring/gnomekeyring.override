@@ -5,11 +5,154 @@ headers
 #include <pygobject.h>
 #include <gnome-keyring.h>
 
-/* %% */
-/* import gobject.GObject as PyGObject_Type */
-/* import gtk.gdk.Pixbuf as PyGdkPixbuf_Type */
-/* import gtk.Widget as PyGtkWidget_Type */
-/* import gtk.Bin as PyGtkBin_Type */
+
+#ifndef GNOME_KEYRING_TYPE_INFO
+# define GNOME_KEYRING_TYPE_INFO pygnome_keyring_info_get_type()
+
+static GType
+pygnome_keyring_info_get_type(void)
+{
+    static GType our_type = 0;
+  
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("PyGnomeKeyringInfo",
+                                                (GBoxedCopyFunc)gnome_keyring_info_copy,
+                                                (GBoxedFreeFunc)gnome_keyring_info_free);
+    return our_type;
+}
+
+#endif /* #ifndef GNOME_KEYRING_TYPE_INFO */
+
+#ifndef GNOME_KEYRING_TYPE_ITEM_INFO
+# define GNOME_KEYRING_TYPE_ITEM_INFO pygnome_keyring_item_info_get_type()
+
+static GType
+pygnome_keyring_item_info_get_type(void)
+{
+    static GType our_type = 0;
+  
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("PyGnomeKeyringItemInfo",
+                                                (GBoxedCopyFunc)gnome_keyring_item_info_copy,
+                                                (GBoxedFreeFunc)gnome_keyring_item_info_free);
+    return our_type;
+}
+
+#endif /* #ifndef GNOME_KEYRING_TYPE_ITEM_INFO */
+
+#ifndef GNOME_KEYRING_TYPE_APPLICATION_REF
+# define GNOME_KEYRING_TYPE_APPLICATION_REF pygnome_keyring_application_ref_get_type()
+static GType
+pygnome_keyring_application_ref_get_type(void)
+{
+    static GType our_type = 0;
+  
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("PyGnomeKeyringApplicationRef",
+                                                (GBoxedCopyFunc)gnome_keyring_application_ref_copy,
+                                                (GBoxedFreeFunc)gnome_keyring_application_ref_free);
+    return our_type;
+}
+#endif /* #ifndef GNOME_KEYRING_APPLICATION_REF_TYPE */
+
+#ifndef GNOME_KEYRING_TYPE_ACCESS_CONTROL
+# define GNOME_KEYRING_TYPE_ACCESS_CONTROL pygnome_keyring_access_control_get_type()
+static GType
+pygnome_keyring_access_control_get_type(void)
+{
+    static GType our_type = 0;
+  
+    if (our_type == 0)
+        our_type = g_boxed_type_register_static("PyGnomeKeyringAccessControl",
+                                                (GBoxedCopyFunc)gnome_keyring_access_control_copy,
+                                                (GBoxedFreeFunc)gnome_keyring_access_control_free);
+    return our_type;
+}
+#endif /* #ifndef GNOME_KEYRING_ACCESS_CONTROL_TYPE */
+
+static GnomeKeyringAttributeList *
+pygnome_keyring_attribute_list_from_pyobject(PyObject *py_attrlist)
+{
+    GnomeKeyringAttributeList *attrlist;
+    int iter = 0;
+    PyObject *key, *value;
+    
+    if (!PyDict_Check(py_attrlist)) {
+        PyErr_SetString(PyExc_TypeError, "dict expected for attribute list parameter");
+        return NULL;
+    }
+
+    attrlist = gnome_keyring_attribute_list_new();
+    while (PyDict_Next(py_attrlist, &iter, &key, &value)) {
+        char *name;
+        if (!PyString_Check(key)) {
+            PyErr_SetString(PyExc_TypeError, "dict keys must be strings, when converting attribute list parameter");
+            gnome_keyring_attribute_list_free(attrlist);
+            return NULL;
+        }
+        name = PyString_AsString(key);
+        if (PyInt_Check(value))
+            gnome_keyring_attribute_list_append_uint32(attrlist, name,
+                                                       PyInt_AsLong(value));
+        else if (PyLong_Check(value)) {
+            gnome_keyring_attribute_list_append_uint32(attrlist, name,
+                                                       PyLong_AsUnsignedLong(value));
+            if (PyErr_Occurred()) {
+                gnome_keyring_attribute_list_free(attrlist);
+                return NULL;
+            }
+        }
+        else if (PyString_Check(value))
+            gnome_keyring_attribute_list_append_string(attrlist, name,
+                                                       PyString_AsString(value));
+        else {
+            PyErr_SetString(PyExc_TypeError, "dict values must be strings, ints or longs,"
+                            " when converting attribute list parameter");
+            gnome_keyring_attribute_list_free(attrlist);
+            return NULL;
+        }
+    }
+    return attrlist;
+}
+
+static PyObject *
+pygnome_keyring_attribute_list_as_pyobject(GnomeKeyringAttributeList *attrlist)
+{
+    PyObject *py_attrlist;
+    int i, len = ((GArray *) attrlist)->len;
+
+    py_attrlist = PyDict_New();
+    for (i = 0; i < len; ++i) {
+        GnomeKeyringAttribute *attr;
+        PyObject *val = NULL;
+
+        attr = &gnome_keyring_attribute_list_index(attrlist, i);
+
+        switch (attr->type)
+        {
+        case GNOME_KEYRING_ATTRIBUTE_TYPE_STRING:
+            val = PyString_FromString(attr->value.string);
+            break;
+	case GNOME_KEYRING_ATTRIBUTE_TYPE_UINT32:
+            val = PyLong_FromUnsignedLong(attr->value.integer);
+            break;
+        default:
+            Py_DECREF(py_attrlist);
+            PyErr_SetString(PyExc_AssertionError, "invalided GnomeKeyringAttributeType"
+                            " (congratulations, you found bug in bindings or C library)");
+            return NULL;
+        }
+
+        if (PyDict_SetItemString(py_attrlist, attr->name, val)) {
+            Py_DECREF(py_attrlist);
+            return NULL;
+        }
+    }
+
+    return py_attrlist;
+}
+
+
 %%
 ignore-glob
  *_get_type
@@ -31,3 +174,151 @@ ignore
  gnome_keyring_acl_free
  gnome_keyring_network_password_free
  gnome_keyring_network_password_list_free
+
+%%
+override gnome_keyring_get_default_keyring_sync noargs
+static PyObject *
+_wrap_gnome_keyring_get_default_keyring_sync(PyObject *self)
+{
+    gint ret;
+    char *keyring;
+
+    ret = gnome_keyring_get_default_keyring_sync(&keyring);
+    return Py_BuildValue("Ns", pyg_enum_from_gtype(G_TYPE_NONE, ret), keyring);
+}
+
+%%
+override gnome_keyring_list_keyring_names_sync noargs
+static PyObject *
+_wrap_gnome_keyring_list_keyring_names_sync(PyObject *self)
+{
+    gint ret;
+    GList *keyrings, *l;
+    PyObject *py_keyrings = NULL;
+
+    ret = gnome_keyring_list_keyring_names_sync(&keyrings);
+    py_keyrings = PyList_New(0);
+    for (l = keyrings; l; l = l->next) {
+        PyObject *item = PyString_FromString((char *) l->data);
+        PyList_Append(py_keyrings, item);
+        Py_DECREF(item);
+        g_free(l->data);
+    }
+    g_list_free(keyrings);
+    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_keyrings);
+}
+%%
+override gnome_keyring_item_get_attributes_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_item_get_attributes_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "id", NULL };
+    char *keyring;
+    unsigned long id;
+    gint ret;
+    GnomeKeyringAttributeList *attrlist = NULL;
+    PyObject *py_attrlist;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sk:item_get_attributes_sync", kwlist, &keyring, &id))
+        return NULL;
+    ret = gnome_keyring_item_get_attributes_sync(keyring, id, &attrlist);
+    py_attrlist = pygnome_keyring_attribute_list_as_pyobject(attrlist);
+    if (!py_attrlist)
+        return NULL;
+    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_attrlist);
+}
+
+%%
+override gnome_keyring_set_network_password_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_set_network_password_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "user", "domain", "server", "object",
+                              "protocol", "authtype", "port", "password", NULL };
+    char *keyring, *user, *domain, *server, *object, *protocol, *authtype, *password;
+    unsigned long port;
+    gint ret;
+    guint32 item_id;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sssssssks:set_network_password_sync", kwlist,
+                                     &keyring, &user, &domain, &server, &object, &protocol,
+                                     &authtype, &port, &password))
+        return NULL;
+    ret = gnome_keyring_set_network_password_sync(keyring, user, domain, server, object,
+                                                  protocol, authtype, port, password, &item_id);
+    return Py_BuildValue("Nk", pyg_enum_from_gtype(G_TYPE_NONE, ret), item_id);
+}
+
+%%
+override gnome_keyring_find_network_password_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_find_network_password_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "user", "domain", "server", "object", "protocol", "authtype", "port", NULL };
+    char *user, *domain, *server, *object, *protocol, *authtype;
+    unsigned long port;
+    gint ret;
+    GList *result = NULL, *l;
+    PyObject *py_result;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"ssssssk:find_network_password_sync", kwlist,
+                                     &user, &domain, &server, &object, &protocol, &authtype, &port))
+        return NULL;
+    ret = gnome_keyring_find_network_password_sync(user, domain, server, object,
+                                                   protocol, authtype, port, &result);
+    py_result = PyList_New(0);
+    for (l = result; l; l = l->next) {
+        GnomeKeyringNetworkPasswordData *data = l->data;
+        PyObject *dict = PyDict_New();
+
+        PyList_Append(py_result, dict);
+        Py_DECREF(dict);
+
+#define copy_string_attr(name)                                  \
+        if (data->name) {                                       \
+            PyObject *item = PyString_FromString(data->name);   \
+            PyDict_SetItemString(dict, #name, item);            \
+            Py_DECREF(item);                                    \
+        }
+#define copy_guint32_attr(name)                                         \
+        if (data->name) {                                               \
+            PyObject *item = PyLong_FromUnsignedLong(data->name);       \
+            PyDict_SetItemString(dict, #name, item);                    \
+            Py_DECREF(item);                                            \
+        }
+        
+        copy_string_attr(keyring);
+        copy_guint32_attr(item_id);
+        copy_string_attr(protocol);
+        copy_string_attr(server);
+        copy_string_attr(object);
+        copy_string_attr(authtype);
+        copy_guint32_attr(port);
+        copy_string_attr(user);
+        copy_string_attr(domain);
+        copy_string_attr(password);
+
+#undef copy_guint32_attr
+#undef copy_string_attr
+
+    }
+    gnome_keyring_network_password_list_free(result);
+    return pyg_enum_from_gtype(G_TYPE_NONE, ret);
+}
+
+%%
+override gnome_keyring_get_info_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_get_info_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", NULL };
+    char *keyring;
+    gint ret;
+    GnomeKeyringInfo *info = NULL;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"s:get_info_sync", kwlist, &keyring))
+        return NULL;
+    ret = gnome_keyring_get_info_sync(keyring, &info);
+    /* pyg_boxed_new handles NULL checking */
+    return Py_BuildValue("iN", ret, pyg_boxed_new(GNOME_KEYRING_TYPE_INFO, ret, FALSE, TRUE));
+}

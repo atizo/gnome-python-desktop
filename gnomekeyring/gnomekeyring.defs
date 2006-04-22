@@ -64,6 +64,29 @@
   )
 )
 
+(define-boxed AccessControl
+  (in-module "Gnome")
+  (c-name "GnomeKeyringAccessControl")
+  (gtype-id "GNOME_KEYRING_TYPE_ACCESS_CONTROL")
+)
+
+(define-boxed Info
+  (in-module "Gnome")
+  (c-name "GnomeKeyringInfo")
+  (gtype-id "GNOME_KEYRING_TYPE_INFO")
+)
+
+(define-boxed ItemInfo
+  (in-module "Gnome")
+  (c-name "GnomeKeyringItemInfo")
+  (gtype-id "GNOME_KEYRING_TYPE_ITEM_INFO")
+)
+
+(define-boxed ApplicationRef
+  (in-module "Gnome")
+  (c-name "GnomeKeyringApplicationRef")
+  (gtype-id "GNOME_KEYRING_TYPE_APPLICATION_REF")
+)
 
 ;; From /opt/gnome-devel/include/gnome-keyring-1/gnome-keyring.h
 
@@ -221,7 +244,7 @@
   (return-type "GnomeKeyringResult")
   (parameters
     '("const-char*" "keyring_name")
-    '("const-char*" "password")
+    '("const-char*" "password" (null-ok))
   )
 )
 

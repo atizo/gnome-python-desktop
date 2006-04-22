@@ -231,7 +231,8 @@ fi
 
 dnl should we build the gnomekeyring module
 build_gnomekeyring=false
-PKG_CHECK_MODULES(GNOMEKEYRING, gnome-keyring-1 >= gnomekeyring_required_version,
+PKG_CHECK_MODULES(GNOMEKEYRING, [gnome-keyring-1 >= gnomekeyring_required_version
+                                 gobject-2.0 >= glib_required_version],
   build_gnomekeyring=true,
   build_gnomekeyring=false)
 AM_CONDITIONAL(BUILD_GNOMEKEYRING, $build_gnomekeyring)

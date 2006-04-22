@@ -1,5 +1,13 @@
 2006-04-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* configure.ac:
+	* gnomekeyring/Makefile.am:
+	* gnomekeyring/gnomekeyring-argtypes.py:
+	* gnomekeyring/gnomekeyring.defs:
+	* gnomekeyring/gnomekeyring.override:
+	* tests/common.py:  Lots of work to improve coverage a bit; now at
+	39%, and it should be usable for many common operations.
+
 	* Makefile.am:
 	* configure.ac:
 	* gnomekeyring/.cvsignore:

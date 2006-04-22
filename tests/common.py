@@ -14,6 +14,7 @@ modules = [
     "mediaprofiles",
     "metacity",
     "rsvg",
+    "gnomekeyring",
     ]
 
 import ltihooks
