@@ -399,7 +399,7 @@
   (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
-    '("GList**" "ids")
+;    '("GList**" "ids")
   )
 )
 

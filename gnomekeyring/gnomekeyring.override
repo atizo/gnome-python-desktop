@@ -174,6 +174,8 @@ ignore
  gnome_keyring_acl_free
  gnome_keyring_network_password_free
  gnome_keyring_network_password_list_free
+ gnome_keyring_find_itemsv
+ gnome_keyring_find_itemsv_sync
 
 %%
 override gnome_keyring_get_default_keyring_sync noargs
@@ -368,4 +370,157 @@ _wrap_gnome_keyring_item_create_sync(PyObject *self, PyObject *args, PyObject *k
     pyg_end_allow_threads;
     gnome_keyring_attribute_list_free(attributes);
     return Py_BuildValue("Nk", pyg_enum_from_gtype(G_TYPE_NONE, ret), item_id);
+}
+
+%%
+override gnome_keyring_item_get_info_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_item_get_info_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "id", NULL };
+    char *keyring;
+    unsigned long id;
+    gint ret;
+    GnomeKeyringItemInfo *info = NULL;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sk:item_get_info_sync", kwlist, &keyring, &id))
+        return NULL;
+    pyg_begin_allow_threads;
+    ret = gnome_keyring_item_get_info_sync(keyring, id, &info);
+    pyg_end_allow_threads;
+    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret),
+                         pyg_boxed_new(GNOME_KEYRING_TYPE_ITEM_INFO, info, FALSE, TRUE));
+}
+
+%%
+override gnome_keyring_item_set_acl_sync kwargs
+
+static PyObject *
+_wrap_gnome_keyring_item_set_acl_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "id", "acl", NULL };
+    char *keyring;
+    unsigned long id;
+    gint ret, i, len;
+    PyObject *pyacl;
+    GList *acl = NULL;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"skO!:item_set_acl_sync", kwlist, &keyring, &id,
+                                     &PyList_Type, &pyacl))
+        return NULL;
+
+    len = PyList_Size(pyacl);
+    for (i = 0; i < len; ++i) {
+        PyObject *item = PyList_GET_ITEM(pyacl, i);
+        if (pyg_boxed_check(item, GNOME_KEYRING_TYPE_ACCESS_CONTROL))
+            acl = g_list_prepend(acl, pyg_boxed_get(item, GnomeKeyringAccessControl));
+        else {
+            PyErr_SetString(PyExc_TypeError, "acl elements must be of type gnomekeyring.AccessControl");
+            g_list_free(acl);
+            return NULL;
+        }
+    }
+    acl = g_list_reverse(acl);
+
+    pyg_begin_allow_threads;
+    ret = gnome_keyring_item_set_acl_sync(keyring, id, acl);
+    pyg_end_allow_threads;
+
+    g_list_free(acl);
+    return pyg_enum_from_gtype(G_TYPE_NONE, ret);
+}
+
+%%
+override gnome_keyring_item_get_acl_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_item_get_acl_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "id", NULL };
+    char *keyring;
+    unsigned long id;
+    gint ret;
+    GList *acl, *l;
+    PyObject *pyacl;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sk:item_get_acl_sync", kwlist, &keyring, &id))
+        return NULL;
+    pyg_begin_allow_threads;
+    ret = gnome_keyring_item_get_acl_sync(keyring, id, &acl);
+    pyg_end_allow_threads;
+
+    pyacl = PyList_New(0);
+    for (l = acl; l; l = l->next) {
+          /* steals ownership of the acl from the list */
+        PyObject *item = pyg_boxed_new(GNOME_KEYRING_TYPE_ACCESS_CONTROL, l->data, FALSE, TRUE);
+        PyList_Append(pyacl, item);
+        Py_DECREF(item);
+    }
+    g_list_free(acl);
+    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), pyacl);
+}
+
+%%
+override gnome_keyring_list_item_ids_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_list_item_ids_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", NULL };
+    char *keyring;
+    gint ret;
+    GList *ids = NULL, *l;
+    PyObject *py_ids;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"s:list_item_ids_sync", kwlist, &keyring))
+        return NULL;
+    pyg_begin_allow_threads;
+    ret = gnome_keyring_list_item_ids_sync(keyring, &ids);
+    pyg_end_allow_threads;
+
+    py_ids = PyList_New(0);
+    for (l = ids; l; l = l->next)
+    {
+        PyObject *item;
+        item = PyLong_FromUnsignedLong(GPOINTER_TO_UINT(l->data));
+        PyList_Append(py_ids, item);
+        Py_DECREF(item);
+    }
+    g_list_free(ids);
+    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_ids);
+}
+
+%%
+override gnome_keyring_find_items_sync
+static PyObject *
+_wrap_gnome_keyring_find_items_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "type", "attributes", NULL };
+    PyObject *py_type = NULL;
+    GnomeKeyringAttributeList * attributes;
+    GnomeKeyringItemType type;
+    gint ret;
+    PyObject * py_attributes;
+    GList *ids = NULL, *l;
+    PyObject *py_ids;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"OO:find_items_sync", kwlist, &py_type, &py_attributes))
+        return NULL;
+    if (pyg_enum_get_value(G_TYPE_NONE, py_type, (gint *)&type))
+        return NULL;
+    attributes = pygnome_keyring_attribute_list_from_pyobject(py_attributes);
+    pyg_begin_allow_threads;
+    ret = gnome_keyring_find_items_sync(type, attributes, &ids);
+    pyg_end_allow_threads;
+    gnome_keyring_attribute_list_free(attributes);
+
+    py_ids = PyList_New(0);
+    for (l = ids; l; l = l->next)
+    {
+        PyObject *item;
+        item = PyLong_FromUnsignedLong(GPOINTER_TO_UINT(l->data));
+        PyList_Append(py_ids, item);
+        Py_DECREF(item);
+    }
+    g_list_free(ids);
+
+    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_ids);
 }

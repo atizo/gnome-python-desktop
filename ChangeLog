@@ -1,7 +1,6 @@
 2006-04-23  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
-	* gnomekeyring/gnomekeyring.override
-	(_wrap_gnome_keyring_item_create_sync): Override and wrap.
+	* gnomekeyring/gnomekeyring.override: Wrap all the remaining _sync APIs.
 
 	* gnomekeyring/gnomekeyring.defs:
 	Convert the gnome_keyring_item_ac_* functions to
