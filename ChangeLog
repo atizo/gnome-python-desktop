@@ -1,4 +1,11 @@
+=== 2.15.1 ===
 2006-04-23  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gnomekeyring/Makefile.am (EXTRA_DIST): Add gnomekeyring-argtypes.py.
+
+	* NEWS: Update.
+
+	* configure.ac: Version 2.15.1.
 
 	* gnomekeyring/gnomekeyring.override: Wrap all the remaining _sync APIs.
 

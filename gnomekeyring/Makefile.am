@@ -4,7 +4,7 @@ defsdir = $(datadir)/pygtk/2.0/defs
 
 defs_DATA = gnomekeyring.defs
 
-EXTRA_DIST = $(defs_DATA)
+EXTRA_DIST = $(defs_DATA) gnomekeyring-argtypes.py
 
 common_ldflags = -module -avoid-version
 
