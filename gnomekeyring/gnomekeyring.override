@@ -341,5 +341,31 @@ _wrap_gnome_keyring_get_info_sync(PyObject *self, PyObject *args, PyObject *kwar
     pyg_end_allow_threads;
 
     /* pyg_boxed_new handles NULL checking */
-    return Py_BuildValue("iN", ret, pyg_boxed_new(GNOME_KEYRING_TYPE_INFO, ret, FALSE, TRUE));
+    return Py_BuildValue("iN", ret, pyg_boxed_new(GNOME_KEYRING_TYPE_INFO, info, FALSE, TRUE));
+}
+%%
+override gnome_keyring_item_create_sync kwargs
+static PyObject *
+_wrap_gnome_keyring_item_create_sync(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "type", "display_name", "attributes", "secret", "update_if_exists", NULL };
+    PyObject * py_attributes;
+    PyObject *py_type = NULL;
+    char *keyring, *display_name, *secret;
+    int update_if_exists;
+    GnomeKeyringAttributeList * attributes;
+    GnomeKeyringItemType type;
+    gint ret;
+    guint32 item_id = 0;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sOsOsi:item_create_sync", kwlist, &keyring, &py_type, &display_name, &py_attributes, &secret, &update_if_exists))
+        return NULL;
+    if (pyg_enum_get_value(G_TYPE_NONE, py_type, (gint *)&type))
+        return NULL;
+    attributes = pygnome_keyring_attribute_list_from_pyobject(py_attributes);
+    pyg_begin_allow_threads;
+    ret = gnome_keyring_item_create_sync(keyring, type, display_name, attributes, secret, update_if_exists, &item_id);
+    pyg_end_allow_threads;
+    gnome_keyring_attribute_list_free(attributes);
+    return Py_BuildValue("Nk", pyg_enum_from_gtype(G_TYPE_NONE, ret), item_id);
 }

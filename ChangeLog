@@ -1,7 +1,16 @@
 2006-04-23  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* gnomekeyring/gnomekeyring.override
+	(_wrap_gnome_keyring_item_create_sync): Override and wrap.
+
+	* gnomekeyring/gnomekeyring.defs:
+	Convert the gnome_keyring_item_ac_* functions to
+	gnomekeyring.AccessControl methods (bad h2def.py).
+
 	* gnomekeyring/gnomekeyring.override: Add
 	pyg_(begin|end)_allow_threads to overridden functions.
+	(_wrap_gnome_keyring_get_info_sync): Correct small copy-paste
+	error in return value.
 
 	* gnomekeyring/gnomekeyring.defs: Add (unblock-threads #t) to all
 	_sync APIs.
