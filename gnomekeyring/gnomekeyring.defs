@@ -171,6 +171,7 @@
 (define-function set_default_keyring_sync
   (c-name "gnome_keyring_set_default_keyring_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
   )
@@ -189,6 +190,7 @@
 (define-function get_default_keyring_sync
   (c-name "gnome_keyring_get_default_keyring_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("char**" "keyring")
   )
@@ -207,6 +209,7 @@
 (define-function list_keyring_names_sync
   (c-name "gnome_keyring_list_keyring_names_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("GList**" "keyrings")
   )
@@ -225,6 +228,7 @@
 (define-function lock_all_sync
   (c-name "gnome_keyring_lock_all_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
 )
 
 (define-function create
@@ -242,6 +246,7 @@
 (define-function create_sync
   (c-name "gnome_keyring_create_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring_name")
     '("const-char*" "password" (null-ok))
@@ -263,6 +268,7 @@
 (define-function unlock_sync
   (c-name "gnome_keyring_unlock_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("const-char*" "password")
@@ -283,6 +289,7 @@
 (define-function lock_sync
   (c-name "gnome_keyring_lock_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
   )
@@ -302,6 +309,7 @@
 (define-function delete_sync
   (c-name "gnome_keyring_delete_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
   )
@@ -323,6 +331,7 @@
 (define-function change_password_sync
   (c-name "gnome_keyring_change_password_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("const-char*" "original")
@@ -344,6 +353,7 @@
 (define-function get_info_sync
   (c-name "gnome_keyring_get_info_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("GnomeKeyringInfo**" "info")
@@ -365,6 +375,7 @@
 (define-function set_info_sync
   (c-name "gnome_keyring_set_info_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("GnomeKeyringInfo*" "info")
@@ -385,6 +396,7 @@
 (define-function list_item_ids_sync
   (c-name "gnome_keyring_list_item_ids_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("GList**" "ids")
@@ -394,6 +406,7 @@
 (define-function daemon_set_display_sync
   (c-name "gnome_keyring_daemon_set_display_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "display")
   )
@@ -486,6 +499,7 @@
 (define-function find_items_sync
   (c-name "gnome_keyring_find_items_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("GnomeKeyringItemType" "type")
     '("GnomeKeyringAttributeList*" "attributes")
@@ -496,6 +510,7 @@
 (define-function find_itemsv_sync
   (c-name "gnome_keyring_find_itemsv_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("GnomeKeyringItemType" "type")
     '("GList**" "found")
@@ -522,6 +537,7 @@
 (define-function item_create_sync
   (c-name "gnome_keyring_item_create_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("GnomeKeyringItemType" "type")
@@ -548,6 +564,7 @@
 (define-function item_delete_sync
   (c-name "gnome_keyring_item_delete_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -569,6 +586,7 @@
 (define-function item_get_info_sync
   (c-name "gnome_keyring_item_get_info_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -592,6 +610,7 @@
 (define-function item_set_info_sync
   (c-name "gnome_keyring_item_set_info_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -614,6 +633,7 @@
 (define-function item_get_attributes_sync
   (c-name "gnome_keyring_item_get_attributes_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -637,6 +657,7 @@
 (define-function item_set_attributes_sync
   (c-name "gnome_keyring_item_set_attributes_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -659,6 +680,7 @@
 (define-function item_get_acl_sync
   (c-name "gnome_keyring_item_get_acl_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -682,6 +704,7 @@
 (define-function item_set_acl_sync
   (c-name "gnome_keyring_item_set_acl_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("guint32" "id")
@@ -907,6 +930,7 @@
 (define-function find_network_password_sync
   (c-name "gnome_keyring_find_network_password_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "user")
     '("const-char*" "domain")
@@ -941,6 +965,7 @@
 (define-function set_network_password_sync
   (c-name "gnome_keyring_set_network_password_sync")
   (return-type "GnomeKeyringResult")
+  (unblock-threads #t)
   (parameters
     '("const-char*" "keyring")
     '("const-char*" "user")

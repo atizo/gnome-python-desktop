@@ -1,3 +1,11 @@
+2006-04-23  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gnomekeyring/gnomekeyring.override: Add
+	pyg_(begin|end)_allow_threads to overridden functions.
+
+	* gnomekeyring/gnomekeyring.defs: Add (unblock-threads #t) to all
+	_sync APIs.
+
 2006-04-22  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* configure.ac:

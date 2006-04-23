@@ -182,8 +182,10 @@ _wrap_gnome_keyring_get_default_keyring_sync(PyObject *self)
 {
     gint ret;
     char *keyring;
-
+    
+    pyg_begin_allow_threads;
     ret = gnome_keyring_get_default_keyring_sync(&keyring);
+    pyg_end_allow_threads;
     return Py_BuildValue("Ns", pyg_enum_from_gtype(G_TYPE_NONE, ret), keyring);
 }
 
@@ -196,7 +198,10 @@ _wrap_gnome_keyring_list_keyring_names_sync(PyObject *self)
     GList *keyrings, *l;
     PyObject *py_keyrings = NULL;
 
+    pyg_begin_allow_threads;
     ret = gnome_keyring_list_keyring_names_sync(&keyrings);
+    pyg_end_allow_threads;
+
     py_keyrings = PyList_New(0);
     for (l = keyrings; l; l = l->next) {
         PyObject *item = PyString_FromString((char *) l->data);
@@ -221,7 +226,11 @@ _wrap_gnome_keyring_item_get_attributes_sync(PyObject *self, PyObject *args, PyO
 
     if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sk:item_get_attributes_sync", kwlist, &keyring, &id))
         return NULL;
+
+    pyg_begin_allow_threads;
     ret = gnome_keyring_item_get_attributes_sync(keyring, id, &attrlist);
+    pyg_end_allow_threads;
+
     py_attrlist = pygnome_keyring_attribute_list_as_pyobject(attrlist);
     if (!py_attrlist)
         return NULL;
@@ -244,8 +253,12 @@ _wrap_gnome_keyring_set_network_password_sync(PyObject *self, PyObject *args, Py
                                      &keyring, &user, &domain, &server, &object, &protocol,
                                      &authtype, &port, &password))
         return NULL;
+
+    pyg_begin_allow_threads;
     ret = gnome_keyring_set_network_password_sync(keyring, user, domain, server, object,
                                                   protocol, authtype, port, password, &item_id);
+    pyg_end_allow_threads;
+
     return Py_BuildValue("Nk", pyg_enum_from_gtype(G_TYPE_NONE, ret), item_id);
 }
 
@@ -264,8 +277,12 @@ _wrap_gnome_keyring_find_network_password_sync(PyObject *self, PyObject *args, P
     if (!PyArg_ParseTupleAndKeywords(args, kwargs,"ssssssk:find_network_password_sync", kwlist,
                                      &user, &domain, &server, &object, &protocol, &authtype, &port))
         return NULL;
+
+    pyg_begin_allow_threads;
     ret = gnome_keyring_find_network_password_sync(user, domain, server, object,
                                                    protocol, authtype, port, &result);
+    pyg_end_allow_threads;
+
     py_result = PyList_New(0);
     for (l = result; l; l = l->next) {
         GnomeKeyringNetworkPasswordData *data = l->data;
@@ -318,7 +335,11 @@ _wrap_gnome_keyring_get_info_sync(PyObject *self, PyObject *args, PyObject *kwar
 
     if (!PyArg_ParseTupleAndKeywords(args, kwargs,"s:get_info_sync", kwlist, &keyring))
         return NULL;
+
+    pyg_begin_allow_threads;
     ret = gnome_keyring_get_info_sync(keyring, &info);
+    pyg_end_allow_threads;
+
     /* pyg_boxed_new handles NULL checking */
     return Py_BuildValue("iN", ret, pyg_boxed_new(GNOME_KEYRING_TYPE_INFO, ret, FALSE, TRUE));
 }
