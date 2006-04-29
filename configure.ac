@@ -4,7 +4,7 @@ AC_PREREQ(2.52)
 dnl the gnome-python version number
 m4_define(gnome_python_desktop_major_version, 2)
 m4_define(gnome_python_desktop_minor_version, 15)
-m4_define(gnome_python_desktop_micro_version, 1)
+m4_define(gnome_python_desktop_micro_version, 2)
 m4_define(gnome_python_desktop_version, gnome_python_desktop_major_version.gnome_python_desktop_minor_version.gnome_python_desktop_micro_version)
 
 dnl required versions of other packages
@@ -27,6 +27,7 @@ m4_define(gconf_required_version,             2.10.0)
 m4_define(metacity_required_version,          2.13.13)
 m4_define(rsvg_required_version,              2.13.93)
 m4_define(gnomekeyring_required_version,      0.5.0)
+m4_define(gnomedesktop_required_version,      2.10.0)
 
 
 AC_INIT(gnome-python-desktop, gnome_python_desktop_version,
@@ -240,6 +241,17 @@ if test -n "$export_dynamic"; then
   GNOMEKEYRING_LIBS=`echo $GNOMEKEYRING_LIBS | sed -e "s/$export_dynamic//"`
 fi
 
+dnl should we build the gnomekeyring module
+build_gnomedesktop=false
+PKG_CHECK_MODULES(GNOMEDESKTOP, [gnome-desktop-2.0 >= gnomedesktop_required_version
+                                 pygobject-2.0],
+  build_gnomedesktop=true,
+  build_gnomedesktop=false)
+AM_CONDITIONAL(BUILD_GNOMEDESKTOP, $build_gnomedesktop)
+if test -n "$export_dynamic"; then
+  GNOMEDESKTOP_LIBS=`echo $GNOMEDESKTOP_LIBS | sed -e "s/$export_dynamic//"`
+fi
+
 dnl add required cflags ...
 JH_ADD_CFLAG([-Wall])
 JH_ADD_CFLAG([-std=c9x])
@@ -259,6 +271,7 @@ AC_CONFIG_FILES(
   metacity/Makefile
   rsvg/Makefile
   gnomekeyring/Makefile
+  gnomedesktop/Makefile
   gnome-python-desktop-2.0.pc
   tests/Makefile
   docs/Makefile
@@ -283,6 +296,7 @@ $build_mediaprofiles     && echo     mediaprofiles
 $build_metacity          && echo     metacity
 $build_rsvg              && echo     rsvg
 $build_gnomekeyring      && echo     gnomekeyring
+$build_gnomedesktop      && echo     gnomedesktop
 echo
 
 echo "The following modules will NOT be built:"
@@ -299,3 +313,4 @@ $build_mediaprofiles     || echo     mediaprofiles
 $build_metacity          || echo     metacity
 $build_rsvg              || echo     rsvg
 $build_gnomekeyring      || echo     gnomekeyring
+$build_gnomedesktop      || echo     gnomedesktop

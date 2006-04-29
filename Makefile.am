@@ -45,6 +45,10 @@ if BUILD_GNOMEKEYRING
   SUBDIRS += gnomekeyring
 endif
 
+if BUILD_GNOMEDESKTOP
+  SUBDIRS += gnomedesktop
+endif
+
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-desktop-2.0.pc

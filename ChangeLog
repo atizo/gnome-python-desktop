@@ -1,3 +1,16 @@
+2006-04-29  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gnomedesktop/Makefile.am: Some modifications to make it
+	buildable in this context, and to install to a system-wide dir
+	instead of deskbar libdir.
+
+	* Makefile.am (SUBDIRS): Add gnomedesktop subdir.
+
+	* configure.ac: Incr. version to 2.15.2.  Detect gnome-desktop libs.
+
+	* gnomedesktop/*: imported gnome-desktop bindings straight from
+	deskbar-applet.
+
 === 2.15.1 ===
 2006-04-23  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 

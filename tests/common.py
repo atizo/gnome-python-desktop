@@ -15,6 +15,7 @@ modules = [
     "metacity",
     "rsvg",
     "gnomekeyring",
+    "gnomedesktop",
     ]
 
 import ltihooks
