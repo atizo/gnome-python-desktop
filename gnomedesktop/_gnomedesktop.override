@@ -74,74 +74,74 @@ override gnome_desktop_item_get_languages kwargs
 static PyObject *
 _wrap_gnome_desktop_item_get_languages (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "attr", NULL };
+    static char *kwlist[] = { "attr", NULL };
     char        *attr;
-	GList       *langs;
-	
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:GnomeDesktopItem.get_languages", kwlist, &attr))
+    GList       *langs;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:GnomeDesktopItem.get_languages", kwlist, &attr))
         return NULL;
-	
-	langs = gnome_desktop_item_get_languages (pyg_boxed_get(self, GnomeDesktopItem), attr);
-	
-	return _helper_wrap_string_glist (langs);
+    
+    langs = gnome_desktop_item_get_languages (pyg_boxed_get(self, GnomeDesktopItem), attr);
+    
+    return _helper_wrap_string_glist (langs);
 }
 %%
 override gnome_desktop_item_get_strings kwargs
 static PyObject *
 _wrap_gnome_desktop_item_get_strings (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "attr", NULL };
+    static char *kwlist[] = { "attr", NULL };
     char        *attr;
-	char       **strings;
-	PyObject    *ret;
-	
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:GnomeDesktopItem.get_strings", kwlist, &attr))
+    char       **strings;
+    PyObject    *ret;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s:GnomeDesktopItem.get_strings", kwlist, &attr))
         return NULL;
-	
-	strings = gnome_desktop_item_get_strings (pyg_boxed_get(self, GnomeDesktopItem), attr);
-	
-	ret = _helper_wrap_string_array (strings);
-	/* FIXME: The doc says to: gnome_desktop_item_free_string_list (strings);
-	   But this function does not exists, using g_strfreev.. */
-	g_strfreev (strings);
-	
-	return ret;
+    
+    strings = gnome_desktop_item_get_strings (pyg_boxed_get(self, GnomeDesktopItem), attr);
+    
+    ret = _helper_wrap_string_array (strings);
+    /* FIXME: The doc says to: gnome_desktop_item_free_string_list (strings);
+       But this function does not exists, using g_strfreev.. */
+    g_strfreev (strings);
+    
+    return ret;
 }
 %%
 override gnome_desktop_item_set_strings kwargs
 static PyObject *
 _wrap_gnome_desktop_item_set_strings (PyObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char *kwlist[] = { "attr", "strings", NULL };
+    static char *kwlist[] = { "attr", "strings", NULL };
     char        *attr;
     PyObject   *pystrings;
     int         i;
-	int         n_strings = 0;
-	char       **strings;
-	
-	if (!PyArg_ParseTupleAndKeywords(args, kwargs, "sO:GnomeDesktopItem.set_strings", kwlist, &attr, &pystrings))
+    int         n_strings = 0;
+    char       **strings;
+    
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "sO:GnomeDesktopItem.set_strings", kwlist, &attr, &pystrings))
         return NULL;
-	
-	if (!PyList_Check(pystrings) && !PyTuple_Check(pystrings)) {
-		PyErr_SetString(PyExc_TypeError, "2nd argument not a tuple or list");
-		return NULL;
-	}
+    
+    if (!PyList_Check(pystrings) && !PyTuple_Check(pystrings)) {
+        PyErr_SetString(PyExc_TypeError, "2nd argument not a tuple or list");
+        return NULL;
+    }
 
     n_strings = PySequence_Length(pystrings);
     strings = g_new(gchar *, n_strings + 1);
     for (i = 0; i < n_strings; i++) {
-	    PyObject *item = PySequence_GetItem(pystrings, i);
-	    Py_DECREF(item); 
-	    strings[i] = PyString_AsString(item);
+        PyObject *item = PySequence_GetItem(pystrings, i);
+        Py_DECREF(item); 
+        strings[i] = PyString_AsString(item);
     }
     strings[n_strings] = NULL;
-	    
-	gnome_desktop_item_set_strings (pyg_boxed_get(self, GnomeDesktopItem), attr, strings);
-	
-	g_free (strings);
-	
-	Py_INCREF(Py_None);
-	return Py_None;
+        
+    gnome_desktop_item_set_strings (pyg_boxed_get(self, GnomeDesktopItem), attr, strings);
+    
+    g_free (strings);
+    
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 %%
 override gnome_desktop_item_drop_uri_list kwargs
@@ -159,28 +159,28 @@ _wrap_gnome_desktop_item_drop_uri_list (PyObject *self, PyObject *args, PyObject
     int ret;
 
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, "s|iO:GnomeDesktopItem.drop_uri_list", kwlist,
-    												&uri_list, &flags, &pyenv))
+                                                    &uri_list, &flags, &pyenv))
         return NULL;
     
     if (pyenv != Py_None) {
-    	if (!PyList_Check(pyenv) && !PyTuple_Check(pyenv)) {
-			PyErr_SetString(PyExc_TypeError, "3rd argument not a tuple or list");
-			return NULL;
-    	}
+        if (!PyList_Check(pyenv) && !PyTuple_Check(pyenv)) {
+            PyErr_SetString(PyExc_TypeError, "3rd argument not a tuple or list");
+            return NULL;
+        }
     
-	    n_env = PySequence_Length(pyenv);
-	    envp = g_new(gchar *, n_env + 1);
-	    for (i = 0; i < n_env; i++) {
-		    PyObject *item = PySequence_GetItem(pyenv, i);
-		    Py_DECREF(item); 
-		    envp[i] = PyString_AsString(item);
-	    }
-	    envp[n_env] = NULL;
-	    ret = gnome_desktop_item_drop_uri_list_with_env (pyg_boxed_get(self, GnomeDesktopItem), uri_list, flags, envp, &error);
-	}
-	else {
-    	ret = gnome_desktop_item_drop_uri_list (pyg_boxed_get(self, GnomeDesktopItem), uri_list, flags, &error);
-	}
+        n_env = PySequence_Length(pyenv);
+        envp = g_new(gchar *, n_env + 1);
+        for (i = 0; i < n_env; i++) {
+            PyObject *item = PySequence_GetItem(pyenv, i);
+            Py_DECREF(item); 
+            envp[i] = PyString_AsString(item);
+        }
+        envp[n_env] = NULL;
+        ret = gnome_desktop_item_drop_uri_list_with_env (pyg_boxed_get(self, GnomeDesktopItem), uri_list, flags, envp, &error);
+    }
+    else {
+        ret = gnome_desktop_item_drop_uri_list (pyg_boxed_get(self, GnomeDesktopItem), uri_list, flags, &error);
+    }
     g_free (envp);
     
     if (pyg_error_check(&error))
@@ -192,14 +192,14 @@ override gnome_desktop_item_launch kwargs
 static PyObject *
 _wrap_gnome_desktop_item_launch (PyGObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char  *kwlist[] = { "file_list", "flags", "env", NULL };
+    static char  *kwlist[] = { "file_list", "flags", "env", NULL };
     
     PyObject   *pyfile_list;
     PyObject   *pyenv = Py_None;
     GnomeDesktopItemLaunchFlags flags = 0;
     int         i;
-	int         n_files = 0;
-	GList      *files = NULL;
+    int         n_files = 0;
+    GList      *files = NULL;
     int         n_env = 0;
     char      **envp = NULL;
     GError     *error = NULL;
@@ -208,15 +208,15 @@ _wrap_gnome_desktop_item_launch (PyGObject *self, PyObject *args, PyObject *kwar
     if (!PyArg_ParseTupleAndKeywords(args, kwargs,
                                      "O|iO:GnomeDesktopItem.launch", kwlist,
                                      &pyfile_list, &flags, &pyenv)) {
-		return NULL;
+        return NULL;
     }
 
     if (!PyList_Check(pyfile_list) && !PyTuple_Check(pyfile_list)) {
-		PyErr_SetString(PyExc_TypeError, "1st argument not a tuple or list");
-		return NULL;
+        PyErr_SetString(PyExc_TypeError, "1st argument not a tuple or list");
+        return NULL;
     }
            
-	n_files = PySequence_Length(pyfile_list);
+    n_files = PySequence_Length(pyfile_list);
     for (i = 0; i < n_files; i++) {
         PyObject *item = PySequence_GetItem(pyfile_list, i);
         Py_DECREF(item); 
@@ -224,48 +224,48 @@ _wrap_gnome_desktop_item_launch (PyGObject *self, PyObject *args, PyObject *kwar
     }
     
     if (pyenv != Py_None) {
-    	if (!PyList_Check(pyenv) && !PyTuple_Check(pyenv)) {
-			PyErr_SetString(PyExc_TypeError, "3rd argument not a tuple or list");
-			return NULL;
-    	}
+        if (!PyList_Check(pyenv) && !PyTuple_Check(pyenv)) {
+            PyErr_SetString(PyExc_TypeError, "3rd argument not a tuple or list");
+            return NULL;
+        }
     
-	    n_env = PySequence_Length(pyenv);
-	    envp = g_new(gchar *, n_env + 1);
-	    for (i = 0; i < n_env; i++) {
-		    PyObject *item = PySequence_GetItem(pyenv, i);
-		    Py_DECREF(item); 
-		    envp[i] = PyString_AsString(item);
-	    }
-	    envp[n_env] = NULL;
-	    
-	    result = gnome_desktop_item_launch_with_env (
-	    					pyg_boxed_get(self, GnomeDesktopItem),
-	    					files,
-	    					flags,
-	    					envp,
-	    					&error);
-	}
-	else {
-		result = gnome_desktop_item_launch (
-	    					pyg_boxed_get(self, GnomeDesktopItem),
-	    					files,
-	    					flags,
-	    					&error);
-	}
-	g_free (envp);
-	g_list_free (files);
-	
-	if (pyg_error_check(&error))
+        n_env = PySequence_Length(pyenv);
+        envp = g_new(gchar *, n_env + 1);
+        for (i = 0; i < n_env; i++) {
+            PyObject *item = PySequence_GetItem(pyenv, i);
+            Py_DECREF(item); 
+            envp[i] = PyString_AsString(item);
+        }
+        envp[n_env] = NULL;
+        
+        result = gnome_desktop_item_launch_with_env (
+                            pyg_boxed_get(self, GnomeDesktopItem),
+                            files,
+                            flags,
+                            envp,
+                            &error);
+    }
+    else {
+        result = gnome_desktop_item_launch (
+                            pyg_boxed_get(self, GnomeDesktopItem),
+                            files,
+                            flags,
+                            &error);
+    }
+    g_free (envp);
+    g_list_free (files);
+    
+    if (pyg_error_check(&error))
         return NULL;
         
-	return PyInt_FromLong(result);
+    return PyInt_FromLong(result);
 }
 %%
 override gnome_desktop_item_launch_on_screen kwargs
 static PyObject *
 _wrap_gnome_desktop_item_launch_on_screen (PyGObject *self, PyObject *args, PyObject *kwargs)
 {
-	static char  *kwlist[] = { "file_list", "flags", "screen", "workspace", NULL };
+    static char  *kwlist[] = { "file_list", "flags", "screen", "workspace", NULL };
     
     PyObject   *pyfile_list;
     PyObject   *pyscreen;
@@ -273,23 +273,23 @@ _wrap_gnome_desktop_item_launch_on_screen (PyGObject *self, PyObject *args, PyOb
     int workspace;
     
     int         i;
-	int         n_files = 0;
-	GList      *files = NULL;
+    int         n_files = 0;
+    GList      *files = NULL;
     GError     *error = NULL;
     int         result;
 
     if (!PyArg_ParseTupleAndKeywords(args, kwargs,
                                      "OiOi:GnomeDesktopItem.launch", kwlist,
                                      &pyfile_list, &flags, &PyGdkScreen_Type, &pyscreen, &workspace)) {
-		return NULL;
+        return NULL;
     }
 
     if (!PyList_Check(pyfile_list) && !PyTuple_Check(pyfile_list)) {
-		PyErr_SetString(PyExc_TypeError, "1st argument not a tuple or list");
-		return NULL;
+        PyErr_SetString(PyExc_TypeError, "1st argument not a tuple or list");
+        return NULL;
     }
             
-	n_files = PySequence_Length(pyfile_list);
+    n_files = PySequence_Length(pyfile_list);
     for (i = 0; i < n_files; i++) {
         PyObject *item = PySequence_GetItem(pyfile_list, i);
         Py_DECREF(item); 
@@ -297,16 +297,16 @@ _wrap_gnome_desktop_item_launch_on_screen (PyGObject *self, PyObject *args, PyOb
     }
         
     result = gnome_desktop_item_launch_on_screen (
-	    				pyg_boxed_get(self, GnomeDesktopItem),
-    					files,
-    					flags,
-    					GDK_SCREEN (pygobject_get (pyscreen)),
-    					workspace,
-    					&error);
+                        pyg_boxed_get(self, GnomeDesktopItem),
+                        files,
+                        flags,
+                        GDK_SCREEN (pygobject_get (pyscreen)),
+                        workspace,
+                        &error);
     
-	g_list_free (files);
-	if (pyg_error_check(&error))
+    g_list_free (files);
+    if (pyg_error_check(&error))
         return NULL;
         
-	return PyInt_FromLong(result);
+    return PyInt_FromLong(result);
 }
