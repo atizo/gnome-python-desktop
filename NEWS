@@ -1,3 +1,7 @@
+Overview of Changes from 2.15.1 to 2.15.2
+==============================================================================
+- New gnomedesktop module, formerly in deskbar-applet (Raphael Slinckx)
+
 Overview of Changes from 2.14.0 to 2.15.1
 ==============================================================================
 - New module rsvg wrapping librsvg  (Robert Staudinger, Sebastian Rittau)

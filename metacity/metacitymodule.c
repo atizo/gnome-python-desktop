@@ -11,6 +11,7 @@
 #include <pygtk/pygtk.h>
 
 void pymetacity_register_classes(PyObject *d);
+void pymetacity_add_constants(PyObject *module, const gchar *strip_prefix);
 extern PyMethodDef pymetacity_functions[];
 
 DL_EXPORT(void)

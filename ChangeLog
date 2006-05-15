@@ -1,3 +1,10 @@
+=== 2.15.2 ===
+2006-05-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* metacity/metacitymodule.c: Missing pymetacity_add_constants() prototype.
+
 2006-05-08  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* docs/pygtk-ref-docs.make (html.stamp): Pass "--stringparam
