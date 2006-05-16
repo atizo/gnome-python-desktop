@@ -5,6 +5,7 @@ headers
 #include <pygobject.h>
 #include <gnome-keyring.h>
 
+gboolean pygnomekeyring_result_check(GnomeKeyringResult result);
 
 #ifndef GNOME_KEYRING_TYPE_INFO
 # define GNOME_KEYRING_TYPE_INFO pygnome_keyring_info_get_type()
@@ -188,7 +189,9 @@ _wrap_gnome_keyring_get_default_keyring_sync(PyObject *self)
     pyg_begin_allow_threads;
     ret = gnome_keyring_get_default_keyring_sync(&keyring);
     pyg_end_allow_threads;
-    return Py_BuildValue("Ns", pyg_enum_from_gtype(G_TYPE_NONE, ret), keyring);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return PyString_FromString(keyring);
 }
 
 %%
@@ -212,7 +215,9 @@ _wrap_gnome_keyring_list_keyring_names_sync(PyObject *self)
         g_free(l->data);
     }
     g_list_free(keyrings);
-    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_keyrings);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return py_keyrings;
 }
 %%
 override gnome_keyring_item_get_attributes_sync kwargs
@@ -236,7 +241,9 @@ _wrap_gnome_keyring_item_get_attributes_sync(PyObject *self, PyObject *args, PyO
     py_attrlist = pygnome_keyring_attribute_list_as_pyobject(attrlist);
     if (!py_attrlist)
         return NULL;
-    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_attrlist);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return py_attrlist;
 }
 
 %%
@@ -261,7 +268,9 @@ _wrap_gnome_keyring_set_network_password_sync(PyObject *self, PyObject *args, Py
                                                   protocol, authtype, port, password, &item_id);
     pyg_end_allow_threads;
 
-    return Py_BuildValue("Nk", pyg_enum_from_gtype(G_TYPE_NONE, ret), item_id);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return PyLong_FromUnsignedLong(item_id);
 }
 
 %%
@@ -322,7 +331,10 @@ _wrap_gnome_keyring_find_network_password_sync(PyObject *self, PyObject *args, P
 
     }
     gnome_keyring_network_password_list_free(result);
-    return pyg_enum_from_gtype(G_TYPE_NONE, ret);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
 %%
@@ -369,7 +381,9 @@ _wrap_gnome_keyring_item_create_sync(PyObject *self, PyObject *args, PyObject *k
     ret = gnome_keyring_item_create_sync(keyring, type, display_name, attributes, secret, update_if_exists, &item_id);
     pyg_end_allow_threads;
     gnome_keyring_attribute_list_free(attributes);
-    return Py_BuildValue("Nk", pyg_enum_from_gtype(G_TYPE_NONE, ret), item_id);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return PyLong_FromUnsignedLong(item_id);
 }
 
 %%
@@ -388,8 +402,9 @@ _wrap_gnome_keyring_item_get_info_sync(PyObject *self, PyObject *args, PyObject 
     pyg_begin_allow_threads;
     ret = gnome_keyring_item_get_info_sync(keyring, id, &info);
     pyg_end_allow_threads;
-    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret),
-                         pyg_boxed_new(GNOME_KEYRING_TYPE_ITEM_INFO, info, FALSE, TRUE));
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return pyg_boxed_new(GNOME_KEYRING_TYPE_ITEM_INFO, info, FALSE, TRUE);
 }
 
 %%
@@ -427,7 +442,10 @@ _wrap_gnome_keyring_item_set_acl_sync(PyObject *self, PyObject *args, PyObject *
     pyg_end_allow_threads;
 
     g_list_free(acl);
-    return pyg_enum_from_gtype(G_TYPE_NONE, ret);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
 %%
@@ -456,7 +474,9 @@ _wrap_gnome_keyring_item_get_acl_sync(PyObject *self, PyObject *args, PyObject *
         Py_DECREF(item);
     }
     g_list_free(acl);
-    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), pyacl);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return pyacl;
 }
 
 %%
@@ -485,7 +505,9 @@ _wrap_gnome_keyring_list_item_ids_sync(PyObject *self, PyObject *args, PyObject 
         Py_DECREF(item);
     }
     g_list_free(ids);
-    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_ids);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return py_ids;
 }
 
 %%
@@ -522,5 +544,7 @@ _wrap_gnome_keyring_find_items_sync(PyObject *self, PyObject *args, PyObject *kw
     }
     g_list_free(ids);
 
-    return Py_BuildValue("NN", pyg_enum_from_gtype(G_TYPE_NONE, ret), py_ids);
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return py_ids;
 }
