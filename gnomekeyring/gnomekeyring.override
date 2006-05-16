@@ -379,6 +379,8 @@ _wrap_gnome_keyring_item_create_sync(PyObject *self, PyObject *args, PyObject *k
     if (pyg_enum_get_value(G_TYPE_NONE, py_type, (gint *)&type))
         return NULL;
     attributes = pygnome_keyring_attribute_list_from_pyobject(py_attributes);
+    if (!attributes)
+        return NULL;
     pyg_begin_allow_threads;
     ret = gnome_keyring_item_create_sync(keyring, type, display_name, attributes, secret, update_if_exists, &item_id);
     pyg_end_allow_threads;
@@ -531,6 +533,8 @@ _wrap_gnome_keyring_find_items_sync(PyObject *self, PyObject *args, PyObject *kw
     if (pyg_enum_get_value(G_TYPE_NONE, py_type, (gint *)&type))
         return NULL;
     attributes = pygnome_keyring_attribute_list_from_pyobject(py_attributes);
+    if (!attributes)
+        return NULL;
     pyg_begin_allow_threads;
     ret = gnome_keyring_find_items_sync(type, attributes, &ids);
     pyg_end_allow_threads;

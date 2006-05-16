@@ -1,8 +1,12 @@
 2006-05-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+	* gnomekeyring/gnomekeyring.override
+	(_wrap_gnome_keyring_item_create_sync)
+	(_wrap_gnome_keyring_find_items_sync): Check for error in
+	attributes convertion.
 
-	* gnomekeyring/gnomekeyring-argtypes.py:
-	* gnomekeyring/gnomekeyring.defs:
-	* gnomekeyring/gnomekeyring.override:
+	* gnomekeyring/gnomekeyring-argtypes.py,
+	* gnomekeyring/gnomekeyring.defs,
+	* gnomekeyring/gnomekeyring.override,
 	* gnomekeyring/gnomekeyringmodule.c: (pygnomekeyring_result_check),
 	(initialize_exceptions), (initgnomekeyring): Instead of returning
 	GnomeKeyringResult error codes, raise exceptions.  This changes
