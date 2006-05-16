@@ -13,3 +13,12 @@ class AttrList(argtypes.ArgType):
 
 argtypes.matcher.register('GnomeKeyringAttributeList*', AttrList())
 
+class GnomeKeyringResultArg(argtypes.IntArg):
+    def write_return(self, ptype, ownsreturn, info):
+        info.varlist.add('GnomeKeyringResult', 'ret')
+	info.codeafter.append('    if (pygnomekeyring_result_check(ret))\n'
+			      '        return NULL;\n'
+			      '    Py_INCREF(Py_None);\n'
+			      '    return Py_None;')
+
+argtypes.matcher.register('GnomeKeyringResult', GnomeKeyringResultArg())

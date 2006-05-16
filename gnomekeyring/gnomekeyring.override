@@ -355,7 +355,9 @@ _wrap_gnome_keyring_get_info_sync(PyObject *self, PyObject *args, PyObject *kwar
     pyg_end_allow_threads;
 
     /* pyg_boxed_new handles NULL checking */
-    return Py_BuildValue("iN", ret, pyg_boxed_new(GNOME_KEYRING_TYPE_INFO, info, FALSE, TRUE));
+    if (pygnomekeyring_result_check(ret))
+        return NULL;
+    return pyg_boxed_new(GNOME_KEYRING_TYPE_INFO, info, FALSE, TRUE);
 }
 %%
 override gnome_keyring_item_create_sync kwargs

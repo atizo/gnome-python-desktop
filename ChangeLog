@@ -1,3 +1,13 @@
+2006-05-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* gnomekeyring/gnomekeyring-argtypes.py:
+	* gnomekeyring/gnomekeyring.defs:
+	* gnomekeyring/gnomekeyring.override:
+	* gnomekeyring/gnomekeyringmodule.c: (pygnomekeyring_result_check),
+	(initialize_exceptions), (initgnomekeyring): Instead of returning
+	GnomeKeyringResult error codes, raise exceptions.  This changes
+	the API, but it's worth it...
+
 === 2.15.2 ===
 2006-05-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 

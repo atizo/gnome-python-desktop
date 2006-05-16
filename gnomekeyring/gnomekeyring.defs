@@ -2,22 +2,22 @@
 ; object definitions ...
 ;; Enumerations and flags ...
 
-(define-enum Result
-  (in-module "Gnome")
-  (c-name "GnomeKeyringResult")
-  ;(gtype-id "GNOME_TYPE_KEYRING_RESULT")
-  (values
-    '("ok" "GNOME_KEYRING_RESULT_OK")
-    '("denied" "GNOME_KEYRING_RESULT_DENIED")
-    '("no-keyring-daemon" "GNOME_KEYRING_RESULT_NO_KEYRING_DAEMON")
-    '("already-unlocked" "GNOME_KEYRING_RESULT_ALREADY_UNLOCKED")
-    '("no-such-keyring" "GNOME_KEYRING_RESULT_NO_SUCH_KEYRING")
-    '("bad-arguments" "GNOME_KEYRING_RESULT_BAD_ARGUMENTS")
-    '("io-error" "GNOME_KEYRING_RESULT_IO_ERROR")
-    '("cancelled" "GNOME_KEYRING_RESULT_CANCELLED")
-    '("already-exists" "GNOME_KEYRING_RESULT_ALREADY_EXISTS")
-  )
-)
+; (define-enum Result
+;   (in-module "Gnome")
+;   (c-name "GnomeKeyringResult")
+;   ;(gtype-id "GNOME_TYPE_KEYRING_RESULT")
+;   (values
+;     '("ok" "GNOME_KEYRING_RESULT_OK")
+;     '("denied" "GNOME_KEYRING_RESULT_DENIED")
+;     '("no-keyring-daemon" "GNOME_KEYRING_RESULT_NO_KEYRING_DAEMON")
+;     '("already-unlocked" "GNOME_KEYRING_RESULT_ALREADY_UNLOCKED")
+;     '("no-such-keyring" "GNOME_KEYRING_RESULT_NO_SUCH_KEYRING")
+;     '("bad-arguments" "GNOME_KEYRING_RESULT_BAD_ARGUMENTS")
+;     '("io-error" "GNOME_KEYRING_RESULT_IO_ERROR")
+;     '("cancelled" "GNOME_KEYRING_RESULT_CANCELLED")
+;     '("already-exists" "GNOME_KEYRING_RESULT_ALREADY_EXISTS")
+;   )
+; )
 
 (define-enum ItemType
   (in-module "Gnome")
