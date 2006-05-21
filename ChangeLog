@@ -1,3 +1,8 @@
+2006-05-21  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (EXTRA_DIST),
+	* examples/keyring.py: New gnomekeyring example.
+
 2006-05-16  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 	* gnomekeyring/gnomekeyring.override
 	(_wrap_gnome_keyring_item_create_sync)

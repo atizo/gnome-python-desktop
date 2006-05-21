@@ -81,4 +81,5 @@ EXTRA_DIST = \
   examples/nautilusburn/blank_disc.py \
   examples/nautilusburn/drive_selection.py \
   examples/nautilusburn/write_iso.py \
+  examples/keyring.py \
   examples/rsvg/rsvg-cairo.py
