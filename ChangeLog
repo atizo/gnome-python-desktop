@@ -1,3 +1,20 @@
+2006-06-02  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* nautilusburn/Makefile.am:
+	* nautilusburn/nautilus_burn.defs:
+	* nautilusburn/nautilus_burn.override:
+	* nautilusburn/nb_drive.c:
+	* nautilusburn/nb_drive.h:
+	* nautilusburn/nb_drive_selection.defs:
+	* nautilusburn/nb_module.c: (initnautilusburn):
+	* nautilusburn/nb_typebuiltins.c:
+	* nautilusburn/nb_typebuiltins.h:
+	Bug 343445: libnautilus-burn API changes.
+
+2006-06-02  Gustavo J. A. M. Carneiro  <gjc@inescporto.pt>
+
+	* nautilusburn/nautilus_burn.defs: Add NautilusBurnDriveMonitor defs.
+
 2006-05-25  Frederic Peters  <fpeters@0d.be>
 
 	* metacity/metacity.defs: updated MetaCursor enum.

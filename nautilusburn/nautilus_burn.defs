@@ -1,25 +1,36 @@
 ;; -*- scheme -*-
-; Enumerations and flags ...
+; object definitions ...
 
-(define-flags RecorderWriteFlags
-  (in-module "NautilusBurn")
-  (c-name "NautilusBurnRecorderWriteFlags")
-  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER_WRITE_FLAGS")
-  (values
-    '("eject"        "NAUTILUS_BURN_RECORDER_WRITE_EJECT")
-    '("blank"        "NAUTILUS_BURN_RECORDER_WRITE_BLANK")
-    '("dummy-write"  "NAUTILUS_BURN_RECORDER_WRITE_DUMMY_WRITE")
-    '("disc-at-once" "NAUTILUS_BURN_RECORDER_WRITE_DISC_AT_ONCE")
-    '("debug"        "NAUTILUS_BURN_RECORDER_WRITE_DEBUG")
-    '("overburn"     "NAUTILUS_BURN_RECORDER_WRITE_OVERBURN")
-    '("burnproof"    "NAUTILUS_BURN_RECORDER_WRITE_BURNPROOF")
-  )
+(define-object Drive
+  (parent "GObject")
+  (c-name "NautilusBurnDrive")
+  (gtype-id "NAUTILUS_BURN_TYPE_DRIVE")
 )
 
-(define-enum NautilusBurnMediaType
-  (in-module "NautilusBurn")
-  (c-name "NautilusBurnRecorderActions")
-  (gtype-id "NAUTILUS_BURN_TYPE_MEDIA_TYPE")
+(define-object DriveMonitor
+  (parent "GObject")
+  (c-name "NautilusBurnDriveMonitor")
+  (gtype-id "NAUTILUS_BURN_TYPE_DRIVE_MONITOR")
+)
+
+(define-object Recorder
+  (parent "GObject")
+  (c-name "NautilusBurnRecorder")
+  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER")
+)
+
+(define-object DriveSelection
+  (parent "GtkComboBox")
+  (c-name "NautilusBurnDriveSelection")
+  (gtype-id "NAUTILUS_BURN_TYPE_DRIVE_SELECTION")
+)
+
+;; Enumerations and flags ...
+
+(define-enum MediaType
+  (in-module "Nautilus")
+  (c-name "NautilusBurnMediaType")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_MEDIA_TYPE")
   (values
     '("busy" "NAUTILUS_BURN_MEDIA_TYPE_BUSY")
     '("error" "NAUTILUS_BURN_MEDIA_TYPE_ERROR")
@@ -33,13 +44,117 @@
     '("dvd-ram" "NAUTILUS_BURN_MEDIA_TYPE_DVD_RAM")
     '("dvd-plus-r" "NAUTILUS_BURN_MEDIA_TYPE_DVD_PLUS_R")
     '("dvd-plus-rw" "NAUTILUS_BURN_MEDIA_TYPE_DVD_PLUS_RW")
+    '("dvd-plus-r-dl" "NAUTILUS_BURN_MEDIA_TYPE_DVD_PLUS_R_DL")
   )
 )
 
-(define-enum NautilusBurnRecorderActions
-  (in-module "NautilusBurn")
+(define-flags DriveType
+  (in-module "Nautilus")
+  (c-name "NautilusBurnDriveType")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_DRIVE_TYPE")
+  (values
+    '("file" "NAUTILUS_BURN_DRIVE_TYPE_FILE")
+    '("cd-recorder" "NAUTILUS_BURN_DRIVE_TYPE_CD_RECORDER")
+    '("cdrw-recorder" "NAUTILUS_BURN_DRIVE_TYPE_CDRW_RECORDER")
+    '("dvd-ram-recorder" "NAUTILUS_BURN_DRIVE_TYPE_DVD_RAM_RECORDER")
+    '("dvd-rw-recorder" "NAUTILUS_BURN_DRIVE_TYPE_DVD_RW_RECORDER")
+    '("dvd-plus-r-recorder" "NAUTILUS_BURN_DRIVE_TYPE_DVD_PLUS_R_RECORDER")
+    '("dvd-plus-rw-recorder" "NAUTILUS_BURN_DRIVE_TYPE_DVD_PLUS_RW_RECORDER")
+    '("cd-drive" "NAUTILUS_BURN_DRIVE_TYPE_CD_DRIVE")
+    '("dvd-drive" "NAUTILUS_BURN_DRIVE_TYPE_DVD_DRIVE")
+    '("dvd-plus-r-dl-recorder" "NAUTILUS_BURN_DRIVE_TYPE_DVD_PLUS_R_DL_RECORDER")
+  )
+)
+
+(define-enum RecorderError
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderError")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_ERROR")
+  (values
+    '("internal" "NAUTILUS_BURN_RECORDER_ERROR_INTERNAL")
+    '("general" "NAUTILUS_BURN_RECORDER_ERROR_GENERAL")
+  )
+)
+
+(define-enum RecorderResult
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderResult")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_RESULT")
+  (values
+    '("error" "NAUTILUS_BURN_RECORDER_RESULT_ERROR")
+    '("cancel" "NAUTILUS_BURN_RECORDER_RESULT_CANCEL")
+    '("finished" "NAUTILUS_BURN_RECORDER_RESULT_FINISHED")
+    '("retry" "NAUTILUS_BURN_RECORDER_RESULT_RETRY")
+  )
+)
+
+(define-enum RecorderResponse
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderResponse")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_RESPONSE")
+  (values
+    '("none" "NAUTILUS_BURN_RECORDER_RESPONSE_NONE")
+    '("cancel" "NAUTILUS_BURN_RECORDER_RESPONSE_CANCEL")
+    '("erase" "NAUTILUS_BURN_RECORDER_RESPONSE_ERASE")
+    '("retry" "NAUTILUS_BURN_RECORDER_RESPONSE_RETRY")
+  )
+)
+
+(define-enum RecorderTrackType
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderTrackType")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_TRACK_TYPE")
+  (values
+    '("unknown" "NAUTILUS_BURN_RECORDER_TRACK_TYPE_UNKNOWN")
+    '("audio" "NAUTILUS_BURN_RECORDER_TRACK_TYPE_AUDIO")
+    '("data" "NAUTILUS_BURN_RECORDER_TRACK_TYPE_DATA")
+    '("cue" "NAUTILUS_BURN_RECORDER_TRACK_TYPE_CUE")
+    '("graft-list" "NAUTILUS_BURN_RECORDER_TRACK_TYPE_GRAFT_LIST")
+  )
+)
+
+(define-flags RecorderWriteFlags
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderWriteFlags")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_WRITE_FLAGS")
+  (values
+    '("none" "NAUTILUS_BURN_RECORDER_WRITE_NONE")
+    '("eject" "NAUTILUS_BURN_RECORDER_WRITE_EJECT")
+    '("blank" "NAUTILUS_BURN_RECORDER_WRITE_BLANK")
+    '("dummy-write" "NAUTILUS_BURN_RECORDER_WRITE_DUMMY_WRITE")
+    '("disc-at-once" "NAUTILUS_BURN_RECORDER_WRITE_DISC_AT_ONCE")
+    '("debug" "NAUTILUS_BURN_RECORDER_WRITE_DEBUG")
+    '("overburn" "NAUTILUS_BURN_RECORDER_WRITE_OVERBURN")
+    '("burnproof" "NAUTILUS_BURN_RECORDER_WRITE_BURNPROOF")
+    '("joliet" "NAUTILUS_BURN_RECORDER_WRITE_JOLIET")
+  )
+)
+
+(define-flags RecorderBlankFlags
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderBlankFlags")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_BLANK_FLAGS")
+  (values
+    '("none" "NAUTILUS_BURN_RECORDER_BLANK_NONE")
+    '("dummy-write" "NAUTILUS_BURN_RECORDER_BLANK_DUMMY_WRITE")
+    '("debug" "NAUTILUS_BURN_RECORDER_BLANK_DEBUG")
+  )
+)
+
+(define-enum RecorderBlankType
+  (in-module "Nautilus")
+  (c-name "NautilusBurnRecorderBlankType")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_BLANK_TYPE")
+  (values
+    '("ast" "NAUTILUS_BURN_RECORDER_BLANK_FAST")
+    '("ull" "NAUTILUS_BURN_RECORDER_BLANK_FULL")
+  )
+)
+
+(define-enum RecorderActions
+  (in-module "Nautilus")
   (c-name "NautilusBurnRecorderActions")
-  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER_ACTIONS")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_ACTIONS")
   (values
     '("preparing-write" "NAUTILUS_BURN_RECORDER_ACTION_PREPARING_WRITE")
     '("writing" "NAUTILUS_BURN_RECORDER_ACTION_WRITING")
@@ -48,56 +163,342 @@
   )
 )
 
-(define-enum NautilusBurnRecorderMedia
-  (in-module "NautilusBurn")
+(define-enum RecorderMedia
+  (in-module "Nautilus")
   (c-name "NautilusBurnRecorderMedia")
-  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER_MEDIA")
+  ;(gtype-id "NAUTILUS_BURN_TYPE_RECORDER_MEDIA")
   (values
-    '("cd"  "NAUTILUS_BURN_RECORDER_MEDIA_CD")
+    '("cd" "NAUTILUS_BURN_RECORDER_MEDIA_CD")
     '("dvd" "NAUTILUS_BURN_RECORDER_MEDIA_DVD")
   )
 )
 
-(define-enum NautilusBurnRecorderBlankType
-  (in-module "NautilusBurn")
-  (c-name "NautilusBurnRecorderBlankType")
-  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER_BLANK_TYPE")
-  (values
-    '("fast"  "NAUTILUS_BURN_RECORDER_BLANK_FAST")
-    '("full" "NAUTILUS_BURN_RECORDER_BLANK_FULL")
+
+;; From nautilus-burn-drive.h
+
+(define-function drive_get_type
+  (c-name "nautilus_burn_drive_get_type")
+  (return-type "GType")
+)
+
+(define-method ref
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_ref")
+  (return-type "NautilusBurnDrive*")
+)
+
+(define-method unref
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_unref")
+  (return-type "none")
+)
+
+(define-method equal
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_equal")
+  (return-type "gboolean")
+  (parameters
+    '("NautilusBurnDrive*" "b")
   )
 )
 
-(define-enum NautilusBurnRecorderResult
-  (in-module "NautilusBurn")
-  (c-name "NautilusBurnRecorderResult")
-  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER_RESULT")
-  (values
-    '("error"     "NAUTILUS_BURN_RECORDER_RESULT_ERROR")
-    '("cancel"    "NAUTILUS_BURN_RECORDER_RESULT_CANCEL")
-    '("finished"  "NAUTILUS_BURN_RECORDER_RESULT_FINISHED")
-    '("retry"     "NAUTILUS_BURN_RECORDER_RESULT_RETRY")
+(define-method lock
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_lock")
+  (return-type "gboolean")
+  (parameters
+    '("const-char*" "reason")
+    '("char**" "reason_for_failure")
   )
 )
+
+(define-method unlock
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_unlock")
+  (return-type "gboolean")
+)
+
+(define-method unmount
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_unmount")
+  (return-type "gboolean")
+)
+
+(define-method is_mounted
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_is_mounted")
+  (return-type "gboolean")
+)
+
+(define-method eject
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_eject")
+  (return-type "gboolean")
+)
+
+(define-method door_is_open
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_door_is_open")
+  (return-type "gboolean")
+)
+
+(define-method get_drive_type
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_drive_type")
+  (return-type "int")
+)
+
+(define-method get_name_for_display
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_name_for_display")
+  (return-type "char*")
+)
+
+(define-method get_device
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_device")
+  (return-type "const-char*")
+)
+
+(define-method can_write
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_can_write")
+  (return-type "gboolean")
+)
+
+(define-method can_rewrite
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_can_rewrite")
+  (return-type "gboolean")
+)
+
+(define-method get_max_speed_write
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_max_speed_write")
+  (return-type "int")
+)
+
+(define-method get_max_speed_read
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_max_speed_read")
+  (return-type "int")
+)
+
+(define-method get_write_speeds
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_write_speeds")
+  (return-type "const-int*")
+)
+
+(define-method get_media_type
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_media_type")
+  (return-type "NautilusBurnMediaType")
+)
+
+(define-method get_media_type_full
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_media_type_full")
+  (return-type "NautilusBurnMediaType")
+  (parameters
+    '("gboolean*" "is_rewritable")
+    '("gboolean*" "is_blank")
+    '("gboolean*" "has_data")
+    '("gboolean*" "has_audio")
+  )
+)
+
+(define-method get_media_capacity
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_media_capacity")
+  (return-type "gint64")
+)
+
+(define-method get_media_size
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_media_size")
+  (return-type "gint64")
+)
+
+(define-method get_media_label
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_media_label")
+  (return-type "char*")
+)
+
+(define-method media_is_appendable
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_media_is_appendable")
+  (return-type "gboolean")
+)
+
+(define-function drive_media_type_get_string
+  (c-name "nautilus_burn_drive_media_type_get_string")
+  (return-type "const-char*")
+  (parameters
+    '("NautilusBurnMediaType" "type")
+  )
+)
+
+(define-method get_supported_media_string
+  (of-object "NautilusBurnDrive")
+  (c-name "nautilus_burn_drive_get_supported_media_string")
+  (return-type "char*")
+  (parameters
+    '("gboolean" "writable_only")
+  )
+)
+
+(define-function drive_media_type_is_writable
+  (c-name "nautilus_burn_drive_media_type_is_writable")
+  (return-type "gboolean")
+  (parameters
+    '("NautilusBurnMediaType" "type")
+    '("gboolean" "is_blank")
+  )
+)
+
+
+
+;; From nautilus-burn-drive-monitor.h
+
+(define-function drive_monitor_get_type
+  (c-name "nautilus_burn_drive_monitor_get_type")
+  (return-type "GType")
+)
+
+(define-function get_drive_monitor
+  (c-name "nautilus_burn_get_drive_monitor")
+  (return-type "NautilusBurnDriveMonitor*")
+)
+
+(define-method get_drives
+  (of-object "NautilusBurnDriveMonitor")
+  (c-name "nautilus_burn_drive_monitor_get_drives")
+  (return-type "GList*")
+)
+
+(define-method get_recorder_drives
+  (of-object "NautilusBurnDriveMonitor")
+  (c-name "nautilus_burn_drive_monitor_get_recorder_drives")
+  (return-type "GList*")
+)
+
+(define-method get_drive_for_device
+  (of-object "NautilusBurnDriveMonitor")
+  (c-name "nautilus_burn_drive_monitor_get_drive_for_device")
+  (return-type "NautilusBurnDrive*")
+  (parameters
+    '("const-char*" "path")
+  )
+)
+
+
+(define-method get_drive_for_image
+  (of-object "NautilusBurnDriveMonitor")
+  (c-name "nautilus_burn_drive_monitor_get_drive_for_image")
+  (return-type "NautilusBurnDrive*")
+)
+
+
 
 ;; From nautilus-burn-drive-selection.h
-(include "nb_drive_selection.defs")
+
+(define-function drive_selection_get_type
+  (c-name "nautilus_burn_drive_selection_get_type")
+  (return-type "GtkType")
+)
+
+(define-function drive_selection_new
+  (c-name "nautilus_burn_drive_selection_new")
+  (is-constructor-of "NautilusBurnDriveSelection")
+  (return-type "GtkWidget*")
+)
+
+(define-method set_active
+  (of-object "NautilusBurnDriveSelection")
+  (c-name "nautilus_burn_drive_selection_set_active")
+  (return-type "none")
+  (parameters
+    '("NautilusBurnDrive*" "drive")
+  )
+)
+
+(define-method get_active
+  (of-object "NautilusBurnDriveSelection")
+  (c-name "nautilus_burn_drive_selection_get_active")
+  (return-type "NautilusBurnDrive*")
+)
+
+(define-method get_drive
+  (of-object "NautilusBurnDriveSelection")
+  (c-name "nautilus_burn_drive_selection_get_drive")
+  (return-type "const-NautilusBurnDrive*")
+)
+
+(define-method set_device
+  (of-object "NautilusBurnDriveSelection")
+  (c-name "nautilus_burn_drive_selection_set_device")
+  (return-type "none")
+  (parameters
+    '("const-char*" "device")
+  )
+)
+
+(define-method get_device
+  (of-object "NautilusBurnDriveSelection")
+  (c-name "nautilus_burn_drive_selection_get_device")
+  (return-type "const-char*")
+)
+
+(define-method get_default_device
+  (of-object "NautilusBurnDriveSelection")
+  (c-name "nautilus_burn_drive_selection_get_default_device")
+  (return-type "const-char*")
+)
+
+
+
+;; From nautilus-burn-features.h
+
+
+
+;; From nautilus-burn.h
+
+
+
+;; From nautilus-burn-init.h
+
+(define-function init
+  (c-name "nautilus_burn_init")
+  (return-type "gboolean")
+)
+
+(define-function initialized
+  (c-name "nautilus_burn_initialized")
+  (return-type "gboolean")
+)
+
+(define-function shutdown
+  (c-name "nautilus_burn_shutdown")
+  (return-type "none")
+)
+
+
 
 ;; From nautilus-burn-recorder.h
 
-(define-object Recorder
-  (in-module "NautilusBurn")
-  (parent "GObject")
-  (c-name "NautilusBurnRecorder")
-  (gtype-id "NAUTILUS_BURN_TYPE_RECORDER")
+(define-function recorder_error_quark
+  (c-name "nautilus_burn_recorder_error_quark")
+  (return-type "GQuark")
 )
 
-(define-function nautilus_burn_recorder_get_type
+(define-function recorder_get_type
   (c-name "nautilus_burn_recorder_get_type")
   (return-type "GType")
 )
 
-(define-function nautilus_burn_recorder_new
+(define-function recorder_new
   (c-name "nautilus_burn_recorder_new")
   (is-constructor-of "NautilusBurnRecorder")
   (return-type "NautilusBurnRecorder*")
@@ -112,6 +513,7 @@
     '("GList*" "tracks")
     '("gint" "speed")
     '("NautilusBurnRecorderWriteFlags" "flags")
+    '("GError**" "error")
   )
 )
 
@@ -122,7 +524,8 @@
   (parameters
     '("NautilusBurnDrive*" "drive")
     '("NautilusBurnRecorderBlankType" "type")
-    '("gboolean" "debug")
+    '("NautilusBurnRecorderBlankFlags" "flags")
+    '("GError**" "error")
   )
 )
 
@@ -134,4 +537,11 @@
     '("gboolean" "skip_if_dangerous")
   )
 )
+
+(define-method free
+  (of-object "NautilusBurnRecorderTrack")
+  (c-name "nautilus_burn_recorder_track_free")
+  (return-type "none")
+)
+
 

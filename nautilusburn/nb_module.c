@@ -18,64 +18,14 @@
  * Authors: Tiago Cogumbreiro <cogumbreiro@users.sf.net>
  */
 
-#include <pygobject.h>
 #include <Python.h>
-#include "nb_drive.h"
+#include <pygobject.h>
 #include "nb_track.h"
 #include <nautilus-burn-recorder.h>
 void nautilus_burn_register_classes (PyObject *d);
 void nautilus_burn_add_constants(PyObject *module, const gchar *strip_prefix);
 extern PyMethodDef nautilus_burn_functions[];
 
-static PyObject *
-nb_get_drives_list (PyObject *self, PyObject *args, PyObject *kwargs)
-{
-	int recorders_only = 0, add_image = 0, index, len;
-	GList *cds, *iter;
-	PyObject *cds_tuple, *cd;
-	
-	static char *kws[] = {"recorders_only", "add_image", NULL};
-	/* defaults to 0 */
-	add_image = 0;
-	if (!PyArg_ParseTupleAndKeywords (args, kwargs, "|ii:get_drives_list", kws, &recorders_only,
-			&add_image))
-		return NULL;
-	cds = nautilus_burn_drive_get_list (recorders_only, add_image);
-	len = g_list_length (cds);
-	cds_tuple = PyTuple_New (len);
-	
-	for (iter = g_list_first (cds), index = 0; iter; iter = iter->next, index++) {
-		/* create the new Drive object */
-		assert (iter->data);
-		cd = nb_drive_new ((NautilusBurnDrive *)iter->data);
-		if (!cd) {
-			return NULL;
-		}
-		if (PyTuple_SetItem (cds_tuple, index, cd)) {
-			return NULL;
-		}
-	}
-
-	g_list_free (cds);
-	return cds_tuple;
-}
-
-static PyObject *
-nb_bytes_to_seconds (PyObject *self, PyObject *args)
-{
-	int size;
-	if (!PyArg_ParseTuple (args, "i", &size))
-		return NULL;
-	return Py_BuildValue ("i", NAUTILUS_BURN_DRIVE_SIZE_TO_TIME(size));
-}
-
-static PyMethodDef nb_methods[] = {
-	{"get_drives_list", (PyCFunction) nb_get_drives_list, METH_VARARGS | METH_KEYWORDS,
-		"get_drives_list(recorders_only = False, add_image = False)\n" \
-		"Scans for available drives."},
-	{"bytes_to_seconds", (PyCFunction) nb_bytes_to_seconds, METH_VARARGS, "Converts a number of bytes to seconds, usefull for converting the Drive.get_media_size into time."},
-	{NULL}
-};
 
 
 DL_EXPORT(void)
@@ -85,12 +35,9 @@ initnautilusburn(void)
 	
 	init_pygobject ();
 	
-	m = Py_InitModule ("nautilusburn", nb_methods);
+	m = Py_InitModule ("nautilusburn", nautilus_burn_functions);
 	d = PyModule_GetDict (m);
 	
-	/* init Drive class */
-	if (nb_drive_init (m))
-		return;
 	/* init Track classes */
 	if (nb_track_init (m))
 		return;

@@ -3,11 +3,8 @@
 headers
 #define NO_IMPORT_PYGOBJECT
 #include "pygobject.h"
-#include <nautilus-burn-drive.h>
-#include <nautilus-burn-drive-selection.h>
-#include <nautilus-burn-recorder.h>
-#include "nb_typebuiltins.h"
-#include "nb_drive.h"
+#include <nautilus-burn.h>
+/* #include "nb_typebuiltins.h" */
 #include "nb_track.h"
 %%
 modulename nautilusburn
@@ -18,68 +15,26 @@ import gobject.GObject as PyGObject_Type
 ignore-glob
   *_get_type
 %%
-override nautilus_burn_drive_selection_new noargs
-static int
-_wrap_nautilus_burn_drive_selection_new(PyGObject *self)
-{
-    self->obj = (GObject *)nautilus_burn_drive_selection_new ();
-
-    if (!self->obj) {
-        PyErr_SetString(PyExc_RuntimeError, "could not create DriveSelection object.");
-        return -1;
-    }
-    pygobject_register_wrapper((PyObject *)self);
-    return 0;
-}
-
-%%
-override nautilus_burn_drive_selection_get_drive noargs
-static PyObject *
-_wrap_nautilus_burn_drive_selection_get_drive (PyGObject *self)
-{
-    const NautilusBurnDrive *drive;
-    drive = nautilus_burn_drive_selection_get_drive((NautilusBurnDriveSelection*)self->obj);
-    if (drive == NULL) {
-        Py_INCREF(Py_None);
-        return Py_None;
-    }
-    return nb_drive_new_from_native(drive);
-}
-%%
-override nautilus_burn_recorder_cancel
-static PyObject *
-_wrap_nautilus_burn_recorder_cancel (PyGObject *self, PyObject *args)
-{
-    int skip_if_dangerous = TRUE;
-
-    if (!PyArg_ParseTuple(args, "|i:Recorder.cancel", &skip_if_dangerous))
-        return NULL;
-
-    return Py_BuildValue("i", nautilus_burn_recorder_cancel(
-                             (NautilusBurnRecorder *)self->obj,
-                             skip_if_dangerous));
-}
 %%
 override nautilus_burn_recorder_write_tracks
 
 static PyObject *
 _wrap_nautilus_burn_recorder_write_tracks (PyGObject *self, PyObject *args, PyObject *kwargs)
 {
-    nb_Drive *drive;
+    PyObject *drive;
     nb_Track *track;
-    PyObject *tracks, *py_flags;
+    PyObject *tracks;
     GList *g_tracks = NULL;
     GError *error = NULL;
 
     int speed, flags, i, len, ret;
 
-    if (!PyArg_ParseTuple(args, "OOiO", &drive, &tracks, &speed, &py_flags))
+    if (!PyArg_ParseTuple(args, "O!Oii", &PyNautilusBurnDrive_Type, &drive, &tracks, &speed, &flags))
         return NULL;
-    if (!PyList_Check(tracks))
+    if (!PyList_Check(tracks)) {
+        PyErr_SetString(PyExc_TypeError, "second parameter (tracks) must be a list");
         return NULL;
-    if (pyg_flags_get_value(NAUTILUS_BURN_TYPE_RECORDER_WRITE_FLAGS, 
-                            py_flags, &flags))
-        return NULL;
+    }
 
     len = PyList_GET_SIZE(tracks);
     for (i = 0; i < len; i++) {
@@ -96,7 +51,7 @@ _wrap_nautilus_burn_recorder_write_tracks (PyGObject *self, PyObject *args, PyOb
     
     pyg_begin_allow_threads;
     ret = nautilus_burn_recorder_write_tracks((NautilusBurnRecorder*)self->obj,
-                                              drive->drive, 
+                                              NAUTILUS_BURN_DRIVE(pygobject_get(drive)), 
                                               g_tracks, 
                                               speed, 
                                               flags, &error);
@@ -105,59 +60,48 @@ _wrap_nautilus_burn_recorder_write_tracks (PyGObject *self, PyObject *args, PyOb
     g_list_free(g_tracks);
     if (pyg_error_check(&error))
         return NULL;
-    return pyg_enum_from_gtype(NAUTILUS_BURN_TYPE_RECORDER_RESULT, ret);
+    return PyInt_FromLong(ret);
 }
 
 %%
-override nautilus_burn_recorder_new noargs
-static int
-_wrap_nautilus_burn_recorder_new (PyGObject *self)
-{
-    self->obj = (GObject *)nautilus_burn_recorder_new();
-
-    if (!self->obj) {
-        PyErr_SetString(PyExc_RuntimeError, "could not create Recorder object.");
-        return -1;
-    }
-    pygobject_register_wrapper((PyObject *)self);
-    return 0;
-}
-
-%%
-override nautilus_burn_recorder_blank_disc
+override nautilus_burn_drive_monitor_get_drives noargs
 
 static PyObject *
-_wrap_nautilus_burn_recorder_blank_disc (PyGObject *self, PyObject *args, PyObject *kwargs)
+_wrap_nautilus_burn_drive_monitor_get_drives(PyObject *self, PyObject *args, PyObject *kwargs)
 {
-    nb_Drive *drive;
-    PyObject *py_blank_type;
-    int debug, blank_type, ret;
-    GError *error = NULL;
+	int index, len;
+	GList *cds, *iter;
+	PyObject *cds_tuple, *cd;
+	
+	cds = nautilus_burn_drive_monitor_get_drives(
+            NAUTILUS_BURN_DRIVE_MONITOR(pygobject_get(self)));
+	len = g_list_length (cds);
+	cds_tuple = PyTuple_New (len);
+	
+	for (iter = g_list_first (cds), index = 0; iter; iter = iter->next, index++) {
+		/* create the new Drive object */
+		assert (iter->data);
+		cd = pygobject_new((GObject *) iter->data);
+		if (!cd) {
+			return NULL;
+		}
+		if (PyTuple_SetItem (cds_tuple, index, cd)) {
+			return NULL;
+		}
+                g_object_unref((GObject *) iter->data);
+	}
 
-    if (!PyArg_ParseTuple(args, "OOi", &drive, &py_blank_type, &debug))
-        return NULL;
-    if (pyg_enum_get_value(NAUTILUS_BURN_TYPE_RECORDER_BLANK_TYPE, 
-                           py_blank_type, 
-                           &blank_type))
-        return NULL;
-    
-    pyg_begin_allow_threads;
-    ret = nautilus_burn_recorder_blank_disc((NautilusBurnRecorder*)self->obj, 
-                                            drive->drive, 
-                                            blank_type, 
-                                            debug, &error);
-    pyg_end_allow_threads;
-    
-    if (pyg_error_check(&error))
-        return NULL;
-
-    return pyg_enum_from_gtype(NAUTILUS_BURN_TYPE_RECORDER_RESULT, ret);
+	g_list_free (cds);
+	return cds_tuple;
+}
+%%
+define bytes_to_seconds
+static PyObject *
+_wrap_bytes_to_seconds (PyObject *self, PyObject *args)
+{
+	long int size;
+	if (!PyArg_ParseTuple (args, "l", &size))
+		return NULL;
+	return Py_BuildValue("l", (long int) NAUTILUS_BURN_DRIVE_SIZE_TO_TIME(size));
 }
 
-%%
-new-constructor NAUTILUS_BURN_TYPE_RECORDER
-
-%%
-new-constructor NAUTILUS_BURN_TYPE_DRIVE_SELECTION
-
-%%
