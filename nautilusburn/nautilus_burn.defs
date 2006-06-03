@@ -520,6 +520,7 @@
 (define-method blank_disc
   (of-object "NautilusBurnRecorder")
   (c-name "nautilus_burn_recorder_blank_disc")
+  (unblock-threads #t)
   (return-type "int")
   (parameters
     '("NautilusBurnDrive*" "drive")

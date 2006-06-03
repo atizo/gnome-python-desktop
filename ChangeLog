@@ -1,5 +1,7 @@
 2006-06-03  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* nautilusburn/nautilus_burn.defs (blank_disc): unblock threads.
+
 	* nautilusburn/nautilus_burn.override
 	(_wrap_nautilus_burn_drive_lock): override/impl.
 	(_wrap_nautilus_burn_drive_get_write_speeds): override/impl.
