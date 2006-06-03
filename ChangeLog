@@ -1,3 +1,12 @@
+2006-06-03  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* nautilusburn/nautilus_burn.override
+	(_wrap_nautilus_burn_drive_lock): override/impl.
+	(_wrap_nautilus_burn_drive_get_write_speeds): override/impl.
+	(_wrap_nautilus_burn_drive_get_media_type_full): override/impl.
+	(_wrap_nautilus_burn_drive_monitor_get_recorder_drives):
+	override/impl.	Completes the API coverage of nautilusburn.
+
 2006-06-03  Magnus Therning  <magnus@therning.org>
 
 	* wnck/wnck.override: Wrap wnck_window_get_geometry().

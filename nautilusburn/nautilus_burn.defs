@@ -301,10 +301,10 @@
   (c-name "nautilus_burn_drive_get_media_type_full")
   (return-type "NautilusBurnMediaType")
   (parameters
-    '("gboolean*" "is_rewritable")
-    '("gboolean*" "is_blank")
-    '("gboolean*" "has_data")
-    '("gboolean*" "has_audio")
+    ;'("gboolean*" "is_rewritable")
+    ;'("gboolean*" "is_blank")
+    ;'("gboolean*" "has_data")
+    ;'("gboolean*" "has_audio")
   )
 )
 
