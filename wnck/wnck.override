@@ -112,3 +112,13 @@ _wrap_wnck_tasklist_get_size_hint_list(PyGObject *self)
         PyList_SET_ITEM(pylist, i, PyInt_FromLong(list[i]));
     return pylist;
 }
+%%
+override wnck_window_get_geometry noargs
+static PyObject *
+_wrap_wnck_window_get_geometry(PyGObject *self)
+{
+    int x, y, width, height;
+
+    wnck_window_get_geometry(WNCK_WINDOW(self->obj), &x, &y, &width, &height);
+    return Py_BuildValue("iiii", x, y, width, height);
+}
