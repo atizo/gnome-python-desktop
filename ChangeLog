@@ -1,3 +1,12 @@
+=== 2.15.3 ===
+2006-06-11  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* NEWS: Update.
+
+	* configure.ac: We now require libnautilus-burn 2.15.3, due to the
+	new API.  Require also metacity 2.15.5 for the same reason.
+	Bump version to 2.15.3.
+
 2006-06-03  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* nautilusburn/nautilus_burn.defs (blank_disc): unblock threads.

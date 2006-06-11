@@ -1,6 +1,19 @@
+Overview of Changes from 2.15.2 to 2.15.3
+==============================================================================
+* gnomekeyring
+ - Improve API (throw exceptions instead of returning error codes) (Gustavo)
+ - Add an example (Gustavo)
+* metacity
+ - Update to new C API (Frederic Peters)
+ - Wrap wnck_window_get_geometry() (Magnus Therning)
+* nautilusburn
+ - Update to new improved C API (Python API is not preserved) (Gustavo)
+
+
 Overview of Changes from 2.15.1 to 2.15.2
 ==============================================================================
 - New gnomedesktop module, formerly in deskbar-applet (Raphael Slinckx)
+
 
 Overview of Changes from 2.14.0 to 2.15.1
 ==============================================================================
@@ -12,9 +25,11 @@ Overview of Changes from 2.13.3 to 2.14.0
 ==============================================================================
 - LIBGNOMEPRINTUI shouldn't build without gnome-python (#330861)
 
+
 Overview of Changes from 2.13.2 to 2.13.3
 ==============================================================================
 * Nothing new, just create this new package from gnome-python-extras.
+
 
 Overview of Changes from 2.13.1 to 2.13.2
 ==============================================================================
