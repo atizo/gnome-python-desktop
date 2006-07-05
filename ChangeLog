@@ -1,5 +1,11 @@
 2006-07-05  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
+	* wnck/wnck.override (NO_IMPORT_PYGOBJECT): #define
+	NO_IMPORT_PYGOBJECT, fixes Mac OS X build failure.
+
+	* metacity/metacity.override: idem.  Thanks Randall Wood.  Fixes
+	#345148.
+
 	* configure.ac: Blacklist pygtk 2.9.[01].
 
 === 2.15.3 ===

@@ -3,7 +3,9 @@
 headers
 #include <Python.h>
 
-#include "pygobject.h"
+#define NO_IMPORT_PYGOBJECT
+#include <pygobject.h>
+
 #include <metacity-private/preview-widget.h>
 /* #include <metacity-private/enum-types.h> */
 #include <metacity-private/theme-parser.h>

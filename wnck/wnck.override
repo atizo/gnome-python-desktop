@@ -3,7 +3,9 @@
 headers
 #include <Python.h>
 
-#include "pygobject.h"
+#define NO_IMPORT_PYGOBJECT
+#include <pygobject.h>
+
 #include <libwnck/libwnck.h>
 #include <libwnck/class-group.h>
 #include <libwnck/window-action-menu.h>
