@@ -1,3 +1,7 @@
+2006-07-20  Marco Pesenti Gritti  <mpg@redhat.com>
+
+	* wnck/wnck.defs: Add wnck_window_get_transient
+
 === 2.15.4 ===
 2006-07-10  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 

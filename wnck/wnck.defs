@@ -691,6 +691,12 @@
   (return-type "WnckApplication*")
 )
 
+(define-method get_transient
+  (of-object "WnckWindow")
+  (c-name "wnck_window_get_transient")
+  (return-type "WnckWindow*")
+)
+
 (define-method get_group_leader
   (of-object "WnckWindow")
   (c-name "wnck_window_get_group_leader")
