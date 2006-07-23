@@ -132,6 +132,36 @@
   )
 )
 
+(define-enum WindowGravity
+  (in-module "Wnck")
+  (c-name "WnckWindowGravity")
+  ;(gtype-id "WNCK_TYPE_WINDOW_GRAVITY")
+  (values
+    '("current" "WNCK_WINDOW_GRAVITY_CURRENT")
+    '("northwest" "WNCK_WINDOW_GRAVITY_NORTHWEST")
+    '("north" "WNCK_WINDOW_GRAVITY_NORTH")
+    '("northeast" "WNCK_WINDOW_GRAVITY_NORTHEAST")
+    '("west" "WNCK_WINDOW_GRAVITY_WEST")
+    '("center" "WNCK_WINDOW_GRAVITY_CENTER")
+    '("east" "WNCK_WINDOW_GRAVITY_EAST")
+    '("southwest" "WNCK_WINDOW_GRAVITY_SOUTHWEST")
+    '("south" "WNCK_WINDOW_GRAVITY_SOUTH")
+    '("southeast" "WNCK_WINDOW_GRAVITY_SOUTHEAST")
+  )
+)
+
+(define-flags WindowMoveResizeMask
+  (in-module "Wnck")
+  (c-name "WnckWindowMoveResizeMask")
+  ;(gtype-id "WNCK_TYPE_WINDOW_MOVE_RESIZE_MASK")
+  (values
+    '("change-x" "WNCK_WINDOW_CHANGE_X")
+    '("change-y" "WNCK_WINDOW_CHANGE_Y")
+    '("change-width" "WNCK_WINDOW_CHANGE_WIDTH")
+    '("change-height" "WNCK_WINDOW_CHANGE_HEIGHT")
+  )
+)
+
 
 ;; From /usr/include/libwnck-1.0/libwnck/application.h
 
@@ -1036,6 +1066,20 @@
     '("int*" "yp")
     '("int*" "widthp")
     '("int*" "heightp")
+  )
+)
+
+(define-method set_geometry
+  (of-object "WnckWindow")
+  (c-name "wnck_window_set_geometry")
+  (return-type "none")
+  (parameters
+    '("WnckWindowGravity" "gravity")
+    '("WnckWindowMoveResizeMask" "geometry_mask")
+    '("int" "x")
+    '("int" "y")
+    '("int" "width")
+    '("int" "height")
   )
 )
 

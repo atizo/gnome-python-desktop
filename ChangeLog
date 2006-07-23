@@ -1,3 +1,13 @@
+2006-07-23  Magnus Therning  <magnus@therning.org>
+
+	reviewed by: Gustavo Carneiro
+
+	* wnck/wnck.defs: Add wrapper for wnck_window_set_geometry (#342900).
+
+2006-07-23  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Require wnck 2.15.5 for bug #342900.
+
 2006-07-20  Marco Pesenti Gritti  <mpg@redhat.com>
 
 	* wnck/wnck.defs: Add wnck_window_get_transient
