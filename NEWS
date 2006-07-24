@@ -1,3 +1,10 @@
+Overview of Changes from 2.15.4 to 2.15.90
+==============================================================================
+* wnck
+ - Wrap wnck_window_get_transient (Marco Pesenti Gritti)
+ - Add wrapper for wnck_window_set_geometry (Magnus Therning)
+
+
 Overview of Changes from 2.15.3 to 2.15.4
 ==============================================================================
 * general
