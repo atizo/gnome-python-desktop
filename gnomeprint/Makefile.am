@@ -52,7 +52,7 @@ printui.c: printui.defs printui.override
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \
 	    --register print.defs \
-	    --register $(PYGTK_DEFSDIR)/canvas.defs \
+	    --register $(GNOMEPYTHON_DEFSDIR)/canvas.defs \
 	    --override $*.override \
 	    --prefix py$* $*.defs) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
