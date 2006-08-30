@@ -1,3 +1,9 @@
+2006-08-31 Marco Pesenti Gritti  <mpg@redhat.com>
+
+	* gnomeapplet/Makefile.am:
+
+	Use the gnome-python defs dir for bonobo.defs 
+
 2006-08-26 Marco Pesenti Gritti  <mpg@redhat.com>
 	* configure.ac:
 	* gnomeprint/Makefile.am:

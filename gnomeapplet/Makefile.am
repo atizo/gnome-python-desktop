@@ -36,8 +36,8 @@ applet.c: applet.defs applet.override
 	    --register $(PYGTK_DEFSDIR)/pango-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \
-	    --register $(PYGTK_DEFSDIR)/bonobo-types.defs \
-	    --register $(PYGTK_DEFSDIR)/bonoboui-types.defs \
+	    --register $(GNOMEPYTHON_DEFSDIR)/bonobo-types.defs \
+	    --register $(GNOMEPYTHON_DEFSDIR)/bonoboui-types.defs \
 	    --override $*.override \
 	    --prefix py$* $*.defs) > gen-$*.c \
 	&& cp gen-$*.c $*.c \
