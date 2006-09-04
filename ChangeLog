@@ -1,3 +1,10 @@
+=== 2.16.0 ===
+2006-09-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* configure.ac: Bump version to 2.16.0.
+
+	* NEWS: Update.
+
 2006-08-31 Marco Pesenti Gritti  <mpg@redhat.com>
 
 	* gnomeapplet/Makefile.am:

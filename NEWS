@@ -1,3 +1,9 @@
+Overview of Changes from 2.15.90 to 2.16.0
+==============================================================================
+* general
+ - Use gnome-python defs dir where appropriate  (Marco Pesenti Gritti)
+
+
 Overview of Changes from 2.15.4 to 2.15.90
 ==============================================================================
 * wnck
