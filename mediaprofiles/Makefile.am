@@ -25,7 +25,7 @@ CLEANFILES = mediaprofiles.c
 		--override $*.override \
 	    --register $(PYGTK_DEFSDIR)/gdk-types.defs \
 	    --register $(PYGTK_DEFSDIR)/gtk-types.defs \
-	    --register $(PYGTK_DEFSDIR)/gconf.defs \
+	    --register $(GNOMEPYTHON_DEFSDIR)/gconf.defs \
 		--prefix py$* $*.defs) > gen-$*.c \
 	    && cp gen-$*.c $*.c \
 	    && rm -f gen-$*.c

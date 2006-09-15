@@ -1,3 +1,9 @@
+2006-09-15 Marco Pesenti Gritti  <mpg@redhat.com>
+
+	* mediaprofiles/Makefile.am:
+
+	Use the gnome-python defs dir for gconf.defs
+
 === 2.16.0 ===
 2006-09-04  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
