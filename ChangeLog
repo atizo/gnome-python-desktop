@@ -1,3 +1,9 @@
+2006-10-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am:
+	* examples/wnck_example.py: Add a wnck example, written by Kyle
+	Brooks, slightly tweaked by me.  Fixes #353112.
+
 2006-09-15 Marco Pesenti Gritti  <mpg@redhat.com>
 
 	* mediaprofiles/Makefile.am:
