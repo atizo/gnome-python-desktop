@@ -1079,6 +1079,7 @@
   (return-type "GdkPixbuf*")
   (parameters
     '("const-char*" "filename")
+    '("guint" "size_of_theme_icons")
     '("GError**" "error")
   )
 )
@@ -1354,6 +1355,7 @@
   (return-type "MetaButtonType")
   (parameters
     '("const-char*" "str")
+    '("MetaTheme*" "theme")
   )
 )
 
@@ -1361,14 +1363,6 @@
   (of-object "MetaButtonType")
   (c-name "meta_button_type_to_string")
   (return-type "const-char*")
-)
-
-(define-function menu_icon_type_from_string
-  (c-name "meta_menu_icon_type_from_string")
-  (return-type "MetaMenuIconType")
-  (parameters
-    '("const-char*" "str")
-  )
 )
 
 (define-method to_string

@@ -1,3 +1,10 @@
+2006-10-14   Marc-Andre Lureau  <marcandre.lureau@gmail.com>
+
+	reviewed by: Gustavo Carneiro.
+
+	* metacity/metacity.defs:  Update defs to follow metacity API
+	changes.  Closes #362056.
+
 2006-10-01  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
 
 	* Makefile.am:
