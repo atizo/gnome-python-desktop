@@ -18,9 +18,19 @@ def get_login_password():
     keyring = gnomekeyring.get_default_keyring_sync()
     auth_token = gconf.client_get_default().get_int(GCONF_AUTH_KEY)
     if auth_token > 0:
+        def item_get_info_cb(result, item, data):
+            if result is None:
+                secret = item.get_secret()
+                data.append(secret)
+            else:
+                print "get_item_info result:", result
+            gtk.main_quit()
+        data = []
+        gnomekeyring.item_get_info(keyring, auth_token, item_get_info_cb, data)
+        gtk.main()
         try:
-            secret = gnomekeyring.item_get_info_sync(keyring, auth_token).get_secret()
-        except gnomekeyring.DeniedError:
+            secret, = data
+        except ValueError:
             login = None
             password = None
             auth_token = 0
@@ -79,13 +89,22 @@ def get_login_password():
             password = local_entry2.get_text()
             if not login or not password:
                 continue
-            auth_token = gnomekeyring.item_create_sync(
+            def item_create_callback(result, auth_token, user_data):
+                assert user_data == "user data"
+                if result is None:
+                    print "result is ok"
+                    gconf.client_get_default().set_int(GCONF_AUTH_KEY, auth_token)
+                else:
+                    print "result:", result
+                gtk.main_quit()
+            auth_token = gnomekeyring.item_create(
                 keyring,
                 gnomekeyring.ITEM_GENERIC_SECRET,
                 "GnomePythonDesktop keyring example, login information",
                 dict(appname="GnomePythonDesktop, sync keyring example"),
-                "\n".join((login, password)), True)
-            gconf.client_get_default().set_int(GCONF_AUTH_KEY, auth_token)
+                "\n".join((login, password)), True,
+                item_create_callback, "user data")
+            gtk.main()
             return login, password
         else:
             raise SystemExit

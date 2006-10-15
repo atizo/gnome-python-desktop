@@ -20,22 +20,14 @@ static PyObject *PyGKExc_IOError; /* GNOME_KEYRING_RESULT_IO_ERROR */
 static PyObject *PyGKExc_CancelledError; /* GNOME_KEYRING_RESULT_CANCELLED */
 static PyObject *PyGKExc_AlreadyExistsError; /* GNOME_KEYRING_RESULT_ALREADY_EXISTS */
 
-gboolean
-pygnomekeyring_result_check(GnomeKeyringResult result)
+inline PyObject *
+pygnomekeyring_result_to_exception(GnomeKeyringResult result)
 {
-    PyObject *exc;
-
-    /* be optimistic */
-    if (G_LIKELY(result == GNOME_KEYRING_RESULT_OK))
-	return FALSE;
-
     switch(result)
     {
-
 #define keyring_result_case(result_suffix, exc_middle)  \
     case GNOME_KEYRING_RESULT_##result_suffix:          \
-        exc = PyGKExc_##exc_middle##Error;              \
-        break
+        return PyGKExc_##exc_middle##Error;
 
         keyring_result_case(DENIED, Denied);
         keyring_result_case(NO_KEYRING_DAEMON, NoKeyringDaemon);
@@ -47,10 +39,26 @@ pygnomekeyring_result_check(GnomeKeyringResult result)
         keyring_result_case(ALREADY_EXISTS, AlreadyExists);
 
 #undef keyring_result_case
+
+    case GNOME_KEYRING_RESULT_OK:
+        return Py_None;
+
     default:
         g_assert_not_reached();
-        exc = NULL;
+        return NULL;
     }
+}
+
+gboolean
+pygnomekeyring_result_check(GnomeKeyringResult result)
+{
+    PyObject *exc;
+
+    /* be optimistic */
+    if (G_LIKELY(result == GNOME_KEYRING_RESULT_OK))
+	return FALSE;
+
+    exc = pygnomekeyring_result_to_exception(result);
 
     PyErr_SetNone(exc);
     return TRUE;

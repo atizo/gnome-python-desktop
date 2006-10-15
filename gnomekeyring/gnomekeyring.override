@@ -5,7 +5,28 @@ headers
 #include <pygobject.h>
 #include <gnome-keyring.h>
 
-gboolean pygnomekeyring_result_check(GnomeKeyringResult result);
+gboolean  pygnomekeyring_result_check        (GnomeKeyringResult result);
+PyObject* pygnomekeyring_result_to_exception (GnomeKeyringResult result);
+
+typedef struct {
+    PyObject *func, *data;
+} PyGtkCustomNotify;
+
+static void
+pygtk_custom_destroy_notify(gpointer user_data)
+{
+    PyGtkCustomNotify *cunote = user_data;
+    PyGILState_STATE state;
+
+    g_return_if_fail(user_data);
+    state = pyg_gil_state_ensure();
+    Py_XDECREF(cunote->func);
+    Py_XDECREF(cunote->data);
+    pyg_gil_state_release(state);
+    
+    g_free(cunote);
+}
+
 
 #ifndef GNOME_KEYRING_TYPE_INFO
 # define GNOME_KEYRING_TYPE_INFO pygnome_keyring_info_get_type()
@@ -554,3 +575,122 @@ _wrap_gnome_keyring_find_items_sync(PyObject *self, PyObject *args, PyObject *kw
         return NULL;
     return py_ids;
 }
+
+%%
+override gnome_keyring_item_create kwargs
+
+static void
+_wrap_GnomeKeyringOperationGetIntCallback(GnomeKeyringResult result,
+                                          guint32            val,
+                                          gpointer           data)
+{
+    PyGtkCustomNotify *cb_data = data;
+    PyObject *ret;
+    PyGILState_STATE state;
+
+    state = pyg_gil_state_ensure();
+
+    if (cb_data->data)
+        
+        ret = PyEval_CallFunction(cb_data->func, "OIO", pygnomekeyring_result_to_exception(result),
+                                  val, cb_data->data);
+    else
+        ret = PyEval_CallFunction(cb_data->func, "OI", pygnomekeyring_result_to_exception(result),
+                                  val);
+    Py_XDECREF(ret);
+    if (PyErr_Occurred())
+        PyErr_Print();
+    pyg_gil_state_release(state);
+}
+
+static PyObject *
+_wrap_gnome_keyring_item_create(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "type", "display_name", "attributes",
+                              "secret", "update_if_exists", "callback", "user_data", NULL };
+    char *keyring, *display_name, *secret;
+    int type, update_if_exists;
+    PyObject *py_attributes;
+    GnomeKeyringAttributeList * attributes;
+    PyObject *func, *data = NULL;
+    PyGtkCustomNotify *cb_data;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"sisOsiO|O:item_create", kwlist,
+                                     &keyring, &type, &display_name, &py_attributes,
+                                     &secret, &update_if_exists, &func, &data))
+        return NULL;
+
+    if (!PyCallable_Check(func)) {
+        PyErr_SetString(PyExc_TypeError, "callback function not callable");
+        return NULL;
+    }
+    attributes = pygnome_keyring_attribute_list_from_pyobject(py_attributes);
+    cb_data = g_new(PyGtkCustomNotify, 1);
+    cb_data->func = func; Py_INCREF(func);
+    cb_data->data = data; Py_XINCREF(data);
+
+    gnome_keyring_item_create(keyring, type, display_name, attributes, secret, update_if_exists,
+                              _wrap_GnomeKeyringOperationGetIntCallback, cb_data,
+                              pygtk_custom_destroy_notify);
+    
+    gnome_keyring_attribute_list_free(attributes);
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+%%
+override gnome_keyring_item_get_info kwargs
+
+static void
+_wrap_GnomeKeyringOperationGetItemInfoCallback(GnomeKeyringResult    result,
+                                               GnomeKeyringItemInfo *info,
+                                               gpointer              data)
+{
+    PyGtkCustomNotify *cb_data = data;
+    PyObject *py_info;
+    PyObject *ret;
+    PyGILState_STATE state;
+
+    state = pyg_gil_state_ensure();
+    py_info = pyg_boxed_new(GNOME_KEYRING_TYPE_ITEM_INFO, info, TRUE, TRUE);
+    if (cb_data->data)
+        ret = PyEval_CallFunction(cb_data->func, "NNO", pygnomekeyring_result_to_exception(result),
+                                  py_info, cb_data->data);
+    else
+        ret = PyEval_CallFunction(cb_data->func, "NN", pygnomekeyring_result_to_exception(result),
+                                  py_info);
+    Py_XDECREF(ret);
+    if (PyErr_Occurred())
+        PyErr_Print();
+    pyg_gil_state_release(state);
+}
+
+static PyObject *
+_wrap_gnome_keyring_item_get_info(PyObject *self, PyObject *args, PyObject *kwargs)
+{
+    static char *kwlist[] = { "keyring", "id", "callback", "user_data", NULL };
+    char *keyring;
+    unsigned long id;
+    PyObject *func, *data = NULL;
+    PyGtkCustomNotify *cb_data;
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs,"skO|O:item_get_info", kwlist,
+                                     &keyring, &id, &func, &data))
+        return NULL;
+
+    if (!PyCallable_Check(func)) {
+        PyErr_SetString(PyExc_TypeError, "callback function not callable");
+        return NULL;
+    }
+    cb_data = g_new(PyGtkCustomNotify, 1);
+    cb_data->func = func; Py_INCREF(func);
+    cb_data->data = data; Py_XINCREF(data);
+
+    gnome_keyring_item_get_info(keyring, id,
+                              _wrap_GnomeKeyringOperationGetItemInfoCallback, cb_data,
+                              pygtk_custom_destroy_notify);
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+

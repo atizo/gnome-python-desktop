@@ -1,3 +1,14 @@
+2006-10-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am, examples/keyring-async.py: Copy keyring.py example
+	and convert to use async functions.
+
+	* gnomekeyring/gnomekeyring.override: Wrap
+	gnome_keyring_item_create and gnome_keyring_item_get_info.
+
+	* examples/keyring.py (get_login_password): Add an appname
+	attribute for more correct password item updating.
+
 2006-10-14   Marc-Andre Lureau  <marcandre.lureau@gmail.com>
 
 	reviewed by: Gustavo Carneiro.
