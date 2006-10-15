@@ -19,6 +19,7 @@ modules = [
     ]
 
 import ltihooks
+ltihooks.install()
 
 for item in modules:
     if isinstance(item, tuple):

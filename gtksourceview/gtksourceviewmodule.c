@@ -36,9 +36,7 @@ initgtksourceview (void)
     
     init_pygobject ();
     init_pygtk ();
-    
+
     pygtksourceview_register_classes (d);
     
-    if (PyErr_Occurred ())
-        Py_FatalError ("can't initialise module gtksourceview");
 }

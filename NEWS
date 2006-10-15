@@ -1,3 +1,18 @@
+Overview of Changes from 2.16.0 to 2.17.1
+==============================================================================
+* gnomekeyring
+ - Wrap item_create and item_get_info (Gustavo)
+ - Fix sync example, add async example (Gustavo)
+* metacity
+ - Update defs to follow upstream metacity API changes (Marc-Andre Lureau)
+* wnck
+ - Add a new example (Kyle Brooks, Gustavo)
+* mediaprofiles
+ - Use the gnome-python defs dir for gconf.defs (Marco Pesenti Gritti)
+* general
+ - make check fixes (Gustavo)
+
+
 Overview of Changes from 2.15.90 to 2.16.0
 ==============================================================================
 * general

@@ -49,6 +49,7 @@ if BUILD_GNOMEDESKTOP
   SUBDIRS += gnomedesktop
 endif
 
+SUBDIRS +=  tests
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-python-desktop-2.0.pc

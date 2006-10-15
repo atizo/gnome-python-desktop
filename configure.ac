@@ -3,8 +3,8 @@ AC_PREREQ(2.52)
 
 dnl the gnome-python version number
 m4_define(gnome_python_desktop_major_version, 2)
-m4_define(gnome_python_desktop_minor_version, 16)
-m4_define(gnome_python_desktop_micro_version, 0)
+m4_define(gnome_python_desktop_minor_version, 17)
+m4_define(gnome_python_desktop_micro_version, 1)
 m4_define(gnome_python_desktop_version, gnome_python_desktop_major_version.gnome_python_desktop_minor_version.gnome_python_desktop_micro_version)
 
 dnl required versions of other packages
@@ -24,7 +24,7 @@ m4_define(libgtop_required_version,           2.13.0)
 m4_define(libnautilus_burn_required_version,  2.15.3)
 m4_define(mediaprofiles_required_version,     2.10.0)
 m4_define(gconf_required_version,             2.10.0)
-m4_define(metacity_required_version,          2.15.5)
+m4_define(metacity_required_version,          2.17.0)
 m4_define(rsvg_required_version,              2.13.93)
 m4_define(gnomekeyring_required_version,      0.5.0)
 m4_define(gnomedesktop_required_version,      2.10.0)

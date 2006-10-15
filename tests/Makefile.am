@@ -1,5 +1,7 @@
 tests = 
 
+PYTHONPATH = $(top_builddir):$(top_srcdir):$(shell echo $$PYTHONPATH)
+
 check-local:
 	@PYTHONPATH=$(PYTHONPATH) $(PYTHON) -W error $(srcdir)/runtests.py
 

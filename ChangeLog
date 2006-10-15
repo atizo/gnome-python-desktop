@@ -1,4 +1,20 @@
+=== 2.17.1 ===
 2006-10-15  Gustavo J. A. M. Carneiro  <gjc@gnome.org>
+
+	* Makefile.am (SUBDIRS): Make sure the tests subdir is last, since
+	unit tests depend on everything else.
+
+	* gtksourceview/gtksourceviewmodule.c (initgtksourceview): Don't
+	abort with cryptic message on error; let python do it's own error
+	handling.
+	
+	* tests/Makefile.am, tests/common.py: In make check, import python
+	modules from the build dir, not from system.
+
+	* configure.ac: Bump version to 2.17.1.
+	Bump metacity required version to 2.17.0.
+
+	* NEWS: Update.
 
 	* Makefile.am, examples/keyring-async.py: Copy keyring.py example
 	and convert to use async functions.
